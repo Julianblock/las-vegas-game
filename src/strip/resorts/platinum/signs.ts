@@ -1,0 +1,13 @@
+import { neon, type SignSpec } from '../../../world/signKit';
+import { GROTESK } from '../../paint/fonts';
+
+/** PLATINUM in cool white along the top of the slab. */
+export const platinumWord: SignSpec = {
+  name: 'platinumWord',
+  w: 768,
+  h: 160,
+  cutout: true,
+  draw(g, w, h) {
+    neon(g, 'PLATINUM', w / 2, h * 0.55, w * 0.9, (p) => `700 ${p}px ${GROTESK}`, h * 0.66, '#e8f0ff');
+  },
+};
