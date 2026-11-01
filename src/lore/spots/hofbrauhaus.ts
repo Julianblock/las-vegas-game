@@ -8,7 +8,7 @@ export const hofbrauhausSpot: Spot = {
   title: 'Munich across from the Hard Rock',
   text: 'A copy of Munich’s 400-year-old beer hall, with beer brewed in Bavaria, oompah bands and long tables, opened on Paradise Road in 2004.',
   at: { x: 3467, z: 937 },
-  hint: 'Look on Paradise Road at Harmon, across from Virgin.',
+  hint: 'Look on Harmon Avenue, just east of Virgin.',
   r: 120,
   h: 50,
   test: near({ x: 3467, z: 937 }, 70, 50),
