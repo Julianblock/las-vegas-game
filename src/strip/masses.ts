@@ -85,6 +85,37 @@ export class Masses {
     return false;
   }
 
+  /**
+   * One edge's share of a pyramid (a single sloped triangle to the apex) or a
+   * dome (stacked bands shrinking toward the centroid on a quarter circle).
+   */
+  private roofFace(pos: number[], nrm: number[], ax: number, az: number, bx: number, bz: number, cx: number, cz: number, eave: number, rise: number, pyramid: boolean) {
+    const bands = pyramid ? 1 : 6;
+    const ring = (t: number): [number, number] => (pyramid ? [1 - t, eave + rise * t] : [Math.cos((t * Math.PI) / 2), eave + rise * Math.sin((t * Math.PI) / 2)]);
+    const v = new THREE.Vector3();
+    const e1 = new THREE.Vector3();
+    const e2 = new THREE.Vector3();
+    for (let k = 0; k < bands; k++) {
+      const [s0, y0] = ring(k / bands);
+      const [s1, y1] = ring((k + 1) / bands);
+      const p = [
+        [cx + (ax - cx) * s0, y0, cz + (az - cz) * s0],
+        [cx + (bx - cx) * s0, y0, cz + (bz - cz) * s0],
+        [cx + (bx - cx) * s1, y1, cz + (bz - cz) * s1],
+        [cx + (ax - cx) * s1, y1, cz + (az - cz) * s1],
+      ];
+      e1.set(p[1][0] - p[0][0], p[1][1] - p[0][1], p[1][2] - p[0][2]);
+      e2.set(p[3][0] - p[0][0], p[3][1] - p[0][1], p[3][2] - p[0][2]);
+      if (e2.lengthSq() < 1e-6) e2.set(p[2][0] - p[0][0], p[2][1] - p[0][1], p[2][2] - p[0][2]);
+      v.crossVectors(e1, e2).normalize();
+      if (v.y < 0) v.negate();
+      for (const q of [p[0], p[1], p[2], p[0], p[2], p[3]]) {
+        pos.push(q[0], q[1], q[2]);
+        nrm.push(v.x, v.y, v.z);
+      }
+    }
+  }
+
   private extrude(s: SolidBuilder, m: OsmMass, cx: number, cz: number) {
     const st = styleFor(m, cx, cz);
     const pts = m.pts;
@@ -97,6 +128,12 @@ export class Masses {
     const cw = signedArea(pts) > 0;
     const pos: number[] = [];
     const nrm: number[] = [];
+    const span = Math.sqrt(Math.abs(signedArea(pts)));
+    // Pyramids and domes rise from the wall top to the tagged height.
+    let rise = 0;
+    if (m.roof === 'pyramidal') rise = m.h > span * 0.45 ? top - y0 : Math.min((top - y0) * 0.5, span * 0.3);
+    else if (m.roof === 'dome' || m.roof === 'round') rise = Math.min((top - y0) * 0.6, span * 0.5);
+    const eave = top - rise;
     for (let i = 0; i < n; i++) {
       const j = (i + 1) % n;
       const ax = pts[i * 2], az = pts[i * 2 + 1];
@@ -107,15 +144,20 @@ export class Masses {
       // Outward normal: right of the edge for clockwise rings.
       const nx = (cw ? -ez : ez) / l;
       const nz = (cw ? ex : -ex) / l;
-      pos.push(ax, y0, az, bx, y0, bz, bx, top, bz, ax, y0, az, bx, top, bz, ax, top, az);
-      for (let k = 0; k < 6; k++) nrm.push(nx, 0, nz);
+      if (eave - y0 > 0.05) {
+        pos.push(ax, y0, az, bx, y0, bz, bx, eave, bz, ax, y0, az, bx, eave, bz, ax, eave, az);
+        for (let k = 0; k < 6; k++) nrm.push(nx, 0, nz);
+      }
+      if (rise > 0) this.roofFace(pos, nrm, ax, az, bx, bz, cx, cz, eave, rise, m.roof === 'pyramidal');
     }
-    const contour = [];
-    for (let i = 0; i < n; i++) contour.push(new THREE.Vector2(pts[i * 2], pts[i * 2 + 1]));
-    for (const [a, b, c] of THREE.ShapeUtils.triangulateShape(contour, [])) {
-      for (const k of [a, b, c]) {
-        pos.push(contour[k].x, top, contour[k].y);
-        nrm.push(0, 1, 0);
+    if (rise <= 0) {
+      const contour = [];
+      for (let i = 0; i < n; i++) contour.push(new THREE.Vector2(pts[i * 2], pts[i * 2 + 1]));
+      for (const [a, b, c] of THREE.ShapeUtils.triangulateShape(contour, [])) {
+        for (const k of [a, b, c]) {
+          pos.push(contour[k].x, top, contour[k].y);
+          nrm.push(0, 1, 0);
+        }
       }
     }
     const g = new THREE.BufferGeometry();
