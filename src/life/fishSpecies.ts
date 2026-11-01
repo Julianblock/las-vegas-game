@@ -112,7 +112,7 @@ export const FISH: FishSpecies[] = [
     id: 'largemouth',
     name: 'Largemouth bass',
     sci: 'Micropterus salmoides',
-    note: 'Waits in the shade of drowned brush and tamarisk in the backs of the coves for anything that swims past.',
+    note: 'Waits under the cattails and bridges of the golf-course ponds for anything that swims past.',
     len: [0.3, 0.55],
     depth: 0.3,
     width: 0.13,
