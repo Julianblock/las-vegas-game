@@ -10,6 +10,8 @@ import { Kit } from './kit';
 import { lotsFromOsm } from './lots';
 import { Masses } from './masses';
 import { RESORTS } from './resorts';
+import { BellagioFountains } from './shows/fountains';
+import type { Show } from './shows/show';
 
 /**
  * The Las Vegas resort corridor: every OSM building along the Strip and
@@ -23,10 +25,12 @@ export class Strip {
   readonly lights: number[];
   readonly glows: number[];
   readonly lots: Lot[];
+  /** Timed spectacles: fountains, volcano, beams and screens. */
+  readonly shows: Show[] = [];
   private solidGeo: THREE.BufferGeometry;
   private shadowMat: THREE.ShaderMaterial;
 
-  constructor(osm: OsmData, hf: Heightfield) {
+  constructor(osm: OsmData, hf: Heightfield, water: (x: number, z: number) => number = () => -Infinity) {
     const atlas = buildSignAtlas();
     this.kit = new Kit(hf, atlas.rects);
     for (const r of RESORTS) r.style?.();
@@ -64,6 +68,13 @@ export class Strip {
     this.lights = [...this.kit.lights, ...this.masses.lights];
     this.glows = [...this.kit.glows, ...this.masses.glows];
     this.lots = [...this.kit.lots, ...lotsFromOsm(osm.lots, (x, z) => this.occupies(x, z))];
+
+    this.shows.push(new BellagioFountains(hf, water));
+    for (const s of this.shows) this.group.add(s.object);
+  }
+
+  update(dt: number, clock: number, night: number) {
+    for (const s of this.shows) s.update(dt, clock, night);
   }
 
   get crowd() {
