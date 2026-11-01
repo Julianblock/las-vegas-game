@@ -30,5 +30,5 @@ export function circuitBuilt(month: number, day: number) {
 export function onTrack(month: number, day: number, hours: number) {
   if (month !== RACE.month) return false;
   const night = day - RACE.day;
-  return night >= -2 && night <= 0 && hours >= RACE.hours && hours < RACE.hours + 2;
+  return night >= -2 && night <= 0 && hours >= 18;
 }
