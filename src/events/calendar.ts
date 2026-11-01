@@ -17,3 +17,18 @@ export function costumeShare(month: number, day: number, hours: number) {
   if (month === 10 && day >= 24) return hours >= 19 ? 0.06 : 0.01;
   return 0;
 }
+
+/** Race weekend: Saturday night, November 21, 2026, lights out at 8 pm. */
+export const RACE = { month: 11, day: 21, hours: 20 };
+
+/** The circuit's walls and fences stand for the month before and the days after. */
+export function circuitBuilt(month: number, day: number) {
+  return (month === 10 && day >= 20) || (month === 11 && day <= 26);
+}
+
+/** Cars on track: practice and qualifying Thursday and Friday nights, the race on Saturday. */
+export function onTrack(month: number, day: number, hours: number) {
+  if (month !== RACE.month) return false;
+  const night = day - RACE.day;
+  return night >= -2 && night <= 0 && hours >= RACE.hours && hours < RACE.hours + 2;
+}
