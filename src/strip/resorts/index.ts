@@ -1,4 +1,5 @@
 import type { Resort } from '../resort';
+import { virgin } from './virgin';
 import { lvcc } from './lvcc';
 import { allegiant } from './allegiant';
 import { halloween } from '../../events/halloween';
@@ -85,6 +86,7 @@ export const RESORTS: Resort[] = [
   halloween,
   allegiant,
   lvcc,
+  virgin,
   // Last: chain signs skip ground the landmarks above have reserved.
   roadside,
 ];
