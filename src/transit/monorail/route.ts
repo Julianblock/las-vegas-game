@@ -1,6 +1,6 @@
 import type { OsmData } from '../../world/meta';
 import { chain } from '../chain';
-import { Path } from '../path';
+import { densify, Path } from '../path';
 
 /** The maintenance yard spur east of the Sahara station, which trains never run in service. */
 const inYard = (w: number[]) => {
@@ -17,5 +17,5 @@ export function monorailLoop(osm: OsmData): Path | null {
   const ways = (osm.rails ?? []).filter((r) => r.kind === 'monorail' && !inYard(r.pts)).map((r) => r.pts);
   if (!ways.length) return null;
   const seed = ways.reduce((a, b) => (b.length > a.length ? b : a));
-  return new Path(chain(ways, seed));
+  return new Path(densify(chain(ways, seed), 8));
 }
