@@ -223,7 +223,7 @@ export const FISH: FishSpecies[] = [
     id: 'carp',
     name: 'Common carp',
     sci: 'Cyprinus carpio',
-    note: 'Big bronze carp cruise the warm shallows of the coves, tailing in the mud.',
+    note: 'Big bronze carp cruise the warm shallows of the Wash and the golf ponds, tailing in the mud.',
     len: [0.4, 0.8],
     depth: 0.3,
     width: 0.14,
