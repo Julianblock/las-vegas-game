@@ -203,7 +203,7 @@ const steps = {
     await writeMeta({ landcover: { size, res, classes: LC } });
   },
   async derived() {
-    for (const name of ['inner', 'mid', 'laughlin']) {
+    for (const name of ['inner', 'mid', 'strip']) {
       console.log(`ao/${name}`);
       const r = REGIONS[name];
       const file = path.join(OUT, `height_${name}.png`);
