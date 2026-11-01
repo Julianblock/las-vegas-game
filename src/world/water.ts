@@ -273,16 +273,10 @@ export class Water {
     this.texture.needsUpdate = true;
   }
 
-  /**
-   * The grid covering (x, z). The main grid's edge cells carry Lake Mohave on
-   * north, east and west past its edge, where the far terrain bounds it; south
-   * lies the detail grid.
-   */
+  /** The grid covering (x, z): the corridor's detail grid, else the valley grid. */
   private gridAt(x: number, z: number): WaterGrid | null {
     if (this.det.contains(x, z)) return this.det;
-    const h = this.size;
-    if (Math.abs(x) > h || z < -h || z > h / 2) return null;
-    return this.main;
+    return this.main.contains(x, z) ? this.main : null;
   }
 
   /** Water surface, mask and depth at (x, z); bilinear like the GPU. */
