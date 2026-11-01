@@ -9,10 +9,10 @@ export const goldenGate: Resort = {
   name: 'Golden Gate Hotel & Casino',
   signs: [goldenGateName],
   build: (k) => {
-    casinoBlock(k, {
+    casinoBlock(k, clearOfMall({
       x: 3935, z: -6121, ang: 2.089, w: 55.4, d: 43.7,
       podium: 4, podiumColor: '#efe9dc',
       sign: 'goldenGateName', signH: 5,
-    });
+    }));
   },
 };
