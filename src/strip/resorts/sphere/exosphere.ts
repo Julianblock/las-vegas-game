@@ -19,6 +19,10 @@ const USUAL = [0, 2, 0, 3, 4, 1];
 const RACE = [5, 0, 5, 2, 5, 3];
 const PARTY = [6, 0, 6, 2, 6, 4];
 const JULY4 = [7, 8, 7, 2, 8, 0];
+const CHRISTMAS = [9, 12, 9, 0, 12, 2];
+const VALENTINE = [10, 0, 10, 2];
+const PADDY = [11, 0, 11, 2];
+const USUAL_PLUS = [0, 2, 0, 3, 13, 4, 1];
 
 /** The lit skin: cycles programs, faces the Strip, and fades between them. */
 export class Exosphere implements Show {
