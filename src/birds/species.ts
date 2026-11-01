@@ -165,6 +165,29 @@ export const SPECIES: Species[] = [
     ],
   },
   {
+    id: 'pigeon',
+    name: 'Rock Pigeon',
+    latin: 'Columba livia',
+    blurb: 'The Strip\u2019s most loyal regular. Nests on casino ledges and under the pedestrian bridges, and works the crowds on Las Vegas Boulevard for dropped churros.',
+    facts: [
+      'Wild rock doves nest on sea cliffs; to a pigeon a 50-storey hotel is just a very tidy cliff.',
+      'Pigeons can find their way home from hundreds of kilometres using the sun and the earth\u2019s magnetic field.',
+      'Feral flocks show every colour from blue-bar to red checker, the legacy of centuries of fancy breeding.',
+    ],
+    call: 'coo',
+    shape: {
+      wingspan: 0.64, length: 0.32, bodyWidth: 0.09, bodyDepth: 0.09, neckLen: 0.02, headSize: 0.045,
+      chord: 0.34, taper: 0.6, sweep: 0.2, tip: 'pointed', fingers: 0, fingerLen: 0,
+      tailLen: 0.11, tailWidth: 0.07, tail: 'square', beak: 'seed', beakLen: 0.018, legs: 'tucked', legLen: 0.04, dihedral: 0.1,
+    },
+    flight: { massKg: 0.35, cruise: 15, stall: 6, maxDive: 35, glideRatio: 6, flapHz: 6, flapPower: 9, climb: 1.4 },
+    palettes: [
+      { ...base, name: 'Blue-bar', head: '#5c6470', throat: '#4a6a5e', breast: '#6a6878', belly: '#8a909a', back: '#9aa0aa', coverts: '#a0a6b0', secondaries: '#8a909a', primaries: '#3c4048', underCoverts: '#c8ccd2', underFlight: '#b8bcc4', tail: '#7a808a', tailUnder: '#6a7078', beak: '#2a2a2c', cere: '#e8e4dc', legs: '#c8504a', eye: '#d86a1e', tailBands: 1, tailBandColor: '#26282c', wingtipDark: 0.5, gloss: 0.5 },
+      { ...base, name: 'Checker', head: '#3e4450', throat: '#3a5a50', breast: '#4a4a56', belly: '#6a6e78', back: '#5a606a', coverts: '#60666e', secondaries: '#555a64', primaries: '#2c3036', underCoverts: '#a8acb4', underFlight: '#9a9ea6', tail: '#555a62', tailUnder: '#4a4e56', beak: '#2a2a2c', cere: '#e8e4dc', legs: '#c8504a', eye: '#d86a1e', tailBands: 1, tailBandColor: '#1e2024', mottle: 0.7, gloss: 0.5 },
+      { ...base, name: 'Red', head: '#9a6450', throat: '#8a5a4a', breast: '#a86a52', belly: '#c89a84', back: '#c8a090', coverts: '#c49a88', secondaries: '#b08876', primaries: '#7a5244', underCoverts: '#e2ccc0', underFlight: '#d8c2b6', tail: '#b48a78', tailUnder: '#a07a6a', beak: '#d8c8b8', cere: '#ece6dc', legs: '#c8504a', eye: '#d86a1e' },
+    ],
+  },
+  {
     id: 'goldeneagle',
     name: 'Golden Eagle',
     latin: 'Aquila chrysaetos',
