@@ -134,6 +134,8 @@ function lampGeometry(): THREE.BufferGeometry {
 }
 
 const PROP_TILE = 2000;
+/** Searchlight filled unmapped lots along its streets; Las Vegas is fully mapped. */
+const FILL_LOTS = false;
 
 interface Batch {
   geo: THREE.InstancedBufferGeometry;
@@ -244,8 +246,8 @@ export class Props {
       addHome(x, z, w, d, ang, s, i, town);
     });
 
-    // Searchlight's grid is only partly mapped: fill empty lots along town
-    // streets with homes, mostly single-wides set well back on big lots.
+    // Clark County's buildings are fully mapped, so streets only gain cobra-head
+    // lights here; no filler homes.
     const occ = new Set<number>();
     const key = (x: number, z: number) => Math.floor(x / 20) * 100003 + Math.floor(z / 20);
     for (const [x, z] of osm.buildings) occ.add(key(x, z));
@@ -253,7 +255,7 @@ export class Props {
     for (const road of osm.roads) {
       const res = road.kind === 'residential';
       const town = res || road.kind === 'tertiary' || road.kind === 'trunk' || road.kind === 'unclassified';
-      if (!town) continue;
+      if (!town || (res && !FILL_LOTS)) continue;
       const p = road.pts;
       let lamp = 0;
       for (let k = 0; k + 3 < p.length; k += 2) {
