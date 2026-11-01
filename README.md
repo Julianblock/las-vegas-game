@@ -64,3 +64,8 @@ Pick a season in the menu, or let the real calendar decide:
 
 World units are metres, x east and z south of a local origin:
 `x = (lon + 115.19) * 89915`, `z = (36.116 - lat) * 111320`.
+
+## Data
+
+Map data © OpenStreetMap contributors, available under the Open Database
+License. Elevation from USGS 3DEP.
