@@ -212,7 +212,7 @@ export const SPECIES: Species[] = [
     id: 'prairiefalcon',
     name: 'Prairie Falcon',
     latin: 'Falco mexicanus',
-    blurb: 'A pale, sand-coloured falcon that nests in the cliffs of the Highland Range and screams low across the bajada after doves.',
+    blurb: 'A pale, sand-coloured falcon from the Red Rock cliffs that screams low across the empty lots after the Strip\u2019s pigeons.',
     facts: [
       'Black "armpits" give it away from below.',
       'Hugs the ground on the attack, using every wash and rise for cover.',
