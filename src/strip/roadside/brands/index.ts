@@ -35,6 +35,7 @@ import { pizzaHut } from './pizzaHut';
 import { popeyes } from './popeyes';
 import { portOfSubs } from './portOfSubs';
 import { rebel } from './rebel';
+import { ross } from './ross';
 import { sevenEleven } from './sevenEleven';
 import { seventySix } from './seventySix';
 import { shell } from './shell';
@@ -90,6 +91,7 @@ export const BRANDS: Brand[] = [
   popeyes,
   portOfSubs,
   rebel,
+  ross,
   sevenEleven,
   seventySix,
   shell,
