@@ -9,11 +9,11 @@ export const circa: Resort = {
   name: 'Circa Resort & Casino',
   signs: [circaName],
   build: (k) => {
-    casinoBlock(k, {
+    casinoBlock(k, clearOfMall({
       x: 3990, z: -6206, ang: -1.09, w: 120, d: 94,
       podium: 4, podiumColor: '#2a2a2e',
   tower: { w: 62, d: 28, floors: 35, color: '#d9d9dc' },
       sign: 'circaName', signH: 10,
-    });
+    }));
   },
 };
