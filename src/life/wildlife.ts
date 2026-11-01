@@ -229,7 +229,7 @@ const SPECIES: SpeciesDef[] = [
   },
   {
     id: 'burro',
-    // Feral burros, descendants of prospectors' pack animals, water at Lake Mohave.
+    // Feral burros, descendants of prospectors' pack animals, out at Red Rock and the valley edge.
     geo: () =>
       quadruped({ len: 1.45, hipY: 0.66, bodyR: [0.24, 0.3], legR: 0.045, neckLen: 0.26, neckUp: 0.22, headLen: 0.45, headR: 0.12, tailLen: 0.5, tailR: 0.03, tailDown: 0.45, coat: '#ffffff', belly: '#e8e2d8', legs: '#d8d0c4', face: '#ffffff', tail: '#3a3430', ears: 0.17 }),
     cap: 24,
