@@ -118,6 +118,7 @@ import { portOfSubs } from './portOfSubs';
 import { ptsPlace } from './ptsPlace';
 import { rachelsKitchen } from './rachelsKitchen';
 import { raisingCanes } from './raisingCanes';
+import { ranch99 } from './ranch99';
 import { rebel } from './rebel';
 import { robertos } from './robertos';
 import { ross } from './ross';
@@ -280,6 +281,7 @@ export const BRANDS: Brand[] = [
   ptsPlace,
   rachelsKitchen,
   raisingCanes,
+  ranch99,
   rebel,
   robertos,
   ross,
