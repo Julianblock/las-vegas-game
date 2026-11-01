@@ -14,4 +14,5 @@ export const DOORS: Door[] = [
   { name: 'Bellagio', z: 300, side: -1, n: 9 },
   { name: 'Caesars Palace', z: -260, side: -1, n: 8 },
   { name: 'Horseshoe', z: 240, side: 1, n: 6 },
+  { name: 'Paris', z: 450, side: 1, n: 7 },
 ];
