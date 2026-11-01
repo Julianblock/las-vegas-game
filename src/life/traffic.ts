@@ -65,6 +65,8 @@ export class Traffic {
   private geos: THREE.InstancedBufferGeometry[] = [];
   private t0: Float32Array[] = [];
   private buckets = new Map<number, Car[]>();
+  /** Streets shut to traffic, such as the Grand Prix circuit on race nights: cars there are hidden. */
+  closed: ((x: number, z: number) => boolean) | null = null;
 
   constructor(osm: OsmData, private hf: Heightfield, radius = 48000) {
     this.material = new THREE.ShaderMaterial({
