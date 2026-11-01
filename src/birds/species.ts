@@ -403,7 +403,7 @@ export const SPECIES: Species[] = [
     id: 'osprey',
     name: 'Osprey',
     latin: 'Pandion haliaetus',
-    blurb: 'Hovers over the coves of Lake Mohave below Cottonwood Cove, then plunges feet-first for striped bass.',
+    blurb: 'Hovers over the golf-course ponds and the Bellagio lake, then plunges feet-first for carp and tilapia.',
     facts: [
       'The only hawk that dives fully underwater after fish.',
       'Reversible outer toes and spiny foot pads let it grip slippery prey.',
