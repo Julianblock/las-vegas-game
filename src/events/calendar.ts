@@ -34,6 +34,11 @@ export function onTrack(month: number, day: number, hours: number) {
 }
 
 /** New Year's Eve after dark, and the first hour of the new year. */
+/** Fourth of July fireworks: from 9 p.m. to midnight on the Fourth. */
+export function isFourthOfJuly(month: number, day: number, hours: number) {
+  return month === 7 && day === 4 && hours >= 21;
+}
+
 export function isNewYearsEve(month: number, day: number, hours: number) {
   return (month === 12 && day === 31 && hours >= 17) || (month === 1 && day === 1 && hours < 1);
 }
