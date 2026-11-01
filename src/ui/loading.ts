@@ -12,9 +12,9 @@ export class LoadingScreen {
   constructor() {
     this.root.className = 'loading';
     this.root.innerHTML = `<div class="inner">${SILHOUETTE}
-      <div class="eyebrow">Searchlight · Nevada · Elev. 3,540 ft</div>
-      <div class="title">Wings over the <em>Mojave</em></div>
-      <p class="lede">An old gold camp on US-95, standing in a forest of Joshua trees between the Highland Range and the deep blue of Lake Mohave. Fill up at Terrible's, grab a Grand Slam, and take to the desert air.</p>
+      <div class="eyebrow">Las Vegas · Nevada · Elev. 2,030 ft</div>
+      <div class="title">Wings over the <em>Strip</em></div>
+      <p class="lede">Flamingo Road runs from Decatur past the Palms, the Rio and the Gold Coast, under I-15 and into the four corners of Caesars, the Bellagio, the Cromwell and the Horseshoe. Every casino, every fountain, every crowd on the Boulevard. Take to the neon air.</p>
       <div class="bar"><i></i></div><div class="status">Preparing</div></div>`;
     this.bar = this.root.querySelector('.bar i')!;
     this.status = this.root.querySelector('.status')!;
