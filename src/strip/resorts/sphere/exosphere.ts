@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { G } from '../../../render/globals';
+import { today } from '../../../events/today';
 import type { Heightfield } from '../../../world/heightfield';
 import type { Show } from '../../shows/show';
 import { exosphereFragment, exosphereVertex } from './exosphereShader';
