@@ -63,6 +63,7 @@ import { VolcanoVision } from './world/volcano';
 import { isTouch } from './ui/device';
 import { TouchControls } from './ui/touch';
 import { onCircuit } from './events/grandprix/clearance';
+import { onTrack } from './events/calendar';
 
 function paletteFor(s: GameSettings): Palette {
   const sp = speciesById(s.bird) ?? SPECIES[0];
