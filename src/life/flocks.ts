@@ -203,6 +203,7 @@ export class Flocks {
       // swifts scream along the cliffs.
       if (species === SP.CORMORANT && x < 17000) continue;
       if (species === SP.BLACKBIRD && (lc < LC.URBAN_OPEN || lc > LC.URBAN_HIGH)) continue;
+      if (species === SP.PIGEON && (lc < LC.URBAN_LOW || lc > LC.URBAN_HIGH)) continue;
       if (species === SP.SWIFT && lc !== LC.ROCK && Math.random() < 0.8) continue;
       const f: Flock = {
         kind,
