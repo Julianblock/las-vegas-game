@@ -54,3 +54,6 @@ export const CROSS = {
   paradise: 3208,
   maryland: 4698,
 } as const;
+
+/** True within `gap` metres (world x) of a Flamingo Road cross street. */
+export const nearCross = (x: number, gap = 16) => Object.values(CROSS).some((c) => Math.abs(x - c) < gap);
