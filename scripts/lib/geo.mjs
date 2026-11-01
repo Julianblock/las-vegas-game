@@ -1,7 +1,8 @@
-// Local tangent-plane coordinates centred on Searchlight, Nevada (US-95 at Cottonwood Cove Road).
+// Local tangent-plane coordinates centred on Flamingo Road in Las Vegas, Nevada,
+// halfway between Decatur Boulevard and the Strip (just west of I-15).
 // x = metres east, z = metres south (three.js convention: -z is north).
 
-export const CENTER = { lat: 35.4652, lon: -114.9195 };
+export const CENTER = { lat: 36.116, lon: -115.19 };
 
 const phi = (CENTER.lat * Math.PI) / 180;
 export const M_PER_DEG_LAT = 111132.92 - 559.82 * Math.cos(2 * phi) + 1.175 * Math.cos(4 * phi);
