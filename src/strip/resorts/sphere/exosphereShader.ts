@@ -122,6 +122,22 @@ vec3 mirrorball(vec3 n) {
   return base * (0.5 + 0.5 * hash3(vec3(cell, 1.0))) + vec3(1.0, 0.95, 0.85) * flash * 3.0;
 }
 
+vec3 flag(vec3 n) {
+  vec3 f = normalize(uFace);
+  vec3 r = normalize(cross(vec3(0.0, 1.0, 0.0), f));
+  vec3 u = cross(f, r);
+  vec2 p = vec2(dot(n, r), dot(n, u));
+  float wave = 0.05 * sin(p.x * 5.0 - uTime * 2.2);
+  float y = p.y + wave;
+  float stripe = mod(floor((y + 0.7) / 1.4 * 13.0), 2.0);
+  vec3 c = mix(vec3(0.78, 0.06, 0.12), vec3(0.96), stripe);
+  float canton = step(p.x, -0.08) * step(0.0, y);
+  vec2 sp = vec2(p.x * 9.0, y * 9.0);
+  float star = smoothstep(0.22, 0.12, length(fract(sp + vec2(0.5 * mod(floor(sp.y), 2.0), 0.0)) - 0.5));
+  c = mix(c, mix(vec3(0.05, 0.12, 0.42), vec3(1.0), star), canton);
+  return c * (0.82 + 0.18 * cos(p.x * 5.0 - uTime * 2.2));
+}
+
 vec3 moon(vec3 n) {
   float m = vnoise(n * 4.0) * 0.6 + vnoise(n * 13.0) * 0.4;
   return vec3(0.82, 0.82, 0.78) * (0.65 + 0.35 * smoothstep(0.35, 0.7, m));
