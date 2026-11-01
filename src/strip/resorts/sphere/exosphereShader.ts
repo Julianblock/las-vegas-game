@@ -98,6 +98,29 @@ vec3 ball(vec3 n) {
   return mix(vec3(0.05), c, smoothstep(0.012, 0.025, seam));
 }
 
+vec3 helmet(vec3 n) {
+  vec3 f = normalize(uFace);
+  vec3 r = normalize(cross(vec3(0.0, 1.0, 0.0), f));
+  vec3 u = cross(f, r);
+  vec2 p = vec2(dot(n, r), dot(n, u));
+  float front = dot(n, f);
+  float sweep = -0.15 + 0.25 * sin(atan(dot(n, r), front) * 1.5);
+  vec3 c = mix(vec3(0.92), vec3(0.85, 0.03, 0.05), step(p.y, sweep));
+  float band = step(abs(p.y - 0.42), 0.06);
+  float check = mod(floor(atan(n.z, n.x) * 30.0) + floor(p.y * 50.0), 2.0);
+  c = mix(c, vec3(check), band);
+  float visor = step(0.2, front) * step(abs(p.y - 0.08), 0.14) * step(abs(p.x), 0.62);
+  vec3 glass = vec3(0.02, 0.03, 0.06) + vec3(0.5, 0.6, 0.8) * smoothstep(0.04, 0.0, abs(p.x + p.y * 0.8 - 0.1 - 0.15 * sin(uTime * 0.5)));
+  return mix(c, glass, visor);
+}
+
+vec3 mirrorball(vec3 n) {
+  vec2 cell = floor(vec2(atan(n.z, n.x) * 9.0, asin(clamp(n.y, -1.0, 1.0)) * 18.0));
+  float flash = pow(hash3(vec3(cell, floor(uTime * 5.0))), 24.0);
+  vec3 base = mix(vec3(0.35, 0.32, 0.28), vec3(0.95, 0.85, 0.55), 0.5 + 0.5 * n.y);
+  return base * (0.5 + 0.5 * hash3(vec3(cell, 1.0))) + vec3(1.0, 0.95, 0.85) * flash * 3.0;
+}
+
 vec3 moon(vec3 n) {
   float m = vnoise(n * 4.0) * 0.6 + vnoise(n * 13.0) * 0.4;
   return vec3(0.82, 0.82, 0.78) * (0.65 + 0.35 * smoothstep(0.35, 0.7, m));
