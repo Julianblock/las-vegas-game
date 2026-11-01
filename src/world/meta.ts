@@ -12,7 +12,7 @@ export interface HeightEncoding {
   scale: number;
 }
 
-export type RegionName = 'inner' | 'mid' | 'far' | 'laughlin';
+export type RegionName = 'inner' | 'mid' | 'far' | 'strip';
 
 export interface WorldMeta {
   center: { lat: number; lon: number };

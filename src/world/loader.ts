@@ -59,7 +59,7 @@ function decodeHeights(px: Pixels, spec: { size: number; cx?: number; cz?: numbe
 
 export async function loadWorld(onProgress: Progress): Promise<WorldData> {
   const meta: WorldMeta = await (await fetch(BASE + 'meta.json')).json();
-  const regions: RegionName[] = ['inner', 'mid', 'far', 'laughlin'];
+  const regions: RegionName[] = ['inner', 'mid', 'far', 'strip'];
 
   const jobs: [string, () => Promise<unknown>][] = [];
   const heights = {} as Record<RegionName, HeightGrid>;

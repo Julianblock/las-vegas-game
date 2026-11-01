@@ -26,7 +26,7 @@ export class Heightfield {
   readonly inner: HeightGrid;
   readonly mid: HeightGrid;
   readonly far: HeightGrid;
-  readonly laughlin: HeightGrid;
+  readonly strip: HeightGrid;
   private readonly lc: Pixels;
   private readonly lcSize: number;
   private readonly canopy: Pixels;
@@ -37,7 +37,7 @@ export class Heightfield {
     this.inner = world.heights.inner;
     this.mid = world.heights.mid;
     this.far = world.heights.far;
-    this.laughlin = world.heights.laughlin;
+    this.strip = world.heights.laughlin;
     this.lc = world.landcover;
     this.lcSize = world.meta.landcover.size;
     this.canopy = world.canopy;
@@ -49,7 +49,7 @@ export class Heightfield {
     let h = bilinear(this.far, this.far.heights, x, z);
     if (wm > 0) h += (bilinear(this.mid, this.mid.heights, x, z) - h) * wm;
     const wl = this.lauWeight(x, z);
-    if (wl > 0) h += (bilinear(this.laughlin, this.laughlin.heights, x, z) - h) * wl;
+    if (wl > 0) h += (bilinear(this.strip, this.strip.heights, x, z) - h) * wl;
     if (wi > 0) h += (bilinear(this.inner, this.inner.heights, x, z) - h) * wi;
     return h;
   }
@@ -80,13 +80,13 @@ export class Heightfield {
     let a = 1;
     if (wm > 0) a += (bilinear(this.mid, this.mid.ao, x, z) - a) * wm;
     const wl = this.lauWeight(x, z);
-    if (wl > 0) a += (bilinear(this.laughlin, this.laughlin.ao, x, z) - a) * wl;
+    if (wl > 0) a += (bilinear(this.strip, this.strip.ao, x, z) - a) * wl;
     if (wi > 0) a += (bilinear(this.inner, this.inner.ao, x, z) - a) * wi;
     return a;
   }
 
   lauWeight(x: number, z: number): number {
-    const g = this.laughlin;
+    const g = this.strip;
     return regionWeight(g.size, x, z, 0.06, g.cx, g.cz);
   }
 

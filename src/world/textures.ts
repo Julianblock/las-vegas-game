@@ -94,10 +94,10 @@ export function createWorldTextures(world: WorldData, renderer: THREE.WebGLRende
   canopy.minFilter = canopy.magFilter = THREE.LinearFilter;
   canopy.needsUpdate = true;
   return {
-    heightDetail: heightTexture(world.heights.inner, world.heights.laughlin),
+    heightDetail: heightTexture(world.heights.inner, world.heights.strip),
     heightMid: heightTexture(world.heights.mid),
     heightFar: heightTexture(world.heights.far),
-    imgDetail: imageTexture(stackImages([world.imagery.inner, world.imagery.laughlin]), aniso),
+    imgDetail: imageTexture(stackImages([world.imagery.inner, world.imagery.strip]), aniso),
     imgMid: imageTexture(world.imagery.mid, aniso),
     imgFar: imageTexture(world.imagery.far, aniso),
     maskA,

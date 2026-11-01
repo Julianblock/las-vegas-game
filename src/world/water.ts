@@ -456,7 +456,7 @@ export class Water {
     // A swift, clear channel: shallow gravel shelves, 5-8 m down the middle.
     const riverBed = (d: number) => Math.min(7, 0.9 + d * 0.09);
     const riverLevel = (k: number) => smooth[Math.floor(k / R)];
-    for (const hg of [world.heights.mid, world.heights.laughlin]) {
+    for (const hg of [world.heights.mid, world.heights.strip]) {
       carveGrid(hg, g, lakeDist, () => this.lakeLevel, lakeBed);
       carveGrid(hg, g, riverDist, riverLevel, riverBed);
     }
