@@ -114,7 +114,7 @@ export class Menu {
         }
         this.pane.append(grid);
         this.pane.append(
-          el('p', 'lede', 'A dusty desert pickup. Cruise US-95 past Terrible\'s and the McDonald\'s sign, or take Cottonwood Cove Road down to the lake; press <kbd>G</kbd> any time to swap between wings and wheels.'),
+          el('p', 'lede', 'A dusty desert pickup. Cruise the Strip under the neon, or run Flamingo Road out to Decatur; press <kbd>G</kbd> any time to swap between wings and wheels.'),
         );
         break;
       }
