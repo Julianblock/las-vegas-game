@@ -16,5 +16,5 @@ export const grandPrix: Resort = {
   style: plazaStyle,
   signs: [gpWord, gpLED],
   build: buildPlaza,
-  shows: (hf) => [new TrackSurface(hf), new CircuitWalls(hf), new StartGantry(hf), new Grandstands(hf), new Race(hf)],
+  shows: (hf) => [new TrackSurface(hf), new CircuitWalls(hf), new Floodlights(hf), new StartGantry(hf), new Grandstands(hf), new Race(hf)],
 };
