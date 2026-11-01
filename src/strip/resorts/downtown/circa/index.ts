@@ -1,5 +1,6 @@
 import type { Resort } from '../../../resort';
 import { casinoBlock } from '../../../parts/casinoBlock';
+import { clearOfMall } from '../fremont';
 import { circaName } from './signs';
 
 /** Circa (2020), the tallest tower downtown, with Vegas Vickie kicking her leg inside and a stadium-sized sportsbook. */
