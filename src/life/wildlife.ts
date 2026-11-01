@@ -202,7 +202,7 @@ const slopeOf = (hf: Heightfield, x: number, z: number) => {
   return 1 - n.y;
 };
 
-/** Open desert scrub the herbivores browse: creosote, Joshua and blackbrush flats, washes, grass. */
+/** Open desert the herbivores browse: the creosote lots between subdivisions, washes and grass. */
 const natural = (lc: number) =>
   lc === LC.CREOSOTE || lc === LC.JOSHUA || lc === LC.BLACKBRUSH || lc === LC.WASH || lc === LC.GRASS || lc === LC.PINYON || lc === LC.OTHER;
 
