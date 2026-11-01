@@ -61,7 +61,7 @@ void main() {
 
   vec2 p = vWorld.xz;
   float grain = vnoise(p * 3.0) * 0.5 + vnoise(p * 0.7) * 0.5;
-  // Asphalt: US-95 sun-faded charcoal, county chip-seal paler, town streets dusty.
+  // Asphalt: the Strip's fresh charcoal, arterials sun-faded, side streets dusty.
   vec3 asphalt = style >= 3 ? vec3(0.075, 0.074, 0.074) : style == 0 ? vec3(0.15, 0.14, 0.125) : vec3(0.11, 0.105, 0.1);
   asphalt *= 0.85 + 0.3 * grain;
   // Tyre polish in the wheel tracks, oil drip down the lane centres.
