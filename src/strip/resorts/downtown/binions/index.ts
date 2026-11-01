@@ -1,5 +1,6 @@
 import type { Resort } from '../../../resort';
 import { casinoBlock } from '../../../parts/casinoBlock';
+import { clearOfMall } from '../fremont';
 import { binionsName } from './signs';
 
 /** Binion’s Horseshoe (1951), where Benny Binion took any bet and the World Series of Poker began in 1970. */
