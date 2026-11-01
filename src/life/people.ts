@@ -300,6 +300,15 @@ export class People {
       c0.set([col.r, col.g, col.b, Math.floor(hash(i * 5.3) * 5)], i * 4);
       col.set(PANTS[Math.floor(hash(i * 2.3) * PANTS.length)]);
       c1.set([col.r, col.g, col.b, hash(i * 8.1) < 0.12 ? 3 : Math.floor(hash(i * 6.7) * 5)], i * 4);
+      const cos = COSTUMES[Math.floor(hash(i * 13.1) * COSTUMES.length)];
+      col.set(cos.shirt);
+      k0.set([col.r, col.g, col.b, hash(i * 17.3)], i * 4);
+      col.set(cos.pants);
+      k1.set([col.r, col.g, col.b, cos.hair ? 1 : 0], i * 4);
+      col.set(cos.hair ?? '#000000');
+      k2.set([col.r, col.g, col.b, cos.face ? 1 : 0], i * 4);
+      col.set(cos.face ?? '#000000');
+      k3.set([col.r, col.g, col.b], i * 3);
       const height = 0.9 + h * 0.17;
       if (p.kind === 'walk') {
         const path = this.paths[p.path!];
