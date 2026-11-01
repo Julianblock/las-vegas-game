@@ -1,5 +1,6 @@
 import type { Resort } from '../../../resort';
 import { casinoBlock } from '../../../parts/casinoBlock';
+import { clearOfMall } from '../fremont';
 import { goldenNuggetName } from './signs';
 
 /** The Golden Nugget (1946), white and gold, where Steve Wynn started. */
