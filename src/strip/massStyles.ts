@@ -1,4 +1,5 @@
 import { FX } from '../world/builders';
+import { ll } from '../world/geo';
 import type { OsmMass } from '../world/meta';
 
 /** How an extruded building is painted and lit. */
@@ -14,18 +15,30 @@ export interface MassStyle {
   glowRgb: [number, number, number];
 }
 
-/** One resort's look, matched on the OSM name of the building or its parts. */
+/**
+ * One resort's look, matched on the OSM name of the building or part, or on a
+ * zone (world centre and radius) for the many unnamed tower parts.
+ */
 export interface StyleRule {
-  match: RegExp;
+  match?: RegExp;
+  zone?: { x: number; z: number; r: number };
+  /** Only masses at least this tall (m). */
+  minH?: number;
   style: Partial<MassStyle>;
 }
 
 /** Resort facades, most specific first. Each landmark module adds its own. */
 export const RULES: StyleRule[] = [];
 
-/** Registers a resort's facade style. */
-export function addStyle(match: RegExp, style: Partial<MassStyle>) {
-  RULES.push({ match, style });
+/** Registers a resort's facade style by building name. */
+export function addStyle(match: RegExp, style: Partial<MassStyle>, minH = 0) {
+  RULES.push({ match, style, minH });
+}
+
+/** Registers a resort's facade style for everything within `r` metres of a lat/lon. */
+export function addZone(lat: number, lon: number, r: number, style: Partial<MassStyle>, minH = 0) {
+  const p = ll(lat, lon);
+  RULES.push({ zone: { x: p.x, z: p.z, r }, style, minH });
 }
 
 function hash(s: string) {
@@ -46,8 +59,11 @@ function fallback(m: OsmMass): MassStyle {
   return { color: m.colour || low[Math.floor(k * low.length)], rough: 0.85, fx: m.h > 9 ? FX.WASH : 0, wash: 0, seed: 11 + k, glowRgb: [0, 0, 0] };
 }
 
-export function styleFor(m: OsmMass): MassStyle {
+export function styleFor(m: OsmMass, x: number, z: number): MassStyle {
   const base = fallback(m);
-  for (const r of RULES) if (r.match.test(m.name)) return { ...base, ...r.style };
+  for (const r of RULES) {
+    if (r.minH && m.h < r.minH) continue;
+    if (r.match ? r.match.test(m.name) : r.zone && Math.hypot(x - r.zone.x, z - r.zone.z) < r.zone.r) return { ...base, ...r.style };
+  }
   return base;
 }

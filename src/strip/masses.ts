@@ -86,7 +86,7 @@ export class Masses {
   }
 
   private extrude(s: SolidBuilder, m: OsmMass, cx: number, cz: number) {
-    const st = styleFor(m);
+    const st = styleFor(m, cx, cz);
     const pts = m.pts;
     const n = pts.length / 2;
     let ground = Infinity;
