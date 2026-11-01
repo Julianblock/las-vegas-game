@@ -8,6 +8,7 @@ import { autozone } from './autozone';
 import { battistas } from './battistas';
 import { blueberryHill } from './blueberryHill';
 import { brewTea } from './brewTea';
+import { buffaloWildWings } from './buffaloWildWings';
 import { burgerKing } from './burgerKing';
 import { cafeRio } from './cafeRio';
 import { capriottis } from './capriottis';
@@ -107,6 +108,7 @@ export const BRANDS: Brand[] = [
   battistas,
   blueberryHill,
   brewTea,
+  buffaloWildWings,
   burgerKing,
   cafeRio,
   capriottis,
