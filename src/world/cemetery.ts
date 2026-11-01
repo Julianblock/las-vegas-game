@@ -23,7 +23,7 @@ const CHARACTER: Record<string, Character> = {
   // kept up and gated at dusk.
   'Palm Mortuary & Cemetery': { old: 0.1, density: 0.6, vandal: 0.01, closedSign: true },
   'Palm South Jones': { old: 0.05, density: 0.55, vandal: 0.01, closedSign: true },
-  // Woodlawn's neighbour in the east valley, older and plainer.
+  // An older, plainer east-valley ground.
   'Davis Memorial Park': { old: 0.3, density: 0.5, vandal: 0.03, closedSign: true },
 };
 const GRAVE_BUDGET_M2 = 30000;
