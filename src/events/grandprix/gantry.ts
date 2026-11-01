@@ -21,7 +21,7 @@ function gantryGeometry() {
   const span = TRACK_HALF * 2 + 1.4;
   for (const z of [-span / 2, span / 2]) s.add(new THREE.BoxGeometry(0.7, 8, 0.7).translate(0, 4, z), I, TRUSS, { rough: 0.5 });
   s.add(new THREE.BoxGeometry(1.0, 1.4, span + 0.7).translate(0, 7.6, 0), I, TRUSS, { rough: 0.5 });
-  s.add(new THREE.BoxGeometry(0.2, 1.2, 4.2).translate(0.55, 6.4, 0), I, '#111214', { rough: 0.4 });
+  s.add(new THREE.BoxGeometry(0.2, 1.2, 4.2).translate(-0.55, 6.4, 0), I, '#111214', { rough: 0.4 });
   for (let i = 0; i < 5; i++) {
     for (const y of [6.75, 6.15]) {
       s.add(new THREE.SphereGeometry(0.2, 10, 8).translate(0.7, y, -1.6 + i * 0.8), I, '#ff1a1a', { rough: 0.5, glow: 3 });
