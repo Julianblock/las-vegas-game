@@ -23,6 +23,7 @@ import { dominos } from './dominos';
 import { dunkin } from './dunkin';
 import { einstein } from './einstein';
 import { greenValley } from './greenValley';
+import { halalGuys } from './halalGuys';
 import { inNOut } from './inNOut';
 import { jackInTheBox } from './jackInTheBox';
 import { jamba } from './jamba';
@@ -87,6 +88,7 @@ export const BRANDS: Brand[] = [
   dunkin,
   einstein,
   greenValley,
+  halalGuys,
   inNOut,
   jackInTheBox,
   jamba,
