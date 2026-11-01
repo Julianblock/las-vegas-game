@@ -1,7 +1,7 @@
 {
-  "name": "Searchlight, Nevada — Wings over the Mojave",
-  "short_name": "Searchlight",
-  "description": "Fly as a desert bird over Searchlight, Nevada: Joshua trees, US-95, Terrible's and Lake Mohave.",
+  "name": "Las Vegas, Nevada — Wings over the Strip",
+  "short_name": "Las Vegas",
+  "description": "Fly over Las Vegas, Nevada: every casino on the Strip, Flamingo Road from Decatur to the Boulevard, fountains, crowds and neon.",
   "start_url": "./",
   "scope": "./",
   "display": "fullscreen",
