@@ -16,4 +16,6 @@ export interface Brand {
   color: string;
   /** Panel height (m); panels keep their painted aspect. */
   h?: number;
+  /** Signed even where the map has no building footprint (local landmarks in strip malls). */
+  free?: boolean;
 }
