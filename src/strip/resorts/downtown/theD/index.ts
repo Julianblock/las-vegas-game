@@ -1,5 +1,6 @@
 import type { Resort } from '../../../resort';
 import { casinoBlock } from '../../../parts/casinoBlock';
+import { clearOfMall } from '../fremont';
 import { theDName } from './signs';
 
 /** The D (2012), once Fitzgeralds, with the Long Bar and a vintage casino upstairs. */
