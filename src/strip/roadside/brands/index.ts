@@ -36,6 +36,7 @@ import { javaTree } from './javaTree';
 import { kingSolomon } from './kingSolomon';
 import { marieCallenders } from './marieCallenders';
 import { marigold } from './marigold';
+import { maverik } from './maverik';
 import { mcdonalds } from './mcdonalds';
 import { metroPizza } from './metroPizza';
 import { officeDepot } from './officeDepot';
@@ -112,6 +113,7 @@ export const BRANDS: Brand[] = [
   kingSolomon,
   marieCallenders,
   marigold,
+  maverik,
   mcdonalds,
   metroPizza,
   officeDepot,
