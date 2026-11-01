@@ -130,7 +130,7 @@ export const FISH: FishSpecies[] = [
     id: 'smallmouth',
     name: 'Smallmouth bass',
     sci: 'Micropterus dolomieu',
-    note: 'A bronze, red-eyed bass of the lake\u2019s rocky points and boulder drop-offs.',
+    note: 'A bronze, red-eyed bass of the rocky banks along the resort lakes.',
     len: [0.25, 0.45],
     depth: 0.27,
     width: 0.12,
