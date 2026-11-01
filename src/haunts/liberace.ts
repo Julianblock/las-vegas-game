@@ -9,7 +9,7 @@ export const liberace: Haunt = {
   text: 'Liberace bought this house off Tropicana in the 1970s and filled it with mirrors, a piano-shaped pool and a painted ceiling of Michelangelo’s cherubs. Owners since have described a scent of his cologne, a piano that plays when nobody is near it, and a candlelit figure in a cape crossing the lawn.',
   ground: rect(4278, 1812, 4322, 1850),
   count: 1,
-  hint: 'Fly over the Liberace Mansion, east of the airport road, after dark.',
+  hint: 'Fly over the Liberace Mansion, off East Tropicana near Maryland Parkway, after dark.',
   r: 50,
   h: 14,
 };
