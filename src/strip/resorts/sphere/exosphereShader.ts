@@ -4,7 +4,7 @@ import { lightingCommon } from '../../../render/shaders/lighting';
  * The Exosphere: 1.2 million LED pucks over the Sphere's skin, here drawn
  * procedurally. Programs (uMode): 0 the eyeball, 1 jack-o'-lantern,
  * 2 the Earth, 3 a basketball, 4 the full moon, 5 a racing helmet,
- * 6 a glitter mirror ball. uFace points the content
+ * 6 a glitter mirror ball, 7 the flag, 8 fireworks. uFace points the content
  * toward the Strip; uLook steers the eye.
  */
 export const exosphereVertex = /* glsl */ `
