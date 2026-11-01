@@ -428,7 +428,7 @@ export const SPECIES: Species[] = [
     facts: [
       'Wintering bald eagles often steal fish from ospreys mid-air.',
       'Takes five years to grow the iconic white head and tail.',
-      'Lake Mohave\u2019s cold, clear water below Hoover Dam keeps fish near the surface all winter.',
+      'Lake Mead, 40 km east, holds the valley\u2019s wintering eagles; a few wander over town.',
     ],
     call: 'chitter',
     shape: {
