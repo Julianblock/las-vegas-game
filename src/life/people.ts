@@ -324,6 +324,10 @@ export class People {
     this.geo.setAttribute('aT1', this.t1);
     this.geo.setAttribute('aC0', new THREE.InstancedBufferAttribute(c0, 4));
     this.geo.setAttribute('aC1', new THREE.InstancedBufferAttribute(c1, 4));
+    this.geo.setAttribute('aK0', new THREE.InstancedBufferAttribute(k0, 4));
+    this.geo.setAttribute('aK1', new THREE.InstancedBufferAttribute(k1, 4));
+    this.geo.setAttribute('aK2', new THREE.InstancedBufferAttribute(k2, 4));
+    this.geo.setAttribute('aK3', new THREE.InstancedBufferAttribute(k3, 3));
     this.geo.instanceCount = total;
     this.material = new THREE.ShaderMaterial({
       glslVersion: THREE.GLSL3,
