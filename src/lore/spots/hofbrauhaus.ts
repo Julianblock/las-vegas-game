@@ -11,5 +11,5 @@ export const hofbrauhausSpot: Spot = {
   hint: 'Look on Paradise Road at Harmon, across from Virgin.',
   r: 120,
   h: 50,
-  test: near({ x: 3290, z: 820 }, 70, 50),
+  test: near({ x: 3467, z: 937 }, 70, 50),
 };
