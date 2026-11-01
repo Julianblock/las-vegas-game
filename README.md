@@ -37,3 +37,14 @@ Mountains to the west.
 
 W/S for gas and brake, A/D to steer, Shift to floor it, Space for the
 handbrake, L for headlights, V for the horn and G to get out and fly.
+
+## What's there
+
+- Every Strip resort with its own massing, colour, crown signs and marquee:
+  the Bellagio fountains, the Mirage volcano, the Sphere's Exosphere, the
+  High Roller, the Eiffel Tower, the monorail and the pedestrian bridges.
+- Flamingo Road east and west, with the real strip malls, gas stations and
+  fast-food signs along it, matched to the map's points of interest.
+- Traffic, pedestrians, pigeons, ravens, grackles and fish in the lakes.
+- Lore: walk or fly into a place to read its history, from El Rancho Vegas
+  to the Caesars Palace Grand Prix, and a few ghosts after dark.
