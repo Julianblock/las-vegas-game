@@ -32,3 +32,8 @@ export function onTrack(month: number, day: number, hours: number) {
   const night = day - RACE.day;
   return night >= -2 && night <= 0 && hours >= 18;
 }
+
+/** New Year's Eve after dark, and the first hour of the new year. */
+export function isNewYearsEve(month: number, day: number, hours: number) {
+  return (month === 12 && day === 31 && hours >= 17) || (month === 1 && day === 1 && hours < 1);
+}
