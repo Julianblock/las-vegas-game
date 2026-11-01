@@ -1,6 +1,7 @@
 import type { Brand } from '../brand';
 import { albertsons } from './albertsons';
 import { ampm } from './ampm';
+import { applebees } from './applebees';
 import { arco } from './arco';
 import { att } from './att';
 import { autozone } from './autozone';
@@ -97,6 +98,7 @@ import { whiteCastle } from './whiteCastle';
 export const BRANDS: Brand[] = [
   albertsons,
   ampm,
+  applebees,
   arco,
   att,
   autozone,
