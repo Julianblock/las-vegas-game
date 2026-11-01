@@ -9,11 +9,11 @@ export const goldenNugget: Resort = {
   name: 'Golden Nugget',
   signs: [goldenNuggetName],
   build: (k) => {
-    casinoBlock(k, {
+    casinoBlock(k, clearOfMall({
       x: 4014, z: -5997, ang: -2.65, w: 161, d: 265,
       podium: 3, podiumColor: '#efe6cc',
   tower: { w: 90, d: 24, floors: 24, color: '#f4efe2' },
       sign: 'goldenNuggetName', signH: 8,
-    });
+    }));
   },
 };
