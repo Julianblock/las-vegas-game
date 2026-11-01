@@ -20,10 +20,15 @@ export class Fireworks implements Show {
   readonly object: THREE.Points;
   private readonly material: THREE.ShaderMaterial;
 
-  constructor(hf: Heightfield) {
-    const r = rand(2027);
+  constructor(
+    hf: Heightfield,
+    roofs: Rooftop[] = ROOFTOPS,
+    private readonly when: () => boolean = () => isNewYearsEve(today.month, today.day, today.hours),
+    seed = 2027,
+  ) {
+    const r = rand(seed);
     const pos: number[] = [], shell: number[] = [], dir: number[] = [];
-    for (const roof of ROOFTOPS) {
+    for (const roof of roofs) {
       const y = hf.height(roof.x, roof.z) + roof.roof;
       for (let s = 0; s < SHELLS_PER_ROOF; s++) {
         const period = 5 + r() * 4, phase = r() * period;
