@@ -1,5 +1,6 @@
 import { bugsy } from './bugsy';
 import { elvis } from './elvis';
 import type { Haunt } from './haunt';
+import { tupac } from './tupac';
 
-export const HAUNTS: Haunt[] = [bugsy, elvis];
+export const HAUNTS: Haunt[] = [bugsy, elvis, tupac];
