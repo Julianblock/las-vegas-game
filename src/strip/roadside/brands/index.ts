@@ -151,6 +151,7 @@ import { texaco } from './texaco';
 import { tireXpress } from './tireXpress';
 import { tmobile } from './tmobile';
 import { tommyRockers } from './tommyRockers';
+import { travelodge } from './travelodge';
 import { umiya } from './umiya';
 import { upsStore } from './upsStore';
 import { verizon } from './verizon';
@@ -319,6 +320,7 @@ export const BRANDS: Brand[] = [
   tireXpress,
   tmobile,
   tommyRockers,
+  travelodge,
   umiya,
   upsStore,
   verizon,
