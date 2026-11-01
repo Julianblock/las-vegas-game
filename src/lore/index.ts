@@ -1,4 +1,5 @@
 import type { Spot } from './spot';
+import { unlvSpot } from './spots/unlv';
 import { lvccSpot } from './spots/lvcc';
 import { chinatownSpot } from './spots/chinatown';
 import { ellisIslandSpot } from './spots/ellis-island';
@@ -112,4 +113,5 @@ export const SPOTS: Spot[] = [
   ellisIslandSpot,
   chinatownSpot,
   lvccSpot,
+  unlvSpot,
 ];
