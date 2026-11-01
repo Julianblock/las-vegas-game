@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { latLonToLocal, regionBounds } from './geo.mjs';
 
-const UA = 'searchlight-game/0.1 (github.com/Julianblock/Searchlight-game)';
+const UA = 'las-vegas-game/0.1 (github.com/Julianblock/las-vegas-game)';
 const ENDPOINTS = [
   'https://overpass-api.de/api/interpreter',
   'https://overpass.kumi.systems/api/interpreter',

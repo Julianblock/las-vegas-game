@@ -4,7 +4,7 @@ import sharp from 'sharp';
 import { latLonToMercatorPx, localToLatLon } from './geo.mjs';
 
 const CACHE = path.resolve('.cache/tiles');
-const UA = 'searchlight-game/0.1 (github.com/Julianblock/Searchlight-game)';
+const UA = 'las-vegas-game/0.1 (github.com/Julianblock/las-vegas-game)';
 
 export const SOURCES = {
   terrarium: {
