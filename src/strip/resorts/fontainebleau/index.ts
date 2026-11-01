@@ -22,7 +22,8 @@ function bowTies(k: Kit, x: number, z: number) {
  * the crown, bow-tie lights on the podium and the marquee on the east kerb.
  */
 function buildFB(k: Kit) {
-  k.sign(k.frame(2746, -2432, 270), 'fbCrown', 0, 214, 0, 9, 1.3, FX.NEON, 0, true);
+  k.sign(k.frame(2694, -2475, 263), 'fbCrown', 0, 214, 0.8, 5.5, 1.3, FX.NEON);
+  k.sign(k.frame(2757, -2401, 180), 'fbCrown', 0, 214, 0.8, 5.5, 1.3, FX.NEON);
   const z = -2440;
   const walk = k.frame(stripX(z) + STRIP_HALF - 2, z, 270);
   pylon(k, walk, 0, 0, { crown: 'fbCrown', screen: 'fbLED', h: 30, w: 17, color: '#d8dce4', crownH: 3 });
