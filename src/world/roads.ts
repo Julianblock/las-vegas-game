@@ -16,7 +16,7 @@ export function roadSpec(r: OsmRoad): { half: number; style: number; rank: numbe
       return { half: 1.85 * Math.max(2, lanes) + 1.4, style: 4, rank: 6 };
     case 'trunk':
       if (r.oneway) return { half: 1.85 * Math.max(2, lanes) + 1.2, style: 4, rank: 5 };
-      // US-95 through Searchlight: four lanes and a turn lane, no median.
+      // Four lanes and a turn lane, no median.
       return lanes >= 4 ? { half: 1.8 * lanes + 0.6, style: 6, rank: 5 } : { half: 4.6, style: 3, rank: 5 };
     case 'primary':
     case 'secondary':
