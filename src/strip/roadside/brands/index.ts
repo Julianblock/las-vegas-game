@@ -70,6 +70,7 @@ import { terribles } from './terribles';
 import { tmobile } from './tmobile';
 import { umiya } from './umiya';
 import { upsStore } from './upsStore';
+import { verizon } from './verizon';
 import { villagePub } from './villagePub';
 import { wahoos } from './wahoos';
 import { walgreens } from './walgreens';
@@ -149,6 +150,7 @@ export const BRANDS: Brand[] = [
   tmobile,
   umiya,
   upsStore,
+  verizon,
   villagePub,
   wahoos,
   walgreens,
