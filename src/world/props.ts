@@ -5,7 +5,9 @@ import type { ShadowMap } from '../render/shadows';
 import type { Heightfield } from './heightfield';
 import { merge, StrutBuilder, withPart } from './geom';
 import { LC, type OsmData } from './meta';
-import { carGeometry, PAINT, pickupGeometry } from '../life/traffic';
+import { carGeometry } from '../life/vehicles/car';
+import { PAINT } from '../life/vehicles/paint';
+import { pickupGeometry } from '../life/vehicles/pickup';
 import { latticeGeometry, poleGeometry, PYLON, type Pylon } from './powerLines';
 import type { RoadIndex } from './roadIndex';
 
