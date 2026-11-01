@@ -35,6 +35,7 @@ import { bellagio } from './bellagio';
 import { caesars } from './caesars';
 import { flamingo } from './flamingo';
 import { monorail } from '../../transit/monorail';
+import { skywalks } from '../skywalks';
 
 /** Every landmark module on the corridor, roughly south to north along the Boulevard, then Flamingo Road west. */
 export const RESORTS: Resort[] = [
@@ -73,6 +74,7 @@ export const RESORTS: Resort[] = [
   resortsWorld,
   fontainebleau,
   monorail,
+  skywalks,
   // Last: chain signs skip ground the landmarks above have reserved.
   roadside,
 ];
