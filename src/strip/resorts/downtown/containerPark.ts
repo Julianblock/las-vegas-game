@@ -40,5 +40,6 @@ export function buildContainerPark(k: Kit) {
   k.box(fr, -8, 4, -4, 6, 0.4, 6, '#8a5a32', { rough: 0.8 });
   k.box(fr, 10, 0, -14, 12, 1, 7, '#2a2a2a', { rough: 0.7 });
   k.box(fr, 10, 6, -17.3, 12, 0.6, 0.6, '#ffe9b0', { glow: 1.6, fx: FX.NONE });
+  k.box(fr, 0, HIGH - 0.4, hd - 0.7, LONG - 1, 0.3, 0.2, '#ffd27a', { glow: 2, fx: FX.NEON });
   k.gather(fr, 2, -4, 12, 30);
 }
