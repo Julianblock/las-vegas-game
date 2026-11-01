@@ -36,13 +36,16 @@ export function lotsFromOsm(rings: { pts: number[] }[], skip: (x: number, z: num
     }
     const w = u1 - u0;
     const d = v1 - v0;
-    if (w < 20 || d < 14 || w * d > 120000) continue;
+    if (w < 20 || d < 14 || w * d > 60000) continue;
     const um = (u0 + u1) / 2;
     const vm = (v0 + v1) / 2;
     const x = um * c - vm * s;
     const z = um * s + vm * c;
     if (skip(x, z)) continue;
-    out.push({ x, z, ang, w: w - 4, d: d - 4, fill: 0.7 + ((Math.abs(x * 7 + z * 13) % 100) / 100) * 0.25 });
+    // Big employee and event lots sit mostly empty; small ones by the doors fill up.
+    const area = w * d;
+    const busy = area < 6000 ? 0.8 : area < 20000 ? 0.55 : 0.3;
+    out.push({ x, z, ang, w: w - 4, d: d - 4, fill: busy + ((Math.abs(x * 7 + z * 13) % 100) / 100) * 0.15 });
   }
   return out;
 }
