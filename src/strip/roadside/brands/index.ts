@@ -5,6 +5,7 @@ import { applebees } from './applebees';
 import { arco } from './arco';
 import { att } from './att';
 import { autozone } from './autozone';
+import { bahamaBreeze } from './bahamaBreeze';
 import { battistas } from './battistas';
 import { bbqChicken } from './bbqChicken';
 import { benihana } from './benihana';
@@ -135,6 +136,7 @@ export const BRANDS: Brand[] = [
   arco,
   att,
   autozone,
+  bahamaBreeze,
   battistas,
   bbqChicken,
   benihana,
