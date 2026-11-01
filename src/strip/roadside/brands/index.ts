@@ -68,6 +68,7 @@ import { kungFuTea } from './kungFuTea';
 import { lawrys } from './lawrys';
 import { littleCaesars } from './littleCaesars';
 import { llHawaiian } from './llHawaiian';
+import { lotusOfSiam } from './lotusOfSiam';
 import { marieCallenders } from './marieCallenders';
 import { marigold } from './marigold';
 import { maverik } from './maverik';
@@ -203,6 +204,7 @@ export const BRANDS: Brand[] = [
   lawrys,
   littleCaesars,
   llHawaiian,
+  lotusOfSiam,
   marieCallenders,
   marigold,
   maverik,
