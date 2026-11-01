@@ -19,9 +19,12 @@ interface Character {
 }
 
 const CHARACTER: Record<string, Character> = {
-  // The gold camp's burial ground east of town: miners' graves from the 1900s
-  // boom ringed with hillside rock under wooden crosses, beside modern granite.
-  'Searchlight Cemetery': { old: 0.55, density: 0.5, vandal: 0.02, closedSign: true },
+  // Modern lawn memorial parks: rows of flat bronze markers and granite,
+  // kept up and gated at dusk.
+  'Palm Mortuary & Cemetery': { old: 0.1, density: 0.6, vandal: 0.01, closedSign: true },
+  'Palm South Jones': { old: 0.05, density: 0.55, vandal: 0.01, closedSign: true },
+  // Woodlawn's neighbour in the east valley, older and plainer.
+  'Davis Memorial Park': { old: 0.3, density: 0.5, vandal: 0.03, closedSign: true },
 };
 const GRAVE_BUDGET_M2 = 30000;
 const DEFAULT: Character = { old: 0.85, density: 0.35, vandal: 0.06, closedSign: false };
