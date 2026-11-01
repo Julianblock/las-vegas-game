@@ -24,7 +24,7 @@ function gantryGeometry() {
   s.add(new THREE.BoxGeometry(0.2, 1.2, 4.2).translate(-0.55, 6.4, 0), I, '#111214', { rough: 0.4 });
   for (let i = 0; i < 5; i++) {
     for (const y of [6.75, 6.15]) {
-      s.add(new THREE.SphereGeometry(0.2, 10, 8).translate(0.7, y, -1.6 + i * 0.8), I, '#ff1a1a', { rough: 0.5, glow: 3 });
+      s.add(new THREE.SphereGeometry(0.2, 10, 8).translate(-0.7, y, -1.6 + i * 0.8), I, '#ff1a1a', { rough: 0.5, glow: 3 });
     }
   }
   s.add(new THREE.BoxGeometry(0.9, 0.04, span - 1.6).translate(0, 0.14, 0), I, '#f0f0f0', { rough: 0.8 });
