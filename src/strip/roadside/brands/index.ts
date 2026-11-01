@@ -35,6 +35,7 @@ import { shell } from './shell';
 import { sinclair } from './sinclair';
 import { souvenirs } from './souvenirs';
 import { soyo } from './soyo';
+import { speedeeMart } from './speedeeMart';
 import { stageDoor } from './stageDoor';
 import { starbucks } from './starbucks';
 import { subway } from './subway';
@@ -83,6 +84,7 @@ export const BRANDS: Brand[] = [
   sinclair,
   souvenirs,
   soyo,
+  speedeeMart,
   stageDoor,
   starbucks,
   subway,
