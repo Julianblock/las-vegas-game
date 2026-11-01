@@ -48,3 +48,14 @@ handbrake, L for headlights, V for the horn and G to get out and fly.
 - Traffic, pedestrians, pigeons, ravens, grackles and fish in the lakes.
 - Lore: walk or fly into a place to read its history, from El Rancho Vegas
   to the Caesars Palace Grand Prix, and a few ghosts after dark.
+
+## Seasons and events
+
+Pick a season in the menu, or let the real calendar decide:
+
+- **Halloween**: costumes on the Strip, jack-o'-lanterns at the resort doors,
+  the Sphere as a pumpkin.
+- **Grand Prix** (November): the Strip Circuit traced from OpenStreetMap,
+  walls, grandstands, the start gantry and twenty-two cars under the lights.
+- **New Year's Eve**: the Strip closed to cars, crowds in the boulevard and
+  fireworks off eight rooftops.
