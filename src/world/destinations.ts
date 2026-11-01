@@ -55,6 +55,7 @@ const LOOKOUTS: Record<string, [number, number, number, number]> = {
   allegiant: [760, 2660, 520, 2830],
   'grand-prix': [2640, 800, 2528, 748],
   fremont: [3960, -6150, 4337, -5961],
+  'fremont-east': [4700, -5815, 4671, -5771],
 };
 
 export interface Spot {
