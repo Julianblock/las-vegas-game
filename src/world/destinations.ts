@@ -51,6 +51,7 @@ const LOOKOUTS: Record<string, [number, number, number, number]> = {
   'welcome-sign': [1551, 3815, 1551, 3766],
   sphere: [2680, -470, 2514, -580],
   allegiant: [760, 2660, 520, 2830],
+  'grand-prix': [2640, 800, 2528, 748],
 };
 
 export interface Spot {
