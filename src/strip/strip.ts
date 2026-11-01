@@ -33,6 +33,7 @@ export class Strip {
   constructor(osm: OsmData, hf: Heightfield, water: (x: number, z: number) => number = () => -Infinity) {
     const atlas = buildSignAtlas();
     this.kit = new Kit(hf, atlas.rects);
+    this.kit.osm = osm;
     for (const r of RESORTS) r.style?.();
     for (const r of RESORTS) {
       this.kit.seed = 100 + RESORTS.indexOf(r);
