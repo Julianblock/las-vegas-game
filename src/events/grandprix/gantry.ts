@@ -37,9 +37,8 @@ export class StartGantry implements Show {
 
   constructor(hf: Heightfield) {
     const p = CIRCUIT.sample(0, blank());
-    this.object = new THREE.Mesh(gantryGeometry(), instancedMaterial());
-    this.object.position.set(p.x, hf.height(p.x, p.z), p.z);
-    this.object.rotation.y = Math.atan2(-p.tz, p.tx);
+    const place = new THREE.Matrix4().makeRotationY(Math.atan2(-p.tz, p.tx)).setPosition(p.x, hf.height(p.x, p.z), p.z);
+    this.object = new THREE.Mesh(gantryGeometry().applyMatrix4(place), instancedMaterial());
   }
 
   update() {
