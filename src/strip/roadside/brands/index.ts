@@ -45,6 +45,7 @@ import { fatburger } from './fatburger';
 import { fedexOffice } from './fedexOffice';
 import { firefly } from './firefly';
 import { fiveGuys } from './fiveGuys';
+import { fogoDeChao } from './fogoDeChao';
 import { greensAndProteins } from './greensAndProteins';
 import { greenValley } from './greenValley';
 import { halalGuys } from './halalGuys';
@@ -174,6 +175,7 @@ export const BRANDS: Brand[] = [
   fedexOffice,
   firefly,
   fiveGuys,
+  fogoDeChao,
   greensAndProteins,
   greenValley,
   halalGuys,
