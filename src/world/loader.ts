@@ -84,8 +84,8 @@ export async function loadWorld(onProgress: Progress): Promise<WorldData> {
     ]);
   }
   jobs.push(['Desert land cover', async () => (landcover = readPixels(await fetchBitmap('landcover.png')))]);
-  jobs.push(['Joshua tree cover', async () => (canopy = readPixels(await fetchBitmap('canopy_inner.png')))]);
-  jobs.push(['US-95 & Main Street', async () => (osm = await (await fetch(BASE + 'osm.json')).json())]);
+  jobs.push(['Palms and desert scrub', async () => (canopy = readPixels(await fetchBitmap('canopy_inner.png')))]);
+  jobs.push(['The Strip & Flamingo Road', async () => (osm = await (await fetch(BASE + 'osm.json')).json())]);
 
   let done = 0;
   await Promise.all(
