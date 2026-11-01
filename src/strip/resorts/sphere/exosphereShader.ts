@@ -181,6 +181,18 @@ vec3 heart(vec3 n) {
   return mix(vec3(1.0, 0.55, 0.7), vec3(0.85, 0.02, 0.12), inside);
 }
 
+vec3 clover(vec3 n) {
+  vec3 p = front(n);
+  vec3 c = vec3(0.04, 0.35, 0.12);
+  float leaf = 0.0;
+  for (int i = 0; i < 3; i++) {
+    float a = 1.5708 + float(i) * 2.0944;
+    leaf = max(leaf, step(length(p.xy - vec2(cos(a), sin(a)) * 0.22), 0.2));
+  }
+  float stem = step(abs(p.x - (p.y + 0.1) * -0.3), 0.03) * step(p.y, -0.1) * step(-0.6, p.y);
+  return mix(c, vec3(0.3, 0.95, 0.35), max(leaf, stem) * step(0.0, p.z));
+}
+
 vec3 moon(vec3 n) {
   float m = vnoise(n * 4.0) * 0.6 + vnoise(n * 13.0) * 0.4;
   return vec3(0.82, 0.82, 0.78) * (0.65 + 0.35 * smoothstep(0.35, 0.7, m));
