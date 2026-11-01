@@ -1,4 +1,5 @@
 import type { Resort } from '../resort';
+import { tuscany } from './tuscany';
 import { platinum } from './platinum';
 import { vdara } from './vdara';
 import { virgin } from './virgin';
@@ -95,6 +96,7 @@ export const RESORTS: Resort[] = [
   virgin,
   vdara,
   platinum,
+  tuscany,
   // Last: chain signs skip ground the landmarks above have reserved.
   roadside,
 ];
