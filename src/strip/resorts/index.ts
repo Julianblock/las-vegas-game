@@ -1,4 +1,5 @@
 import type { Resort } from '../resort';
+import { goldenGate } from './downtown/goldenGate';
 import { californiaHotel } from './downtown/californiaHotel';
 import { mainStreetStation } from './downtown/mainStreetStation';
 import { elCortezHotel } from './downtown/elCortezHotel';
@@ -123,6 +124,7 @@ export const RESORTS: Resort[] = [
   elCortezHotel,
   mainStreetStation,
   californiaHotel,
+  goldenGate,
   // Last: chain signs skip ground the landmarks above have reserved.
   roadside,
 ];
