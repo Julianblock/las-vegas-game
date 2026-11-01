@@ -249,7 +249,7 @@ export class Water {
       this.paintPond(p);
     }
     this.main.dilate(8);
-    this.planRiver(world);
+    this.planResortLakes(world);
     this.det.dilate(10);
 
     const H = RES + DETAIL.res;
@@ -359,15 +359,15 @@ export class Water {
   }
 
   /**
-   * The bottom of Lake Mohave against Davis Dam and the Colorado below it,
-   * sliding past the casinos toward Needles. The river's surface follows the
-   * elevation model's water down the valley, smoothed and never running uphill.
+   * The corridor's man-made lakes from OpenStreetMap: the Bellagio's 8-acre
+   * lake, the Wynn's Lake of Dreams, the old Mirage lagoon, the Flamingo's
+   * wildlife-habitat ponds and the Venetian's canal. Each sits flat at its
+   * lowest shore, 3-4.5 m deep at the middle with a sheer concrete edge.
    */
-  private planRiver(world: WorldData) {
+  private planResortLakes(world: WorldData) {
     const g = this.det;
     const R = g.res;
-    const lakeRings: number[][] = [];
-    const riverRings: number[][] = [];
+    const h = g.size / 2;
     for (const a of world.osm.waterAreas) {
       const p = a.pts;
       if (p.length < 8) continue;
@@ -378,84 +378,31 @@ export class Water {
         minZ = Math.min(minZ, p[i + 1]);
         maxZ = Math.max(maxZ, p[i + 1]);
       }
-      const h = g.size / 2;
       if (maxX < g.cx - h || minX > g.cx + h || maxZ < g.cz - h || minZ > g.cz + h) continue;
-      // Golf course and subdivision ponds in Bullhead City stay dry land.
-      if (Math.max(maxX - minX, maxZ - minZ) < 5000) continue;
-      if (/mohave/i.test(a.name)) lakeRings.push(p);
-      else riverRings.push(p);
-    }
-    const lake = rasterize(g, lakeRings);
-    const river = rasterize(g, riverRings);
-    const damRow = Math.floor(g.fj(DAM_Z));
-    for (let k = 0; k < R * R; k++) {
-      if (k >= (damRow + 1) * R) lake[k] = 0;
-      if (lake[k] || k < (damRow + 1) * R) river[k] = 0;
-    }
-
-    // River surface per row from the elevation model's low water inside the banks.
-    const rowLevel = new Float32Array(R).fill(NaN);
-    const hs: number[] = [];
-    for (let j = damRow + 1; j < R; j++) {
-      hs.length = 0;
-      for (let i = 0; i < R; i += 2) if (river[j * R + i]) hs.push(this.hf.height(g.x(i), g.z(j)));
-      if (hs.length < 3) continue;
-      hs.sort((a, b) => a - b);
-      rowLevel[j] = hs[Math.floor(hs.length * 0.25)];
-    }
-    const smooth = new Float32Array(R).fill(NaN);
-    const W = 40;
-    for (let j = 0; j < R; j++) {
-      let s = 0, n = 0;
-      for (let d = -W; d <= W; d++) {
-        const v = rowLevel[j + d];
-        if (j + d >= 0 && j + d < R && !Number.isNaN(v)) (s += v), n++;
+      const ext = Math.max(maxX - minX, maxZ - minZ);
+      if (ext < 6 || ext > 1500) continue;
+      const hs: number[] = [];
+      for (let i = 0; i < p.length; i += 2) hs.push(this.hf.height(p[i], p[i + 1]));
+      hs.sort((x, y) => x - y);
+      const level = hs[0] - 0.4;
+      const mask = rasterize(g, [p]);
+      const id = this.nameId(a.name || 'Resort lake', 'pond');
+      let n = 0;
+      for (let k = 0; k < R * R; k++) {
+        if (!mask[k]) continue;
+        g.level[k] = level;
+        g.mask[k] = 1;
+        g.names[k] = id;
+        n++;
       }
-      if (n) smooth[j] = s / n + 0.6;
-    }
-    let last = NaN;
-    for (let j = damRow + 1; j < R; j++) {
-      if (Number.isNaN(smooth[j])) smooth[j] = last;
-      else if (!Number.isNaN(last)) smooth[j] = Math.min(smooth[j], last);
-      last = smooth[j];
-    }
-    let first = NaN;
-    for (let j = damRow + 1; j < R && Number.isNaN(first); j++) first = smooth[j];
-    for (let j = damRow + 1; j < R; j++) if (Number.isNaN(smooth[j])) smooth[j] = first;
-    this.riverTop = first;
-
-    const lakeId = this.nameId('Lake Mohave', 'lake');
-    const riverId = this.nameId('Colorado River', 'river');
-    for (let j = 0; j < R; j++) {
-      for (let i = 0; i < R; i++) {
-        const k = j * R + i;
-        if (lake[k]) {
-          g.level[k] = this.lakeLevel;
-          g.mask[k] = 1;
-          g.names[k] = lakeId;
-        } else if (river[k] && !Number.isNaN(smooth[j])) {
-          g.level[k] = smooth[j];
-          g.mask[k] = 1;
-          g.names[k] = riverId;
-        }
-      }
+      if (!n) continue;
+      const dist = shoreDistance(mask, R);
+      const deep = Math.min(4.5, 1.2 + ext * 0.01);
+      carveGrid(world.heights.strip, g, dist, () => level, (d) => Math.min(deep, 0.9 + d * g.cell * 0.25));
+      carveGrid(world.heights.inner, g, dist, () => level, (d) => Math.min(deep, 0.9 + d * g.cell * 0.25));
     }
     g.feather();
-
-    const lakeDist = shoreDistance(lake, R);
-    const riverDist = shoreDistance(river, R);
-    const lakeBed = (d: number) => Math.min(45, 1.5 + d * 0.12);
-    // A swift, clear channel: shallow gravel shelves, 5-8 m down the middle.
-    const riverBed = (d: number) => Math.min(7, 0.9 + d * 0.09);
-    const riverLevel = (k: number) => smooth[Math.floor(k / R)];
-    for (const hg of [world.heights.mid, world.heights.strip]) {
-      carveGrid(hg, g, lakeDist, () => this.lakeLevel, lakeBed);
-      carveGrid(hg, g, riverDist, riverLevel, riverBed);
-    }
   }
-
-  /** River surface just below Davis Dam (m). */
-  riverTop = NO_WATER;
 
   /** Stock tanks and the sewage lagoons east of town; big unnamed polygons are dry playas. */
   private planPonds(world: WorldData): Pond[] {
