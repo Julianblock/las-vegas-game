@@ -12,7 +12,7 @@ export const neonMuseum: Resort = {
   build: (k) => {
     buildLaConcha(k);
     const fr = boneyardFrame(k);
-    k.box(fr, 0, -0.35, 0, 56, 0.4, 64, '#b8a890', { rough: 1 });
+    k.box(fr, 2, -0.35, 0, 50, 0.4, 62, '#9a8a72', { rough: 1 });
     for (const p of PIECES) p.build(k, fr);
     k.walk(fr, [[-24, -30], [-14, -10], [-2, 6], [12, 20], [0, 30]]);
   },
