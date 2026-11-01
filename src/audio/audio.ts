@@ -40,6 +40,7 @@ type CallType = 'scream' | 'kak' | 'whistle' | 'raven' | 'croak' | 'coo' | 'quai
 const CALLS: Record<string, CallType> = {
   redtail: 'scream',
   raven: 'raven',
+  pigeon: 'coo',
   goldeneagle: 'whistle',
   vulture: 'hiss',
   prairiefalcon: 'kak',
