@@ -68,4 +68,5 @@ World units are metres, x east and z south of a local origin:
 ## Data
 
 Map data © OpenStreetMap contributors, available under the Open Database
-License. Elevation from USGS 3DEP.
+License. Elevation from the AWS Terrain Tiles (Terrarium), imagery from the
+USGS National Map, and land cover from the USDA Cropland Data Layer.
