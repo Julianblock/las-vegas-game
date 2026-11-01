@@ -88,6 +88,7 @@ import { llHawaiian } from './llHawaiian';
 import { lotusOfSiam } from './lotusOfSiam';
 import { marieCallenders } from './marieCallenders';
 import { marigold } from './marigold';
+import { marriott } from './marriott';
 import { maverik } from './maverik';
 import { maxs } from './maxs';
 import { mcdonalds } from './mcdonalds';
@@ -253,6 +254,7 @@ export const BRANDS: Brand[] = [
   lotusOfSiam,
   marieCallenders,
   marigold,
+  marriott,
   maverik,
   maxs,
   mcdonalds,
