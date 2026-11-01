@@ -446,7 +446,7 @@ export const SPECIES: Species[] = [
     id: 'heron',
     name: 'Great Blue Heron',
     latin: 'Ardea herodias',
-    blurb: 'Stalks the tamarisk shallows of Lake Mohave and flaps slowly up the coves with its neck folded and legs trailing.',
+    blurb: 'Stalks the edges of the Flamingo\u2019s habitat and the Bellagio lake, and flaps slowly over the Strip with its neck folded and legs trailing.',
     facts: [
       'Stands well over a metre tall but weighs barely two kilos.',
       'Hunts at night as well as day, thanks to eyes rich in rod cells.',
