@@ -10,6 +10,7 @@ import { bbqChicken } from './bbqChicken';
 import { benihana } from './benihana';
 import { blueberryHill } from './blueberryHill';
 import { brewTea } from './brewTea';
+import { brokenYolk } from './brokenYolk';
 import { buffaloWildWings } from './buffaloWildWings';
 import { burgerKing } from './burgerKing';
 import { cafeRio } from './cafeRio';
@@ -133,6 +134,7 @@ export const BRANDS: Brand[] = [
   benihana,
   blueberryHill,
   brewTea,
+  brokenYolk,
   buffaloWildWings,
   burgerKing,
   cafeRio,
