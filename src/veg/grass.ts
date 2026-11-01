@@ -69,7 +69,7 @@ export class Grass {
     const geo = clumpGeometry();
     const shared = {
       uHDetail: terrainUniforms.uHDetail,
-      uLauRect: terrainUniforms.uLauRect,
+      uStripRect: terrainUniforms.uStripRect,
       uHMid: terrainUniforms.uHMid,
       uHFar: terrainUniforms.uHFar,
       uImgDetail: terrainUniforms.uImgDetail,

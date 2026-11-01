@@ -52,7 +52,7 @@ export class TerrainShadow {
         fragmentShader: frag,
         uniforms: {
           uHDetail: { value: tex.heightDetail },
-          uLauRect: G.uLauRect,
+          uStripRect: G.uStripRect,
           uHMid: { value: tex.heightMid },
           uHFar: { value: tex.heightFar },
           uRegionSize: { value: new THREE.Vector3(...regionSizes) },

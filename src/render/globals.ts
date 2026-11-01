@@ -45,7 +45,7 @@ export const G = {
   uWaterSize: { value: 50000 },
   uWaterDetail: { value: new THREE.Vector3(0, 0, 1) }, // Davis Dam / Laughlin water grid centre x, z, size
   uWaterAtlas: { value: new THREE.Vector4(1, 0, 0, 1) }, // main grid's share of height, detail share of width & height, detail res
-  uLauRect: { value: new THREE.Vector3(30000, 34700, 13000) }, // Laughlin detail region centre x, z, size
+  uStripRect: { value: new THREE.Vector3(700, -300, 9000) }, // resort corridor detail region centre x, z, size
   uStripA: { value: Array.from({ length: 16 }, () => new THREE.Vector4(0, 0, 0, -1)) }, // lit casino facades the river mirrors: x, z, y0, y1
   uStripB: { value: Array.from({ length: 16 }, () => new THREE.Vector4()) }, // their linear rgb and half-width
   uUnderwater: { value: 0 }, // 1 while the camera is below a water surface

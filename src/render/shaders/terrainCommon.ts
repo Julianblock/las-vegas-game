@@ -7,7 +7,7 @@ uniform sampler2D uHDetail; // inner region in the top half, Laughlin in the bot
 uniform sampler2D uHMid;
 uniform sampler2D uHFar;
 uniform vec3 uRegionSize; // inner, mid, far
-uniform vec3 uLauRect; // Laughlin region centre x, z and size
+uniform vec3 uStripRect; // Laughlin region centre x, z and size
 
 float regionWeight(float size, vec2 xz) {
   float e = max(abs(xz.x), abs(xz.y)) / (size * 0.5);
@@ -21,8 +21,8 @@ vec3 regionWeights(vec2 xz) {
 vec2 regionUV(vec2 xz, float size) { return xz / size + 0.5; }
 
 float lauWeight(vec2 xz) {
-  vec2 d = abs(xz - uLauRect.xy);
-  return clamp((1.0 - max(d.x, d.y) / (uLauRect.z * 0.5)) / 0.06, 0.0, 1.0);
+  vec2 d = abs(xz - uStripRect.xy);
+  return clamp((1.0 - max(d.x, d.y) / (uStripRect.z * 0.5)) / 0.06, 0.0, 1.0);
 }
 
 /** Atlas UV for a region stacked into one half of a detail texture with \`res\` texels per side. */
@@ -31,7 +31,7 @@ vec2 atlasUV(vec2 uv, float res, float slot) {
   return vec2(uv.x, (uv.y + slot) * 0.5);
 }
 vec2 innerUV(vec2 xz, float res) { return atlasUV(regionUV(xz, uRegionSize.x), res, 0.0); }
-vec2 lauUV(vec2 xz, float res) { return atlasUV((xz - uLauRect.xy) / uLauRect.z + 0.5, res, 1.0); }
+vec2 lauUV(vec2 xz, float res) { return atlasUV((xz - uStripRect.xy) / uStripRect.z + 0.5, res, 1.0); }
 
 /** x: height (m), y: baked ambient occlusion */
 vec2 terrainSample(vec2 xz) {
@@ -58,7 +58,7 @@ vec3 terrainNormal(vec2 xz, float e) {
 float terrainTexel(vec2 xz) {
   vec3 w = regionWeights(xz);
   if (w.x > 0.0) return uRegionSize.x / 2048.0;
-  if (lauWeight(xz) > 0.0) return uLauRect.z / 2048.0;
+  if (lauWeight(xz) > 0.0) return uStripRect.z / 2048.0;
   if (w.y > 0.0) return uRegionSize.y / 2048.0;
   return uRegionSize.z / 1024.0;
 }
