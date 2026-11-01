@@ -1,0 +1,41 @@
+/** Streets the HUD names when you're low over them. */
+export const NAMED_ROADS = [
+  'South Las Vegas Boulevard',
+  'North Las Vegas Boulevard',
+  'West Flamingo Road',
+  'East Flamingo Road',
+  'West Tropicana Avenue',
+  'East Tropicana Avenue',
+  'Spring Mountain Road',
+  'West Sahara Avenue',
+  'East Sahara Avenue',
+  'Paradise Road',
+  'Koval Lane',
+  'West Harmon Avenue',
+  'East Harmon Avenue',
+  'South Decatur Boulevard',
+  'North Decatur Boulevard',
+  'South Valley View Boulevard',
+  'North Valley View Boulevard',
+  'Arville Street',
+  'Dean Martin Drive',
+  'Frank Sinatra Drive',
+  'Hotel Rio Drive',
+  'Hugh Hefner Drive',
+  'Industrial Road',
+  'Las Vegas Freeway',
+  'I 15 EXPR',
+  'Airport Connector',
+];
+
+/** How a street is called out, where its mapped name isn't what people say. */
+export const ROAD_LABEL: Record<string, string> = {
+  'South Las Vegas Boulevard': 'Las Vegas Boulevard \u00b7 the Strip',
+  'North Las Vegas Boulevard': 'Las Vegas Boulevard',
+  'West Flamingo Road': 'Flamingo Road',
+  'East Flamingo Road': 'Flamingo Road',
+  'Las Vegas Freeway': 'I-15 \u00b7 Las Vegas Freeway',
+  'I 15 EXPR': 'I-15 express lanes',
+  'South Valley View Boulevard': 'Valley View Boulevard',
+  'North Valley View Boulevard': 'Valley View Boulevard',
+};
