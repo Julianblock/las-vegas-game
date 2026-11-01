@@ -58,6 +58,7 @@ import { mcdonalds } from './mcdonalds';
 import { metroPcs } from './metroPcs';
 import { metroPizza } from './metroPizza';
 import { officeDepot } from './officeDepot';
+import { oliveGarden } from './oliveGarden';
 import { oodleNoodle } from './oodleNoodle';
 import { oreilly } from './oreilly';
 import { outback } from './outback';
@@ -164,6 +165,7 @@ export const BRANDS: Brand[] = [
   metroPcs,
   metroPizza,
   officeDepot,
+  oliveGarden,
   oodleNoodle,
   oreilly,
   outback,
