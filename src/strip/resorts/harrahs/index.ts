@@ -1,4 +1,5 @@
 import type { Resort } from '../../resort';
+import { buildBand } from './band';
 import { buildCarnaval } from './carnaval';
 import { buildCrowns } from './crowns';
 import { buildFacade } from './facade';
@@ -15,6 +16,7 @@ export const harrahs: Resort = {
   build(k) {
     buildCrowns(k);
     buildFacade(k);
+    buildBand(k);
     buildCarnaval(k);
   },
 };
