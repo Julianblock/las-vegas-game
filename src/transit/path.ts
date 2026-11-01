@@ -1,8 +1,11 @@
 /** A polyline in world x, z sampled by distance along it. */
 export class Path {
   readonly pts: number[];
-  private cum: number[] = [0];
+  /** Distance along the line to each vertex. */
+  readonly cum: number[] = [0];
   readonly length: number;
+  /** Optional absolute height at each vertex. */
+  ys: number[] | null = null;
 
   constructor(pts: number[]) {
     this.pts = pts;
@@ -12,8 +15,8 @@ export class Path {
     this.length = this.cum[this.cum.length - 1];
   }
 
-  /** Point and unit heading at distance `s` (wrapped round the length). */
-  at(s: number, out = { x: 0, z: 0, dx: 1, dz: 0 }) {
+  /** Point, height and unit heading at distance `s` (wrapped round the length). */
+  at(s: number, out = { x: 0, y: 0, z: 0, dx: 1, dz: 0 }) {
     s = ((s % this.length) + this.length) % this.length;
     let lo = 0, hi = this.cum.length - 1;
     while (hi - lo > 1) {
@@ -29,6 +32,7 @@ export class Path {
     out.z = az + (bz - az) * t;
     out.dx = (bx - ax) / seg;
     out.dz = (bz - az) / seg;
+    out.y = this.ys ? this.ys[lo] + (this.ys[hi] - this.ys[lo]) * t : 0;
     return out;
   }
 
@@ -41,4 +45,15 @@ export class Path {
     }
     return { s: at, d: best };
   }
+}
+
+/** Adds vertices so no segment is longer than `step` (m). */
+export function densify(pts: number[], step: number) {
+  const out = [pts[0], pts[1]];
+  for (let i = 2; i < pts.length; i += 2) {
+    const ax = pts[i - 2], az = pts[i - 1], bx = pts[i], bz = pts[i + 1];
+    const n = Math.max(1, Math.ceil(Math.hypot(bx - ax, bz - az) / step));
+    for (let k = 1; k <= n; k++) out.push(ax + ((bx - ax) * k) / n, az + ((bz - az) * k) / n);
+  }
+  return out;
 }
