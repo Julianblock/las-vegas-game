@@ -69,7 +69,7 @@ export class Fireworks implements Show {
   }
 
   update(_dt: number, clock: number, night: number) {
-    const on = isNewYearsEve(today.month, today.day, today.hours) ? night : 0;
+    const on = this.when() ? night : 0;
     this.object.visible = on > 0.05;
     this.material.uniforms.uOn.value = on;
     this.material.uniforms.uT.value = clock;
