@@ -319,7 +319,7 @@ export const SPECIES: Species[] = [
     id: 'burrowingowl',
     name: 'Burrowing Owl',
     latin: 'Athene cunicularia',
-    blurb: 'A long-legged little owl that bobs at the mouth of an old tortoise burrow by the airstrip and hunts beetles under the streetlights.',
+    blurb: 'A long-legged little owl that bobs at the mouth of a burrow in a vacant lot by Harry Reid Airport and hunts beetles under the streetlights.',
     facts: [
       'Lines its burrow with dung to attract dung beetles, its favourite snack.',
       'Mimics a rattlesnake\u2019s buzz to scare off anything poking into its burrow.',
