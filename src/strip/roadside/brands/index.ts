@@ -19,6 +19,7 @@ import { chevron } from './chevron';
 import { chickFilA } from './chickFilA';
 import { chilis } from './chilis';
 import { chipotle } from './chipotle';
+import { churchs } from './churchs';
 import { circleK } from './circleK';
 import { coffeeBean } from './coffeeBean';
 import { costco } from './costco';
@@ -132,6 +133,7 @@ export const BRANDS: Brand[] = [
   chickFilA,
   chilis,
   chipotle,
+  churchs,
   circleK,
   coffeeBean,
   costco,
