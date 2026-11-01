@@ -189,17 +189,16 @@ function speciesFor(lc: number, dark: number, s: number): number {
       if (dark > 0.3 && s < 0.55) return TREE.DESERT_WILLOW;
       return s < 0.8 ? TREE.CREOSOTE : TREE.BURSAGE;
     case LC.URBAN_OPEN:
-      // "Developed open" is mostly the US-95 corridor and dirt lots: still desert.
-      return s < 0.3 ? TREE.JOSHUA : s < 0.4 ? TREE.YUCCA : s < 0.75 ? TREE.CREOSOTE : TREE.BURSAGE;
+      // "Developed open" in the valley is vacant lots and freeway margins: creosote and bursage scrub.
+      return s < 0.04 ? TREE.YUCCA : s < 0.6 ? TREE.CREOSOTE : TREE.BURSAGE;
     case LC.URBAN_LOW:
     case LC.URBAN_MED:
     case LC.URBAN_HIGH:
-      // Searchlight yards: Joshua trees, a few Aleppo pines and athel, the odd palm.
-      if (s < 0.14) return TREE.TOWN;
-      if (s < 0.18) return TREE.PALM;
-      if (s < 0.5) return TREE.JOSHUA;
+      // Las Vegas yards and parking-lot islands: Mondell pines, mesquite and ash, a great many palms.
+      if (s < 0.3) return TREE.TOWN;
+      if (s < 0.55) return TREE.PALM;
       if (s < 0.6) return TREE.YUCCA;
-      return TREE.CREOSOTE;
+      return s < 0.85 ? TREE.CREOSOTE : TREE.BURSAGE;
     case LC.FARM:
       return TREE.TOWN;
     case LC.PINYON:
