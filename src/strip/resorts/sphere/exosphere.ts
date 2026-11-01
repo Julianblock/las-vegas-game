@@ -9,10 +9,10 @@ import { exosphereFragment, exosphereVertex } from './exosphereShader';
 export const SPHERE = { x: 2514, z: -580, r: 78.5, h: 112 };
 const PROGRAM_SECONDS = 24;
 
-/** Halloween and the days before it: the Sphere turns into a jack-o'-lantern more often. */
-function halloween(d = new Date()) {
-  return d.getMonth() === 9 && d.getDate() >= 24;
-}
+/** Halloween and the week before it: the Sphere turns into a jack-o'-lantern more often. */
+const halloween = () => today.month === 10 && today.day >= 24;
+const SPOOKY = [1, 0, 1, 2, 1, 3, 1, 4];
+const USUAL = [0, 2, 0, 3, 4, 1];
 
 /** The lit skin: cycles programs, faces the Strip, and fades between them. */
 export class Exosphere implements Show {
