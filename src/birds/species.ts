@@ -147,7 +147,7 @@ export const SPECIES: Species[] = [
     id: 'raven',
     name: 'Common Raven',
     latin: 'Corvus corax',
-    blurb: 'The unofficial mayor of Searchlight. Works the dumpsters behind Terrible\u2019s and McDonald\u2019s, then tumbles for fun over Duplex Hill.',
+    blurb: 'The unofficial pit boss of the Strip. Works the dumpsters behind the buffets and the In-N-Out on Flamingo, then tumbles for fun around the Strat.',
     facts: [
       'Ravens barrel-roll and fly upside down purely for play.',
       'They follow the highway at dawn for roadkill, and remember which cars feed them.',
