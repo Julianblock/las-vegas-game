@@ -49,6 +49,7 @@ import { phoDaLat } from './phoDaLat';
 import { pizzaHut } from './pizzaHut';
 import { popeyes } from './popeyes';
 import { portOfSubs } from './portOfSubs';
+import { raisingCanes } from './raisingCanes';
 import { rebel } from './rebel';
 import { robertos } from './robertos';
 import { ross } from './ross';
@@ -126,6 +127,7 @@ export const BRANDS: Brand[] = [
   pizzaHut,
   popeyes,
   portOfSubs,
+  raisingCanes,
   rebel,
   robertos,
   ross,
