@@ -9,11 +9,11 @@ export const binions: Resort = {
   name: 'Binion’s Gambling Hall',
   signs: [binionsName],
   build: (k) => {
-    casinoBlock(k, {
+    casinoBlock(k, clearOfMall({
       x: 4101, z: -6180, ang: -1.09, w: 83, d: 58,
       podium: 3, podiumColor: '#5a1a14',
   tower: { w: 42, d: 22, floors: 26, color: '#e2d6c4' },
       sign: 'binionsName', signH: 7,
-    });
+    }));
   },
 };
