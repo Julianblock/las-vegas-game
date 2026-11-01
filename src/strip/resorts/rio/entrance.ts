@@ -2,7 +2,7 @@ import { FX } from '../../../world/builders';
 import type { Kit } from '../../kit';
 import { palm } from '../../parts/palm';
 import { pylon } from '../../parts/pylon';
-import { FLAMINGO_HALF, flamingoZ } from '../../streets';
+import { FLAMINGO_HALF, flamingoZ, nearCross } from '../../streets';
 
 /**
  * The Rio on Flamingo Road: the marquee pylon at the kerb, read by traffic
@@ -16,7 +16,7 @@ export function buildEntrance(k: Kit) {
   const drive = k.frame(300, 22, 180);
   k.porte(drive, 0, 0, 34, 16, '#b02030');
   for (const s of [-1, 1]) mask(k, drive, s * 24, 4, s);
-  for (let x = 90; x <= 470; x += 16) palm(k, k.frame(x, flamingoZ(x) - FLAMINGO_HALF - 4, 180), 0, 0, 13, x);
+  for (let x = 90; x <= 470; x += 16) if (!nearCross(x) && Math.abs(x - 236) > 10) palm(k, k.frame(x, flamingoZ(x) - FLAMINGO_HALF - 4, 180), 0, 0, 13, x);
 }
 
 /** A 6 m half-mask on a post: gold face, feathers in carnival colours. */
