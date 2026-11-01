@@ -271,9 +271,9 @@ export class Fish {
 
   setMonth(m: number) {
     this.month = m;
-    // Razorback males on the winter spawning shoals darken, with a fiery orange belly.
-    const k = FISH.findIndex((f) => f.id === 'razorback');
-    const spawn = m >= 1 && m <= 3 ? 0.6 : m === 4 || m === 12 ? 0.25 : 0;
+    // Tilapia males guarding summer nests flush a red fringe on the fins.
+    const k = FISH.findIndex((f) => f.id === 'tilapia');
+    const spawn = m >= 5 && m <= 8 ? 0.6 : m === 4 || m === 9 ? 0.25 : 0;
     (this.material.uniforms.uPattern.value as THREE.Vector2[])[k].y = spawn;
   }
 
