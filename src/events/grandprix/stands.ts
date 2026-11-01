@@ -11,7 +11,7 @@ export interface Stand {
 }
 
 export const STANDS: Stand[] = [
-  { name: 'Main Grandstand', s: 6040, len: 150, rows: 18, side: -1 },
+  { name: 'Main Grandstand', s: 40, len: 150, rows: 18, side: -1 },
   { name: 'Koval Zone', s: 1300, len: 90, rows: 12, side: -1 },
   { name: 'Sphere Zone', s: 1960, len: 60, rows: 14, side: -1 },
   { name: 'Flamingo Zone', s: 4380, len: 110, rows: 12, side: 1 },
