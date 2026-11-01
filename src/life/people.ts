@@ -89,6 +89,10 @@ out vec3 vNormal;
 flat out float vMat;
 flat out vec4 vC0;
 flat out vec4 vC1;
+flat out vec4 vK0;
+flat out vec4 vK1;
+flat out vec4 vK2;
+flat out vec3 vK3;
 
 mat3 rotX(float a) {
   float c = cos(a), s = sin(a);
