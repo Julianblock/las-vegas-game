@@ -18,3 +18,36 @@ export function onFremont(t: number, off = 0) {
   const ux = dx / len, uz = dz / len;
   return { x: FREMONT.west.x + ux * t - uz * off, z: FREMONT.west.z + uz * t + ux * off, len };
 }
+
+interface Lot {
+  x: number;
+  z: number;
+  ang: number;
+  w: number;
+  d: number;
+}
+
+/**
+ * Mapped casino sites along the mall often run out to the middle of the
+ * street. Trims a lot on either side so its street face stops at the
+ * building line, leaving the mall open under the canopy.
+ */
+export function clearOfMall<T extends Lot>(lot: T, margin = 1): T {
+  const { len } = onFremont(0);
+  const ux = (FREMONT.east.x - FREMONT.west.x) / len, uz = (FREMONT.east.z - FREMONT.west.z) / len;
+  const nx = -uz, nz = ux;
+  const rx = lot.x - FREMONT.west.x, rz = lot.z - FREMONT.west.z;
+  const along = rx * ux + rz * uz;
+  if (along < 0 || along > len) return lot;
+  const off = rx * nx + rz * nz;
+  const perpW = Math.abs(Math.cos(lot.ang) * nx + Math.sin(lot.ang) * nz) > 0.7;
+  const near = Math.abs(off) - (perpW ? lot.w : lot.d) / 2;
+  const limit = FREMONT.width / 2 + margin;
+  if (near >= limit) return lot;
+  const cut = limit - near;
+  const s = Math.sign(off);
+  const out = { ...lot, x: lot.x + nx * s * cut / 2, z: lot.z + nz * s * cut / 2 };
+  if (perpW) out.w -= cut;
+  else out.d -= cut;
+  return out;
+}
