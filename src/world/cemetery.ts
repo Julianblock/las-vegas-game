@@ -39,7 +39,7 @@ export interface CemeteryPlan {
   out: [number, number];
   /** Unit direction of the fence side the gate sits in. */
   along: [number, number];
-  /** A few Joshua trees and yuccas left standing among the graves. */
+  /** Shade trees and palms planted among the graves. */
   trees: PlantedTree[];
   /** Drives crossing the plot (polyline points), kept clear of graves. */
   drives: number[][];
