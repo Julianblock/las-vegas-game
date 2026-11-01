@@ -1,6 +1,7 @@
 import type { Resort } from '../../strip/resort';
 import { Race } from './race';
 import { plazaStyle } from './style';
+import { TrackSurface } from './surface';
 import { CircuitWalls } from './walls';
 
 /** The Las Vegas Grand Prix: the Strip becomes a street circuit in November. */
