@@ -74,7 +74,7 @@ export const FISH: FishSpecies[] = [
     id: 'striper',
     name: 'Striped bass',
     sci: 'Morone saxatilis',
-    note: 'Lake Mohave\u2019s big game fish. Stripers hunt threadfin shad in packs, boiling the surface of the coves at dawn.',
+    note: 'Lake Las Vegas and Lake Mead\u2019s big game fish. Stripers hunt threadfin shad in packs, boiling the surface at dawn.',
     len: [0.45, 0.9],
     depth: 0.26,
     width: 0.12,
