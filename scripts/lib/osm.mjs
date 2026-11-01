@@ -224,13 +224,44 @@ out geom;`,
   );
   json.elements.push(...corridor.elements);
 
-  const out = { roads: [], waterways: [], waterAreas: [], buildings: [], power: [], peaks: [], places: [], masts: [], cemeteries: [], pois: [] };
+  const out = { roads: [], waterways: [], waterAreas: [], buildings: [], power: [], peaks: [], places: [], masts: [], cemeteries: [], pois: [], masses: [], lots: [], pools: [], rails: [], bridges: [], plazas: [], lawns: [], sites: [] };
+  const inCorridor = (pts) => {
+    let x = 0, z = 0;
+    for (let i = 0; i < pts.length; i += 2) {
+      x += pts[i];
+      z += pts[i + 1];
+    }
+    const n = pts.length / 2;
+    return Math.abs(x / n - CORRIDOR.cx) < CORRIDOR.size / 2 && Math.abs(z / n - CORRIDOR.cz) < CORRIDOR.size / 2;
+  };
   const seen = new Set();
   for (const e of json.elements) {
     const t = e.tags || {};
     const id = `${e.type}${e.id}`;
     if (seen.has(id)) continue;
     seen.add(id);
+    if ((t.building || t['building:part']) && e.type !== 'node') {
+      const outlines = e.type === 'relation' ? rings(e.members || []).map(toLine) : e.geometry ? [toLine(e.geometry)] : [];
+      for (const pts of outlines) {
+        if (pts.length < 8 || !inCorridor(pts)) continue;
+        const h = tagHeight(t);
+        const area = ringArea(pts);
+        const garage = t.building === 'parking' || t.parking === 'multi-storey';
+        if (!t['building:part'] && h < 12 && area < 2500 && !garage) continue;
+        out.masses.push({
+          name: t.name || '',
+          part: t['building:part'] ? 1 : 0,
+          h: r1(h || (garage ? 14 : Math.min(18, 6 + Math.sqrt(area) * 0.08))),
+          min: r1(tagHeight(t, 'min_height', 'building:min_level')),
+          colour: t['building:colour'] || t.colour || '',
+          roof: t['roof:shape'] || '',
+          garage: garage ? 1 : 0,
+          pts: pts.slice(0, -2),
+        });
+        e.massed = true;
+      }
+      if (e.massed || t['building:part']) continue;
+    }
     const kind = poiKind(t);
     if (kind) {
       const g = e.type === 'node' ? [{ lat: e.lat, lon: e.lon }] : e.geometry || (e.bounds && [{ lat: (e.bounds.minlat + e.bounds.maxlat) / 2, lon: (e.bounds.minlon + e.bounds.maxlon) / 2 }]);
@@ -261,6 +292,34 @@ out geom;`,
       continue;
     }
     if (!e.geometry) continue;
+    if (t.highway && t.bridge && /^(footway|pedestrian)$/.test(t.highway)) {
+      out.bridges.push({ name: t.name || '', pts: toLine(e.geometry) });
+      continue;
+    }
+    if (t.highway === 'pedestrian') {
+      out.plazas.push({ name: t.name || '', pts: toLine(e.geometry) });
+      continue;
+    }
+    if (t.railway) {
+      out.rails.push({ name: t.name || '', kind: t.railway, pts: toLine(e.geometry) });
+      continue;
+    }
+    if (t.leisure === 'swimming_pool') {
+      out.pools.push({ name: t.name || '', pts: toLine(e.geometry).slice(0, -2) });
+      continue;
+    }
+    if (t.amenity === 'parking') {
+      if (!t.parking || t.parking === 'surface') out.lots.push({ name: t.name || '', pts: toLine(e.geometry).slice(0, -2) });
+      continue;
+    }
+    if (t.landuse === 'grass') {
+      out.lawns.push({ pts: toLine(e.geometry).slice(0, -2) });
+      continue;
+    }
+    if (t.landuse === 'construction') {
+      out.sites.push({ name: t.name || '', pts: toLine(e.geometry).slice(0, -2) });
+      continue;
+    }
     if (t.landuse === 'cemetery' || t.amenity === 'grave_yard') {
       out.cemeteries.push({ name: t.name || '', pts: toLine(e.geometry) });
     } else if (t.highway) {
@@ -276,5 +335,11 @@ out geom;`,
       out.power.push({ pts: toLine(e.geometry) });
     }
   }
+  // Where a building is modelled in parts, the parts replace its outline.
+  const parts = out.masses.filter((m) => m.part);
+  out.masses = out.masses.filter((m) => {
+    if (m.part) return true;
+    return !parts.some((p) => inRing(p.pts[0] * 0.5 + p.pts[4] * 0.5, p.pts[1] * 0.5 + p.pts[5] * 0.5, m.pts));
+  });
   return out;
 }
