@@ -117,7 +117,7 @@ async function boot() {
   const waterSurface = new WaterSurface(terrain);
   engine.scene.add(sky.mesh, terrain.mesh, waterSurface.mesh);
 
-  loading.progress('Growing the Joshua tree forest', 0.95);
+  loading.progress('Planting the palms along the Strip', 0.95);
   const treeBuf = await fetch('data/trees.bin').then((r) => r.arrayBuffer());
   const trees = new Trees(treeBuf, world.meta.trees?.size ?? 16000, heightfield, roadIndex, cemeteryPlans.flatMap((p) => p.trees), water);
   engine.scene.add(trees.group);
