@@ -182,7 +182,7 @@ function mappedLane(osm: OsmData, poly: number[]) {
   return null;
 }
 
-/** Joshua trees and Mojave yuccas the graves were dug around. */
+/** Pines, ash and palms planted along the memorial-park lawns. */
 function shadeTrees(name: string, poly: number[], cx: number, cz: number, gate: [number, number] | null): PlantedTree[] {
   const rnd = rand(name.length * 977 + Math.round(Math.abs(cx)));
   const trees: PlantedTree[] = [];
