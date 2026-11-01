@@ -21,7 +21,7 @@ float snowAmount(vec3 n, vec2 xz, float y) {
 export const waterCommon = /* glsl */ `
 #ifndef WATER_COMMON
 #define WATER_COMMON
-uniform sampler2D uWaterTex; // main grid on top, Davis Dam / Laughlin grid below
+uniform sampler2D uWaterTex; // main grid on top, detail grid below
 uniform float uWaterSize;
 uniform vec3 uWaterDetail;
 uniform vec4 uWaterAtlas;
@@ -32,7 +32,7 @@ uniform float uCamWaterY;
 
 /**
  * x: water surface height (m), y: channel mask (0 on dry land).
- * Lake Mohave runs off the north and east edges of the main grid; edge texels
+ * Water can run off the north and east edges of the main grid; edge texels
  * carry it on outward, where the far terrain's flat reservoir floor bounds it.
  * South of the main grid the detail grid takes over.
  */
