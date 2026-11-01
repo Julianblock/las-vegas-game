@@ -10,8 +10,7 @@ import { westgateStyle } from './style';
 /**
  * The Westgate, opened in 1969 as the International (then the Las Vegas
  * Hilton, then the LVH), where Elvis played 837 straight sell-outs: red
- * WESTGATE across its Y wings, the King in bronze out front, and its giant
- * marquee on Paradise Road.
+ * WESTGATE across its Y wings and its giant marquee on Paradise Road.
  */
 function buildWestgate(k: Kit) {
   for (const [ax, az, bx, bz, cx, cz] of [
