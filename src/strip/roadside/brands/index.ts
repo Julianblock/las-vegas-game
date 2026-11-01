@@ -139,6 +139,7 @@ import { tacoBell } from './tacoBell';
 import { tacosElGordo } from './tacosElGordo';
 import { tacosMexico } from './tacosMexico';
 import { terribles } from './terribles';
+import { texaco } from './texaco';
 import { tireXpress } from './tireXpress';
 import { tmobile } from './tmobile';
 import { tommyRockers } from './tommyRockers';
@@ -297,6 +298,7 @@ export const BRANDS: Brand[] = [
   tacosElGordo,
   tacosMexico,
   terribles,
+  texaco,
   tireXpress,
   tmobile,
   tommyRockers,
