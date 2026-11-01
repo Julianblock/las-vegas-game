@@ -6,5 +6,5 @@ import { Fireworks } from './fireworks';
 export const newYear: Resort = {
   id: 'new-year',
   name: "New Year's Eve",
-  shows: (hf) => [new Fireworks(hf)],
+  shows: (hf) => [new Fireworks(hf), new Revellers(hf)],
 };
