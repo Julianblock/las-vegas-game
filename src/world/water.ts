@@ -214,12 +214,11 @@ function carveGrid(
 }
 
 /**
- * Lake Mohave, the Colorado River reservoir behind Davis Dam, from the
- * land-cover water class; the river itself running past the Laughlin casinos
- * from OpenStreetMap's riverbank polygons; and the stock tanks and the town's
- * sewage lagoons. The washes are dry. Carves a bed below each surface and bakes
- * the water-level atlas the water, lake bed and underwater shaders share: the
- * main grid on top, the Davis Dam / Laughlin detail grid below it.
+ * Las Vegas water: the Bellagio's lake and the other resort lakes along the
+ * Strip, park and golf-course ponds across the valley, and Lake Mead's Las
+ * Vegas Bay on the eastern edge. Carves a bed below each surface and bakes the
+ * water-level atlas the water, lake bed and underwater shaders share: the
+ * valley grid on top, the corridor's detail grid below it.
  */
 export class Water {
   readonly size: number;
