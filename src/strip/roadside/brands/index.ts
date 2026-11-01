@@ -9,6 +9,7 @@ import { cafeRio } from './cafeRio';
 import { carlsJr } from './carlsJr';
 import { chevron } from './chevron';
 import { chickFilA } from './chickFilA';
+import { chilis } from './chilis';
 import { chipotle } from './chipotle';
 import { circleK } from './circleK';
 import { dairyQueen } from './dairyQueen';
@@ -61,6 +62,7 @@ export const BRANDS: Brand[] = [
   carlsJr,
   chevron,
   chickFilA,
+  chilis,
   chipotle,
   circleK,
   dairyQueen,
