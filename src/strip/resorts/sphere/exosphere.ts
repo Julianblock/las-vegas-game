@@ -11,6 +11,8 @@ const PROGRAM_SECONDS = 24;
 
 /** Halloween and the week before it: the Sphere turns into a jack-o'-lantern more often. */
 const halloween = () => today.month === 10 && today.day >= 24;
+const raceWeek = () => today.month === 11 && today.day >= 14 && today.day <= 23;
+const holidays = () => (today.month === 12 && today.day >= 26) || (today.month === 1 && today.day === 1);
 const SPOOKY = [1, 0, 1, 2, 1, 3, 1, 4];
 const USUAL = [0, 2, 0, 3, 4, 1];
 const RACE = [5, 0, 5, 2, 5, 3];
