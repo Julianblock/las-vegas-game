@@ -126,6 +126,34 @@ function rings(members) {
   return out;
 }
 
+/** Building height in metres from OSM tags, or 0 when untagged. */
+export function tagHeight(t, key = 'height', levelsKey = 'building:levels') {
+  const h = parseFloat(t[key]);
+  if (Number.isFinite(h)) return /ft|'/.test(t[key]) ? h * 0.3048 : h;
+  const l = parseFloat(t[levelsKey]);
+  return Number.isFinite(l) ? l * 3.4 : 0;
+}
+
+/** Shoelace area of a local-coordinate ring [x0, z0, x1, z1, …] in m². */
+export function ringArea(pts) {
+  let a = 0;
+  for (let i = 0, n = pts.length; i < n; i += 2) {
+    const j = (i + 2) % n;
+    a += pts[i] * pts[j + 1] - pts[j] * pts[i + 1];
+  }
+  return Math.abs(a) / 2;
+}
+
+/** Even-odd point-in-polygon test on a flat ring. */
+export function inRing(x, z, pts) {
+  let inside = false;
+  for (let i = 0, j = pts.length - 2; i < pts.length; j = i, i += 2) {
+    const xi = pts[i], zi = pts[i + 1], xj = pts[j], zj = pts[j + 1];
+    if (zi > z !== zj > z && x < ((xj - xi) * (z - zi)) / (zj - zi) + xi) inside = !inside;
+  }
+  return inside;
+}
+
 export async function buildOsm(size, cacheDir) {
   const b = regionBounds(size);
   const bbox = `${b.south},${b.west},${b.north},${b.east}`;
