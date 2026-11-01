@@ -1,10 +1,8 @@
 import * as THREE from 'three';
 import { movingMaterial } from '../../strip/shows/materials';
 import type { Show } from '../../strip/shows/show';
-import type { Heightfield } from '../../world/heightfield';
 import type { Path } from '../path';
 import { CAR, carGeometry } from './car';
-import { DECK } from './guideway';
 import { LIVERIES } from './liveries';
 
 const CARS = 4;
@@ -15,7 +13,7 @@ const DWELL = 28;
 /** Distances along the loop where trains stop: each station once per track. */
 export function stopsOn(path: Path, stations: { x: number; z: number }[], r = 45) {
   const out: number[] = [];
-  const at = { x: 0, z: 0, dx: 0, dz: 0 };
+  const at = { x: 0, y: 0, z: 0, dx: 0, dz: 0 };
   for (const st of stations) {
     let best = Infinity, bestS = 0;
     for (let s = 0; s < path.length; s += 2) {
@@ -44,12 +42,11 @@ interface Train {
 export class MonorailTrains implements Show {
   readonly object = new THREE.Group();
   private trains: Train[] = [];
-  private p = { x: 0, z: 0, dx: 1, dz: 0 };
+  private p = { x: 0, y: 0, z: 0, dx: 1, dz: 0 };
 
   constructor(
     private path: Path,
     private stops: number[],
-    private hf: Heightfield,
     count = 7,
   ) {
     const mat = movingMaterial();
@@ -88,7 +85,7 @@ export class MonorailTrains implements Show {
       for (let c = 0; c < t.cars.length; c++) {
         const at = this.path.at(t.s - CAR * (c + 0.5), this.p);
         const m = t.cars[c];
-        m.position.set(at.x, this.hf.height(at.x, at.z) + DECK + 1.5, at.z);
+        m.position.set(at.x, at.y + 1.5, at.z);
         m.rotation.y = -Math.atan2(at.dz, at.dx);
       }
     }
