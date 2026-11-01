@@ -187,22 +187,6 @@ void main() {
   float glow = mix(hz, 0.35 + 0.65 * hz, deck) * (1.0 + deck * 1.5);
   col += vec3(1.0, 0.6, 0.32) * (vegas * 0.0011 + hendo * 0.0005 + laughlin * 0.0006 + kingman * 0.0002 + 0.00002 + deck * 0.00005) * glow * uNight;
 
-  // The Luxor Sky Beam: 42 billion candela straight up from the pyramid on the
-  // Strip, a thin pale-blue needle standing on the northern horizon all night.
-  vec2 lx = vec2(-23290.0, -69930.0) - uCamPos.xz;
-  float lxDist = length(lx);
-  vec2 lxDir = lx / lxDist;
-  float across = dh.x * lxDir.y - dh.y * lxDir.x;
-  float facing = step(0.0, dot(dh, lxDir));
-  // Beam ~12 m wide; keep it at least a pixel or so wide at any distance.
-  float bw = max(6.0 / lxDist, 0.00045);
-  float horizonDrop = (lxDist * lxDist) / (2.0 * 7310000.0) + uCamPos.y - 650.0;
-  float baseEl = -horizonDrop / lxDist;
-  float el = dir.y / max(length(dir.xz), 1e-4);
-  float rise = smoothstep(baseEl - 0.002, baseEl + 0.004, el) * exp(-max(el - baseEl, 0.0) * 4.5);
-  float beam = exp(-across * across / (bw * bw)) * facing * rise;
-  col += vec3(0.82, 0.88, 1.0) * beam * 0.006 * uNight * (1.0 - deck * 0.85) * (0.9 + 0.1 * sin(uTime * 0.7));
-
   vec4 cl = cloudLayer(dir) * clearSky;
   col = col * (1.0 - cl.a) + cl.rgb;
 
