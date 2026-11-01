@@ -18,6 +18,7 @@ import { jackInTheBox } from './jackInTheBox';
 import { marieCallenders } from './marieCallenders';
 import { mcdonalds } from './mcdonalds';
 import { pandaExpress } from './pandaExpress';
+import { parkwayTavern } from './parkwayTavern';
 import { popeyes } from './popeyes';
 import { rebel } from './rebel';
 import { sevenEleven } from './sevenEleven';
@@ -52,6 +53,7 @@ export const BRANDS: Brand[] = [
   marieCallenders,
   mcdonalds,
   pandaExpress,
+  parkwayTavern,
   popeyes,
   rebel,
   sevenEleven,
