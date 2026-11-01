@@ -61,6 +61,39 @@ export interface OsmData {
   masts: { name: string; x: number; z: number; height: number | null }[];
   cemeteries: { name: string; pts: number[] }[];
   pois: OsmPoi[];
+  /** Corridor buildings and building parts with their real outlines and heights. */
+  masses: OsmMass[];
+  /** Surface parking lots (open rings). */
+  lots: { name: string; pts: number[] }[];
+  /** Hotel and casino pools (open rings). */
+  pools: { name: string; pts: number[] }[];
+  /** The monorail and rail lines. */
+  rails: { name: string; kind: string; pts: number[] }[];
+  /** Pedestrian bridges over the Strip and the side streets. */
+  bridges: { name: string; pts: number[] }[];
+  /** Pedestrian promenades: the LINQ, the Park, the Forum's plazas. */
+  plazas: { name: string; pts: number[] }[];
+  /** Lawns and medians (open rings). */
+  lawns: { pts: number[] }[];
+  /** Construction sites (open rings). */
+  sites: { name: string; pts: number[] }[];
+}
+
+/** A corridor building or building part, extruded from its outline. */
+export interface OsmMass {
+  name: string;
+  /** 1 for a building:part. */
+  part: number;
+  /** Top above the ground (m). */
+  h: number;
+  /** Bottom above the ground for raised parts (m). */
+  min: number;
+  colour: string;
+  roof: string;
+  /** 1 for a multi-storey parking garage. */
+  garage: number;
+  /** Open outline ring [x0, z0, x1, z1, …]. */
+  pts: number[];
 }
 
 /** A point of interest: a business, mine, spring, memorial or viewpoint. */
