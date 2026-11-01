@@ -1,5 +1,6 @@
 import type { Brand } from '../brand';
 import { albertsons } from './albertsons';
+import { amigoTires } from './amigoTires';
 import { ampm } from './ampm';
 import { applebees } from './applebees';
 import { arco } from './arco';
@@ -152,6 +153,7 @@ import { zia } from './zia';
 /** Every chain with a roadside identity, alphabetical. */
 export const BRANDS: Brand[] = [
   albertsons,
+  amigoTires,
   ampm,
   applebees,
   arco,
