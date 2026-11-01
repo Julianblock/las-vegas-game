@@ -30,6 +30,7 @@ import { chilis } from './chilis';
 import { chipotle } from './chipotle';
 import { churchs } from './churchs';
 import { circleK } from './circleK';
+import { cleanEnergy } from './cleanEnergy';
 import { coffeeBean } from './coffeeBean';
 import { costco } from './costco';
 import { cricket } from './cricket';
@@ -189,6 +190,7 @@ export const BRANDS: Brand[] = [
   chipotle,
   churchs,
   circleK,
+  cleanEnergy,
   coffeeBean,
   costco,
   cricket,
