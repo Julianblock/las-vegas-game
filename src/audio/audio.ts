@@ -2,7 +2,7 @@
  * Procedural soundscape: airflow over the wings, wingbeats, and the Mojave's
  * voices by season and hour — cactus wrens, Gambel's quail, mourning doves,
  * ravens, summer cicadas, spadefoot toads after a monsoon, burros, coyotes and
- * passing trucks on US-95 — plus each species' own call. Everything is
+ * passing traffic on the Strip — plus each species' own call. Everything is
  * synthesised with WebAudio; no samples.
  */
 
