@@ -154,71 +154,75 @@ export function inRing(x, z, pts) {
   return inside;
 }
 
+/** The resort corridor (matches the strip region in fetch-data.mjs). */
+export const CORRIDOR = { size: 9000, cx: 700, cz: -300 };
+/** Square of city around the corridor where every street and building is kept. */
+const CITY = 14000;
+
 export async function buildOsm(size, cacheDir) {
   const b = regionBounds(size);
   const bbox = `${b.south},${b.west},${b.north},${b.east}`;
+  // Valley-wide: freeways and arterials, washes, Lake Mead, power lines, peaks, towns and masts.
   const query = `[out:json][timeout:300];
 (
-  way["highway"~"^(motorway|trunk|primary|secondary|tertiary|unclassified|residential|living_street|motorway_link|trunk_link|primary_link|secondary_link|tertiary_link)$"](${bbox});
+  way["highway"~"^(motorway|trunk|primary|secondary|tertiary)(_link)?$"](${bbox});
   way["waterway"~"^(river|canal|stream|drain|ditch)$"](${bbox});
-  way["natural"="water"](${bbox});
-  way["building"](${bbox});
+  way["natural"="water"]["water"!~"^(pond|reflecting_pool|fountain)$"](${bbox});
   way["power"="line"](${bbox});
   node["natural"="peak"](${bbox});
-  node["place"~"^(city|town|village|hamlet)$"](${bbox});
+  node["place"~"^(city|town|village|suburb)$"](${bbox});
   node["man_made"~"^(mast|tower|communications_tower)$"](${bbox});
 );
 out geom;`;
   const json = await overpass(query, path.join(cacheDir, `osm_${size}.json`));
 
-  // Mining and ranch tracks and town service lanes near Searchlight (the inner
-  // region); cemeteries, mines and roadside businesses across the region.
-  const ib = regionBounds(22000);
-  const ibox = `${ib.south},${ib.west},${ib.north},${ib.east}`;
-  const extra = await overpass(
-    `[out:json][timeout:180];
-(
-  way["highway"~"^(track|service)$"](${ibox});
-  way["landuse"="cemetery"](${bbox});
-  way["amenity"="grave_yard"](${bbox});
-  nwr["amenity"~"^(fuel|fast_food|restaurant|casino|cafe|bar|post_office|fire_station|school|community_centre|courthouse|place_of_worship|social_facility|shelter)$"](${bbox});
-  nwr["shop"](${bbox});
-  nwr["tourism"~"^(motel|hotel|museum|viewpoint|camp_site|caravan_site|attraction|information)$"](${bbox});
-  nwr["historic"](${bbox});
-  nwr["man_made"~"^(mineshaft|adit|water_tower|storage_tank|headframe)$"](${bbox});
-  nwr["leisure"~"^(park|marina|slipway)$"](${bbox});
-  node["natural"~"^(spring|saddle|cave_entrance)$"](${bbox});
-  node["mountain_pass"="yes"](${bbox});
-);
-out geom;`,
-    path.join(cacheDir, `osm_extra_${size}.json`),
-  );
-  json.elements.push(...extra.elements);
-
-  // The road down to the river and the Laughlin strip, Bullhead City and Davis Dam.
-  const wb = regionBounds(92000);
-  const wbox = `${wb.south},${wb.west},${wb.north},${wb.east}`;
-  const lb = regionBounds(13000, 30000, 34700);
-  const lbox = `${lb.south},${lb.west},${lb.north},${lb.east}`;
-  const river = await overpass(
+  // The city around the corridor: every street, every building, parks, cemeteries
+  // and businesses.
+  const cb = regionBounds(CITY);
+  const cbox = `${cb.south},${cb.west},${cb.north},${cb.east}`;
+  const city = await overpass(
     `[out:json][timeout:300];
 (
-  way["highway"~"^(motorway|trunk|primary|secondary|tertiary)(_link)?$"](${wbox});
-  node["place"~"^(city|town|village|hamlet)$"](${wbox});
-  node["natural"="peak"](${wbox});
-  way["highway"~"^(unclassified|residential|living_street|service)$"]["service"!~"^(parking_aisle|driveway|drive-through)$"](${lbox});
-  way["building"](${lbox});
-  way["natural"="water"](${lbox});
-  relation["natural"="water"](${lbox});
-  way["power"="line"](${lbox});
-  nwr["amenity"~"^(fuel|fast_food|restaurant|casino|cafe|bar|post_office)$"](${lbox});
-  nwr["tourism"~"^(motel|hotel|museum|viewpoint|attraction|information)$"](${lbox});
-  nwr["leisure"~"^(park|marina|slipway)$"](${lbox});
+  way["highway"~"^(unclassified|residential|living_street)$"](${cbox});
+  way["building"](${cbox});
+  way["landuse"="cemetery"](${cbox});
+  way["amenity"="grave_yard"](${cbox});
+  nwr["amenity"~"^(fuel|fast_food|restaurant|casino|cafe|bar|post_office|fire_station|school|community_centre|courthouse|place_of_worship|social_facility|shelter|theatre|nightclub|cinema|university|hospital|police)$"](${cbox});
+  nwr["shop"](${cbox});
+  nwr["tourism"~"^(motel|hotel|museum|viewpoint|attraction|information|artwork|theme_park)$"](${cbox});
+  nwr["historic"](${cbox});
+  nwr["man_made"~"^(water_tower|storage_tank)$"](${cbox});
+  nwr["leisure"~"^(park|stadium|golf_course|sports_centre)$"](${cbox});
 );
 out geom;`,
-    path.join(cacheDir, 'osm_laughlin.json'),
+    path.join(cacheDir, `osm_city_${CITY}.json`),
   );
-  json.elements.push(...river.elements);
+  json.elements.push(...city.elements);
+
+  // The resort corridor in full 3D: building outlines and parts with their
+  // heights, service drives, footbridges, the monorail, pools, lakes and lots.
+  const sb = regionBounds(CORRIDOR.size, CORRIDOR.cx, CORRIDOR.cz);
+  const sbox = `${sb.south},${sb.west},${sb.north},${sb.east}`;
+  const corridor = await overpass(
+    `[out:json][timeout:300];
+(
+  way["highway"="service"]["service"!~"^(parking_aisle|driveway|drive-through)$"](${sbox});
+  way["highway"~"^(footway|pedestrian)$"]["bridge"](${sbox});
+  way["highway"="pedestrian"](${sbox});
+  way["building:part"](${sbox});
+  relation["building"](${sbox});
+  relation["building:part"](${sbox});
+  way["railway"~"^(monorail|rail|light_rail)$"](${sbox});
+  way["leisure"="swimming_pool"](${sbox});
+  way["natural"="water"](${sbox});
+  relation["natural"="water"](${sbox});
+  way["amenity"="parking"](${sbox});
+  way["landuse"~"^(grass|construction)$"](${sbox});
+);
+out geom;`,
+    path.join(cacheDir, 'osm_corridor.json'),
+  );
+  json.elements.push(...corridor.elements);
 
   const out = { roads: [], waterways: [], waterAreas: [], buildings: [], power: [], peaks: [], places: [], masts: [], cemeteries: [], pois: [] };
   const seen = new Set();
