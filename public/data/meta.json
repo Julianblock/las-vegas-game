@@ -1,0 +1,99 @@
+{
+  "center": {
+    "lat": 36.116,
+    "lon": -115.19
+  },
+  "regions": {
+    "inner": {
+      "size": 22000,
+      "heightRes": 2048,
+      "heightZoom": 14,
+      "imageRes": 4096,
+      "imageZoom": 15
+    },
+    "mid": {
+      "size": 92000,
+      "heightRes": 2048,
+      "heightZoom": 12,
+      "imageRes": 4096,
+      "imageZoom": 13
+    },
+    "far": {
+      "size": 400000,
+      "heightRes": 1024,
+      "heightZoom": 9,
+      "imageRes": 2048,
+      "imageZoom": 10
+    },
+    "strip": {
+      "size": 9000,
+      "cx": 700,
+      "cz": -300,
+      "heightRes": 2048,
+      "heightZoom": 15,
+      "imageRes": 4096,
+      "imageZoom": 16
+    }
+  },
+  "heightEncoding": {
+    "inner": {
+      "offset": 0,
+      "scale": 24
+    },
+    "mid": {
+      "offset": 100,
+      "scale": 16
+    },
+    "far": {
+      "offset": 100,
+      "scale": 16
+    },
+    "strip": {
+      "offset": 0,
+      "scale": 24
+    }
+  },
+  "heightRanges": {
+    "inner": {
+      "min": 523.8456697207686,
+      "max": 1001.367404022975
+    },
+    "mid": {
+      "min": 193.17616240498637,
+      "max": 3623.5710161100324
+    },
+    "far": {
+      "min": -95,
+      "max": 3555.6063200336175
+    },
+    "strip": {
+      "min": 594.3420593985126,
+      "max": 728.7099822134389
+    }
+  },
+  "landcover": {
+    "size": 50000,
+    "res": 2048,
+    "classes": {
+      "OTHER": 0,
+      "CREOSOTE": 1,
+      "JOSHUA": 2,
+      "BLACKBRUSH": 3,
+      "WASH": 4,
+      "GRASS": 5,
+      "WETLAND": 6,
+      "WATER": 7,
+      "URBAN_OPEN": 8,
+      "URBAN_LOW": 9,
+      "URBAN_MED": 10,
+      "URBAN_HIGH": 11,
+      "PINYON": 12,
+      "ROCK": 13,
+      "FARM": 14
+    }
+  },
+  "trees": {
+    "size": 16000,
+    "count": 395405
+  }
+}
