@@ -82,6 +82,7 @@ import { mintIndian } from './mintIndian';
 import { mortons } from './mortons';
 import { nachoDaddy } from './nachoDaddy';
 import { officeDepot } from './officeDepot';
+import { oleRed } from './oleRed';
 import { oliveGarden } from './oliveGarden';
 import { oodleNoodle } from './oodleNoodle';
 import { oreilly } from './oreilly';
@@ -221,6 +222,7 @@ export const BRANDS: Brand[] = [
   mortons,
   nachoDaddy,
   officeDepot,
+  oleRed,
   oliveGarden,
   oodleNoodle,
   oreilly,
