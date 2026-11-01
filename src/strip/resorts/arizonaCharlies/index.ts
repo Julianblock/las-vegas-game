@@ -1,5 +1,5 @@
-import type { Resort } from '../../../resort';
-import { casinoBlock } from '../../../parts/casinoBlock';
+import type { Resort } from '../../resort';
+import { casinoBlock } from '../../parts/casinoBlock';
 import { arizonaCharliesName } from './signs';
 
 /** Arizona Charlie’s (1988), the locals casino on Decatur Boulevard, named for a Klondike sharpshooter. */

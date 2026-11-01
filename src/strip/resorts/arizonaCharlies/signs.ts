@@ -1,5 +1,5 @@
-import { neon, type SignSpec } from '../../../../world/signKit';
-import { GROTESK } from '../../../paint/fonts';
+import { neon, type SignSpec } from '../../../world/signKit';
+import { GROTESK } from '../../paint/fonts';
 
 /** Arizona Charlie’s Decatur in neon across the top of the tower. */
 export const arizonaCharliesName: SignSpec = {

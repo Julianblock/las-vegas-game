@@ -1,5 +1,5 @@
 import type { Resort } from '../resort';
-import { arizonaCharlies } from './downtown/arizonaCharlies';
+import { arizonaCharlies } from './arizonaCharlies';
 import { goldSpike } from './downtown/goldSpike';
 import { goldenGate } from './downtown/goldenGate';
 import { californiaHotel } from './downtown/californiaHotel';
