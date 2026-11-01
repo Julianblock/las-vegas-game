@@ -38,6 +38,7 @@ import { dennys } from './dennys';
 import { dollarTree } from './dollarTree';
 import { dominos } from './dominos';
 import { dottys } from './dottys';
+import { doubleDown } from './doubleDown';
 import { doubleTree } from './doubleTree';
 import { dunkin } from './dunkin';
 import { dutchBros } from './dutchBros';
@@ -181,6 +182,7 @@ export const BRANDS: Brand[] = [
   dollarTree,
   dominos,
   dottys,
+  doubleDown,
   doubleTree,
   dunkin,
   dutchBros,
