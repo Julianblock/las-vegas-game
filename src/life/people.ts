@@ -289,6 +289,10 @@ export class People {
     this.t1.setUsage(THREE.DynamicDrawUsage);
     const c0 = new Float32Array(total * 4);
     const c1 = new Float32Array(total * 4);
+    const k0 = new Float32Array(total * 4);
+    const k1 = new Float32Array(total * 4);
+    const k2 = new Float32Array(total * 4);
+    const k3 = new Float32Array(total * 3);
     const col = new THREE.Color();
     plan.forEach((p, i) => {
       const h = hash(i * 3.7 + 1.3);
