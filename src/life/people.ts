@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { COSTUMES } from './costumes';
 import { G } from '../render/globals';
 import { lightingCommon } from '../render/shaders/lighting';
 import type { Heightfield } from '../world/heightfield';
