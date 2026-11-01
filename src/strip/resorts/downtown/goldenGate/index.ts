@@ -1,5 +1,6 @@
 import type { Resort } from '../../../resort';
 import { casinoBlock } from '../../../parts/casinoBlock';
+import { clearOfMall } from '../fremont';
 import { goldenGateName } from './signs';
 
 /** The Golden Gate (1906), the oldest hotel in town, once the Hotel Nevada, at Fremont and Main. */
