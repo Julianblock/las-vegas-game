@@ -32,3 +32,8 @@ npm run build    # typecheck and bundle into dist/
 
 Circle in thermals off the hot parking lots, or ride ridge lift on the Spring
 Mountains to the west.
+
+## Driving
+
+W/S for gas and brake, A/D to steer, Shift to floor it, Space for the
+handbrake, L for headlights, V for the horn and G to get out and fly.
