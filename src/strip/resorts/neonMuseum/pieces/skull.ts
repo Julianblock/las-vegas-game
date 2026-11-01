@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import type { Piece } from '../piece';
 
-/** Treasure Island\u2019s pirate skull and crossbones (1993), from the old marquee over the Strip. */
+/** Treasure Island’s pirate skull and crossbones (1993), from the old marquee over the Strip. */
 export const skull: Piece = {
   build(k, fr) {
     const x = 22, z = -4, y = 0.5;

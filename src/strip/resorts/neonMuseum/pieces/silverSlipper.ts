@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import type { Piece } from '../piece';
 
 /**
- * The Silver Slipper\u2019s giant rhinestone slipper (1950s), which turned on a
+ * The Silver Slipper’s giant rhinestone slipper (1950s), which turned on a
  * pole outside the casino where Howard Hughes, they say, had it stopped
  * because it shone into his bedroom at the Desert Inn.
  */

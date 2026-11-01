@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import type { Piece } from '../piece';
 
-/** The Aladdin\u2019s magic lamp, gold and nine metres long, from the hotel\u2019s 1960s pylon. */
+/** The Aladdin’s magic lamp, gold and nine metres long, from the hotel’s 1960s pylon. */
 export const aladdinLamp: Piece = {
   build(k, fr) {
     const x = 2, z = -18, y = 0.8;
