@@ -124,7 +124,7 @@ export const SPECIES: Species[] = [
     id: 'redtail',
     name: 'Red-tailed Hawk',
     latin: 'Buteo jamaicensis',
-    blurb: 'Perches on the power poles along US-95, then rides ridge lift off the Highland Range over the Joshua tree flats.',
+    blurb: 'Perches on the light poles along I-15, then hunts the vacant desert lots between the casinos for ground squirrels.',
     facts: [
       'Its raspy keee-eeer scream is the "eagle" call Hollywood dubs into every movie.',
       'Hunts jackrabbits and ground squirrels from the tops of Joshua trees.',
