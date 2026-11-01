@@ -1,4 +1,5 @@
 import type { Piece } from '../piece';
+import { caesars } from './caesars';
 import { goldenNugget } from './goldenNugget';
 import { binions } from './binions';
 import { yucca } from './yucca';
@@ -7,4 +8,4 @@ import { moulinRouge } from './moulinRouge';
 import { stardust } from './stardust';
 
 /** Everything standing in the Boneyard. */
-export const PIECES: Piece[] = [stardust, moulinRouge, sahara, yucca, binions, goldenNugget];
+export const PIECES: Piece[] = [stardust, moulinRouge, sahara, yucca, binions, goldenNugget, caesars];
