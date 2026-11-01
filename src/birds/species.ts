@@ -276,7 +276,7 @@ export const SPECIES: Species[] = [
     id: 'quail',
     name: 'Gambel\u2019s Quail',
     latin: 'Callipepla gambelii',
-    blurb: 'Coveys scurry under the creosote at the edge of town, then burst into flight with a whirr of wings and glide to cover.',
+    blurb: 'Coveys scurry under the oleanders of the resort gardens, then burst into flight with a whirr of wings and glide to cover.',
     facts: [
       'The bobbing teardrop topknot is made of six overlapping feathers.',
       'Its "chi-CA-go-go" rally call gathers a scattered covey back together.',
