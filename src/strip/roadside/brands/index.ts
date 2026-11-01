@@ -105,6 +105,7 @@ import { panera } from './panera';
 import { papaJohns } from './papaJohns';
 import { parkwayTavern } from './parkwayTavern';
 import { peiWei } from './peiWei';
+import { pepBoys } from './pepBoys';
 import { pepesTacos } from './pepesTacos';
 import { peppermill } from './peppermill';
 import { pfChangs } from './pfChangs';
@@ -262,6 +263,7 @@ export const BRANDS: Brand[] = [
   papaJohns,
   parkwayTavern,
   peiWei,
+  pepBoys,
   pepesTacos,
   peppermill,
   pfChangs,
