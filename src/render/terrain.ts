@@ -115,7 +115,7 @@ export class Terrain {
 
   private select(x0: number, z0: number, size: number) {
     const c = this.camPos;
-    // The ranges around Searchlight top out near 2,150 m; Charleston Peak at 3,633 m.
+    // The valley rim tops out near 2,500 m; Charleston Peak at 3,633 m.
     const near = Math.max(Math.abs(x0 + size / 2), Math.abs(z0 + size / 2)) - size / 2 < 26000;
     const maxY = near ? 2300 : 3800;
     const dx = Math.max(x0 - c.x, 0, c.x - (x0 + size));
