@@ -3,6 +3,7 @@ import { albertsons } from './albertsons';
 import { ampm } from './ampm';
 import { arco } from './arco';
 import { att } from './att';
+import { autozone } from './autozone';
 import { battistas } from './battistas';
 import { blueberryHill } from './blueberryHill';
 import { brewTea } from './brewTea';
@@ -81,6 +82,7 @@ export const BRANDS: Brand[] = [
   ampm,
   arco,
   att,
+  autozone,
   battistas,
   blueberryHill,
   brewTea,
