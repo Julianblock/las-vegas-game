@@ -411,7 +411,7 @@ async function boot() {
   addEventListener('keydown', wake);
   /** Moves the truck or the bird to a named destination picked in the menu. */
   const goTo = (id: string) => {
-    const s = resolveDestination(id, world.osm, cemeteryPlans);
+    const s = resolveDestination(id, world.osm);
     if (!s) return;
     let { x, z } = s;
     if (driving) {
