@@ -107,6 +107,7 @@ import { steakNShake } from './steakNShake';
 import { subway } from './subway';
 import { tacoBell } from './tacoBell';
 import { tacosElGordo } from './tacosElGordo';
+import { tacosMexico } from './tacosMexico';
 import { terribles } from './terribles';
 import { tireXpress } from './tireXpress';
 import { tmobile } from './tmobile';
@@ -231,6 +232,7 @@ export const BRANDS: Brand[] = [
   subway,
   tacoBell,
   tacosElGordo,
+  tacosMexico,
   terribles,
   tireXpress,
   tmobile,
