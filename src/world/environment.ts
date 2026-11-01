@@ -39,6 +39,7 @@ export const SEASONS: Record<Season, { label: string; month: number; day: number
   summer: { label: 'Monsoon Summer', month: 8, day: 4, blurb: '110°F, heat shimmer on the Strip, thunderheads over the Spring Mountains' },
   fall: { label: 'Fall', month: 10, day: 18, blurb: 'Long golden light, tarantulas on the road, vultures kettling south' },
   halloween: { label: 'Halloween', month: 10, day: 31, blurb: 'Costumes on the Strip, jack-o\u2019-lanterns at every door, the Sphere grinning orange' },
+  grandprix: { label: 'Grand Prix', month: 11, day: 21, blurb: 'Formula 1 under the lights: walls down the Strip, cars past the Bellagio at 340 km/h' },
 };
 
 export const TIMES: Record<TimePreset, { label: string }> = {
