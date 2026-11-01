@@ -6,5 +6,6 @@ import { CircuitWalls } from './walls';
 export const grandPrix: Resort = {
   id: 'grand-prix',
   name: 'Las Vegas Grand Prix',
+  style: plazaStyle,
   shows: (hf) => [new CircuitWalls(hf)],
 };
