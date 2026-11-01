@@ -1,5 +1,4 @@
-import { neon, type SignSpec } from '../../../world/signKit';
-import { BLACK } from '../../../world/signKit';
+import { BLACK, neon, type SignSpec } from '../../../world/signKit';
 import { FX } from '../../../world/builders';
 import type { Kit } from '../../kit';
 import { FREMONT, onFremont } from './fremont';
