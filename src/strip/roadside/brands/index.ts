@@ -11,6 +11,7 @@ import { bahamaBreeze } from './bahamaBreeze';
 import { battistas } from './battistas';
 import { bbqChicken } from './bbqChicken';
 import { benihana } from './benihana';
+import { bestWestern } from './bestWestern';
 import { bigO } from './bigO';
 import { blueberryHill } from './blueberryHill';
 import { bonfire } from './bonfire';
@@ -178,6 +179,7 @@ export const BRANDS: Brand[] = [
   battistas,
   bbqChicken,
   benihana,
+  bestWestern,
   bigO,
   blueberryHill,
   bonfire,
