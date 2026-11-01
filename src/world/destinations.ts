@@ -1,4 +1,3 @@
-import type { CemeteryPlan } from './cemetery';
 import type { OsmData } from './meta';
 
 export interface Destination {
@@ -8,86 +7,49 @@ export interface Destination {
 }
 
 export const DESTINATIONS: Destination[] = [
-  {
-    id: 'town',
-    label: 'US-95 into Searchlight',
-    blurb: "Roll in from the north past the welcome sign, Terrible's Roadhouse and its Denny's, the McDonald's arches and the gas stations.",
-  },
-  {
-    id: 'overlook',
-    label: 'Duplex Hill overlook',
-    blurb: 'The hill above the old Duplex Mine: the whole town, the ribbon of US-95 running north toward Las Vegas, and the Highland Range beyond.',
-  },
-  { id: 'main', label: 'Main Street', blurb: 'The old mining-camp grid behind the highway: the post office, the El Rey Motel and the Duplex Mine headframe on the hill.' },
-  {
-    id: 'cove',
-    label: 'Cottonwood Cove Road',
-    blurb: 'Fourteen miles east, dropping 2,800 feet through Joshua trees and creosote to the shore of Lake Mohave.',
-  },
-  { id: 'lake', label: 'Cottonwood Cove', blurb: 'The marina at the bottom of the grade, with the canyon walls of Arizona across the water.' },
-  { id: 'joshua', label: 'Joshua Tree Highway', blurb: 'NV-164 heads west through one of the densest Joshua tree forests anywhere, toward Nipton and Crescent Peak.' },
-  { id: 'walkingbox', label: 'Walking Box Ranch', blurb: "Clara Bow and Rex Bell's 1930s ranch out on the Piute Valley, down a long dirt road." },
-  {
-    id: 'cemetery',
-    label: 'Searchlight Cemetery',
-    blurb: 'Rock-ringed miners\' graves under the Joshua trees east of town. Please respect our pioneers after dark.',
-  },
-  { id: 'calnevari', label: 'Cal-Nev-Ari', blurb: 'South on US-95: a 1960s fly-in town with its own runway, casino and wide-open valley views.' },
-  {
-    id: 'christmastree',
-    label: 'Christmas Tree Pass',
-    blurb: 'A rough dirt pass below Spirit Mountain, past Grapevine Canyon\'s petroglyphs and junipers hung with ornaments.',
-  },
-  {
-    id: 'to-laughlin',
-    label: 'Down to Laughlin',
-    blurb: 'NV-163 drops off the Newberry Mountains toward the Colorado River, the casino towers rising out of the haze at the bottom of the grade.',
-  },
-  {
-    id: 'casinodrive',
-    label: 'Laughlin: Casino Drive',
-    blurb: "The strip on the river: the Riverside's red R, the Aquarius, the Edgewater, the old Colorado Belle riverboat, the Tropicana, River Rick at the Pioneer and Harrah's.",
-  },
-  {
-    id: 'riverwalk',
-    label: 'Laughlin Riverwalk',
-    blurb: 'The white rail, palms and lamps along the Colorado, with water taxis crossing to Bullhead City. Come back after dark to watch the towers glow in the river.',
-  },
-  { id: 'davisdam', label: 'Davis Dam', blurb: 'The dam holding back Lake Mohave, with the whole Laughlin strip strung out down the river below.' },
+  { id: 'four-corners', label: 'Flamingo & the Strip', blurb: 'The Four Corners: Caesars, Bellagio, the Flamingo and the Horseshoe, with the bridges overhead and the crowds below.' },
+  { id: 'strip-south', label: 'The Strip from the Welcome sign', blurb: 'Start at Betty Willis\u2019s sign and roll north past Mandalay Bay, the Luxor pyramid and the Excalibur castle.' },
+  { id: 'strip-north', label: 'The north Strip', blurb: 'Resorts World, Circus Circus and the Fontainebleau, with the Strat standing over the Sahara.' },
+  { id: 'flamingo-west', label: 'Flamingo Road from Decatur', blurb: 'Five kilometres east along Flamingo: Blueberry Hill, the strip malls, the Palms, the Gold Coast and the Rio, then over I-15 to Caesars.' },
+  { id: 'flamingo-east', label: 'East Flamingo Road', blurb: 'Behind the Flamingo: Koval Lane, Battista\u2019s, the Stage Door and the Hughes Center office towers.' },
+  { id: 'tropicana', label: 'Tropicana Avenue', blurb: 'The busiest corner on the Strip: MGM Grand\u2019s lion, New York-New York, Excalibur, and the ballpark rising on the Trop\u2019s old ground.' },
+  { id: 'chinatown', label: 'Chinatown', blurb: 'Spring Mountain Road west of I-15, three miles of noodle houses, boba and karaoke in pagoda-roofed plazas.' },
+  { id: 'paradise', label: 'Paradise Road', blurb: 'The convention-centre side of the corridor: the Westgate, the monorail overhead and the Sphere\u2019s back side.' },
+  { id: 'fountains', label: 'Bellagio fountains', blurb: 'Stand at the rail on the Strip and wait for the next show. Come after dark for the best of it.' },
+  { id: 'welcome-sign', label: 'Welcome to Fabulous Las Vegas', blurb: 'The sign in the median south of Mandalay Bay, with the photo queue and the Strip skyline behind.' },
+  { id: 'sphere', label: 'Sphere', blurb: 'The giant LED ball behind the Venetian. Tonight it might be a planet, an eyeball or a jack-o\u2019-lantern.' },
+  { id: 'allegiant', label: 'Allegiant Stadium', blurb: 'The Raiders\u2019 black glass dome across I-15 from Mandalay Bay.' },
 ];
 
 const ROAD_ANCHORS: Record<string, [string, number, number]> = {
-  town: ['Veterans Memorial Highway', -392, -800],
-  main: ['Main Street', 120, -150],
-  cove: ['Cottonwood Cove Road', 600, -40],
-  lake: ['Cottonwood Cove Road', 21058, -2957],
-  joshua: ['Joshua Tree Highway', -2500, -200],
-  walkingbox: ['Walking Box Ranch Road', -10700, -3700],
-  calnevari: ['Veterans Memorial Highway', 3500, 17600],
-  christmastree: ['Christmas Tree Pass Road', 15856, 22676],
-  'to-laughlin': ['Colorado River Highway', 23600, 29700],
-  casinodrive: ['South Casino Drive', 31480, 33060],
+  'four-corners': ['South Las Vegas Boulevard', 1541, 260],
+  'strip-south': ['South Las Vegas Boulevard', 1551, 3600],
+  'strip-north': ['South Las Vegas Boulevard', 2420, -2100],
+  'flamingo-west': ['West Flamingo Road', -1560, 58],
+  'flamingo-east': ['East Flamingo Road', 2500, 168],
+  tropicana: ['West Tropicana Avenue', 1150, 1680],
+  chinatown: ['Spring Mountain Road', -700, -1060],
+  paradise: ['Paradise Road', 3208, -900],
 };
 
 /** Where each anchored drive should face: toward this point. */
 const FACING: Record<string, [number, number]> = {
-  town: [0, 300],
-  main: [130, 400],
-  cove: [21000, -2900],
-  lake: [23000, -3000],
-  joshua: [-20000, -4000],
-  walkingbox: [-15000, 9000],
-  calnevari: [3600, 25000],
-  christmastree: [22000, 23000],
-  'to-laughlin': [31600, 32500],
-  casinodrive: [31300, 34000],
+  'four-corners': [1541, -1000],
+  'strip-south': [1540, 0],
+  'strip-north': [2900, -3000],
+  'flamingo-west': [1541, 146],
+  'flamingo-east': [1541, 146],
+  tropicana: [2500, 1680],
+  chinatown: [1500, -1000],
+  paradise: [3300, -2500],
 };
 
 /** Off-road lookouts: position and the point to face. */
 const LOOKOUTS: Record<string, [number, number, number, number]> = {
-  overlook: [-200, 660, -120, -1500],
-  riverwalk: [31612, 33240, 31420, 34700],
-  davisdam: [31500, 29700, 31450, 33500],
+  fountains: [1508, 360, 1400, 330],
+  'welcome-sign': [1551, 3815, 1551, 3766],
+  sphere: [2680, -470, 2514, -580],
+  allegiant: [760, 2660, 520, 2830],
 };
 
 export interface Spot {
@@ -122,7 +84,7 @@ function nearestOn(osm: OsmData, match: (name: string, kind: string) => boolean,
   return spot;
 }
 
-export function resolveDestination(id: string, osm: OsmData, cemeteries: CemeteryPlan[]): Spot | null {
+export function resolveDestination(id: string, osm: OsmData): Spot | null {
   const anchor = ROAD_ANCHORS[id];
   if (anchor) {
     const s = nearestOn(osm, (n) => n === anchor[0], anchor[1], anchor[2]);
@@ -135,12 +97,6 @@ export function resolveDestination(id: string, osm: OsmData, cemeteries: Cemeter
   if (look) {
     const [x, z, fx, fz] = look;
     return { x, z, psi: Math.atan2(fx - x, fz - z), road: false };
-  }
-  if (id === 'cemetery') {
-    const c = cemeteries.find((p) => p.name === 'Searchlight Cemetery');
-    if (!c?.gate) return null;
-    const [ox, oz] = c.out;
-    return { x: c.gate[0] + ox * 45, z: c.gate[1] + oz * 45, psi: Math.atan2(-ox, -oz), road: false };
   }
   return null;
 }
