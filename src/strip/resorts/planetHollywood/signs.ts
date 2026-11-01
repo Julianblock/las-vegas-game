@@ -29,3 +29,18 @@ export const phWall: SignSpec = {
     ]);
   },
 };
+
+export const phLED: SignSpec = {
+  name: 'phLED',
+  w: 640,
+  h: 352,
+  frames: 4,
+  draw(g, w, h, frame) {
+    slides(g, w, h, frame, [
+      { bg: ['#06122a', '#1a5ab0'], head: 'PLANET HOLLYWOOD', sub: 'LAS VEGAS', font: (p) => `900 ${p}px ${GROTESK}` },
+      { bg: ['#2a1606', '#b0702a'], head: 'GORDON RAMSAY', sub: 'BURGER', font: (p) => `900 ${p}px ${CONDENSED}` },
+      { bg: ['#0a1a10', '#2a7a4a'], head: 'MIRACLE MILE', sub: '170 SHOPS & RESTAURANTS', font: (p) => `900 ${p}px ${CONDENSED}` },
+      { bg: ['#0a0a0a', '#a04a10'], head: 'HAPPY HALLOWEEN', sub: 'COSTUME PARTY TONIGHT', font: (p) => `900 ${p}px ${GROTESK}`, ink: '#ffb030' },
+    ]);
+  },
+};
