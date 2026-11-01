@@ -16,7 +16,7 @@ export const EYE = new THREE.Vector3(-0.28, 1.5, -0.42);
 
 export const PAINTS: { id: string; name: string; hex: number }[] = [
   { id: 'cherry', name: 'Cherry red', hex: 0xb01c1a },
-  { id: 'mohave', name: 'Lake Mohave blue', hex: 0x1f5a7a },
+  { id: 'mohave', name: 'Lake Mead blue', hex: 0x1f5a7a },
   { id: 'white', name: 'Oxford white', hex: 0xd8d8d2 },
   { id: 'sage', name: 'Sagebrush green', hex: 0x5a6a4c },
   { id: 'tan', name: 'Desert tan', hex: 0xa08860 },
