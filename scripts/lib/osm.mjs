@@ -276,7 +276,8 @@ out geom;`,
         const fp = e.type === 'way' && t.building && e.geometry ? building(e.geometry) : null;
         out.pois.push({ name: t.name || '', kind, brand: t.brand || '', x: r1(p.x), z: r1(p.z), ...(fp ? { fp: fp.slice(2) } : {}) });
         if (fp) out.buildings.push(fp);
-        if (e.type !== 'way' || !t.highway) continue;
+        // Lake Bellagio is mapped as a fountain: keep it as water too.
+        if ((e.type !== 'way' || !t.highway) && t.natural !== 'water') continue;
       }
     }
     if (e.type === 'node') {
