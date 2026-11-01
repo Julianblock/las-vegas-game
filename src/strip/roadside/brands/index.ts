@@ -44,6 +44,7 @@ import { inNOut } from './inNOut';
 import { jackInTheBox } from './jackInTheBox';
 import { jamba } from './jamba';
 import { javaTree } from './javaTree';
+import { jerseyMikes } from './jerseyMikes';
 import { jimmyJohns } from './jimmyJohns';
 import { kfc } from './kfc';
 import { kingSolomon } from './kingSolomon';
@@ -145,6 +146,7 @@ export const BRANDS: Brand[] = [
   jackInTheBox,
   jamba,
   javaTree,
+  jerseyMikes,
   jimmyJohns,
   kfc,
   kingSolomon,
