@@ -46,6 +46,7 @@ import { oodleNoodle } from './oodleNoodle';
 import { oreilly } from './oreilly';
 import { outback } from './outback';
 import { pandaExpress } from './pandaExpress';
+import { panera } from './panera';
 import { parkwayTavern } from './parkwayTavern';
 import { phoDaLat } from './phoDaLat';
 import { pizzaHut } from './pizzaHut';
@@ -127,6 +128,7 @@ export const BRANDS: Brand[] = [
   oreilly,
   outback,
   pandaExpress,
+  panera,
   parkwayTavern,
   phoDaLat,
   pizzaHut,
