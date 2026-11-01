@@ -21,8 +21,6 @@ function buildWestgate(k: Kit) {
     [3382, -2356, 3447, -2245, 3430, -2300],
   ]) k.sign(faceFrame(k, ax, az, bx, bz, cx, cz, 0.6).fr, 'westgateCrown', 0, 104, 0, 8, 1.4, FX.NEON);
   pylon(k, k.frame(3200, -2290, 0), 0, 0, { crown: 'westgateCrown', screen: 'westgateLED', h: 48, w: 22, color: '#2a1c18', crownH: 4 });
-  const front = k.frame(3330, -2250, 270);
-  elvis(k, front, 0, 0, 2.8);
   palmRow(k, k.frame(3196, -2250, 270), -120, 0, 120, 0, 14, 13);
 }
 
