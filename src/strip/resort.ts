@@ -1,6 +1,8 @@
+import type { Heightfield } from '../world/heightfield';
 import type { OsmMass } from '../world/meta';
 import type { SignSpec } from '../world/signKit';
 import type { Kit } from './kit';
+import type { Show } from './shows/show';
 
 /**
  * One resort, attraction or street landmark on the corridor. Each lives in its
@@ -18,4 +20,6 @@ export interface Resort {
   build?(k: Kit): void;
   /** True for OSM masses this resort builds by hand. */
   replaces?(m: OsmMass, x: number, z: number): boolean;
+  /** Moving and timed parts: rides, fountains, screens. `water` gives the surface level. */
+  shows?(hf: Heightfield, water: (x: number, z: number) => number): Show[];
 }
