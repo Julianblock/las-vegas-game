@@ -11,4 +11,5 @@ export interface Door {
 }
 
 export const DOORS: Door[] = [
+  { name: 'Bellagio', z: 300, side: -1, n: 9 },
 ];
