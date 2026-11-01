@@ -1,0 +1,787 @@
+import * as THREE from 'three';
+import { G } from '../render/globals';
+import { landmarkFragment, landmarkVertex } from '../render/shaders/landmarkShader';
+import type { ShadowMap } from '../render/shadows';
+import { Frame, FX, type Mat, SignBuilder, SolidBuilder, UP } from './builders';
+import type { Heightfield } from './heightfield';
+import type { Lot } from './props';
+import type { Crowd } from '../life/people';
+import { buildSignAtlas, type SignRect } from './signAtlas';
+
+/** Storey height the facade shader's room grid assumes (m). */
+const FLOOR = 3.1;
+
+/**
+ * The Colorado's Nevada bank through the strip, [z, x] pairs north to south,
+ * traced from the river's water mask.
+ */
+const BANK: [number, number][] = [
+  [32300, 31660], [32800, 31668], [33000, 31672], [33200, 31642], [33400, 31622], [33600, 31612],
+  [33800, 31608], [33900, 31578], [34100, 31552], [34300, 31540], [34400, 31516], [34500, 31496],
+  [34600, 31462], [34700, 31426], [34800, 31390], [34900, 31356], [35000, 31322], [35100, 31292],
+  [35300, 31278], [35400, 31246], [35500, 31212], [35700, 31215],
+];
+
+/** West bank x at z, and the unit normal pointing out over the river. */
+export function bankAt(z: number): { x: number; nx: number; nz: number } {
+  let i = 0;
+  while (i < BANK.length - 2 && BANK[i + 1][0] < z) i++;
+  const [z0, x0] = BANK[i];
+  const [z1, x1] = BANK[i + 1];
+  const t = Math.max(0, Math.min(1, (z - z0) / (z1 - z0)));
+  const dxdz = (x1 - x0) / (z1 - z0);
+  const l = Math.hypot(1, dxdz);
+  return { x: x0 + (x1 - x0) * t, nx: 1 / l, nz: -dxdz / l };
+}
+
+interface Rect {
+  x: number;
+  z: number;
+  ux: number;
+  uz: number;
+  hw: number;
+  hd: number;
+}
+
+/**
+ * Laughlin's casino row on the Colorado, hand-built from photographs: Don
+ * Laughlin's Riverside with its red R crown, the copper-glass Aquarius, the
+ * cream Edgewater slab, the Colorado Belle riverboat, the gold-and-green
+ * Tropicana, the Pioneer and River Rick, the Golden Nugget, the rust-red River
+ * Lodge and Harrah's mission parapets, strung together by the Riverwalk's
+ * white rail, palms and lamps. The Laughlin Bridge carries Route 163 over to
+ * Bullhead City.
+ */
+export class Laughlin {
+  readonly group = new THREE.Group();
+  /** Point lights (world xyz, rgb, size, blink) for the night-light renderer. */
+  readonly lights: number[] = [];
+  /** River-mirrored facades: world x, z, y0, y1, then linear rgb and half-width. */
+  readonly glows: number[] = [];
+  private sites: Rect[] = [];
+  /** Riverwalk strollers and the crowds under the porte-cochères. */
+  readonly crowd: Crowd = { walks: [], spots: [], day: 0.45, night: 1, cx: 31400, cz: 34100, radius: 1900 };
+  /**
+   * Surface lots traced from the aerial imagery (x0, z0, x1, z1): stall rows run
+   * north-south, parallel to Casino Drive.
+   */
+  readonly lots: Lot[] = [
+    [31560, 32760, 31640, 32910],
+    [31445, 33145, 31635, 33320],
+    [31262, 33345, 31345, 33480],
+    [31350, 33490, 31520, 33600],
+    [31300, 33754, 31525, 33937],
+    [31293, 33890, 31494, 34177],
+    [31018, 33909, 31250, 33982],
+    [31311, 34280, 31445, 34415],
+    [30922, 35544, 31049, 35655],
+    [30974, 35453, 31077, 35497],
+  ].map(([x0, z0, x1, z1]) => ({ x: (x0 + x1) / 2, z: (z0 + z1) / 2, ang: Math.PI / 2, w: z1 - z0, d: x1 - x0, fill: 0.8 }));
+  private s = new SolidBuilder();
+  private sg = new SignBuilder();
+  private rects: Record<string, SignRect>;
+  private solidGeo: THREE.BufferGeometry;
+  private shadowMat: THREE.ShaderMaterial;
+  private seed = 100;
+
+  constructor(private hf: Heightfield) {
+    const atlas = buildSignAtlas();
+    this.rects = atlas.rects;
+
+    this.bridge();
+    this.riverside();
+    this.aquarius();
+    this.regency();
+    this.edgewater();
+    this.belle();
+    this.tropicana();
+    this.pioneer();
+    this.nugget();
+    this.riverLodge();
+    this.harrahs();
+    this.roadside();
+    this.riverwalk();
+
+    const solidMat = new THREE.ShaderMaterial({
+      glslVersion: THREE.GLSL3,
+      vertexShader: landmarkVertex,
+      fragmentShader: landmarkFragment,
+      uniforms: { ...G },
+      side: THREE.DoubleSide,
+    });
+    const signMat = new THREE.ShaderMaterial({
+      glslVersion: THREE.GLSL3,
+      vertexShader: landmarkVertex,
+      fragmentShader: landmarkFragment,
+      uniforms: { ...G, uMap: { value: atlas.texture } },
+      defines: { USE_MAP: '' },
+      side: THREE.DoubleSide,
+    });
+    this.shadowMat = solidMat.clone();
+    this.shadowMat.uniforms = solidMat.uniforms;
+    this.shadowMat.defines = { SHADOW_PASS: '' };
+    this.solidGeo = this.s.build();
+    const solids = new THREE.Mesh(this.solidGeo, solidMat);
+    const signs = new THREE.Mesh(this.sg.build(), signMat);
+    solids.name = signs.name = 'laughlin';
+    this.group.add(solids, signs);
+  }
+
+  /** True on the lots the hand-built casinos stand on (OSM buildings skip these). */
+  occupies(x: number, z: number) {
+    for (const r of this.sites) {
+      const dx = x - r.x;
+      const dz = z - r.z;
+      if (Math.abs(dx * r.ux + dz * r.uz) < r.hw && Math.abs(-dx * r.uz + dz * r.ux) < r.hd) return true;
+    }
+    return false;
+  }
+
+  addShadowCasters(shadow: ShadowMap) {
+    shadow.addCaster(this.solidGeo, this.shadowMat);
+  }
+
+  // --- helpers ---------------------------------------------------------------------
+
+  /**
+   * Frame centred at (x, z), squared to a footprint whose edges run along `ang`
+   * (radians): local +z is whichever edge normal faces the river most, so local
+   * x runs along the river. Reserves `hw` x `hd` metres of lot.
+   */
+  private site(x: number, z: number, ang: number, hw: number, hd: number): Frame {
+    const b = bankAt(z);
+    let fx = 1;
+    let fz = 0;
+    let best = -2;
+    for (let k = 0; k < 4; k++) {
+      const a = ang + (k * Math.PI) / 2;
+      const d = Math.cos(a) * b.nx + Math.sin(a) * b.nz;
+      if (d > best) {
+        best = d;
+        fx = Math.cos(a);
+        fz = Math.sin(a);
+      }
+    }
+    const fr = new Frame(x, this.hf.height(x, z), z, fx, fz);
+    this.sites.push({ x, z, ux: fr.r.x, uz: fr.r.z, hw, hd });
+    return fr;
+  }
+
+  private box(fr: Frame, x: number, y: number, z: number, w: number, h: number, d: number, color: string, mat: Mat = {}, yaw = 0, seed = this.seed) {
+    const g = new THREE.BoxGeometry(w, h, d).translate(0, h / 2, 0);
+    this.s.add(g, fr.at(x, y, z, yaw), color, mat, seed);
+  }
+
+  private cyl(fr: Frame, x: number, y: number, z: number, r0: number, r1: number, h: number, color: string, mat: Mat = {}, sides = 10) {
+    const g = new THREE.CylinderGeometry(r1, r0, h, sides).translate(0, h / 2, 0);
+    this.s.add(g, fr.at(x, y, z), color, mat, this.seed);
+  }
+
+  /** Sign face centred at local (x, y, z), facing local yaw (0 = toward the river). */
+  private sign(fr: Frame, name: string, x: number, y: number, z: number, h: number, glow = 1, fx: number = FX.NONE, yaw = 0, both = false) {
+    const s = this.rects[name];
+    this.sg.quad(fr.p(x, y, z), fr.dir(yaw), UP, h * s.aspect, h, s, glow, fx, this.seed, both);
+  }
+
+  /** Hotel slab: `floors` storeys of rooms over a sunk base, with a plain roof cap. */
+  private slab(fr: Frame, x: number, z: number, w: number, d: number, floors: number, color: string, fx: number = FX.WINDOWS, wash = 0, yaw = 0, base = 0) {
+    const h = floors * FLOOR;
+    this.box(fr, x, base - 4, z, w, h + 4, d, color, { rough: 0.75, fx, glow: wash }, yaw);
+    return base + h;
+  }
+
+  /** Thin glowing tube along a polyline in the frame. */
+  private tube(fr: Frame, a: THREE.Vector3, b: THREE.Vector3, r: number, color: string, glow: number) {
+    const d = b.clone().sub(a);
+    const len = d.length();
+    const g = new THREE.BoxGeometry(r, len, r).translate(0, len / 2, 0);
+    const q = new THREE.Quaternion().setFromUnitVectors(UP, d.normalize());
+    const m = new THREE.Matrix4().compose(a, q, new THREE.Vector3(1, 1, 1));
+    this.s.add(g, fr.basis.clone().multiply(m), color, { glow, rough: 0.4 }, this.seed);
+  }
+
+  /** A lit facade `w` wide between local heights y0..y1 that the river mirrors at night. */
+  private glow(fr: Frame, x: number, z: number, w: number, y0: number, y1: number, r: number, g: number, b: number) {
+    const a = fr.p(x, y0, z);
+    this.glows.push(a.x, a.z, a.y, fr.p(x, y1, z).y, r, g, b, w / 2);
+  }
+
+  private light(p: THREE.Vector3, r: number, g: number, b: number, size: number, blink = 0) {
+    this.lights.push(p.x, p.y, p.z, r, g, b, size, blink);
+  }
+
+  /** Red obstruction beacons at both ends of a tower's roof (`w` long along local x). */
+  private beacons(fr: Frame, x: number, z: number, w: number, y: number) {
+    for (const u of [-w / 2, w / 2]) this.light(fr.p(x + u, y + 1.5, z), 1, 0.08, 0.04, 3.2, 1);
+  }
+
+  /** A Mexican fan palm: tall slim trunk, a shaggy skirt and a tight crown. */
+  private palm(x: number, z: number, h: number, k: number) {
+    const y = this.hf.height(x, z);
+    const fr = new Frame(x, y, z, Math.cos(k * 2.1), Math.sin(k * 2.1));
+    const lean = (Math.sin(k * 7.7) * 0.5) * 0.06;
+    const trunk = new THREE.CylinderGeometry(0.2, 0.3, h, 6).translate(0, h / 2, 0);
+    const m = fr.at(0, -0.3, 0).multiply(new THREE.Matrix4().makeRotationZ(lean));
+    this.s.add(trunk, m, '#8a7458', { rough: 0.95 }, this.seed);
+    const top = new THREE.Vector3(0, h, 0).applyMatrix4(new THREE.Matrix4().makeRotationZ(lean));
+    const skirt = new THREE.CylinderGeometry(0.75, 0.45, 1.6, 7).translate(0, -0.8, 0);
+    this.s.add(skirt, fr.at(top.x, top.y - 0.3, top.z), '#9a8a62', { rough: 1 }, this.seed);
+    const frond = new THREE.ConeGeometry(0.55, 3.4, 4, 1).rotateX(Math.PI / 2).translate(0, 0, 1.7).scale(1, 0.25, 1);
+    for (let i = 0; i < 11; i++) {
+      const a = (i / 11) * Math.PI * 2 + k;
+      const droop = 0.15 + ((i * 37) % 5) * 0.09;
+      const fm = fr.at(top.x, top.y + 0.2, top.z, a).multiply(new THREE.Matrix4().makeRotationX(droop));
+      this.s.add(frond, fm, i % 3 ? '#4f6a2c' : '#5e7a34', { rough: 0.85 }, this.seed);
+    }
+  }
+
+  /** A row of palms from a to b, about `step` metres apart. */
+  private palms(ax: number, az: number, bx: number, bz: number, step: number, h = 13) {
+    const n = Math.max(1, Math.round(Math.hypot(bx - ax, bz - az) / step));
+    for (let i = 0; i <= n; i++) {
+      const t = i / n;
+      const k = ax * 0.013 + az * 0.007 + i;
+      this.palm(ax + (bx - ax) * t, az + (bz - az) * t, h + Math.sin(k * 3.3) * 2.5, k);
+    }
+  }
+
+  /** Porte-cochère: a lit canopy on columns at local (x, z). */
+  private porte(fr: Frame, x: number, z: number, w: number, d: number, color: string, h = 6) {
+    const c = fr.p(x, 0, z);
+    this.crowd.spots.push({ x: c.x, z: c.z, r: Math.min(w, d) * 0.35, n: 9 });
+    this.sites.push({ x: c.x, z: c.z, ux: fr.r.x, uz: fr.r.z, hw: w / 2 + 4, hd: d / 2 + 4 });
+    this.box(fr, x, h, z, w, 1.4, d, color, { rough: 0.5 });
+    this.box(fr, x, h - 0.05, z, w - 1, 0.05, d - 1, '#fff2d8', { glow: 1.3 });
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) this.box(fr, x + sx * (w / 2 - 1), -1, z + sz * (d / 2 - 1), 0.9, h + 1, 0.9, color);
+    this.light(fr.p(x, h - 0.4, z), 1, 0.9, 0.75, 4);
+  }
+
+  /** Two-pole street marquee with a sign on top and an LED board under it. */
+  private marquee(fr: Frame, x: number, z: number, top: string, topH: number, led: string, ledH: number, poleColor: string) {
+    const tw = topH * this.rects[top].aspect;
+    const lw = ledH * this.rects[led].aspect;
+    const y1 = 6 + ledH + 0.6;
+    const yTop = y1 + topH / 2 + 0.6;
+    for (const px of [-1, 1]) this.box(fr, x + px * Math.max(tw, lw) * 0.32, -1, z, 0.9, yTop + topH / 2 + 1.5, 0.9, poleColor, { rough: 0.5 });
+    this.box(fr, x, 6 - 0.3, z, lw + 0.6, ledH + 0.6, 0.7, '#1e1e22');
+    this.box(fr, x, y1 + 0.2, z, tw + 0.6, topH + 0.6, 0.7, '#1e1e22');
+    // Both faces read up and down Casino Drive.
+    for (const yaw of [Math.PI / 2, -Math.PI / 2]) {
+      const off = Math.sign(yaw) * 0.37;
+      this.sg.quad(fr.p(x - off, 6 + ledH / 2, z), fr.dir(yaw), UP, lw, ledH, this.rects[led], 1.5, FX.NONE, this.seed, false);
+      this.sg.quad(fr.p(x - off, yTop, z), fr.dir(yaw), UP, tw, topH, this.rects[top], 1.4, FX.NONE, this.seed, false);
+    }
+    this.light(fr.p(x, yTop, z), 1, 0.8, 0.6, 7);
+  }
+
+  // --- the strip, north to south ----------------------------------------------------
+
+  /** Donald J. Laughlin Memorial Bridge: concrete box girders on three pier pairs. */
+  private bridge() {
+    this.seed = 100;
+    const z = 32507;
+    const ax = 31630;
+    const bx = 31935;
+    const ya = this.hf.height(ax, z);
+    const yb = this.hf.height(bx, z);
+    const deck = Math.max(ya, yb);
+    this.hf.addDeck(ax - 10, z, bx + 10, z, 12, ya + 0.1, yb + 0.1);
+    const fr = new Frame((ax + bx) / 2, 0, z, 0, 1);
+    const L = bx - ax;
+    for (let i = 0; i < 24; i++) {
+      const t0 = i / 24;
+      const t1 = (i + 1) / 24;
+      const y0 = ya + (yb - ya) * t0 + Math.sin(t0 * Math.PI) * 1.2;
+      const y1 = ya + (yb - ya) * t1 + Math.sin(t1 * Math.PI) * 1.2;
+      const x0 = -L / 2 + L * t0;
+      const len = L / 24;
+      const g = new THREE.BoxGeometry(len + 0.2, 2.6, 23).translate(0, -1.3, 0);
+      const m = fr.at(x0 + len / 2, (y0 + y1) / 2, 0).multiply(new THREE.Matrix4().makeRotationZ(Math.atan2(y1 - y0, len)));
+      this.s.add(g, m, '#c9c4b8', { rough: 0.85 }, this.seed);
+      // Parapets.
+      for (const side of [-1, 1]) {
+        const pg = new THREE.BoxGeometry(len + 0.2, 1.1, 0.4).translate(0, 0.55, 0);
+        const pm = fr.at(x0 + len / 2, (y0 + y1) / 2, side * 11.3).multiply(new THREE.Matrix4().makeRotationZ(Math.atan2(y1 - y0, len)));
+        this.s.add(pg, pm, '#dcd8ce', { rough: 0.8 }, this.seed);
+      }
+    }
+    for (const t of [0.25, 0.5, 0.75]) {
+      for (const side of [-6, 6]) this.cyl(fr, -L / 2 + L * t, 140, side, 1.6, 1.6, deck - 140 - 2, '#bdb8ac', { rough: 0.9 }, 12);
+    }
+    for (const t of [0.1, 0.3, 0.5, 0.7, 0.9]) {
+      const px = -L / 2 + L * t;
+      const py = ya + (yb - ya) * t + Math.sin(t * Math.PI) * 1.2;
+      for (const side of [-1, 1]) {
+        this.cyl(fr, px, py, side * 11, 0.12, 0.1, 9, '#8a8c8e', { fx: FX.METAL });
+        this.light(fr.p(px, py + 9, side * 11), 1, 0.62, 0.25, 2.2);
+      }
+    }
+  }
+
+  /** Don Laughlin's Riverside: the tall south tower by the water with RIVERSIDE across its crown, and the lower north tower. */
+  private riverside() {
+    this.seed = -101;
+    const fr = this.site(31585, 33015, 0, 95, 75);
+    // Casino podium along the river, white with a red fascia.
+    this.box(fr, 0, -3, 0, 120, 15, 110, '#efe9de', { rough: 0.8 });
+    this.box(fr, 0, 10.5, 0, 121, 2.2, 111, '#c8141c', { rough: 0.6 });
+    this.box(fr, 0, 12.8, 0, 118, 0.2, 108, '#d4d0c6');
+    // North tower: the older, lower slab, stepped down at both ends, its roof sign lit red.
+    const nx = 40, nz = -38;
+    const nTop = this.slab(fr, nx, nz, 56, 20, 13, '#f2f0ea', FX.WINDOWS, 1.8);
+    for (const e of [-1, 1]) this.slab(fr, nx + e * 34, nz, 12, 18, 10, '#eceae4', FX.WINDOWS, 1.6);
+    this.box(fr, nx, nTop, nz, 40, 6, 3, '#e8e6e0');
+    this.sign(fr, 'riversideRoof', nx, nTop + 3.4, nz - 1.7, 5, 1.6, FX.NONE, Math.PI);
+    this.sign(fr, 'riversideRoof', nx, nTop + 3.4, nz + 1.7, 5, 1.6);
+    this.beacons(fr, nx, nz, 56, nTop + 6);
+    this.glow(fr, nx, nz, 80, 12, nTop, 1, 0.82, 0.6);
+    this.glow(fr, nx, nz, 40, nTop + 1, nTop + 6, 2.4, 0.15, 0.12);
+    this.glow(fr, 0, 0, 120, 10.5, 12.7, 1.6, 0.08, 0.06);
+    // South tower by the water: the tall, wide slab with RIVERSIDE across its crown and the red R badge.
+    const sx = -45, sz = 38;
+    const SW = 66, SD = 22;
+    const sTop = this.slab(fr, sx, sz, SW, SD, 28, '#eeeeea', FX.WINDOWS, 2);
+    // Stair cores standing proud of the ends, and a set-back mechanical penthouse.
+    for (const e of [-1, 1]) this.box(fr, sx + e * (SW / 2 + 1.5), -2, sz, 3, sTop + 5, 9, '#e4e4de', { rough: 0.7, glow: 1.6, fx: FX.WASH });
+    this.box(fr, sx, sTop, sz, SW - 18, 7, SD - 6, '#e4e4de', { rough: 0.7, glow: 1.2, fx: FX.WASH });
+    for (const f of [1, -1]) {
+      this.sign(fr, 'riversideRoof', sx + 6, sTop - 3, sz + f * (SD / 2 + 0.3), 4.6, 1.6, FX.NONE, f > 0 ? 0 : Math.PI);
+      this.box(fr, sx - SW / 2 + 6, sTop - 9, sz + f * (SD / 2 + 0.2), 8, 8, 0.4, '#c8141c', { glow: 0.8 });
+      this.sign(fr, 'riversideR', sx - SW / 2 + 6, sTop - 5, sz + f * (SD / 2 + 0.5), 7, 1.4, FX.NONE, f > 0 ? 0 : Math.PI);
+    }
+    this.beacons(fr, sx, sz, SW, sTop + 7);
+    this.glow(fr, sx, sz, SW, 12, sTop, 1, 0.84, 0.62);
+    this.glow(fr, sx + 6, sz, 40, sTop - 6, sTop, 2.4, 0.15, 0.12);
+    // Classic car showroom glass on the river side and the Riverview restaurant deck.
+    this.box(fr, 0, 0, 55.2, 80, 8, 0.3, '#2a3a44', { rough: 0.1, glow: 0.5 });
+    this.box(fr, -30, 0, 60, 40, 0.6, 10, '#d8d2c4');
+    // Casino Drive side: porte-cochère and the big marquee.
+    this.porte(fr, 10, -62, 30, 14, '#c8141c');
+    this.marquee(fr, -20, -76, 'riversideRoof', 3.2, 'riversideLED', 6, '#c8141c');
+    // Casino West and the parking garage across the drive.
+    const wf = this.site(31452, 32957, 3.11, 18, 28);
+    this.box(wf, 0, -2, 0, 30, 10, 48, '#efe9de');
+    this.box(wf, 0, 7.6, 0, 30.6, 1.6, 48.6, '#c8141c');
+    this.storefront(wf, 0, 24.1, 22, 3);
+    const gf = this.site(31430, 33008, 1.81, 50, 32);
+    for (let l = 0; l < 5; l++) {
+      this.box(gf, 0, l * 3.2 - 1, 0, 90, 0.5, 56, '#bdb6a8');
+      if (l) for (const px of [-44, -22, 0, 22, 44]) for (const pz of [-27, 27]) this.box(gf, px, (l - 1) * 3.2 - 0.5, pz, 0.8, 3.2, 0.8, '#b0aa9c');
+    }
+    this.box(gf, 0, -1, 0, 89, 1, 55, '#8a8680');
+    this.palms(31640, 32900, 31646, 33120, 14);
+  }
+
+  /** Lit storefront glazing strip on a wall at local z. */
+  private storefront(fr: Frame, cx: number, z: number, w: number, h: number, glow = 0.8) {
+    this.box(fr, cx, 0.2, z, w, h, 0.15, '#3a2e22', { rough: 0.15, glow });
+  }
+
+  /** Aquarius: two long, kinked bronze-glass towers with white fins and blue light strips. */
+  private aquarius() {
+    this.seed = -102;
+    const fr = this.site(31540, 33450, 0.27, 110, 100);
+    this.box(fr, 0, -3, 0, 150, 14, 120, '#e8e2d6', { rough: 0.8 });
+    this.box(fr, 0, 9.8, 0, 151, 1.4, 121, '#2a7ab8', { rough: 0.5, glow: 0.6 });
+    // Two long towers running back from the river, each kinked near its west end
+    // (traced from the aerial): [world z of the centreline, floors].
+    const towers: [number, number][] = [
+      [33390, 19],
+      [33512, 23],
+    ];
+    const D = 22, east = 98, west = 57, kink = 0.2;
+    for (const [tz, fl] of towers) {
+      const tf = new Frame(31512, this.hf.height(31512, tz), tz, 1, 0);
+      this.sites.push({ x: 31512, z: tz, ux: tf.r.x, uz: tf.r.z, hw: D / 2 + 4, hd: 82 });
+      const j = -20;
+      const top = this.slab(tf, 0, j + east / 2, D, east, fl, '#6e5444', FX.GLASS, 1.6);
+      const wx = -(west / 2) * Math.sin(kink);
+      const wz = j - (west / 2) * Math.cos(kink);
+      this.slab(tf, wx, wz, D, west, fl, '#6e5444', FX.GLASS, 1.6, kink);
+      // White fins closing both ends, a white crown, the window stack up the river end.
+      const ez = j + east;
+      this.box(tf, 0, -2, ez + 1.2, D + 1.2, top + 3, 2.4, '#f0ece4', { rough: 0.6 });
+      this.box(tf, 0, 12, ez + 2.5, 4.2, top - 12, 0.3, '#6e5444', { rough: 0.3, fx: FX.WINDOWS, glow: 0.4 });
+      this.box(tf, -west * Math.sin(kink), -2, j - west * Math.cos(kink) - 1.2, D + 1.2, top + 3, 2.4, '#f0ece4', { rough: 0.6 }, kink);
+      this.box(tf, 0, top, j + east / 2, D + 1.2, 2.4, east, '#f0ece4');
+      this.box(tf, wx, top, wz, D + 1.2, 2.4, west, '#f0ece4', {}, kink);
+      // Blue LED strips up the river-end corners.
+      for (const e of [-1, 1]) this.tube(tf, new THREE.Vector3(e * (D / 2 + 0.7), 10, ez + 2.5), new THREE.Vector3(e * (D / 2 + 0.7), top + 2, ez + 2.5), 0.3, '#3aa8ff', 2.2);
+      this.light(tf.p(0, top + 3.5, ez), 1, 0.08, 0.04, 3.2, 1);
+      this.light(tf.p(wx * 2, top + 3.5, j - west), 1, 0.08, 0.04, 3.2, 1);
+      this.glow(tf, 0, ez, D + 4, 10, top + 2, 0.35, 0.75, 1.6);
+      if (fl > 20) this.sign(tf, 'aquarius', 0, top - 4, ez + 2.7, 5.5, 1.4);
+    }
+    this.sign(fr, 'aquarius', 0, 5, 60.4, 5.5, 1.5);
+    this.porte(fr, -40, -66, 34, 14, '#2a7ab8');
+    // The neon fan over the entrance: blue and white tubes splaying up from the doors.
+    const fc = new THREE.Vector3(-40, 7.5, -73.5);
+    for (let i = 0; i <= 16; i++) {
+      const a = Math.PI * (0.08 + 0.84 * (i / 16));
+      const r = 13 - Math.abs(i - 8) * 0.35;
+      const tip = fc.clone().add(new THREE.Vector3(Math.cos(a) * r * 1.5, Math.sin(a) * r * 0.75, 0));
+      this.tube(fr, fc.clone().add(new THREE.Vector3(Math.cos(a) * 2.5, Math.sin(a) * 1.4, 0)), tip, 0.4, i % 2 ? '#7ad8ff' : '#2a6aff', 2.6);
+    }
+    for (let k = 1; k <= 3; k++) {
+      let prev: THREE.Vector3 | null = null;
+      for (let i = 0; i <= 16; i++) {
+        const a = Math.PI * (0.08 + 0.84 * (i / 16));
+        const p = fc.clone().add(new THREE.Vector3(Math.cos(a) * k * 5.2, Math.sin(a) * k * 2.6, 0.1));
+        if (prev) this.tube(fr, prev, p, 0.3, k === 3 ? '#ff7ad8' : '#bfefff', 2.2);
+        prev = p;
+      }
+    }
+    this.sign(fr, 'aquarius', -40, 19.2, -73.4, 3.2, 1.6, FX.NONE, Math.PI);
+    this.light(fr.p(-40, 12, -76), 0.4, 0.7, 1, 9);
+    this.marquee(fr, -70, -80, 'aquarius', 4, 'aquariusLED', 6, '#e8e2d6');
+    this.palms(31620, 33360, 31612, 33560, 13);
+  }
+
+  private regency() {
+    this.seed = 103;
+    const fr = this.site(31582, 33644, -0.01, 12, 26);
+    this.box(fr, 0, -2, 0, 20, 9, 47, '#e6d8c0');
+    this.box(fr, 0, 6.2, 0, 20.5, 1.2, 47.5, '#7a2a3a');
+    this.storefront(fr, 0, -23.6, 14, 3);
+  }
+
+  /** Edgewater: the cream 26-storey slab with its recessed stripe and blue name. */
+  private edgewater() {
+    this.seed = -104;
+    const fr = this.site(31585, 33700, 1.565, 50, 22);
+    const W = 86, D = 22;
+    const top = this.slab(fr, 0, 0, W, D, 26, '#ece4cc', FX.WINDOWS, 1.9);
+    // Recessed centre stripe, and stair towers at the ends that glow green after dark.
+    for (const f of [-1, 1]) this.box(fr, 0, -2, f * (D / 2 + 0.1), 6, top + 2, 0.4, '#bfae8c', { rough: 0.8, glow: 1.2, fx: FX.WASH });
+    for (const e of [-1, 1]) this.box(fr, e * (W / 2 + 2.5), -2, 0, 5, top + 6, 10, '#d8e0cc', { rough: 0.8, glow: 3, fx: FX.WASH }, 0, 104.33);
+    this.box(fr, 0, top, 0, W, 2.6, D, '#d8cba8');
+    this.sign(fr, 'edgewater', 0, top + 6, D / 2 + 0.3, 7.5, 1.5);
+    this.sign(fr, 'edgewater', 0, top + 6, -D / 2 - 0.3, 7.5, 1.5, FX.NONE, Math.PI);
+    this.box(fr, 0, top + 2.6, 0, 66, 7, 1, '#d8cba8');
+    this.beacons(fr, 0, 0, W, top + 9);
+    this.glow(fr, 0, 0, W, 4, top, 1, 0.84, 0.62);
+    this.glow(fr, 0, 0, 60, top + 3, top + 9, 0.3, 0.55, 2.2);
+    // Second tower and the low white riverfront casino.
+    const tf = this.site(31468, 33765, 0, 23, 36);
+    this.slab(tf, 0, 0, 40, 66, 9, '#e2d6ba', FX.WINDOWS, 0.5);
+    const cf = this.site(31548, 33805, -1.556, 64, 62);
+    this.box(cf, 0, -2, 0, 120, 13, 118, '#f2eee6');
+    this.box(cf, 0, 10.6, 0, 121, 1, 119, '#1f4fa8', { glow: 0.5 });
+    this.storefront(cf, 0, 59.2, 70, 4, 0.9);
+    this.porte(cf, 0, -66, 30, 12, '#e2d6ba');
+    this.palms(31606, 33740, 31600, 33880, 12);
+  }
+
+  /** Colorado Belle: the paddlewheeler in her moat, four black stacks, the six-floor hotel behind. Dark since 2020. */
+  private belle() {
+    this.seed = 105;
+    const fr = this.site(31540, 34092, -1.43, 95, 40);
+    const L = 165;
+    // Hull and three decks, tapering toward the bow (local -x, upriver).
+    this.box(fr, 5, -4, 0, L - 10, 7, 34, '#f6f2ea', { rough: 0.6 });
+    const bow = new THREE.CylinderGeometry(17, 17, 7, 3, 1).rotateY(Math.PI / 6).scale(0.9, 1, 1).translate(0, 3.5, 0);
+    this.s.add(bow, fr.at(-L / 2 + 6, -4, 0), '#f6f2ea', { rough: 0.6 }, this.seed);
+    this.box(fr, 5, 2.6, 0, L - 12, 0.6, 35, '#b81822');
+    for (let k = 0; k < 3; k++) {
+      const w = L - 26 - k * 22;
+      const y = 3.2 + k * 4.4;
+      this.box(fr, 8 + k * 6, y, 0, w, 3.8, 30 - k * 4, '#fbf8f0', { rough: 0.6 });
+      this.box(fr, 8 + k * 6, y + 3.8, 0, w + 2, 0.4, 32 - k * 4, '#b81822');
+      // Rail and window band.
+      this.box(fr, 8 + k * 6, y + 0.8, 15.1 - k * 2, w - 4, 1.6, 0.1, '#2a3036', { rough: 0.2 });
+      this.box(fr, 8 + k * 6, y + 0.8, -15.1 + k * 2, w - 4, 1.6, 0.1, '#2a3036', { rough: 0.2 });
+    }
+    // Pilot house and the four tall stacks with gold crowns.
+    this.box(fr, -28, 16.4, 0, 12, 4, 10, '#fbf8f0');
+    this.box(fr, -28, 20.4, 0, 14, 0.5, 12, '#b81822');
+    for (const [px, pz] of [[-46, -7], [-46, 7], [-40, -7], [-40, 7]]) {
+      this.cyl(fr, px, 15, pz, 1.4, 1.4, 26, '#141414', { rough: 0.6 }, 10);
+      this.cyl(fr, px, 40.5, pz, 1.5, 2.6, 2.2, '#d6a84a', { rough: 0.4, fx: FX.METAL }, 10);
+      // Feathered crown: a ring of gold spikes.
+      const spike = new THREE.ConeGeometry(0.42, 3.2, 4).translate(0, 1.6, 0);
+      for (let i = 0; i < 8; i++) {
+        const a = (i / 8) * Math.PI * 2;
+        const m = fr.at(px + Math.cos(a) * 2.2, 42.6, pz + Math.sin(a) * 2.2).multiply(new THREE.Matrix4().makeRotationAxis(new THREE.Vector3(-Math.sin(a), 0, Math.cos(a)), -0.35));
+        this.s.add(spike, m, '#e0b450', { rough: 0.4, fx: FX.METAL }, this.seed);
+      }
+    }
+    // Rigging: stays from the stack tops down to the bow and across between the pairs.
+    for (const pz of [-7, 7]) {
+      this.tube(fr, new THREE.Vector3(-46, 41, pz), new THREE.Vector3(-L / 2 + 4, 12, pz * 0.4), 0.12, '#2a2a2a', 0);
+      this.tube(fr, new THREE.Vector3(-40, 41, pz), new THREE.Vector3(-28, 20.6, pz * 0.6), 0.12, '#2a2a2a', 0);
+    }
+    for (const px of [-46, -40]) for (const y of [30, 36]) this.tube(fr, new THREE.Vector3(px, y, -7), new THREE.Vector3(px, y, 7), 0.12, '#2a2a2a', 0);
+    // Stern paddlewheel, sign boards along the hull.
+    const wheel = new THREE.CylinderGeometry(8.5, 8.5, 22, 20, 1, true).rotateX(Math.PI / 2);
+    this.s.add(wheel, fr.at(L / 2 + 2, 4, 0), '#c01822', { rough: 0.7 }, this.seed);
+    for (const side of [-11.2, 11.2]) {
+      for (let i = 0; i < 10; i++) {
+        const a = (i / 10) * Math.PI;
+        const d = new THREE.Vector3(Math.cos(a) * 8.4, Math.sin(a) * 8.4, 0);
+        const c = new THREE.Vector3(L / 2 + 2, 4, side);
+        this.tube(fr, c.clone().sub(d), c.clone().add(d), 0.35, '#f4f0e6', 0);
+      }
+      const hub = new THREE.CylinderGeometry(1.6, 1.6, 0.6, 12).rotateX(Math.PI / 2);
+      this.s.add(hub, fr.at(L / 2 + 2, 4, side), '#f4f0e6', { rough: 0.6 }, this.seed);
+    }
+    this.sign(fr, 'belleWheel', L / 2 - 12, 9, 17.6, 14, 0.2);
+    this.sign(fr, 'belle', 0, 0, 17.2, 4.2, 0.2);
+    this.sign(fr, 'belle', 0, 0, -17.2, 4.2, 0.2, FX.NONE, Math.PI);
+    // Moat in front, the hotel behind.
+    const hf = this.site(31520, 33920, 3.14, 54, 52);
+    this.slab(hf, 0, 0, 104, 30, 6, '#efeae0', FX.WINDOWS, 0);
+    this.palms(31585, 33990, 31570, 34190, 16, 11);
+  }
+
+  /** Tropicana: the wide white slab with its gold-and-green gabled centre, green turrets, and a green wash at night. */
+  private tropicana() {
+    this.seed = 106.36;
+    const fr = this.site(31040, 34105, 1.57, 80, 30);
+    const W = 150, D = 22;
+    const top = this.slab(fr, 0, 0, W, D, 21, '#f0eee8', FX.WINDOWS, 1.9);
+    // Centre section: gold and dark green, rising above the roof into a gable with an arched window.
+    const cw = 26;
+    this.box(fr, 0, -2, 0.8, cw, top + 6, D + 2, '#d4aa48', { rough: 0.6, glow: 1.2, fx: FX.WASH });
+    for (const f of [1, -1]) {
+      for (const u of [-10.5, -3.5, 3.5, 10.5]) this.box(fr, u, -2, 0.8 + f * (D / 2 + 1.15), 3.2, top + 4, 0.3, '#1f4a3a', { rough: 0.5, fx: FX.WINDOWS, glow: 0.6 });
+    }
+    const gable = new THREE.CylinderGeometry(cw * 0.72, cw * 0.72, D + 2, 3, 1).rotateX(Math.PI / 2).rotateZ(Math.PI / 2).scale(1, 0.55, 1);
+    this.s.add(gable, fr.at(0, top + 4 + cw * 0.18, 0.8), '#1f4a3a', { rough: 0.5 }, this.seed);
+    this.box(fr, 0, top - 2, D / 2 + 2, 8, 10, 0.3, '#ffe0a0', { glow: 0.9 });
+    this.sign(fr, 'tropicana', 0, top - 8, D / 2 + 2.3, 4.5, 1.5);
+    // Green cupola turrets over the wings.
+    for (const e of [-1, 1]) {
+      this.box(fr, e * 52, top, 0, 14, 7, 14, '#f0eee8');
+      const dome = new THREE.ConeGeometry(9.5, 9, 4, 1).rotateY(Math.PI / 4);
+      this.s.add(dome, fr.at(e * 52, top + 11.5, 0), '#2a7a5a', { rough: 0.5, glow: 0.6, fx: FX.WASH }, this.seed);
+    }
+    this.beacons(fr, 0, 0, W, top + 14);
+    this.glow(fr, 0, 0, W, 4, top + 6, 0.35, 1.2, 0.55);
+    this.glow(fr, 0, 0, cw, 4, top + 14, 1.6, 1.1, 0.4);
+    // Low casino and porte-cochère toward Casino Drive.
+    const cf = this.site(31197, 34099, 1.44, 86, 60);
+    this.box(cf, 0, -2, 0, 160, 11, 110, '#e8e2d2');
+    this.box(cf, 0, 8.6, 0, 161, 1.6, 111, '#1f4a3a', { glow: 0.5 });
+    this.box(cf, 0, 10.2, 0, 156, 0.2, 106, '#cfcabe');
+    this.porte(cf, 0, 62, 40, 14, '#1f4a3a');
+    this.marquee(cf, -40, 70, 'tropicana', 3, 'tropicanaLED', 6, '#d4aa48');
+    this.palms(31262, 34020, 31270, 34180, 14);
+  }
+
+  /** The Pioneer: weathered western false fronts and River Rick waving at Casino Drive. */
+  private pioneer() {
+    this.seed = 107;
+    const fr = this.site(31458, 34340, 0, 55, 34);
+    this.box(fr, 0, -2, 0, 100, 13, 62, '#8a5a34', { rough: 0.95 });
+    this.box(fr, 0, 10.8, 0, 101, 0.8, 63, '#5a3a20');
+    // Three storeys of wooden balconies along the river.
+    this.slab(fr, 10, 14, 90, 26, 3, '#6a4428', FX.BALCONY, 0.6, 0, 11);
+    this.box(fr, 10, 20.3, 14, 92, 1.2, 28, '#4a2e1a');
+    // False fronts with a shaded boardwalk along the drive.
+    for (let i = 0; i < 4; i++) {
+      this.box(fr, -36 + i * 24, 0, -32, 20, 14 + (i % 2) * 3, 1.4, i % 2 ? '#a06a3a' : '#7a4a28', { rough: 0.95 });
+    }
+    this.box(fr, 0, 3.6, -36, 96, 0.4, 6, '#5a3a20');
+    for (let i = -4; i <= 4; i++) this.box(fr, i * 11, -1, -38.6, 0.4, 4.8, 0.4, '#5a3a20');
+    this.sign(fr, 'pioneer', 0, 12, -32.8, 6, 1.4, FX.NONE, Math.PI);
+    // River Rick on his pole at the corner.
+    for (const px of [-0.8, 0.8]) this.box(fr, -40 + px, -1, -46, 0.6, 16, 0.6, '#3a3a3a');
+    this.box(fr, -40, 6, -46, 12, 4.5, 1, '#1e1e22');
+    this.sign(fr, 'pioneer', -40, 8.2, -46.6, 4, 1.5, FX.NONE, Math.PI);
+    this.sign(fr, 'pioneer', -40, 8.2, -45.4, 4, 1.5);
+    this.sign(fr, 'riverRick', -40, 22.5, -46, 15, 1.1, FX.NONE, Math.PI, true);
+    this.light(fr.p(-40, 22, -47.5), 1, 0.75, 0.4, 8);
+  }
+
+  /** Golden Nugget: tan stucco, a big parking garage with the logo, and a forest of palms. */
+  private nugget() {
+    this.seed = 108;
+    const fr = this.site(31437, 34481, 1.77, 50, 60);
+    this.box(fr, 0, -2, 0, 86, 13, 110, '#cdb48e');
+    this.box(fr, 0, 10.4, 0, 87, 1.6, 111, '#8a6a3e');
+    for (const [x, z] of [[-24, 30], [24, 30]]) this.slab(fr, x, z, 30, 18, 4, '#d6bf98', FX.WINDOWS, 0.4, 0, 12);
+    this.storefront(fr, 0, 55.2, 60, 4);
+    this.sign(fr, 'nugget', 0, 7, 55.4, 5, 1.3);
+    const gf = this.site(31350, 34535, 1.6, 56, 34);
+    for (let l = 0; l < 6; l++) this.box(gf, 0, l * 3.3 - 1, 0, 108, 0.6, 63, '#c8b48e');
+    for (const e of [-1, 1]) this.box(gf, e * 54, -1, 0, 1.2, 19, 63, '#b89a72');
+    this.box(gf, 0, -1, 31.8, 108, 2, 0.6, '#b89a72');
+    this.sign(gf, 'nugget', 0, 13, 32.3, 6, 1.2);
+    this.sign(gf, 'nugget', 0, 13, -32.3, 6, 1.2, FX.NONE, Math.PI);
+    for (let i = 0; i < 7; i++) this.palms(31480 + i * 6, 34420 + i * 4, 31440 + i * 6, 34560 + i * 4, 18, 12 + i);
+  }
+
+  /** Laughlin River Lodge: the 25-storey taupe tower with its burnt-orange end wall and stepped gable, low red-roofed casino. */
+  private riverLodge() {
+    this.seed = -109;
+    const fr = this.site(31335, 34851, -1.21, 48, 16);
+    const W = 82, D = 20;
+    const top = this.slab(fr, 0, 0, W, D, 25, '#8c7c6c', FX.WINDOWS, 1.5);
+    // One end is a blank wall of burnt orange running the full height.
+    this.box(fr, -W / 2 - 3, -2, 0, 6, top + 6, D + 2, '#d0682e', { rough: 0.8, glow: 1.6, fx: FX.WASH });
+    // The other end steps up into a pointed gable.
+    for (let k = 0; k < 4; k++) this.box(fr, W / 2 - 9, top - 2 + k * 3, 0, 18 - k * 4, 3.2, D - k * 3, k % 2 ? '#a89480' : '#9a8674', { rough: 0.7, glow: 0.8, fx: FX.WASH });
+    const peak = new THREE.ConeGeometry(4, 6, 4).rotateY(Math.PI / 4);
+    this.s.add(peak, fr.at(W / 2 - 9, top + 13.2, 0), '#a89480', { rough: 0.7 }, this.seed);
+    this.box(fr, 0, top, 0, W, 1.6, D + 0.6, '#a89480');
+    this.sign(fr, 'riverLodge', -6, top + 2.6, D / 2 + 1, 4.2, 1.4);
+    this.beacons(fr, 0, 0, W, top + 6);
+    this.glow(fr, 0, 0, W, 4, top + 4, 1, 0.7, 0.42);
+    const cf = this.site(31245, 34995, 1.925, 90, 50);
+    this.box(cf, 0, -2, 0, 160, 10, 90, '#d2b48c');
+    const roof = new THREE.CylinderGeometry(1, 1, 160, 4, 1).rotateZ(Math.PI / 2).rotateX(Math.PI / 4).scale(1, 5, 46);
+    this.s.add(roof, cf.at(0, 10, 0), '#a8482a', { rough: 0.7 }, this.seed);
+    this.storefront(cf, 0, 45.2, 80, 3);
+    // Water taxi dock.
+    const b = bankAt(34970);
+    const df = new Frame(b.x + b.nx * 6, this.hf.height(b.x - 8, 34970) - 3, 34970 + b.nz * 6, b.nx, b.nz);
+    this.box(df, 0, 0, 0, 30, 0.6, 5, '#8a7a62');
+    this.sign(df, 'waterTaxi', 0, 3, -1, 1.2, 0.8, FX.NONE, 0, true);
+    for (const px of [-12, 12]) this.box(df, px, 0, -1, 0.3, 3.2, 0.3, '#6a6a6a');
+    this.palms(31402, 34780, 31330, 34950, 15);
+  }
+
+  /** Harrah's: three tan stucco wings capped by white mission parapets, and its beach on the river. */
+  private harrahs() {
+    this.seed = -110;
+    // [x, z, footprint angle, length along the river, depth toward it, floors]
+    const wings: [number, number, number, number, number, number][] = [
+      [31140, 35433, -3.14, 19, 86, 14],
+      [31154, 35479, 1.57, 75, 27, 16],
+      [31105, 35570, -3.12, 19, 83, 14],
+    ];
+    for (const [x, z, a, w, d, fl] of wings) {
+      const fr = this.site(x, z, a, w / 2 + 4, d / 2 + 4);
+      const top = this.slab(fr, 0, 0, w, d, fl, '#c4a084', FX.WINDOWS, 1.7);
+      // Cream top storeys under the white mission crown.
+      this.box(fr, 0, top - 2 * FLOOR, 0, w + 0.4, 2 * FLOOR, d + 0.4, '#efe2cc', { rough: 0.75, fx: FX.WINDOWS, glow: 1.7 });
+      this.box(fr, 0, top, 0, w + 1, 1.4, d + 1, '#f4efe4');
+      // Mission parapet: scalloped white crown on the broad faces.
+      const alongX = w > d;
+      const L = alongX ? w : d;
+      const D = alongX ? d : w;
+      const yaw = alongX ? 0 : Math.PI / 2;
+      for (let i = -3; i <= 3; i++) {
+        const arch = new THREE.CylinderGeometry(3.2, 3.2, 0.8, 12, 1, false, -Math.PI / 2, Math.PI).rotateX(Math.PI / 2);
+        for (const f of [-1, 1]) {
+          const u = i * (L / 7);
+          const v = f * (D / 2 + 0.1);
+          this.s.add(arch, fr.at(alongX ? u : v, top + 1.4, alongX ? v : u, yaw), '#f4efe4', { rough: 0.7 }, this.seed);
+        }
+      }
+      for (const f of [-1, 1]) {
+        const v = f * (D / 2 + 0.6);
+        this.sign(fr, 'harrahs', alongX ? 0 : v, top + 4.6, alongX ? v : 0, 5.5, 1.5, FX.NONE, alongX ? (f > 0 ? 0 : Math.PI) : f > 0 ? Math.PI / 2 : -Math.PI / 2);
+      }
+      this.light(fr.p(0, top + 7, 0), 1, 0.08, 0.04, 3.2, 1);
+      this.glow(fr, 0, 0, Math.max(w, d), 4, top + 6, 1, 0.66, 0.4);
+    }
+    const cf = this.site(31135, 35572, 0.004, 150, 62);
+    this.box(cf, 0, -2, -10, 280, 12, 90, '#d8b898');
+    this.box(cf, 0, 9.6, -10, 281, 1.4, 91, '#a85a3c');
+    this.porte(cf, 60, -62, 34, 16, '#a85a3c');
+    this.marquee(cf, 100, -80, 'harrahs', 3.4, 'harrahsLED', 6, '#a85a3c');
+    // The beach: pale sand down to the water, umbrellas and palms.
+    const b = bankAt(35560);
+    for (let i = 0; i < 9; i++) {
+      const z = 35500 + i * 14;
+      const bb = bankAt(z);
+      const fr = new Frame(bb.x - 6, this.hf.height(bb.x - 6, z), z, bb.nx, bb.nz);
+      const col = i % 3 === 0 ? '#e8402a' : i % 3 === 1 ? '#18a8a0' : '#f0d040';
+      this.cyl(fr, 0, -0.2, 0, 0.05, 0.05, 2.6, '#e8e8e8');
+      const umb = new THREE.ConeGeometry(1.6, 0.7, 8).translate(0, 2.6, 0);
+      this.s.add(umb, fr.at(0, 0, 0), col, { rough: 0.8 }, this.seed);
+    }
+    this.palms(b.x - 18, 35470, b.x - 14, 35660, 13, 12);
+  }
+
+  /** Terrible's and its 76, the In-N-Out, and the welcome sign at the foot of the bridge. */
+  private roadside() {
+    this.seed = 111;
+    const tf = this.site(31213, 33867, 3.142, 12, 14);
+    this.box(tf, 0, -1.5, 0, 19, 6.5, 24, '#e2d6be');
+    this.box(tf, 0, 4.2, 11.7, 19.6, 1.6, 1.2, '#ffc61a');
+    this.sign(tf, 'terriblesStore', 0, 5, 12.4, 1.4, 1.1);
+    this.storefront(tf, 0, 12.1, 12, 2.6, 0.9);
+    const sf = this.site(31248, 33875, 1.578, 15, 9);
+    this.box(sf, 0, 5, 0, 26, 1.2, 14, '#f4f4f2');
+    this.box(sf, 0, 4.95, 0, 25, 0.05, 13, '#fff6e8', { glow: 1.6 });
+    for (const px of [-8, 0, 8]) this.box(sf, px, -1, 0, 0.7, 6, 0.7, '#e8e6e0');
+    for (const yaw of [Math.PI / 2, -Math.PI / 2]) this.sign(sf, 'seventySix', 13.5, 9, 0, 4, 1.4, FX.NONE, yaw);
+    this.cyl(sf, 13.5, -1, 0, 0.3, 0.25, 8, '#d8d8d8');
+    this.light(sf.p(0, 4.8, 0), 1, 0.97, 0.92, 3);
+    const nf = this.site(31252, 33942, -1.602, 13, 8);
+    this.box(nf, 0, -1, 0, 23, 5.5, 13, '#f6f2ea');
+    this.box(nf, 0, 3.6, 0, 23.4, 0.9, 13.4, '#d8001d');
+    this.box(nf, 0, 3, 6.7, 23, 0.4, 0.1, '#ffd200', { glow: 0.6 });
+    this.cyl(nf, 14, -1, 4, 0.35, 0.3, 12, '#d8d8d8');
+    for (const yaw of [Math.PI / 2, -Math.PI / 2]) this.sign(nf, 'innout', 14, 13, 4, 3, 1.4, FX.NONE, yaw);
+    this.palms(31238, 33925, 31238, 33962, 18, 14);
+    // Welcome to Laughlin, at the bridge's Nevada end.
+    const wf = new Frame(31590, this.hf.height(31590, 32480), 32480, 1, 0);
+    for (const px of [-4, 4]) this.box(wf, px, -0.5, 0, 0.6, 5, 0.6, '#d4aa48');
+    this.box(wf, 0, 2.6, 0, 9.4, 4.6, 0.4, '#0a2a5a');
+    this.sign(wf, 'laughlinWelcome', 0, 4.9, 0.25, 4.2, 1.1, FX.NONE, 0, true);
+    this.light(wf.p(0, 0.4, 2), 1, 0.85, 0.6, 1.5);
+  }
+
+  /**
+   * The Riverwalk from the bridge to Harrah's: rock-clad pillars carrying two
+   * timber rails, a rose-paved path, and dark green lamp posts with clusters of
+   * white globes.
+   */
+  private riverwalk() {
+    this.seed = 112;
+    const fr = new Frame(0, 0, 0, 0, 1);
+    const globe = new THREE.SphereGeometry(0.34, 10, 8);
+    const pillar = new THREE.BoxGeometry(0.62, 1.15, 0.62).translate(0, 0.575, 0);
+    let prev: THREE.Vector3 | null = null;
+    let k = 0;
+    let walk: number[] = [];
+    for (let z = 32560; z <= 35680; z += 5) {
+      const b = bankAt(z);
+      const x = b.x - b.nx * 4;
+      const zz = z - b.nz * 4;
+      const y = this.hf.height(x, zz);
+      if (y < 155) {
+        prev = null;
+        walk = [];
+        continue;
+      }
+      if (!walk.length) this.crowd.walks.push(walk);
+      walk.push(b.x - b.nx * 6.2, z - b.nz * 6.2);
+      const p = new THREE.Vector3(x, y, zz);
+      this.s.add(pillar, fr.at(x, y - 0.25, zz, k * 0.7), k % 2 ? '#8c7a66' : '#7e6c5a', { rough: 1 }, this.seed);
+      this.box(fr, x, y + 0.88, zz, 0.72, 0.1, 0.72, '#9a8a76', { rough: 1 });
+      if (prev) {
+        for (const h of [0.45, 0.85]) this.tube(fr, prev.clone().setY(prev.y + h), p.clone().setY(y + h), 0.16, '#7a5a3a', 0);
+        // Paving between the rail and the casinos, laid in short slabs that follow the ground.
+        const mx = (prev.x + x) / 2 - b.nx * 2.2;
+        const mz = (prev.z + zz) / 2 - b.nz * 2.2;
+        const paver = new THREE.BoxGeometry(3.8, 0.3, prev.distanceTo(p) + 0.3);
+        const yaw = Math.atan2(x - prev.x, zz - prev.z);
+        this.s.add(paver, fr.at(mx, this.hf.height(mx, mz) - 0.12, mz, yaw), '#b88a78', { rough: 0.95 }, this.seed);
+      }
+      if (k % 5 === 0) {
+        // Lamp post: four globes on scrolled arms round a taller centre globe.
+        const lx = x - b.nx * 0.2;
+        const lz = zz - b.nz * 0.2;
+        const ly = this.hf.height(lx, lz);
+        this.cyl(fr, lx, ly - 0.3, lz, 0.16, 0.08, 4.4, '#1e3a2a', { rough: 0.5, fx: FX.METAL }, 8);
+        this.cyl(fr, lx, ly - 0.3, lz, 0.28, 0.2, 0.9, '#1e3a2a', { rough: 0.5, fx: FX.METAL }, 8);
+        for (let i = 0; i < 4; i++) {
+          const a = (i / 4) * Math.PI * 2 + Math.PI / 4;
+          const gx = lx + Math.cos(a) * 0.6;
+          const gz = lz + Math.sin(a) * 0.6;
+          this.tube(fr, new THREE.Vector3(lx, ly + 3.4, lz), new THREE.Vector3(gx, ly + 3.75, gz), 0.07, '#1e3a2a', 0);
+          this.s.add(globe, fr.at(gx, ly + 4.05, gz), '#fff6e4', { glow: 1.5 }, this.seed);
+        }
+        this.s.add(globe, fr.at(lx, ly + 4.45, lz), '#fff6e4', { glow: 1.5 }, this.seed);
+        this.light(new THREE.Vector3(lx, ly + 4.1, lz), 1, 0.85, 0.62, 1.6);
+      }
+      if (k % 4 === 2 && !this.occupies(x - b.nx * 8, zz - b.nz * 8)) this.palm(x - b.nx * 8, zz - b.nz * 8, 11 + (k % 5), k * 0.37);
+      prev = p;
+      k++;
+    }
+  }
+}
