@@ -12,17 +12,17 @@ export function buildMountain(k: Kit) {
   const fr = k.frame(2010, -1160, 90);
   k.reserve(fr, 0, -6, 90, 18);
   const peaks: [number, number, number, number][] = [
-    [-80, -8, 16, 22], [-56, -10, 22, 34], [-30, -8, 20, 43], [-6, -12, 24, 40],
-    [18, -9, 20, 38], [40, -10, 22, 30], [64, -8, 18, 24], [84, -6, 12, 16],
+    [-80, -8, 22, 22], [-58, -12, 28, 34], [-32, -10, 30, 43], [-6, -16, 32, 40],
+    [20, -12, 30, 38], [44, -12, 28, 30], [66, -8, 24, 24], [86, -6, 16, 16],
   ];
   for (const [x, z, r, h] of peaks) {
-    k.cyl(fr, x, -2, z, r, r * 0.25, h, '#5a4a36', { rough: 1 }, 9);
+    k.cyl(fr, x, -2, z, r, r * 0.4, h, '#5e5640', { rough: 1 }, 9);
   }
   for (const [px, pz, r, h] of peaks) {
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < 16; i++) {
       const a = i * 2.39996;
       const d = r * (0.25 + 0.65 * ((i * 0.618) % 1));
-      const y = Math.min(h, (h * (r - d)) / (0.75 * r)) - 1.5;
+      const y = Math.min(h, (h * (r - d)) / (0.6 * r)) - 1.5;
       pine(k, fr, px + Math.cos(a) * d, y, pz + Math.sin(a) * d, 7 + (i % 3) * 2);
     }
   }
