@@ -1,0 +1,119 @@
+import { lightingCommon } from '../../../render/shaders/lighting';
+
+/**
+ * The Exosphere: 1.2 million LED pucks over the Sphere's skin, here drawn
+ * procedurally. Programs (uMode): 0 the eyeball, 1 jack-o'-lantern,
+ * 2 the Earth, 3 a basketball, 4 the full moon. uFace points the content
+ * toward the Strip; uLook steers the eye.
+ */
+export const exosphereVertex = /* glsl */ `
+#include <common>
+#include <logdepthbuf_pars_vertex>
+uniform vec3 uCamPos;
+out vec3 vN;
+out vec3 vWorld;
+void main() {
+  vN = normalize(position);
+  vec3 world = (modelMatrix * vec4(position, 1.0)).xyz;
+  vec2 dc = world.xz - uCamPos.xz;
+  world.y -= dot(dc, dc) / (2.0 * 7310000.0);
+  vWorld = world;
+  gl_Position = projectionMatrix * viewMatrix * vec4(world, 1.0);
+  #include <logdepthbuf_vertex>
+}
+`;
+
+export const exosphereFragment = /* glsl */ `
+${lightingCommon}
+#include <logdepthbuf_pars_fragment>
+uniform float uMode;
+uniform float uFade;
+uniform vec3 uFace;
+uniform vec3 uLook;
+in vec3 vN;
+in vec3 vWorld;
+out vec4 outColor;
+
+float hash3(vec3 p) { return fract(sin(dot(p, vec3(12.9898, 78.233, 37.719))) * 43758.5453); }
+float vnoise(vec3 p) {
+  vec3 i = floor(p), f = fract(p);
+  f = f * f * (3.0 - 2.0 * f);
+  float n = mix(mix(mix(hash3(i), hash3(i + vec3(1, 0, 0)), f.x), mix(hash3(i + vec3(0, 1, 0)), hash3(i + vec3(1, 1, 0)), f.x), f.y),
+                mix(mix(hash3(i + vec3(0, 0, 1)), hash3(i + vec3(1, 0, 1)), f.x), mix(hash3(i + vec3(0, 1, 1)), hash3(i + vec3(1, 1, 1)), f.x), f.y), f.z);
+  return n;
+}
+float tri(vec2 p, vec2 c, float s, float flip) {
+  vec2 q = (p - c) / s;
+  q.y *= flip;
+  return step(-0.5, q.y) * step(abs(q.x) * 1.7, 0.5 - q.y);
+}
+
+vec3 eye(vec3 n) {
+  float d = acos(clamp(dot(n, normalize(uLook)), -1.0, 1.0));
+  vec3 sclera = vec3(0.95, 0.93, 0.9) - vec3(0.0, 0.25, 0.25) * smoothstep(0.9, 1.6, d) * (0.5 + 0.5 * sin(atan(n.z, n.x) * 30.0));
+  float a = atan(n.y, n.x) * 40.0;
+  vec3 iris = mix(vec3(0.08, 0.35, 0.55), vec3(0.35, 0.65, 0.4), 0.5 + 0.5 * sin(a + d * 30.0));
+  vec3 c = mix(iris, sclera, smoothstep(0.42, 0.46, d));
+  c = mix(vec3(0.01), c, smoothstep(0.17, 0.2, d));
+  c += vec3(1.0) * smoothstep(0.06, 0.0, length(n - normalize(uLook + vec3(0.12, 0.15, 0.0))));
+  return c;
+}
+
+vec3 pumpkin(vec3 n) {
+  float lon = atan(n.z, n.x);
+  vec3 skin = vec3(0.95, 0.42, 0.04) * (0.7 + 0.3 * pow(abs(cos(lon * 6.0)), 0.5));
+  skin = mix(skin, vec3(0.2, 0.45, 0.1), smoothstep(0.88, 0.95, n.y));
+  vec3 f = normalize(uFace);
+  vec3 r = normalize(cross(vec3(0.0, 1.0, 0.0), f));
+  vec3 u = cross(f, r);
+  vec2 p = vec2(dot(n, r), dot(n, u));
+  float front = step(0.0, dot(n, f));
+  float carve = tri(p, vec2(-0.32, 0.25), 0.3, -1.0) + tri(p, vec2(0.32, 0.25), 0.3, -1.0) + tri(p, vec2(0.0, 0.02), 0.16, 1.0);
+  float top = -0.14 + 0.38 * p.x * p.x;
+  float bot = -0.44 + 0.5 * p.x * p.x;
+  float mouth = step(abs(p.x), 0.56) * step(bot, p.y) * step(p.y, top);
+  float upper = step(fract(p.x * 4.0 + 0.25), 0.32) * step(top - 0.09, p.y);
+  float lower = step(fract(p.x * 4.0 + 0.75), 0.32) * step(p.y, bot + 0.09);
+  mouth *= 1.0 - max(upper, lower);
+  carve = clamp(carve + mouth, 0.0, 1.0) * front;
+  float flick = 0.85 + 0.15 * sin(uTime * 13.0) * sin(uTime * 7.3);
+  return mix(skin, vec3(1.0, 0.85, 0.3) * 1.6 * flick, carve);
+}
+
+vec3 earth(vec3 n) {
+  float s = uTime * 0.05;
+  vec3 q = vec3(n.x * cos(s) - n.z * sin(s), n.y, n.x * sin(s) + n.z * cos(s));
+  float land = vnoise(q * 2.2) * 0.6 + vnoise(q * 5.0) * 0.3 + vnoise(q * 11.0) * 0.1;
+  vec3 c = mix(vec3(0.03, 0.15, 0.45), mix(vec3(0.2, 0.45, 0.15), vec3(0.6, 0.5, 0.3), vnoise(q * 7.0)), smoothstep(0.52, 0.56, land));
+  c = mix(c, vec3(0.95), smoothstep(0.78, 0.86, abs(n.y)));
+  c = mix(c, vec3(1.0), smoothstep(0.62, 0.75, vnoise(q * 4.0 + vec3(uTime * 0.03))) * 0.6);
+  return c;
+}
+
+vec3 ball(vec3 n) {
+  float s = uTime * 0.3;
+  vec3 q = vec3(n.x * cos(s) - n.z * sin(s), n.y, n.x * sin(s) + n.z * cos(s));
+  vec3 c = vec3(0.85, 0.38, 0.1) * (0.85 + 0.15 * vnoise(q * 60.0));
+  float seam = min(min(abs(q.x), abs(q.y)), abs(abs(q.z) - 0.6 - 0.3 * q.y * q.y));
+  return mix(vec3(0.05), c, smoothstep(0.012, 0.025, seam));
+}
+
+vec3 moon(vec3 n) {
+  float m = vnoise(n * 4.0) * 0.6 + vnoise(n * 13.0) * 0.4;
+  return vec3(0.82, 0.82, 0.78) * (0.65 + 0.35 * smoothstep(0.35, 0.7, m));
+}
+
+void main() {
+  #include <logdepthbuf_fragment>
+  vec3 n = normalize(vN);
+  vec3 c = uMode < 0.5 ? eye(n) : uMode < 1.5 ? pumpkin(n) : uMode < 2.5 ? earth(n) : uMode < 3.5 ? ball(n) : moon(n);
+  // LED pucks: a fine grid of points with dark gaps.
+  float lon = atan(n.z, n.x) * 420.0;
+  float lat = asin(clamp(n.y, -1.0, 1.0)) * 420.0;
+  float puck = smoothstep(0.5, 0.2, length(fract(vec2(lon, lat)) - 0.5));
+  c *= mix(0.55, 1.0, puck) * uFade;
+  vec3 col = c * mix(0.9, 1.5, uNight) * uInvExposure;
+  col *= segmentTransmittance(vWorld);
+  outColor = vec4(col, 1.0);
+}
+`;
