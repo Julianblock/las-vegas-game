@@ -11,7 +11,7 @@ export function zoneOf(name: string, kind: string, x: number, z: number): Zone {
 }
 
 /** Vehicles per km relative to the road class's base density. */
-export const DENSITY: Record<Zone, number> = { strip: 28, arterial: 10, freeway: 1.6, city: 1 };
+export const DENSITY: Record<Zone, number> = { strip: 64, arterial: 18, freeway: 1.6, city: 1 };
 
 /** Cruising speed cap (m/s): the Strip crawls, the arterials run at 45 mph. */
 export const CAP: Record<Zone, number> = { strip: 9, arterial: 20, freeway: 31, city: 18 };
