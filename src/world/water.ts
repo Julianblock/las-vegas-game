@@ -404,7 +404,7 @@ export class Water {
     g.feather();
   }
 
-  /** Stock tanks and the sewage lagoons east of town; big unnamed polygons are dry playas. */
+  /** Park lakes, golf-course ponds and retention basins across the city. */
   private planPonds(world: WorldData): Pond[] {
     const out: Pond[] = [];
     const half = world.meta.regions.inner.size * 0.47;
@@ -418,7 +418,9 @@ export class Water {
         maxZ = Math.max(maxZ, p[i + 1]);
       }
       const ext = Math.max(maxX - minX, maxZ - minZ);
-      if (ext > 200 || ext < 8 || Math.max(Math.abs(minX), Math.abs(maxX), Math.abs(minZ), Math.abs(maxZ)) > half) continue;
+      if (ext > 400 || ext < 8 || Math.max(Math.abs(minX), Math.abs(maxX), Math.abs(minZ), Math.abs(maxZ)) > half) continue;
+      // The corridor's lakes are planned on the detail grid.
+      if (this.det.contains((minX + maxX) / 2, (minZ + maxZ) / 2)) continue;
       const hs: number[] = [];
       for (let i = 0; i < p.length; i += 2) hs.push(this.hf.height(p[i], p[i + 1]));
       hs.sort((x, y) => x - y);
