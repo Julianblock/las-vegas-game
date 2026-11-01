@@ -21,6 +21,7 @@ import { dairyQueen } from './dairyQueen';
 import { daves } from './daves';
 import { delTaco } from './delTaco';
 import { dennys } from './dennys';
+import { dollarTree } from './dollarTree';
 import { dominos } from './dominos';
 import { dunkin } from './dunkin';
 import { einstein } from './einstein';
@@ -96,6 +97,7 @@ export const BRANDS: Brand[] = [
   daves,
   delTaco,
   dennys,
+  dollarTree,
   dominos,
   dunkin,
   einstein,
