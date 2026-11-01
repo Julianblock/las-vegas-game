@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { G } from '../render/globals';
 import { noiseCommon } from '../render/shaders/noise';
-import type { CemeteryPlan } from '../world/cemetery';
 import type { Heightfield } from '../world/heightfield';
 
 const vertexShader = /* glsl */ `
@@ -68,7 +67,7 @@ void main() {
 }
 `;
 
-/** A miner in a long canvas duster and a slouch hat, as a lathe silhouette. */
+/** A man in a long overcoat and a brimmed hat, as a lathe silhouette. */
 function shroud() {
   const prof = [
     [0.36, 0.0], [0.31, 0.35], [0.27, 0.8], [0.26, 1.1], [0.31, 1.33], [0.26, 1.46],
@@ -78,6 +77,13 @@ function shroud() {
   const g = new THREE.LatheGeometry(curve.getPoints(40), 32);
   g.computeVertexNormals();
   return g;
+}
+
+/** Ground a haunting walks: an outline and its centre. */
+export interface GhostGround {
+  poly: number[];
+  cx: number;
+  cz: number;
 }
 
 interface Ghost {
@@ -94,8 +100,9 @@ interface Ghost {
 }
 
 /**
- * Easter egg: the gold camp's miners walk Searchlight Cemetery after dark,
- * lanterns swinging. They melt away when you get close.
+ * Easter egg: figures in hats and long coats walk a haunted patch of ground
+ * after dark, each with a small warm glow at the hip, and melt away when you
+ * get close.
  */
 export class Ghosts {
   readonly group = new THREE.Group();
@@ -108,7 +115,7 @@ export class Ghosts {
   presence = 0;
   onSight?: () => void;
 
-  constructor(plan: CemeteryPlan, private hf: Heightfield) {
+  constructor(plan: GhostGround, private hf: Heightfield, count = 4) {
     this.poly = plan.poly;
     this.cx = plan.cx;
     this.cz = plan.cz;
@@ -139,13 +146,13 @@ export class Ghosts {
       this.group.add(mesh);
       return g;
     };
-    for (let i = 0; i < 4; i++) this.ghosts.push(make(false, i));
+    for (let i = 0; i < count; i++) this.ghosts.push(make(false, i));
     // One lantern per miner, then a couple of will-o'-wisps over the graves.
-    for (let i = 0; i < 6; i++) this.orbs.push(make(true, i + 10));
+    for (let i = 0; i < count + 2; i++) this.orbs.push(make(true, i + 10));
     this.group.visible = false;
   }
 
-  /** A random point inside the cemetery fence. */
+  /** A random point inside the haunted ground. */
   private spot(): [number, number] {
     let x0 = Infinity, x1 = -Infinity, z0 = Infinity, z1 = -Infinity;
     for (let i = 0; i < this.poly.length; i += 2) {
