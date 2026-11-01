@@ -190,7 +190,7 @@ export const SPECIES: Species[] = [
     id: 'vulture',
     name: 'Turkey Vulture',
     latin: 'Cathartes aura',
-    blurb: 'Teeters in a deep V over US-95 for hours without a single wingbeat, riding the heat off the asphalt.',
+    blurb: 'Teeters in a deep V over the Strip for hours without a single wingbeat, riding the heat off the parking garages.',
     facts: [
       'One of the few birds with a keen sense of smell; it can find carrion hidden under a creosote bush.',
       'Leaves the Mojave in October and streams south in kettles of hundreds.',
