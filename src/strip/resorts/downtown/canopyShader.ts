@@ -74,7 +74,9 @@ void main() {
   float grid = max(step(0.92, fract(p.y / 3.0)), step(0.9, fract((p.x + 1.0) * 6.0)));
   vec3 steel = vec3(0.42, 0.44, 0.47) * (0.6 + 0.4 * max(dot(normalize(vNormal), vec3(0.3, 0.9, 0.2)), 0.0));
   vec3 day = mix(steel * 0.7, steel, grid);
-  vec3 c = mix(day * (1.0 - uNight * 0.85), led * 1.6, uNight * (1.0 - grid * 0.5));
+  // The LEDs face down at the street; from above the vault is a plain steel roof.
+  float under = step(uCamPos.y, vWorld.y);
+  vec3 c = mix(day * (1.0 - uNight * 0.85), led * 1.6, uNight * (1.0 - grid * 0.5) * under);
   c *= uInvExposure;
   c *= segmentTransmittance(vWorld);
   outColor = vec4(c, 1.0);
