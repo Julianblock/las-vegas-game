@@ -114,9 +114,9 @@ function rnd(a: number, b: number) {
 }
 
 /**
- * Birds passing through Searchlight: white pelicans riding thermals along the
- * Colorado River flyway, vulture kettles, raven pairs, swifts at the cliffs,
- * winter Canada geese, cormorants over Lake Mohave, doves and a winter
+ * Birds over Las Vegas: pigeons wheeling round the casino towers, white
+ * pelicans riding thermals on migration, vulture kettles, raven pairs, swifts,
+ * winter Canada geese, cormorants heading for the Wash, doves and a winter
  * blackbird murmuration over town.
  */
 export class Flocks {
