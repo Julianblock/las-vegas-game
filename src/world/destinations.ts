@@ -57,6 +57,7 @@ const LOOKOUTS: Record<string, [number, number, number, number]> = {
   'grand-prix': [2640, 800, 2528, 748],
   fremont: [3960, -6150, 4337, -5961],
   'fremont-east': [4700, -5815, 4671, -5771],
+  'downtown-north': [4880, -6700, 4927, -6802],
 };
 
 export interface Spot {
