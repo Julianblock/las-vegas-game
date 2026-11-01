@@ -1,5 +1,6 @@
 import type { Resort } from '../../../resort';
 import { casinoBlock } from '../../../parts/casinoBlock';
+import { clearOfMall } from '../fremont';
 import { fourQueensName } from './signs';
 
 /** The Four Queens (1966), named for the owner’s four daughters. */
