@@ -31,7 +31,7 @@ export interface FishSpecies {
   months?: number[];
 }
 
-/** Fish of Lake Mohave, the Colorado River reservoir east of Searchlight, and the stock ponds. */
+/** Fish of the resort lakes and lagoons, the golf-course ponds and the Las Vegas Wash. */
 export const FISH: FishSpecies[] = [
   {
     id: 'razorback',
