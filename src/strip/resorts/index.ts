@@ -1,4 +1,5 @@
 import type { Resort } from '../resort';
+import { mgmGrand } from './mgmGrand';
 import { nyny } from './nyny';
 import { veer } from './veer';
 import { aria } from './aria';
@@ -45,6 +46,7 @@ export const RESORTS: Resort[] = [
   aria,
   veer,
   nyny,
+  mgmGrand,
   // Last: chain signs skip ground the landmarks above have reserved.
   roadside,
 ];
