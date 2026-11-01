@@ -11,6 +11,7 @@ import { palm } from '../../parts/palm';
  */
 export function buildCove(k: Kit) {
   const fr = k.frame(1772, -950, 117);
+  k.reserve(fr, 0, -42, 62, 42);
   const wl = -0.6;
   galleon(k, fr, 10, -24, wl, { length: 34, hull: '#3a2416', trim: '#c8a040', sail: '#e8dcc0' });
   galleon(k, fr, -18, -48, wl, { length: 30, hull: '#2a2a30', trim: '#9a9aa0', sail: '#d8d0c0' });
