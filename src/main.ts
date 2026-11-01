@@ -131,7 +131,7 @@ async function boot() {
   loading.progress('Lighting up Terrible\'s and the McDonald\'s sign', 0.97);
   const power = new PowerLines(world.osm, heightfield);
   const landmarks = new Landmarks(world.osm, heightfield);
-  const strip = new Strip(world.osm, heightfield);
+  const strip = new Strip(world.osm, heightfield, (x, z) => water.sample(x, z).level);
   for (let i = 0; i * 8 < Math.min(strip.glows.length, 128); i++) {
     const g = strip.glows.slice(i * 8, i * 8 + 8);
     G.uStripA.value[i].set(g[0], g[1], g[2], g[3]);
@@ -847,6 +847,7 @@ async function boot() {
     }
     const focus = free ? cam.position : actor;
     props.update(cam.position, focus);
+    strip.update(dt, G.uTime.value, G.uNight.value);
     shadow.update(engine.renderer, focus);
     G.uInvExposure.value = 1 / env.exposure;
     updateSound(dt);
