@@ -168,7 +168,7 @@ export const SPECIES: Species[] = [
     id: 'goldeneagle',
     name: 'Golden Eagle',
     latin: 'Aquila chrysaetos',
-    blurb: 'Patrols the crest of the Newberry Mountains and Spirit Mountain on two-metre wings, scanning for jackrabbits and bighorn lambs.',
+    blurb: 'Patrols the crest of the Spring Mountains and Red Rock on two-metre wings, drifting over the valley on winter days.',
     facts: [
       'Can dive at over 240 km/h onto jackrabbits in the creosote flats.',
       'The golden hackles on the nape catch low sun like burnished bronze.',
