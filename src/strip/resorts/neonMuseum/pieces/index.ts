@@ -1,4 +1,5 @@
 import type { Piece } from '../piece';
+import { silverSlipper } from './silverSlipper';
 import { hardRock } from './hardRock';
 import { flame } from './flame';
 import { liberace } from './liberace';
@@ -19,4 +20,4 @@ import { moulinRouge } from './moulinRouge';
 import { stardust } from './stardust';
 
 /** Everything standing in the Boneyard. */
-export const PIECES: Piece[] = [stardust, moulinRouge, sahara, yucca, binions, goldenNugget, caesars, riviera, normandie, desertRose, fitzgeralds, greenShack, societyCleaners, luckyCuss, aladdin, liberace, flame, hardRock];
+export const PIECES: Piece[] = [stardust, moulinRouge, sahara, yucca, binions, goldenNugget, caesars, riviera, normandie, desertRose, fitzgeralds, greenShack, societyCleaners, luckyCuss, aladdin, liberace, flame, hardRock, silverSlipper];
