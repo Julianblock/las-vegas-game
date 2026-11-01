@@ -13,6 +13,8 @@ const PROGRAM_SECONDS = 24;
 const halloween = () => today.month === 10 && today.day >= 24;
 const SPOOKY = [1, 0, 1, 2, 1, 3, 1, 4];
 const USUAL = [0, 2, 0, 3, 4, 1];
+const RACE = [5, 0, 5, 2, 5, 3];
+const PARTY = [6, 0, 6, 2, 6, 4];
 
 /** The lit skin: cycles programs, faces the Strip, and fades between them. */
 export class Exosphere implements Show {
