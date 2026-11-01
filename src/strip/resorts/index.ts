@@ -1,4 +1,5 @@
 import type { Resort } from '../resort';
+import { venetian } from './venetian';
 import { sphere } from './sphere';
 import { linq } from './linq';
 import { paris } from './paris';
@@ -18,4 +19,5 @@ export const RESORTS: Resort[] = [
   paris,
   linq,
   sphere,
+  venetian,
 ];
