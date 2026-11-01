@@ -4,6 +4,7 @@ import { lvcc } from './lvcc';
 import { allegiant } from './allegiant';
 import { grandPrix } from '../../events/grandprix';
 import { halloween } from '../../events/halloween';
+import { newYear } from '../../events/newyear';
 import { westgate } from './westgate';
 import { planetHollywood } from './planetHollywood';
 import { fontainebleau } from './fontainebleau';
