@@ -80,6 +80,10 @@ in vec4 aT0; // x, y, z, yaw
 in vec4 aT1; // walk phase, stride (0 = standing), height scale, idle pose
 in vec4 aC0; // shirt rgb, skin tone
 in vec4 aC1; // trousers rgb, hair colour
+in vec4 aK0; // costume shirt rgb, costume key (worn when below uCostume)
+in vec4 aK1; // costume trousers rgb, 1 if the costume colours the hair
+in vec4 aK2; // costume hair rgb, 1 if the costume colours the face
+in vec3 aK3; // costume face rgb
 out vec3 vWorld;
 out vec3 vNormal;
 flat out float vMat;
