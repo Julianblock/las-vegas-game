@@ -74,6 +74,7 @@ import { lotusOfSiam } from './lotusOfSiam';
 import { marieCallenders } from './marieCallenders';
 import { marigold } from './marigold';
 import { maverik } from './maverik';
+import { maxs } from './maxs';
 import { mcdonalds } from './mcdonalds';
 import { metroPcs } from './metroPcs';
 import { metroPizza } from './metroPizza';
@@ -212,6 +213,7 @@ export const BRANDS: Brand[] = [
   marieCallenders,
   marigold,
   maverik,
+  maxs,
   mcdonalds,
   metroPcs,
   metroPizza,
