@@ -6,6 +6,7 @@ import { arco } from './arco';
 import { att } from './att';
 import { autozone } from './autozone';
 import { battistas } from './battistas';
+import { bbqChicken } from './bbqChicken';
 import { benihana } from './benihana';
 import { blueberryHill } from './blueberryHill';
 import { brewTea } from './brewTea';
@@ -125,6 +126,7 @@ export const BRANDS: Brand[] = [
   att,
   autozone,
   battistas,
+  bbqChicken,
   benihana,
   blueberryHill,
   brewTea,
