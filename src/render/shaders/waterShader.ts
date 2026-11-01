@@ -68,7 +68,7 @@ vec3 waterNormal(vec2 xz, float dist) {
 uniform vec4 uStripA[16];
 uniform vec4 uStripB[16];
 
-/** Laughlin's lit facades seen along the reflected ray; ripples smear them into columns. */
+/** The Strip's lit facades seen along the reflected ray; ripples smear them into columns. */
 vec3 stripReflection(vec3 p, vec3 R) {
   vec3 s = vec3(0.0);
   float rl = length(R.xz);
