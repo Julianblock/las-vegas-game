@@ -195,6 +195,12 @@ void main() {
   else if (m == 2) albedo = vC1.rgb;
   else if (m == 3) { albedo = vec3(0.06); rough = 0.5; }
   else { albedo = HAIR[int(vC1.a + 0.5)]; rough = 0.6; }
+  if (vK0.a < uCostume) {
+    if (m == 1) albedo = vK0.rgb;
+    else if (m == 2) albedo = vK1.rgb;
+    else if (m == 4 && vK1.a > 0.5) albedo = vK2.rgb;
+    else if (m == 0 && vK2.a > 0.5) albedo = vK3;
+  }
   albedo *= 0.55;
   vec3 n = normalize(vNormal);
   float shadow = shadowAt(vWorld + n * 0.2, 0.0012);
