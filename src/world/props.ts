@@ -136,7 +136,7 @@ function lampGeometry(): THREE.BufferGeometry {
 }
 
 const PROP_TILE = 2000;
-/** Searchlight filled unmapped lots along its streets; Las Vegas is fully mapped. */
+/** Las Vegas is fully mapped: no filler lots along its streets. */
 const FILL_LOTS = false;
 
 interface Batch {
@@ -274,7 +274,7 @@ export class Props {
           const lc = hf.landcover(cx, cz);
           if (lc < LC.URBAN_LOW || lc > LC.URBAN_HIGH) continue;
           lamp += 26;
-          // Cobra-heads every other lot along US-95 through town, sparser on side streets.
+          // Cobra-heads every other lot along the arterials, sparser on side streets.
           if (!res && lamp > (road.kind === 'trunk' ? 50 : 120)) {
             lamp = 0;
             const sx = cx - uz * 9;
@@ -349,7 +349,7 @@ export class Props {
       push(KIND.TANK, GEO.TANK, poi.x, poi.z, w, w * 0.7 + 2, w, 0, '#b4ac9a', '#a09a90', 0, 0.3);
     }
 
-    // Radio masts on the peaks and along US-95, with red obstruction beacons.
+    // Radio masts on the peaks and along the freeways, with red obstruction beacons.
     for (const m of osm.masts) {
       const h = m.height ?? 30 + hash(m.x) * 60;
       push(KIND.TOWER, GEO.TOWER, m.x, m.z, Math.max(1.6, h * 0.035), h, Math.max(1.6, h * 0.035), hash(m.z) * 6, '#a8adb2', '#a8adb2', 0, 0.5);
