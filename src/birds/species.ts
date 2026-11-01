@@ -127,7 +127,7 @@ export const SPECIES: Species[] = [
     blurb: 'Perches on the light poles along I-15, then hunts the vacant desert lots between the casinos for ground squirrels.',
     facts: [
       'Its raspy keee-eeer scream is the "eagle" call Hollywood dubs into every movie.',
-      'Hunts jackrabbits and ground squirrels from the tops of Joshua trees.',
+      'Hunts ground squirrels from the tops of the Strip\u2019s light poles.',
       'Desert birds are paler than coastal ones, sun-bleached like everything else out here.',
     ],
     call: 'scream',
