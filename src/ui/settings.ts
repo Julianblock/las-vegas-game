@@ -21,7 +21,7 @@ export interface GameSettings {
   truck: string;
 }
 
-const KEY = 'searchlight-settings-v1';
+const KEY = 'las-vegas-settings-v1';
 
 export const DEFAULT_SETTINGS: GameSettings = {
   bird: 'redtail',
