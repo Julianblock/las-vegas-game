@@ -42,6 +42,7 @@ export class Exosphere implements Show {
     const slot = Math.floor(clock / PROGRAM_SECONDS);
     const t = clock - slot * PROGRAM_SECONDS;
     const u = this.material.uniforms;
+    this.playlist = halloween() ? SPOOKY : USUAL;
     u.uMode.value = this.playlist[slot % this.playlist.length];
     u.uFade.value = Math.min(1, t / 1.2, (PROGRAM_SECONDS - t) / 1.2);
     // The eye glances up and down the Strip.
