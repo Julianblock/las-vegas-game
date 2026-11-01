@@ -48,7 +48,7 @@ export class Heightfield {
     const wm = regionWeight(this.mid.size, x, z);
     let h = bilinear(this.far, this.far.heights, x, z);
     if (wm > 0) h += (bilinear(this.mid, this.mid.heights, x, z) - h) * wm;
-    const wl = this.lauWeight(x, z);
+    const wl = this.stripWeight(x, z);
     if (wl > 0) h += (bilinear(this.strip, this.strip.heights, x, z) - h) * wl;
     if (wi > 0) h += (bilinear(this.inner, this.inner.heights, x, z) - h) * wi;
     return h;
@@ -79,13 +79,13 @@ export class Heightfield {
     const wm = regionWeight(this.mid.size, x, z);
     let a = 1;
     if (wm > 0) a += (bilinear(this.mid, this.mid.ao, x, z) - a) * wm;
-    const wl = this.lauWeight(x, z);
+    const wl = this.stripWeight(x, z);
     if (wl > 0) a += (bilinear(this.strip, this.strip.ao, x, z) - a) * wl;
     if (wi > 0) a += (bilinear(this.inner, this.inner.ao, x, z) - a) * wi;
     return a;
   }
 
-  lauWeight(x: number, z: number): number {
+  stripWeight(x: number, z: number): number {
     const g = this.strip;
     return regionWeight(g.size, x, z, 0.06, g.cx, g.cz);
   }
