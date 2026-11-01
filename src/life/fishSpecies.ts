@@ -67,8 +67,8 @@ export const FISH: FishSpecies[] = [
     accent: '#c86a3a',
     accentAmt: 0.15,
     pattern: PATTERN.PLAIN,
-    habitat: { lake: 0.25 },
-    speed: 0.8,
+    habitat: { pond: 1.4, lake: 0.6 },
+    speed: 0.6,
   },
   {
     id: 'striper',
