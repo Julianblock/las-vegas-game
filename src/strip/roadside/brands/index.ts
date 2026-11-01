@@ -59,6 +59,7 @@ import { raisingCanes } from './raisingCanes';
 import { rebel } from './rebel';
 import { robertos } from './robertos';
 import { ross } from './ross';
+import { samsClub } from './samsClub';
 import { sevenEleven } from './sevenEleven';
 import { seventySix } from './seventySix';
 import { shakeShack } from './shakeShack';
@@ -144,6 +145,7 @@ export const BRANDS: Brand[] = [
   rebel,
   robertos,
   ross,
+  samsClub,
   sevenEleven,
   seventySix,
   shakeShack,
