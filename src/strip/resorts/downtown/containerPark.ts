@@ -2,7 +2,7 @@ import { FX } from '../../../world/builders';
 import type { Kit } from '../../kit';
 
 /** Block centre, and the side on Fremont (local +z faces the street). */
-const PARK = { x: 4636, z: -5722, deg: 28, w: 64, d: 58 };
+const PARK = { x: 4648, z: -5729, deg: 28, w: 48, d: 84 };
 const LONG = 12.2, WIDE = 2.44, HIGH = 2.6;
 const COLOURS = ['#2d6fa3', '#c23b22', '#e0a526', '#3d7d4a', '#7d7d78', '#d9d4c7', '#8c3b5e', '#1f3a52'];
 
