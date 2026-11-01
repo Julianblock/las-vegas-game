@@ -1,4 +1,5 @@
 import type { Spot } from './spot';
+import { neonBoneyardSpot } from './spots/neon-boneyard';
 import { mobMuseumSpot } from './spots/mob-museum';
 import { elCortezSpot } from './spots/el-cortez';
 import { fremontSpot } from './spots/fremont';
@@ -136,4 +137,5 @@ export const SPOTS: Spot[] = [
   fremontSpot,
   elCortezSpot,
   mobMuseumSpot,
+  neonBoneyardSpot,
 ];
