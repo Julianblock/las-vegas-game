@@ -9,11 +9,11 @@ export const fremontHotel: Resort = {
   name: 'Fremont Hotel & Casino',
   signs: [fremontHotelName],
   build: (k) => {
-    casinoBlock(k, {
+    casinoBlock(k, clearOfMall({
       x: 4232, z: -6122, ang: -1.08, w: 122, d: 95,
       podium: 3, podiumColor: '#a0301a',
   tower: { w: 60, d: 22, floors: 14, color: '#efe4d0' },
       sign: 'fremontHotelName', signH: 7,
-    });
+    }));
   },
 };
