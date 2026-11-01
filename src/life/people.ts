@@ -333,7 +333,7 @@ export class People {
       glslVersion: THREE.GLSL3,
       vertexShader,
       fragmentShader,
-      uniforms: { ...G, uLit: { value: 0.35 } },
+      uniforms: { ...G, uLit: { value: 0.35 }, uCostume: { value: 0 } },
     });
     const mesh = new THREE.Mesh(this.geo, this.material);
     mesh.frustumCulled = false;
