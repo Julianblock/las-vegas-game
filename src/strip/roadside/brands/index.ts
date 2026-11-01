@@ -122,6 +122,7 @@ import { walmart } from './walmart';
 import { wendys } from './wendys';
 import { whiteCastle } from './whiteCastle';
 import { wingstop } from './wingstop';
+import { yardHouse } from './yardHouse';
 
 /** Every chain with a roadside identity, alphabetical. */
 export const BRANDS: Brand[] = [
@@ -248,4 +249,5 @@ export const BRANDS: Brand[] = [
   wendys,
   whiteCastle,
   wingstop,
+  yardHouse,
 ];
