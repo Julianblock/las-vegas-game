@@ -18,7 +18,7 @@ function buildPlanetHollywood(k: Kit) {
   for (const [ax, az, bx, bz, cx, cz] of [
     [1697, 560, 1667, 623, 1705, 600],
     [1667, 691, 1698, 755, 1705, 715],
-  ]) k.sign(faceFrame(k, ax, az, bx, bz, cx, cz, 0.6).fr, 'phCrown', 0, 113, 0, 7.5, 1.4, FX.NEON);
+  ]) k.sign(faceFrame(k, ax, az, bx, bz, cx, cz, 0.6).fr, 'phCrown', 0, 112, 0, 10, 1.4, FX.NEON);
   // The two lower wings in front carry the video walls on their outer faces.
   for (const [ax, az, bx, bz, cx, cz] of [
     [1641, 586, 1677, 603, 1655, 605],
