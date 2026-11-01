@@ -20,6 +20,7 @@ export const DESTINATIONS: Destination[] = [
   { id: 'sphere', label: 'Sphere', blurb: 'The giant LED ball behind the Venetian. Tonight it might be a planet, an eyeball or a jack-o\u2019-lantern.' },
   { id: 'grand-prix', label: 'Grand Prix Plaza', blurb: 'The pit building at Koval and Harmon. Pick the Grand Prix season and come after dark to watch the cars down the straight.' },
   { id: 'fremont', label: 'Fremont Street', blurb: 'Old downtown under the LED canopy: Vegas Vic, the Golden Nugget, Binion\u2019s, zipliners overhead and the crowds below.' },
+  { id: 'fremont-east', label: 'Fremont East', blurb: 'Past the canopy: the fire-breathing mantis at Container Park, El Cortez, Atomic Liquors and the neon of the old motels.' },
   { id: 'allegiant', label: 'Allegiant Stadium', blurb: 'The Raiders\u2019 black glass dome across I-15 from Mandalay Bay.' },
 ];
 
