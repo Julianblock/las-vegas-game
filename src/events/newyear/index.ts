@@ -1,4 +1,5 @@
 import type { Resort } from '../../strip/resort';
+import { Revellers } from './crowd';
 import { Fireworks } from './fireworks';
 
 /** New Year's Eve on the Strip: fireworks from the rooftops. */
