@@ -15,7 +15,7 @@ function rand(seed: number) {
   return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296);
 }
 
-/** Fireworks off the resort rooftops up and down the Strip on New Year's Eve. */
+/** Fireworks off resort rooftops: New Year's Eve by default, or any event's night. */
 export class Fireworks implements Show {
   readonly object: THREE.Points;
   private readonly material: THREE.ShaderMaterial;
