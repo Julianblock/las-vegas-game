@@ -346,7 +346,7 @@ const FIELD_ROCK = ['#6a5446', '#5a4a40', '#7a6452', '#8a7a6a', '#4a3e36', '#d8d
 /** Plastic roses, carnations and sunflowers. */
 const FLOWERS = ['#c8202a', '#e85a8a', '#f0c020', '#f4f0ec', '#8a3ac8', '#e8742a', '#2a6ad0'];
 
-/** Searchlight's desert burial grounds. */
+/** The valley's memorial parks. */
 export class Cemeteries {
   readonly group = new THREE.Group();
   readonly material: THREE.ShaderMaterial;
