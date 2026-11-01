@@ -24,7 +24,7 @@ export function pumpkinGeometry() {
   body.computeVertexNormals();
   s.add(body, I, RIND, { rough: 0.55 });
   s.add(new THREE.CylinderGeometry(0.04, 0.06, 0.16, 6).rotateZ(0.25).translate(0.02, 0.78, 0), I, '#4a5a22', { rough: 0.8 });
-  const lit = { rough: 0.9, glow: 1.4 };
+  const lit = { rough: 0.9, glow: 3.5 };
   for (const sx of [-1, 1]) {
     const eye = new THREE.CylinderGeometry(0.09, 0.09, 0.04, 3).rotateX(Math.PI / 2).rotateZ(Math.PI / 2 * sx * 0.2);
     s.add(eye.translate(sx * 0.16, 0.48, 0.45), I, CANDLE, lit);
