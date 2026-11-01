@@ -6,10 +6,8 @@ import { LC } from './meta';
 
 /** Main water level grid: covers the land-cover square at this resolution. */
 const RES = 2048;
-/** Detail grid over Davis Dam, the Colorado below it and the Laughlin strip. */
-const DETAIL = { cx: 30250, cz: 32600, size: 17500, res: 1536 };
-/** Just past Davis Dam's crest road (m south of town): Lake Mohave above, the river below. */
-const DAM_Z = 29590;
+/** Detail grid over the resort corridor: the Bellagio's lake, the Wynn's, pools and ponds. */
+const DETAIL = { cx: 700, cz: -300, size: 9000, res: 2048 };
 const NO_WATER = -1000;
 
 export type WaterKind = 'lake' | 'river' | 'pond';
