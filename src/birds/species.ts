@@ -233,7 +233,7 @@ export const SPECIES: Species[] = [
     id: 'kestrel',
     name: 'American Kestrel',
     latin: 'Falco sparverius',
-    blurb: 'A jewel of a falcon that hovers over the roadside on US-95 and perches on the wires along Cottonwood Cove Road.',
+    blurb: 'A jewel of a falcon that hovers over the freeway verges and perches on the wires along Flamingo Road.',
     facts: [
       'North America\u2019s smallest falcon, barely heavier than a robin.',
       'Can see ultraviolet light, so it tracks rodents by the glow of their urine trails.',
