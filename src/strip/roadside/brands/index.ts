@@ -24,6 +24,7 @@ import { einstein } from './einstein';
 import { greenValley } from './greenValley';
 import { inNOut } from './inNOut';
 import { jackInTheBox } from './jackInTheBox';
+import { jamba } from './jamba';
 import { javaTree } from './javaTree';
 import { kingSolomon } from './kingSolomon';
 import { marieCallenders } from './marieCallenders';
@@ -85,6 +86,7 @@ export const BRANDS: Brand[] = [
   greenValley,
   inNOut,
   jackInTheBox,
+  jamba,
   javaTree,
   kingSolomon,
   marieCallenders,
