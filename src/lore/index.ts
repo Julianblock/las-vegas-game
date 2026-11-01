@@ -1,4 +1,5 @@
 import type { Spot } from './spot';
+import { binionsSpot } from './spots/binions';
 import { goldenGateSpot } from './spots/golden-gate';
 import { springsPreserveSpot } from './spots/springs-preserve';
 import { pawnStarsSpot } from './spots/pawn-stars';
@@ -168,4 +169,5 @@ export const SPOTS: Spot[] = [
   pawnStarsSpot,
   springsPreserveSpot,
   goldenGateSpot,
+  binionsSpot,
 ];
