@@ -22,6 +22,7 @@ import { cafeRio } from './cafeRio';
 import { capriottis } from './capriottis';
 import { carlsJr } from './carlsJr';
 import { cheesecakeFactory } from './cheesecakeFactory';
+import { chefKennys } from './chefKennys';
 import { chevron } from './chevron';
 import { chickFilA } from './chickFilA';
 import { chilis } from './chilis';
@@ -176,6 +177,7 @@ export const BRANDS: Brand[] = [
   capriottis,
   carlsJr,
   cheesecakeFactory,
+  chefKennys,
   chevron,
   chickFilA,
   chilis,
