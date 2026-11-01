@@ -70,6 +70,7 @@ export class Strip {
     this.lots = [...this.kit.lots, ...lotsFromOsm(osm.lots, (x, z) => this.occupies(x, z))];
 
     this.shows.push(new BellagioFountains(hf, water));
+    for (const r of RESORTS) this.shows.push(...(r.shows?.(hf, water) ?? []));
     for (const s of this.shows) this.group.add(s.object);
   }
 
