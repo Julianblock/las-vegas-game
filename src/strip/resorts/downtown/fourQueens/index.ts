@@ -9,11 +9,11 @@ export const fourQueens: Resort = {
   name: 'Four Queens',
   signs: [fourQueensName],
   build: (k) => {
-    casinoBlock(k, {
+    casinoBlock(k, clearOfMall({
       x: 4158, z: -5990, ang: -2.65, w: 92, d: 77,
       podium: 3, podiumColor: '#3a0a10',
   tower: { w: 50, d: 22, floors: 19, color: '#e6dccb' },
       sign: 'fourQueensName', signH: 6,
-    });
+    }));
   },
 };
