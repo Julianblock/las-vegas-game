@@ -31,6 +31,7 @@ import { sevenEleven } from './sevenEleven';
 import { seventySix } from './seventySix';
 import { shell } from './shell';
 import { sinclair } from './sinclair';
+import { soyo } from './soyo';
 import { starbucks } from './starbucks';
 import { subway } from './subway';
 import { tacoBell } from './tacoBell';
@@ -73,6 +74,7 @@ export const BRANDS: Brand[] = [
   seventySix,
   shell,
   sinclair,
+  soyo,
   starbucks,
   subway,
   tacoBell,
