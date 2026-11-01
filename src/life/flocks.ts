@@ -199,9 +199,9 @@ export class Flocks {
       const z = cam.z + Math.sin(a) * r;
       const ground = this.hf.height(x, z);
       const lc = this.hf.landcover(x, z);
-      // Cormorants commute low over Lake Mohave; blackbirds gather over town;
-      // swifts scream along the cliffs.
-      if (species === SP.CORMORANT && x < 17000) continue;
+      // Cormorants commute east to the Las Vegas Wash; blackbirds gather over
+      // town; swifts scream along the cliffs.
+      if (species === SP.CORMORANT && x < 6000) continue;
       if (species === SP.BLACKBIRD && (lc < LC.URBAN_OPEN || lc > LC.URBAN_HIGH)) continue;
       if (species === SP.PIGEON && (lc < LC.URBAN_LOW || lc > LC.URBAN_HIGH)) continue;
       if (species === SP.SWIFT && lc !== LC.ROCK && Math.random() < 0.8) continue;
