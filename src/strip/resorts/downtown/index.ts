@@ -7,6 +7,8 @@ import { MantisFire } from './mantisFire';
 import { buildPioneer } from './pioneer';
 import { buildSlotzilla, slotzillaSign } from './slotzilla';
 import { vegasVic } from './vic';
+import { buildCables } from './zipline';
+import { Zipliners } from './zipliners';
 
 /** Fremont Street, downtown's five-block casino mall under the canopy. */
 export const fremontStreet: Resort = {
