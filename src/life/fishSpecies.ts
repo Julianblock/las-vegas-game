@@ -186,7 +186,7 @@ export const FISH: FishSpecies[] = [
     id: 'bluegill',
     name: 'Bluegill',
     sci: 'Lepomis macrochirus',
-    note: 'Bold little sunfish that crowd the swimming beach at Cottonwood Cove. In summer the males fan out nests in the shallows.',
+    note: 'Bold little sunfish that crowd the edges of the park ponds. In summer the males fan out nests in the shallows.',
     len: [0.12, 0.22],
     depth: 0.5,
     width: 0.1,
