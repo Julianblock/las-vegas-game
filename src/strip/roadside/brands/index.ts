@@ -16,6 +16,7 @@ import { dunkin } from './dunkin';
 import { inNOut } from './inNOut';
 import { jackInTheBox } from './jackInTheBox';
 import { marieCallenders } from './marieCallenders';
+import { marigold } from './marigold';
 import { mcdonalds } from './mcdonalds';
 import { pandaExpress } from './pandaExpress';
 import { parkwayTavern } from './parkwayTavern';
@@ -51,6 +52,7 @@ export const BRANDS: Brand[] = [
   inNOut,
   jackInTheBox,
   marieCallenders,
+  marigold,
   mcdonalds,
   pandaExpress,
   parkwayTavern,
