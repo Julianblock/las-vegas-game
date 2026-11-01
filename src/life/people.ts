@@ -340,6 +340,11 @@ export class People {
     this.group.add(mesh);
   }
 
+  /** Fraction of people in costume (0 most of the year, about a third on Halloween night). */
+  set costume(share: number) {
+    this.material.uniforms.uCostume.value = share;
+  }
+
   update(dt: number, cam: THREE.Vector3, night: number) {
     const near = this.crowds.map((c) => Math.hypot(cam.x - c.cx, cam.z - c.cz) < c.radius + 1500);
     this.group.visible = near.some(Boolean);
