@@ -122,6 +122,7 @@ import { rebel } from './rebel';
 import { robertos } from './robertos';
 import { ross } from './ross';
 import { samsClub } from './samsClub';
+import { seafoodCity } from './seafoodCity';
 import { sevenEleven } from './sevenEleven';
 import { seventySix } from './seventySix';
 import { shakeShack } from './shakeShack';
@@ -283,6 +284,7 @@ export const BRANDS: Brand[] = [
   robertos,
   ross,
   samsClub,
+  seafoodCity,
   sevenEleven,
   seventySix,
   shakeShack,
