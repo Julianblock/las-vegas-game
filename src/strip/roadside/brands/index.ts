@@ -48,6 +48,7 @@ import { stageDoor } from './stageDoor';
 import { starbucks } from './starbucks';
 import { subway } from './subway';
 import { tacoBell } from './tacoBell';
+import { tmobile } from './tmobile';
 import { umiya } from './umiya';
 import { villagePub } from './villagePub';
 import { wahoos } from './wahoos';
@@ -105,6 +106,7 @@ export const BRANDS: Brand[] = [
   starbucks,
   subway,
   tacoBell,
+  tmobile,
   umiya,
   villagePub,
   wahoos,
