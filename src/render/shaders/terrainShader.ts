@@ -97,8 +97,8 @@ void main() {
 
   vec3 alb = texture(uImgFar, regionUV(xz, uRegionSize.z)).rgb;
   if (w.y > 0.0) alb = mix(alb, texture(uImgMid, regionUV(xz, uRegionSize.y)).rgb, w.y);
-  float wLau = lauWeight(xz);
-  if (wLau > 0.0) alb = mix(alb, texture(uImgDetail, lauUV(xz, 4096.0)).rgb, wLau);
+  float wStrip = stripWeight(xz);
+  if (wStrip > 0.0) alb = mix(alb, texture(uImgDetail, stripUV(xz, 4096.0)).rgb, wStrip);
   if (w.x > 0.0) alb = mix(alb, texture(uImgDetail, innerUV(xz, 4096.0)).rgb, w.x);
   // Orthophotos are exposed for display; pale desert soil keeps more of its brightness.
   alb *= 0.8;

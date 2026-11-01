@@ -20,7 +20,7 @@ vec3 regionWeights(vec2 xz) {
 
 vec2 regionUV(vec2 xz, float size) { return xz / size + 0.5; }
 
-float lauWeight(vec2 xz) {
+float stripWeight(vec2 xz) {
   vec2 d = abs(xz - uStripRect.xy);
   return clamp((1.0 - max(d.x, d.y) / (uStripRect.z * 0.5)) / 0.06, 0.0, 1.0);
 }
@@ -31,15 +31,15 @@ vec2 atlasUV(vec2 uv, float res, float slot) {
   return vec2(uv.x, (uv.y + slot) * 0.5);
 }
 vec2 innerUV(vec2 xz, float res) { return atlasUV(regionUV(xz, uRegionSize.x), res, 0.0); }
-vec2 lauUV(vec2 xz, float res) { return atlasUV((xz - uStripRect.xy) / uStripRect.z + 0.5, res, 1.0); }
+vec2 stripUV(vec2 xz, float res) { return atlasUV((xz - uStripRect.xy) / uStripRect.z + 0.5, res, 1.0); }
 
 /** x: height (m), y: baked ambient occlusion */
 vec2 terrainSample(vec2 xz) {
   vec3 w = regionWeights(xz);
   vec2 s = vec2(textureLod(uHFar, regionUV(xz, uRegionSize.z), 0.0).r, 1.0);
   if (w.y > 0.0) s = mix(s, textureLod(uHMid, regionUV(xz, uRegionSize.y), 0.0).rg, w.y);
-  float wl = lauWeight(xz);
-  if (wl > 0.0) s = mix(s, textureLod(uHDetail, lauUV(xz, 2048.0), 0.0).rg, wl);
+  float wl = stripWeight(xz);
+  if (wl > 0.0) s = mix(s, textureLod(uHDetail, stripUV(xz, 2048.0), 0.0).rg, wl);
   if (w.x > 0.0) s = mix(s, textureLod(uHDetail, innerUV(xz, 2048.0), 0.0).rg, w.x);
   return s;
 }
@@ -58,7 +58,7 @@ vec3 terrainNormal(vec2 xz, float e) {
 float terrainTexel(vec2 xz) {
   vec3 w = regionWeights(xz);
   if (w.x > 0.0) return uRegionSize.x / 2048.0;
-  if (lauWeight(xz) > 0.0) return uStripRect.z / 2048.0;
+  if (stripWeight(xz) > 0.0) return uStripRect.z / 2048.0;
   if (w.y > 0.0) return uRegionSize.y / 2048.0;
   return uRegionSize.z / 1024.0;
 }

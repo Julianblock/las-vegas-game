@@ -114,7 +114,7 @@ void main() {
     refl += sunRadiance(vWorld.y) * shadow * (pow(sd, 900.0) * 55.0 + pow(sd, 80.0) * 0.12);
     refl += moonRadiance(vWorld.y) * pow(max(dot(R, uMoonDir), 0.0), 700.0) * 90.0;
     refl += flashLight(vec3(0.0, 1.0, 0.0)) * 0.3;
-    if (uNight > 0.0 && lauWeight(xz) > 0.0) refl += stripReflection(vWorld, R) * uNight * uInvExposure * 0.18;
+    if (uNight > 0.0 && stripWeight(xz) > 0.0) refl += stripReflection(vWorld, R) * uNight * uInvExposure * 0.18;
     // Down through the water to the bed along the refracted ray, and back.
     float cosT = sqrt(1.0 - (1.0 - cosV * cosV) / 1.77);
     vec3 T = exp(-WATER_SIGMA * depth / max(cosT, 0.12));
