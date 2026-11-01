@@ -201,6 +201,17 @@ vec3 snowglobe(vec3 n) {
   return c + vec3(flake);
 }
 
+vec3 smiley(vec3 n) {
+  vec3 p = front(n);
+  vec3 c = vec3(1.0, 0.82, 0.1);
+  float eyes = step(length(vec2(abs(p.x) - 0.22, p.y - 0.18) * vec2(1.0, 0.6)), 0.07);
+  float r = length(p.xy - vec2(0.0, 0.05));
+  float mouth = step(abs(r - 0.38), 0.035) * step(p.y, -0.05);
+  float wink = step(0.92, fract(uTime * 0.25)) * step(p.x, 0.0);
+  eyes *= 1.0 - wink * (1.0 - step(abs(p.y - 0.18), 0.015));
+  return mix(c, vec3(0.08), max(eyes, mouth) * step(0.0, p.z));
+}
+
 vec3 moon(vec3 n) {
   float m = vnoise(n * 4.0) * 0.6 + vnoise(n * 13.0) * 0.4;
   return vec3(0.82, 0.82, 0.78) * (0.65 + 0.35 * smoothstep(0.35, 0.7, m));
