@@ -17,7 +17,7 @@ float snowAmount(vec3 n, vec2 xz, float y) {
 }
 `;
 
-/** Lake Mohave, the Colorado and ponds baked by Water: surface height and channel mask. */
+/** The Bellagio's lake, resort pools, park ponds and Lake Mead baked by Water: surface height and channel mask. */
 export const waterCommon = /* glsl */ `
 #ifndef WATER_COMMON
 #define WATER_COMMON
