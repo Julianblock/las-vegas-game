@@ -194,7 +194,7 @@ export const SPECIES: Species[] = [
     facts: [
       'One of the few birds with a keen sense of smell; it can find carrion hidden under a creosote bush.',
       'Leaves the Mojave in October and streams south in kettles of hundreds.',
-      'Spreads its wings to the morning sun on the Searchlight water tower to warm up.',
+      'Spreads its wings to the morning sun on the casino rooftops to warm up.',
     ],
     call: 'hiss',
     shape: {
