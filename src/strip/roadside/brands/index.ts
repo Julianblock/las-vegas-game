@@ -87,6 +87,7 @@ import { shakeShack } from './shakeShack';
 import { shell } from './shell';
 import { sinclair } from './sinclair';
 import { smiths } from './smiths';
+import { sonic } from './sonic';
 import { souvenirs } from './souvenirs';
 import { soyo } from './soyo';
 import { speedeeMart } from './speedeeMart';
@@ -199,6 +200,7 @@ export const BRANDS: Brand[] = [
   shell,
   sinclair,
   smiths,
+  sonic,
   souvenirs,
   soyo,
   speedeeMart,
