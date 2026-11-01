@@ -16,4 +16,5 @@ export const COSTUMES: Costume[] = [
   { name: 'Showgirl', shirt: '#e8508a', pants: '#f2c8d8', hair: '#f0d070', face: null },
   { name: 'Witch', shirt: '#141216', pants: '#141216', hair: '#1a1a1a', face: '#8ac070' },
   { name: 'Skeleton', shirt: '#101010', pants: '#101010', hair: '#f0eee8', face: '#f0eee8' },
+  { name: 'Vampire', shirt: '#1a0a0c', pants: '#0c0c0e', hair: '#0a0a0c', face: '#e8e2e0' },
 ];
