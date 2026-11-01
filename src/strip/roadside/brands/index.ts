@@ -9,6 +9,7 @@ import { blueberryHill } from './blueberryHill';
 import { brewTea } from './brewTea';
 import { burgerKing } from './burgerKing';
 import { cafeRio } from './cafeRio';
+import { capriottis } from './capriottis';
 import { carlsJr } from './carlsJr';
 import { chevron } from './chevron';
 import { chickFilA } from './chickFilA';
@@ -89,6 +90,7 @@ export const BRANDS: Brand[] = [
   brewTea,
   burgerKing,
   cafeRio,
+  capriottis,
   carlsJr,
   chevron,
   chickFilA,
