@@ -73,6 +73,7 @@ import { starbucks } from './starbucks';
 import { subway } from './subway';
 import { tacoBell } from './tacoBell';
 import { terribles } from './terribles';
+import { tireXpress } from './tireXpress';
 import { tmobile } from './tmobile';
 import { umiya } from './umiya';
 import { upsStore } from './upsStore';
@@ -159,6 +160,7 @@ export const BRANDS: Brand[] = [
   subway,
   tacoBell,
   terribles,
+  tireXpress,
   tmobile,
   umiya,
   upsStore,
