@@ -22,6 +22,7 @@ import { marigold } from './marigold';
 import { mcdonalds } from './mcdonalds';
 import { pandaExpress } from './pandaExpress';
 import { parkwayTavern } from './parkwayTavern';
+import { phoDaLat } from './phoDaLat';
 import { popeyes } from './popeyes';
 import { rebel } from './rebel';
 import { sevenEleven } from './sevenEleven';
@@ -60,6 +61,7 @@ export const BRANDS: Brand[] = [
   mcdonalds,
   pandaExpress,
   parkwayTavern,
+  phoDaLat,
   popeyes,
   rebel,
   sevenEleven,
