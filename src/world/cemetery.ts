@@ -194,8 +194,8 @@ function shadeTrees(name: string, poly: number[], cx: number, cz: number, gate: 
     if (!inside(poly, x, z) || edgeDist(poly, x, z) < 3) continue;
     if (gate && closest(x, z, gate[0], gate[1], cx, cz)[2] < 4) continue;
     if (trees.some((t) => Math.hypot(t.x - x, t.z - z) < 8)) continue;
-    if (rnd() < 0.6) trees.push({ x, z, r: 1.6 + rnd(), h: 4 + rnd() * 2.5, sp: TREE.JOSHUA });
-    else trees.push({ x, z, r: 0.9, h: 1.6 + rnd(), sp: TREE.YUCCA });
+    if (rnd() < 0.65) trees.push({ x, z, r: 2.6 + rnd() * 1.4, h: 7 + rnd() * 4, sp: TREE.TOWN });
+    else trees.push({ x, z, r: 1.4, h: 9 + rnd() * 6, sp: TREE.PALM });
   }
   return trees;
 }
