@@ -32,6 +32,7 @@ import { elPolloLoco } from './elPolloLoco';
 import { fedexOffice } from './fedexOffice';
 import { greenValley } from './greenValley';
 import { halalGuys } from './halalGuys';
+import { ihop } from './ihop';
 import { inNOut } from './inNOut';
 import { jackInTheBox } from './jackInTheBox';
 import { jamba } from './jamba';
@@ -115,6 +116,7 @@ export const BRANDS: Brand[] = [
   fedexOffice,
   greenValley,
   halalGuys,
+  ihop,
   inNOut,
   jackInTheBox,
   jamba,
