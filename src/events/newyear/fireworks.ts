@@ -5,7 +5,7 @@ import type { Show } from '../../strip/shows/show';
 import { isNewYearsEve } from '../calendar';
 import { today } from '../today';
 import { fireworkFragment, fireworkVertex } from './fireworkShader';
-import { ROOFTOPS } from './rooftops';
+import { ROOFTOPS, type Rooftop } from './rooftops';
 
 const SHELLS_PER_ROOF = 7;
 const STARS = 140;
