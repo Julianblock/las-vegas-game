@@ -1,7 +1,7 @@
 import { lightingCommon } from './lighting';
 
 /**
- * Hand-built Main Street landmarks. Solids carry per-vertex colour and
+ * Hand-built resort landmarks. Solids carry per-vertex colour and
  * material; sign faces (USE_MAP) sample the sign atlas and glow after dark.
  */
 export const landmarkVertex = /* glsl */ `
