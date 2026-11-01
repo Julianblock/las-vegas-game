@@ -74,6 +74,7 @@ import { maverik } from './maverik';
 import { mcdonalds } from './mcdonalds';
 import { metroPcs } from './metroPcs';
 import { metroPizza } from './metroPizza';
+import { mintIndian } from './mintIndian';
 import { mortons } from './mortons';
 import { nachoDaddy } from './nachoDaddy';
 import { officeDepot } from './officeDepot';
@@ -208,6 +209,7 @@ export const BRANDS: Brand[] = [
   mcdonalds,
   metroPcs,
   metroPizza,
+  mintIndian,
   mortons,
   nachoDaddy,
   officeDepot,
