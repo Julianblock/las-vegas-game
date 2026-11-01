@@ -11,5 +11,5 @@ export const grandPrix: Resort = {
   id: 'grand-prix',
   name: 'Las Vegas Grand Prix',
   style: plazaStyle,
-  shows: (hf) => [new TrackSurface(hf), new CircuitWalls(hf), new StartGantry(hf), new Race(hf)],
+  shows: (hf) => [new TrackSurface(hf), new CircuitWalls(hf), new StartGantry(hf), new Grandstands(hf), new Race(hf)],
 };
