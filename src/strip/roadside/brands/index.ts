@@ -41,6 +41,7 @@ import { dunkin } from './dunkin';
 import { dutchBros } from './dutchBros';
 import { eggWorks } from './eggWorks';
 import { einstein } from './einstein';
+import { ellisIsland } from './ellisIsland';
 import { elPolloLoco } from './elPolloLoco';
 import { farmerBoys } from './farmerBoys';
 import { fatburger } from './fatburger';
@@ -174,6 +175,7 @@ export const BRANDS: Brand[] = [
   dutchBros,
   eggWorks,
   einstein,
+  ellisIsland,
   elPolloLoco,
   farmerBoys,
   fatburger,
