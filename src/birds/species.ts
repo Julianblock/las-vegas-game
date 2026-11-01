@@ -382,7 +382,7 @@ export const SPECIES: Species[] = [
     id: 'hummingbird',
     name: 'Costa\u2019s Hummingbird',
     latin: 'Calypte costae',
-    blurb: 'A tiny desert hummer with a flared violet gorget, zipping between the ocotillo blooms and the feeders in Searchlight backyards.',
+    blurb: 'A tiny desert hummer with a flared violet gorget, zipping between the desert-willow blooms in the resort gardens and the feeders in Spring Valley backyards.',
     facts: [
       'Wings beat around 50 times a second; it can fly backwards and upside down.',
       'Drops into torpor on cold nights, cooling its body to save energy.',
