@@ -237,7 +237,7 @@ const steps = {
       .toFile(path.join(OUT, 'canopy_inner.png'));
   },
   async trees() {
-    console.log('plants/searchlight');
+    console.log('plants/las-vegas');
     const lc = await sharp(path.join(OUT, 'landcover.png')).raw().toBuffer({ resolveWithObject: true });
     const lcRes = lc.info.width;
     const ok = new Set([LC.CREOSOTE, LC.JOSHUA, LC.BLACKBRUSH, LC.WASH, LC.GRASS, LC.WETLAND, LC.PINYON, LC.OTHER, LC.URBAN_OPEN, LC.URBAN_LOW]);
