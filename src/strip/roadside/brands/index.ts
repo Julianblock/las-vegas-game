@@ -66,6 +66,7 @@ import { hyattPlace } from './hyattPlace';
 import { ihop } from './ihop';
 import { inNOut } from './inNOut';
 import { jackInTheBox } from './jackInTheBox';
+import { jackpotBar } from './jackpotBar';
 import { jamba } from './jamba';
 import { javaTree } from './javaTree';
 import { jerseyMikes } from './jerseyMikes';
@@ -217,6 +218,7 @@ export const BRANDS: Brand[] = [
   ihop,
   inNOut,
   jackInTheBox,
+  jackpotBar,
   jamba,
   javaTree,
   jerseyMikes,
