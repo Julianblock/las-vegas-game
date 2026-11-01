@@ -229,6 +229,7 @@ export class Flocks {
         f.y = ground + f.clear;
       } else if (kind === 'swirl') {
         if (species === SP.SWIFT) (f.n = Math.floor(rnd(12, 30))), (f.radius = rnd(25, 60)), (f.speed = 16), (f.y = ground + rnd(20, 70));
+        else if (species === SP.PIGEON) (f.n = Math.floor(rnd(15, 45))), (f.radius = rnd(18, 40)), (f.speed = 14), (f.y = ground + rnd(15, 60));
         else (f.n = Math.floor(rnd(200, 420))), (f.radius = rnd(35, 60)), (f.speed = 12), (f.y = ground + rnd(25, 60));
       } else if (species === SP.PELICAN) {
         // A wheeling white cloud of pelicans, flashing as they turn.
