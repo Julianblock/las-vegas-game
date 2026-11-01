@@ -138,6 +138,22 @@ vec3 flag(vec3 n) {
   return c * (0.82 + 0.18 * cos(p.x * 5.0 - uTime * 2.2));
 }
 
+vec3 bursts(vec3 n) {
+  vec3 c = vec3(0.01, 0.01, 0.04);
+  vec3 f = normalize(uFace);
+  for (int i = 0; i < 6; i++) {
+    float t = uTime * 0.45 + float(i) * 0.37;
+    float k = floor(t), ph = fract(t);
+    vec3 at = normalize(f * 1.2 + vec3(hash3(vec3(k, float(i), 1.0)) - 0.5, hash3(vec3(k, float(i), 2.0)) - 0.3, hash3(vec3(k, float(i), 3.0)) - 0.5) * 1.6);
+    float d = acos(clamp(dot(n, at), -1.0, 1.0));
+    float shell = smoothstep(0.035, 0.0, abs(d - ph * 0.55)) * (1.0 - ph);
+    float sparks = step(0.8, hash3(floor(n * 90.0) + k)) * step(d, ph * 0.55) * (1.0 - ph);
+    vec3 hue = 0.55 + 0.45 * cos(6.2831 * (hash3(vec3(k, float(i), 4.0)) + vec3(0.0, 0.33, 0.67)));
+    c += hue * (shell * 2.2 + sparks);
+  }
+  return c;
+}
+
 vec3 moon(vec3 n) {
   float m = vnoise(n * 4.0) * 0.6 + vnoise(n * 13.0) * 0.4;
   return vec3(0.82, 0.82, 0.78) * (0.65 + 0.35 * smoothstep(0.35, 0.7, m));
