@@ -424,7 +424,7 @@ export const SPECIES: Species[] = [
     id: 'baldeagle',
     name: 'Bald Eagle',
     latin: 'Haliaeetus leucocephalus',
-    blurb: 'A winter visitor to Lake Mohave, perching on the canyon walls above the coves and fishing the open water.',
+    blurb: 'A rare winter visitor out of Lake Mead, sometimes drifting over the Strip on its way to the Las Vegas Wash.',
     facts: [
       'Wintering bald eagles often steal fish from ospreys mid-air.',
       'Takes five years to grow the iconic white head and tail.',
