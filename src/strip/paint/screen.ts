@@ -12,6 +12,11 @@ export interface Slide {
   font?: (px: number) => string;
 }
 
+/** Paints slide `frame` of a rotation (wraps). */
+export function slides(g: CanvasRenderingContext2D, w: number, h: number, frame: number, list: Slide[]) {
+  screen(g, w, h, list[frame % list.length]);
+}
+
 export function screen(g: CanvasRenderingContext2D, w: number, h: number, s: Slide) {
   const grad = g.createLinearGradient(0, 0, w, h);
   grad.addColorStop(0, s.bg[0]);
