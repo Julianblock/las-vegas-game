@@ -8,7 +8,7 @@ export const doubleDownSpot: Spot = {
   title: 'Ass Juice and punk rock',
   text: 'A dive on Paradise Road with murals on every surface, punk on the jukebox and a house drink called Ass Juice. A sign behind the bar sets the price of throwing up.',
   at: { x: 3572, z: 1161 },
-  hint: 'Drop down on Paradise Road near Harmon.',
+  hint: 'Drop down on Paradise Road, south of Harmon.',
   r: 120,
   h: 50,
   test: near({ x: 3572, z: 1161 }, 70, 50),
