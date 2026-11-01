@@ -194,7 +194,7 @@ export class Flocks {
   private spawn(kind: Kind, species: number, cam: THREE.Vector3): Flock | null {
     for (let tries = 0; tries < 20; tries++) {
       const a = Math.random() * Math.PI * 2;
-      const r = species === SP.SWIFT || species === SP.DOVE ? rnd(200, 1400) : rnd(600, 3200);
+      const r = species === SP.SWIFT || species === SP.DOVE || species === SP.PIGEON ? rnd(200, 1400) : rnd(600, 3200);
       const x = cam.x + Math.cos(a) * r;
       const z = cam.z + Math.sin(a) * r;
       const ground = this.hf.height(x, z);
