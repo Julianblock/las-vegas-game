@@ -159,10 +159,23 @@ vec3 moon(vec3 n) {
   return vec3(0.82, 0.82, 0.78) * (0.65 + 0.35 * smoothstep(0.35, 0.7, m));
 }
 
+vec3 program(vec3 n) {
+  int m = int(uMode + 0.5);
+  if (m == 0) return eye(n);
+  if (m == 1) return pumpkin(n);
+  if (m == 2) return earth(n);
+  if (m == 3) return ball(n);
+  if (m == 4) return moon(n);
+  if (m == 5) return helmet(n);
+  if (m == 6) return mirrorball(n);
+  if (m == 7) return flag(n);
+  return bursts(n);
+}
+
 void main() {
   #include <logdepthbuf_fragment>
   vec3 n = normalize(vN);
-  vec3 c = uMode < 0.5 ? eye(n) : uMode < 1.5 ? pumpkin(n) : uMode < 2.5 ? earth(n) : uMode < 3.5 ? ball(n) : uMode < 4.5 ? moon(n) : uMode < 5.5 ? helmet(n) : uMode < 6.5 ? mirrorball(n) : uMode < 7.5 ? flag(n) : bursts(n);
+  vec3 c = program(n);
   // LED pucks: a fine grid of points with dark gaps.
   float lon = atan(n.z, n.x) * 420.0;
   float lat = asin(clamp(n.y, -1.0, 1.0)) * 420.0;
