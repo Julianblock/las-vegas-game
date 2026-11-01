@@ -3,6 +3,7 @@ import { Frame, FX, type Mat, SignBuilder, SolidBuilder, UP } from '../world/bui
 import type { Heightfield } from '../world/heightfield';
 import type { SignRect } from '../world/signAtlas';
 import { ll } from '../world/geo';
+import type { OsmData } from '../world/meta';
 import type { Lot } from '../world/props';
 import type { Crowd } from '../life/people';
 
@@ -36,6 +37,8 @@ export class Kit {
   readonly crowd: Crowd = { walks: [], spots: [], day: 0.8, night: 1, cx: 1500, cz: -300, radius: 4200 };
   /** Seed passed to the shader for per-landmark variation. */
   seed = 1;
+  /** The map data, for builders that place things from OSM (roadside signs, bridges). */
+  osm?: OsmData;
 
   constructor(
     readonly hf: Heightfield,
