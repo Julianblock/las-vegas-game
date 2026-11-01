@@ -148,7 +148,7 @@ export const FISH: FishSpecies[] = [
     id: 'rainbow',
     name: 'Rainbow trout',
     sci: 'Oncorhynchus mykiss',
-    note: 'Stocked below Hoover Dam at Willow Beach, where water released from the bottom of Lake Mead runs cold all year.',
+    note: 'Stocked each winter in the city park ponds for the urban fishing programme, gone again once the water warms.',
     len: [0.25, 0.5],
     depth: 0.22,
     width: 0.11,
