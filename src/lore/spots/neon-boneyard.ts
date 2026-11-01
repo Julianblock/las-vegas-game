@@ -7,7 +7,7 @@ export const neonBoneyardSpot: Spot = {
   kicker: 'The Neon Boneyard',
   title: 'Where old signs go',
   text: 'The Neon Museum keeps the town’s retired signs, from the Stardust to the Moulin Rouge, out in the open. Its visitor centre is the shell-shaped lobby of the La Concha Motel, designed by Paul Revere Williams and moved here in pieces in 2006.',
-  at: { x: 4927, z: -6802 },
+  at: { x: 4925, z: -6758 },
   hint: 'Keep north up Las Vegas Boulevard past downtown.',
   r: 160,
   h: 60,
