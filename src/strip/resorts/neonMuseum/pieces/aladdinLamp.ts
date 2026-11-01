@@ -4,7 +4,7 @@ import type { Piece } from '../piece';
 /** The Aladdin’s magic lamp, gold and nine metres long, from the hotel’s 1960s pylon. */
 export const aladdinLamp: Piece = {
   build(k, fr) {
-    const x = 2, z = -18, y = 0.8;
+    const x = -4, z = -20, y = 0.8;
     const gold = { rough: 0.3, glow: 0.2 };
     k.box(fr, x, -0.5, z, 2.5, y + 0.5, 1.8, '#4a3a2a', { rough: 0.9 });
     k.geo(fr, new THREE.SphereGeometry(1, 18, 12).scale(2.4, 1.1, 1.6), x, y + 1.2, z, '#d4a032', gold);
