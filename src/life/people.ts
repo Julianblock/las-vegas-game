@@ -170,11 +170,16 @@ const fragmentShader = /* glsl */ `
 ${lightingCommon}
 #include <logdepthbuf_pars_fragment>
 uniform float uLit;
+uniform float uCostume;
 in vec3 vWorld;
 in vec3 vNormal;
 flat in float vMat;
 flat in vec4 vC0;
 flat in vec4 vC1;
+flat in vec4 vK0;
+flat in vec4 vK1;
+flat in vec4 vK2;
+flat in vec3 vK3;
 out vec4 outColor;
 
 const vec3 SKIN[5] = vec3[5](vec3(0.92, 0.72, 0.58), vec3(0.8, 0.58, 0.42), vec3(0.62, 0.42, 0.28), vec3(0.42, 0.27, 0.17), vec3(0.28, 0.17, 0.11));
