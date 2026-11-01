@@ -255,7 +255,7 @@ export const SPECIES: Species[] = [
     id: 'roadrunner',
     name: 'Greater Roadrunner',
     latin: 'Geococcyx californianus',
-    blurb: 'Sprints across Main Street and the dirt lots behind the motels at 30 km/h. Flies only when it must, in short, low glides.',
+    blurb: 'Sprints across the dirt lots behind the motels on Koval and the golf course edges at 30 km/h. Flies only when it must, in short, low glides.',
     facts: [
       'Fast enough to catch and eat rattlesnakes, slamming them against rocks.',
       'Warms up on cold desert mornings by turning a patch of black skin on its back to the sun.',
