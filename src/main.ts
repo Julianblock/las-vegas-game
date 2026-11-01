@@ -49,6 +49,7 @@ import { Precipitation } from './weather/precip';
 import { Water } from './world/water';
 import { WaterSurface } from './render/waterSurface';
 import { Fish } from './life/fish';
+import { costumeShare } from './events/calendar';
 import { FISH } from './life/fishSpecies';
 import { HAUNTS } from './haunts';
 import { Hauntings } from './life/hauntings';
@@ -808,6 +809,7 @@ async function boot() {
     fish.setMonth(env.month);
     fish.update(dt, cam, camWater.mask > 0.3 && cam.position.y < camWater.level + 6, actor);
     ghosts.update(dt, cam, G.uNight.value);
+    people.costume = costumeShare(env.month, env.day, env.hours);
     people.update(dt, cam.position, G.uNight.value);
     volcano.update(dt, cam, window.innerHeight * engine.pixelRatio);
     if (mode === 'fly' && !free && !tour.active) {
