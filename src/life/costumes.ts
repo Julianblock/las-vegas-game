@@ -27,4 +27,5 @@ export const COSTUMES: Costume[] = [
   { name: 'Black cat', shirt: '#0e0e10', pants: '#0e0e10', hair: '#0e0e10', face: null },
   { name: 'Banana', shirt: '#f4d828', pants: '#f4d828', hair: '#f4d828', face: null },
   { name: 'Wizard', shirt: '#2a1a6a', pants: '#2a1a6a', hair: '#c8c8d0', face: null },
+  { name: 'Astronaut', shirt: '#eaeae6', pants: '#eaeae6', hair: '#eaeae6', face: null },
 ];
