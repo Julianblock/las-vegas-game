@@ -312,6 +312,10 @@ export class Traffic {
       const lane = e.oneway ? (e.lanes > 1 ? (slow ? 1.8 : -1.8) : 0) : e.lanes >= 4 ? (slow ? 5.5 : 1.9) : 1.9;
       c.x = x0 + (x1 - x0) * f - uz * lane;
       c.z = z0 + (z1 - z0) * f + ux * lane;
+      if (this.closed?.(c.x, c.z)) {
+        this.t0[c.type].set([c.x, -1e4, c.z, 0], c.slot * 4);
+        continue;
+      }
       const dx = c.x - camPos.x;
       const dz = c.z - camPos.z;
       const d2 = dx * dx + dz * dz;
