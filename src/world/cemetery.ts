@@ -23,6 +23,7 @@ const CHARACTER: Record<string, Character> = {
   // boom ringed with hillside rock under wooden crosses, beside modern granite.
   'Searchlight Cemetery': { old: 0.55, density: 0.5, vandal: 0.02, closedSign: true },
 };
+const GRAVE_BUDGET_M2 = 30000;
 const DEFAULT: Character = { old: 0.85, density: 0.35, vandal: 0.06, closedSign: false };
 
 export interface CemeteryPlan {
@@ -385,8 +386,12 @@ export class Cemeteries {
       minZ = Math.min(minZ, poly[i + 1]);
       maxZ = Math.max(maxZ, poly[i + 1]);
     }
-    const small = (maxX - minX) * (maxZ - minZ) < 400;
+    const area = (maxX - minX) * (maxZ - minZ);
+    const small = area < 400;
     const margin = small ? 1.2 : 2.2;
+    // Memorial parks run to fifty acres; past ~5,000 graves, thin the rows so
+    // one plot can't swamp GPU memory (flush lawn markers vanish from the air anyway).
+    const thin = Math.max(1, Math.sqrt(area / GRAVE_BUDGET_M2));
     const onDrive = (x: number, z: number) =>
       plan.drives.some((p) => {
         for (let i = 0; i + 3 < p.length; i += 2) if (closest(x, z, p[i], p[i + 1], p[i + 2], p[i + 3])[2] < 3.6) return true;
@@ -398,13 +403,13 @@ export class Cemeteries {
     const col = new THREE.Color();
     const mat = new THREE.Matrix4();
     const tmp = new THREE.Matrix4();
-    const rowStep = small ? 2.4 : 3.1;
+    const rowStep = (small ? 2.4 : 3.1) * thin;
     // Graves run in north-south rows, headstones at the west end facing east.
     for (let x = minX + margin; x < maxX - margin; x += rowStep) {
       // Family plots: a low concrete curb around a few graves.
       let curbLeft = 0;
       let curbStart = 0;
-      for (let z = minZ + margin; z < maxZ - margin; z += 1.6 + rnd() * 0.8) {
+      for (let z = minZ + margin; z < maxZ - margin; z += (1.6 + rnd() * 0.8) * thin) {
         const jx = x + (rnd() - 0.5) * 0.5;
         if (!inside(poly, jx, z) || edgeDist(poly, jx, z) < margin || aisle(jx, z)) continue;
         if (plan.trees.some((t) => Math.hypot(t.x - jx, t.z - z) < 1.2 + t.r * 0.12)) continue;
