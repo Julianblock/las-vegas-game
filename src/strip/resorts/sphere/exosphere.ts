@@ -18,10 +18,9 @@ const USUAL = [0, 2, 0, 3, 4, 1];
 export class Exosphere implements Show {
   readonly object: THREE.Mesh;
   private material: THREE.ShaderMaterial;
-  private playlist: number[];
+  private playlist = USUAL;
 
   constructor(hf: Heightfield) {
-    this.playlist = halloween() ? [1, 0, 1, 2, 1, 3, 1, 4] : [0, 2, 0, 3, 4, 1];
     this.material = new THREE.ShaderMaterial({
       glslVersion: THREE.GLSL3,
       vertexShader: exosphereVertex,
