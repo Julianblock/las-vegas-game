@@ -32,6 +32,7 @@ import { sinclair } from './sinclair';
 import { starbucks } from './starbucks';
 import { subway } from './subway';
 import { tacoBell } from './tacoBell';
+import { umiya } from './umiya';
 import { wahoos } from './wahoos';
 import { walgreens } from './walgreens';
 import { wendys } from './wendys';
@@ -71,6 +72,7 @@ export const BRANDS: Brand[] = [
   starbucks,
   subway,
   tacoBell,
+  umiya,
   wahoos,
   walgreens,
   wendys,
