@@ -3,11 +3,11 @@ export const terrainCommon = /* glsl */ `
 #ifndef TERRAIN_COMMON
 #define TERRAIN_COMMON
 
-uniform sampler2D uHDetail; // inner region in the top half, Laughlin in the bottom half
+uniform sampler2D uHDetail; // inner region in the top half, the Strip corridor in the bottom half
 uniform sampler2D uHMid;
 uniform sampler2D uHFar;
 uniform vec3 uRegionSize; // inner, mid, far
-uniform vec3 uStripRect; // Laughlin region centre x, z and size
+uniform vec3 uStripRect; // resort corridor centre x, z and size
 
 float regionWeight(float size, vec2 xz) {
   float e = max(abs(xz.x), abs(xz.y)) / (size * 0.5);

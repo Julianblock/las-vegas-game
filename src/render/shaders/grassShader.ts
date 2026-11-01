@@ -82,7 +82,7 @@ void main() {
   if (wl.y > 0.01 && wl.x > hC - 0.1) { collapse(); return; }
   float scrub = clamp(mA.r + mA.g + mA.b + mB.r, 0.0, 1.0);
   float habitat = scrub * (1.0 - rocky) * (1.0 - mA.a) * (1.0 - mB.b * 0.85);
-  // Past the landcover edge, Laughlin's own photo tells pavement and roofs (grey) from desert (tan).
+  // The corridor's own photo tells pavement and roofs (grey) from desert (tan).
   float wStrip = stripWeight(centre);
   if (wStrip > 0.0) {
     vec3 lp = textureLod(uImgDetail, stripUV(centre, 4096.0), 0.0).rgb;

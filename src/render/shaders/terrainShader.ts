@@ -35,7 +35,7 @@ export const terrainFragment = /* glsl */ `
 ${lightingCommon}
 ${terrainCommon}
 #include <logdepthbuf_pars_fragment>
-uniform sampler2D uImgDetail; // inner region on top, Laughlin below
+uniform sampler2D uImgDetail; // inner region on top, the Strip corridor below
 uniform sampler2D uImgMid;
 uniform sampler2D uImgFar;
 uniform sampler2D uMaskA;

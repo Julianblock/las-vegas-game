@@ -3,11 +3,11 @@ import type { HeightGrid, Pixels, WorldData } from './loader';
 import { LC } from './meta';
 
 export interface WorldTextures {
-  /** Inner region heights in the top half, Laughlin in the bottom half. */
+  /** Inner region heights in the top half, the Strip corridor in the bottom half. */
   heightDetail: THREE.DataTexture;
   heightMid: THREE.DataTexture;
   heightFar: THREE.DataTexture;
-  /** Inner region photo on top, Laughlin below. */
+  /** Inner region photo on top, the Strip corridor below. */
   imgDetail: THREE.Texture;
   imgMid: THREE.Texture;
   imgFar: THREE.Texture;
