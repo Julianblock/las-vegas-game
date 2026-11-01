@@ -242,7 +242,7 @@ export const FISH: FishSpecies[] = [
     id: 'mosquitofish',
     name: 'Western mosquitofish',
     sci: 'Gambusia affinis',
-    note: 'A tiny live-bearer stocked across the desert to eat mosquito larvae; the stock ponds and lagoons are full of them.',
+    note: 'A tiny live-bearer stocked by the Southern Nevada Health District to eat mosquito larvae; the ornamental ponds and fountains are full of them.',
     len: [0.03, 0.05],
     depth: 0.24,
     width: 0.09,
