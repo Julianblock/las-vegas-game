@@ -92,7 +92,7 @@ function hash(n: number) {
 }
 
 /**
- * Desert tortoise exclusion fencing along US-95 and the state highways through
+ * Desert tortoise exclusion fencing along I-15 and the state highways through
  * the Piute and Eldorado valleys, keeping tortoises off the road.
  */
 export class Fences {
