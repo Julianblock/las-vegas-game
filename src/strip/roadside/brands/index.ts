@@ -85,6 +85,7 @@ import { wahoos } from './wahoos';
 import { walgreens } from './walgreens';
 import { walmart } from './walmart';
 import { wendys } from './wendys';
+import { whiteCastle } from './whiteCastle';
 
 /** Every chain with a roadside identity, alphabetical. */
 export const BRANDS: Brand[] = [
@@ -174,4 +175,5 @@ export const BRANDS: Brand[] = [
   walgreens,
   walmart,
   wendys,
+  whiteCastle,
 ];
