@@ -1,4 +1,5 @@
 import type { Resort } from '../resort';
+import { westgate } from './westgate';
 import { planetHollywood } from './planetHollywood';
 import { fontainebleau } from './fontainebleau';
 import { resortsWorld } from './resortsWorld';
@@ -77,6 +78,7 @@ export const RESORTS: Resort[] = [
   monorail,
   skywalks,
   planetHollywood,
+  westgate,
   // Last: chain signs skip ground the landmarks above have reserved.
   roadside,
 ];
