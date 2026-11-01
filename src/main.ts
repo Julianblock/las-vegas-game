@@ -49,7 +49,7 @@ import { Precipitation } from './weather/precip';
 import { Water } from './world/water';
 import { WaterSurface } from './render/waterSurface';
 import { Fish } from './life/fish';
-import { costumeShare } from './events/calendar';
+import { costumeShare, onTrack } from './events/calendar';
 import { setToday } from './events/today';
 import { FISH } from './life/fishSpecies';
 import { HAUNTS } from './haunts';
