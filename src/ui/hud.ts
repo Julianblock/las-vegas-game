@@ -34,7 +34,7 @@ export class Hud {
     <tr><td><kbd>T</kbd></td><td>Toggle HUD</td></tr>
     <tr><td><kbd>Esc</kbd></td><td>Menu</td></tr>
     </table><p style="font:300 12px/1.6 var(--sans);color:var(--ink-dim);margin:16px 0 0;max-width:380px">
-    Soar like the ravens: circle in the thermals that boil off the hot desert floor (the vario turns green), or ride ridge lift along the windward faces of the Newberry Mountains. Land by flaring slowly near the ground.</p></div>`;
+    Soar like the ravens: circle in the thermals that boil off the hot parking lots and desert lots (the vario turns green), or ride ridge lift along the windward faces of the Spring Mountains to the west. Land by flaring slowly near the ground.</p></div>`;
   private driveHelp =
     `<div class="box"><h2>Driving</h2><table>
     <tr><td><kbd>W</kbd> / <kbd>↑</kbd></td><td>Gas</td></tr>
@@ -51,7 +51,7 @@ export class Hud {
     <tr><td><kbd>K</kbd></td><td>Full screen</td></tr>
     <tr><td><kbd>Esc</kbd></td><td>Menu</td></tr>
     </table><p style="font:300 12px/1.6 var(--sans);color:var(--ink-dim);margin:16px 0 0;max-width:380px">
-    US-95 runs straight through Searchlight past Terrible's and McDonald's. Cottonwood Cove Road drops 14 miles east to Lake Mohave. Off the asphalt the truck crawls through sandy washes and over rock, and floods out in a running wash after a monsoon storm.</p></div>`;
+    The Strip crawls at 20 mph, bumper to bumper with cabs, limos and the Deuce. Flamingo Road runs five kilometres west to Decatur past the Rio, the Palms and the Gold Coast. Off the asphalt the truck crawls through vacant desert lots, and floods out in a running wash after a monsoon storm.</p></div>`;
   private flyTouch =
     `<div class="box"><h2>Flying</h2><table>
     <tr><td>Left thumb</td><td>Push up to dive, pull down to climb, sideways to bank</td></tr>
@@ -62,7 +62,7 @@ export class Hud {
     <tr><td>Drag the sky</td><td>Look around · pinch to zoom</td></tr>
     <tr><td>Camera · Drive</td><td>Change view · land and take the pickup</td></tr>
     </table><p style="font:300 12px/1.6 var(--sans);color:var(--ink-dim);margin:16px 0 0;max-width:380px">
-    Soar like the ravens: circle in the thermals that boil off the hot desert floor (the vario turns green), or ride ridge lift along the windward faces of the Newberry Mountains. Tap to close.</p></div>`;
+    Soar like the ravens: circle in the thermals that boil off the hot parking lots (the vario turns green), or ride ridge lift off the Spring Mountains to the west. Tap to close.</p></div>`;
   private driveTouch =
     `<div class="box"><h2>Driving</h2><table>
     <tr><td>Left thumb</td><td>Steer · push up for gas, down to brake</td></tr>
@@ -72,7 +72,7 @@ export class Hud {
     <tr><td>Drag the view</td><td>Look around</td></tr>
     <tr><td>Camera · Fly</td><td>Cockpit, chase or hood view · get out and fly</td></tr>
     </table><p style="font:300 12px/1.6 var(--sans);color:var(--ink-dim);margin:16px 0 0;max-width:380px">
-    US-95 runs straight through Searchlight; Cottonwood Cove Road drops east to Lake Mohave. Tap to close.</p></div>`;
+    The Strip crawls; Flamingo Road runs west to Decatur. Tap to close.</p></div>`;
   /** Phones and tablets: describe the on-screen controls instead of keys. */
   touch = false;
   private place = el('place fade', '<div class="t"></div><div class="s"></div>');
