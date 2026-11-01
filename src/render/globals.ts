@@ -43,7 +43,7 @@ export const G = {
   uFlash: { value: 0 }, // lightning flash brightness (display units)
   uWaterTex: { value: null as THREE.Texture | null }, // R water surface (m), G channel mask
   uWaterSize: { value: 50000 },
-  uWaterDetail: { value: new THREE.Vector3(0, 0, 1) }, // Davis Dam / Laughlin water grid centre x, z, size
+  uWaterDetail: { value: new THREE.Vector3(0, 0, 1) }, // detail water grid centre x, z, size
   uWaterAtlas: { value: new THREE.Vector4(1, 0, 0, 1) }, // main grid's share of height, detail share of width & height, detail res
   uStripRect: { value: new THREE.Vector3(700, -300, 9000) }, // resort corridor detail region centre x, z, size
   uStripA: { value: Array.from({ length: 16 }, () => new THREE.Vector4(0, 0, 0, -1)) }, // lit casino facades the river mirrors: x, z, y0, y1
