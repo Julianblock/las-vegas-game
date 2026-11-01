@@ -361,7 +361,7 @@ export const SPECIES: Species[] = [
     id: 'swift',
     name: 'White-throated Swift',
     latin: 'Aeronautes saxatalis',
-    blurb: 'Screams in tight packs along the cliffs of Eldorado Canyon and through the narrows of Christmas Tree Pass.',
+    blurb: 'Screams in tight packs between the casino towers, nesting in the expansion joints of the parking garages like the cliffs at Red Rock.',
     facts: [
       'Among the fastest small birds on the continent, clocked near 300 km/h in display.',
       'Mates in mid-air, tumbling together for hundreds of metres.',
