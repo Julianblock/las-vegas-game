@@ -4,7 +4,7 @@ import { FLOCK_SPECIES, flockFragment, flockVertex } from '../render/shaders/flo
 import type { Heightfield } from '../world/heightfield';
 import { LC } from '../world/meta';
 
-export const SP = { PELICAN: 0, VULTURE: 1, RAVEN: 2, SWIFT: 3, GOOSE: 4, CORMORANT: 5, DOVE: 6, BLACKBIRD: 7 } as const;
+export const SP = { PELICAN: 0, VULTURE: 1, RAVEN: 2, SWIFT: 3, GOOSE: 4, CORMORANT: 5, DOVE: 6, BLACKBIRD: 7, PIGEON: 8 } as const;
 
 /** Wingspan (m) and wingbeat frequency (Hz) per species. */
 const INFO = [
@@ -16,6 +16,7 @@ const INFO = [
   { span: 1.25, hz: 4.2 },
   { span: 0.46, hz: 8 },
   { span: 0.36, hz: 11 },
+  { span: 0.66, hz: 6 },
 ];
 
 const CAP = 1600;
@@ -140,10 +141,10 @@ export class Flocks {
         ...G,
         // Pelican (black flight feathers), vulture (silvery), raven, swift, Canada goose,
         // cormorant, mourning dove, Brewer's blackbird.
-        uBody: { value: [c('#ecebe4'), c('#1c1612'), c('#0e0e10'), c('#2a2622'), c('#5a5048'), c('#141210'), c('#9a8a7a'), c('#141414')] },
-        uWingC: { value: [c('#f0efe8'), c('#231c17'), c('#111114'), c('#2e2a26'), c('#6a5e54'), c('#1a1816'), c('#8e8478'), c('#161616')] },
-        uTip: { value: [c('#16140f'), c('#6b6862'), c('#111114'), c('#2e2a26'), c('#2a2420'), c('#1a1816'), c('#4a4440'), c('#161616')] },
-        uTipStart: { value: [0.45, 0.55, 2.0, 2.0, 0.7, 2.0, 0.8, 2.0] },
+        uBody: { value: [c('#ecebe4'), c('#1c1612'), c('#0e0e10'), c('#2a2622'), c('#5a5048'), c('#141210'), c('#9a8a7a'), c('#141414'), c('#5c6470')] },
+        uWingC: { value: [c('#f0efe8'), c('#231c17'), c('#111114'), c('#2e2a26'), c('#6a5e54'), c('#1a1816'), c('#8e8478'), c('#161616'), c('#9aa0aa')] },
+        uTip: { value: [c('#16140f'), c('#6b6862'), c('#111114'), c('#2e2a26'), c('#2a2420'), c('#1a1816'), c('#4a4440'), c('#161616'), c('#3c4048')] },
+        uTipStart: { value: [0.45, 0.55, 2.0, 2.0, 0.7, 2.0, 0.8, 2.0, 0.7] },
       },
     });
     if (FLOCK_SPECIES !== INFO.length) throw new Error('species mismatch');

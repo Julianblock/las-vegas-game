@@ -1,6 +1,6 @@
 import { lightingCommon } from './lighting';
 
-export const FLOCK_SPECIES = 8;
+export const FLOCK_SPECIES = 9;
 
 /** Instanced background birds: wings flap or hold a gliding dihedral in the shader. */
 export const flockVertex = /* glsl */ `
