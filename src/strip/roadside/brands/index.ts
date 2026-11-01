@@ -1,6 +1,7 @@
 import type { Brand } from '../brand';
 import { ampm } from './ampm';
 import { arco } from './arco';
+import { att } from './att';
 import { battistas } from './battistas';
 import { blueberryHill } from './blueberryHill';
 import { brewTea } from './brewTea';
@@ -57,6 +58,7 @@ import { wendys } from './wendys';
 export const BRANDS: Brand[] = [
   ampm,
   arco,
+  att,
   battistas,
   blueberryHill,
   brewTea,
