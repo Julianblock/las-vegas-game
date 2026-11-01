@@ -1,4 +1,5 @@
 import type { Resort } from '../resort';
+import { goldCoast } from './goldCoast';
 import { palms } from './palms';
 import { rio } from './rio';
 import { harrahs } from './harrahs';
@@ -34,4 +35,5 @@ export const RESORTS: Resort[] = [
   harrahs,
   rio,
   palms,
+  goldCoast,
 ];
