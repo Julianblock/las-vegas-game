@@ -46,6 +46,7 @@ import { marieCallenders } from './marieCallenders';
 import { marigold } from './marigold';
 import { maverik } from './maverik';
 import { mcdonalds } from './mcdonalds';
+import { metroPcs } from './metroPcs';
 import { metroPizza } from './metroPizza';
 import { officeDepot } from './officeDepot';
 import { oodleNoodle } from './oodleNoodle';
@@ -138,6 +139,7 @@ export const BRANDS: Brand[] = [
   marigold,
   maverik,
   mcdonalds,
+  metroPcs,
   metroPizza,
   officeDepot,
   oodleNoodle,
