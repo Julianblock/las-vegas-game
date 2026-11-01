@@ -16,6 +16,7 @@ import { circleK } from './circleK';
 import { coffeeBean } from './coffeeBean';
 import { cricket } from './cricket';
 import { dairyQueen } from './dairyQueen';
+import { daves } from './daves';
 import { delTaco } from './delTaco';
 import { dennys } from './dennys';
 import { dominos } from './dominos';
@@ -78,6 +79,7 @@ export const BRANDS: Brand[] = [
   coffeeBean,
   cricket,
   dairyQueen,
+  daves,
   delTaco,
   dennys,
   dominos,
