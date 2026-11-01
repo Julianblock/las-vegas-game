@@ -125,8 +125,8 @@ export class Environment {
   /** Local wall-clock hours (fractional). */
   hours = 18;
   timeFlow = 0; // game seconds per real second (0 = frozen)
-  latitude = 35.4652;
-  longitude = -114.9195;
+  latitude = 36.116;
+  longitude = -115.172;
   sunAltitude = 0;
   exposure = 0.3;
   geese = 0;
