@@ -2,7 +2,7 @@ import type { Resort } from '../../strip/resort';
 import { Revellers } from './crowd';
 import { Fireworks } from './fireworks';
 
-/** New Year's Eve on the Strip: fireworks from the rooftops. */
+/** New Year's Eve on the Strip: crowds in the boulevard and fireworks from the rooftops. */
 export const newYear: Resort = {
   id: 'new-year',
   name: "New Year's Eve",
