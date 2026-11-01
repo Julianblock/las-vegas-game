@@ -340,7 +340,7 @@ export const SPECIES: Species[] = [
     id: 'nighthawk',
     name: 'Lesser Nighthawk',
     latin: 'Chordeiles acutipennis',
-    blurb: 'Flutters moth-like over the parking lot lights at Terrible\u2019s on summer nights, scooping insects with an enormous gape.',
+    blurb: 'Flutters moth-like around the Strip\u2019s marquees on summer nights, scooping the insects the neon draws in with an enormous gape.',
     facts: [
       'Not a hawk at all but a nightjar, kin to the whip-poor-will.',
       'Rests flat on the warm desert pavement by day, all but invisible.',
