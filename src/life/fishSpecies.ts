@@ -167,7 +167,7 @@ export const FISH: FishSpecies[] = [
     id: 'catfish',
     name: 'Channel catfish',
     sci: 'Ictalurus punctatus',
-    note: 'A whiskered night feeder working the silty bottoms of the coves. Its whole skin is covered in taste buds.',
+    note: 'A whiskered night feeder stocked in the park ponds every summer. Its whole skin is covered in taste buds.',
     len: [0.35, 0.7],
     depth: 0.17,
     width: 0.14,
