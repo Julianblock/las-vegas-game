@@ -205,7 +205,7 @@ export const FISH: FishSpecies[] = [
     id: 'greensunfish',
     name: 'Green sunfish',
     sci: 'Lepomis cyanellus',
-    note: 'A tough, big-mouthed sunfish that survives in stock tanks and ponds where little else can.',
+    note: 'A tough, big-mouthed sunfish that survives in drainage basins and ornamental ponds where little else can.',
     len: [0.1, 0.2],
     depth: 0.42,
     width: 0.11,
