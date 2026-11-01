@@ -15,7 +15,7 @@ export function buildFacade(k: Kit) {
   k.box(fr, 0, 8, -2, 120, 1.2, 6, '#c89a2a', { rough: 0.4, fx: FX.METAL });
   for (let x = -58; x <= 58; x += 6) k.cyl(fr, x, 7.4, 1, 1.6, 1.6, 0.5, '#e8c04a', { rough: 0.4, fx: FX.METAL, glow: 0.6 }, 10);
   k.box(fr, 0, 7.8, 0.9, 118, 0.12, 0.2, '#ffe8a0', { glow: 1.4, fx: FX.CHASE });
-  k.storefront(fr, 0, -4.6, 100, 6, 1);
+  k.storefront(fr, -6, 2.4, 44, 6, 1);
   for (const x of [-36, -12, 12, 36]) {
     k.box(fr, x, 9.2, -2, 6, 6, 3, '#7a1a8a', { rough: 0.5 });
     jester(k, fr, x, 15.2, -2, 5);
