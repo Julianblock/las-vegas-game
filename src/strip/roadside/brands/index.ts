@@ -44,6 +44,7 @@ import { rebel } from './rebel';
 import { ross } from './ross';
 import { sevenEleven } from './sevenEleven';
 import { seventySix } from './seventySix';
+import { shakeShack } from './shakeShack';
 import { shell } from './shell';
 import { sinclair } from './sinclair';
 import { souvenirs } from './souvenirs';
@@ -107,6 +108,7 @@ export const BRANDS: Brand[] = [
   ross,
   sevenEleven,
   seventySix,
+  shakeShack,
   shell,
   sinclair,
   souvenirs,
