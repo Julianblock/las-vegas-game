@@ -174,18 +174,18 @@ void main() {
   col += night * Tview * mix(1.0, twinkle, 1.0 - dir.y) * clearSky;
   col += moonDisk(dir) * Tview * max(uMoonScale, 2e-6) * 1200.0 * clearSky;
 
-  // Skyglow from the cities over the horizon: Las Vegas and Henderson to the
-  // north-northwest, Laughlin and Bullhead City down the river to the southeast,
-  // Boulder City and Kingman fainter still. Searchlight itself barely registers.
+  // Skyglow from the valley all around: Downtown and North Las Vegas to the
+  // north, Henderson to the southeast, Summerlin out west, and the whole grid
+  // between lighting the horizon in every direction.
   float hz = exp(-max(dir.y, 0.0) * 22.0);
   vec2 dh = normalize(dir.xz + 1e-5);
-  float vegas = pow(max(dot(dh, normalize(vec2(-23000.0, -71000.0) - uCamPos.xz)), 0.0), 14.0);
-  float hendo = pow(max(dot(dh, normalize(vec2(-5600.0, -63700.0) - uCamPos.xz)), 0.0), 24.0);
-  float laughlin = pow(max(dot(dh, normalize(vec2(31600.0, 34000.0) - uCamPos.xz)), 0.0), 18.0);
-  float kingman = pow(max(dot(dh, normalize(vec2(78600.0, 30600.0) - uCamPos.xz)), 0.0), 40.0);
+  float downtown = pow(max(dot(dh, normalize(vec2(4500.0, -9000.0) - uCamPos.xz)), 0.0), 10.0);
+  float hendo = pow(max(dot(dh, normalize(vec2(12000.0, 14000.0) - uCamPos.xz)), 0.0), 8.0);
+  float summerlin = pow(max(dot(dh, normalize(vec2(-16000.0, -4000.0) - uCamPos.xz)), 0.0), 8.0);
+  float nlv = pow(max(dot(dh, normalize(vec2(5000.0, -18000.0) - uCamPos.xz)), 0.0), 12.0);
   // Low cloud reflects the city lights back down as an orange ceiling glow.
   float glow = mix(hz, 0.35 + 0.65 * hz, deck) * (1.0 + deck * 1.5);
-  col += vec3(1.0, 0.6, 0.32) * (vegas * 0.0011 + hendo * 0.0005 + laughlin * 0.0006 + kingman * 0.0002 + 0.00002 + deck * 0.00005) * glow * uNight;
+  col += vec3(1.0, 0.6, 0.32) * (downtown * 0.0006 + hendo * 0.0005 + summerlin * 0.0004 + nlv * 0.0004 + 0.0004 + deck * 0.0002) * glow * uNight;
 
   vec4 cl = cloudLayer(dir) * clearSky;
   col = col * (1.0 - cl.a) + cl.rgb;
