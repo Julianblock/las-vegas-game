@@ -19,6 +19,7 @@ export const fremontStreet: Resort = {
     canopyColumns(k);
     buildPioneer(k);
     buildSlotzilla(k);
+    buildCables(k);
     buildContainerPark(k);
     buildMantis(k);
   },
