@@ -47,7 +47,7 @@ void main() {
     world.y -= 1.6 * tb * tb;
     float fade = clamp(1.0 - tb / LIFE, 0.0, 1.0);
     float sparkle = 0.75 + 0.25 * sin(uT * 37.0 + aDir.x * 91.0 + aDir.z * 53.0);
-    col = mix(hue(aShell.w), vec3(1.0), 0.25) * fade * fade * sparkle * 3.0;
+    col = mix(hue(aShell.w), vec3(1.0), 0.12) * fade * fade * sparkle * 4.0;
     size = 2.2 * (0.6 + 0.4 * fade);
     on *= step(0.001, fade);
   }
