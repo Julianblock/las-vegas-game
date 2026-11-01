@@ -87,6 +87,7 @@ export const RESORTS: Resort[] = [
   westgate,
   halloween,
   grandPrix,
+  newYear,
   allegiant,
   lvcc,
   virgin,
