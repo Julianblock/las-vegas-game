@@ -2,7 +2,7 @@ import { FX } from '../../../world/builders';
 import type { Kit } from '../../kit';
 import { pylon } from '../../parts/pylon';
 import type { Resort } from '../../resort';
-import { buildLion } from './lion';
+import { buildLion, LION } from './lion';
 import { mgmCrown, mgmLED } from './signs';
 
 /** The crown on the west wing's south face, and the marquee on the Strip walk north of the lion. */
@@ -21,4 +21,5 @@ export const mgmGrand: Resort = {
     buildLion(k);
     buildSigns(k);
   },
+  replaces: (m, x, z) => m.h < 25 && Math.hypot(x - LION.x, z - LION.z) < 30,
 };
