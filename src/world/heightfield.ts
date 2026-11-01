@@ -37,7 +37,7 @@ export class Heightfield {
     this.inner = world.heights.inner;
     this.mid = world.heights.mid;
     this.far = world.heights.far;
-    this.strip = world.heights.laughlin;
+    this.strip = world.heights.strip;
     this.lc = world.landcover;
     this.lcSize = world.meta.landcover.size;
     this.canopy = world.canopy;
