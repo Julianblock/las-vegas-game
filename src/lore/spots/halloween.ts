@@ -1,3 +1,4 @@
+import { today } from '../../events/today';
 import type { Spot } from '../spot';
 
 export const halloweenSpot: Spot = {
@@ -11,5 +12,5 @@ export const halloweenSpot: Spot = {
   r: 500,
   h: 120,
   night: true,
-  test: (s) => s.night > 0.5 && s.agl < 60 && Math.abs(s.pos.x - 1540) < 120 && Math.abs(s.pos.z - 400) < 1600 && new Date().getMonth() === 9 && new Date().getDate() >= 24,
+  test: (s) => s.night > 0.5 && s.agl < 60 && Math.abs(s.pos.x - 1540) < 120 && Math.abs(s.pos.z - 400) < 1600 && today.month === 10 && today.day >= 24,
 };
