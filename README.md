@@ -59,3 +59,8 @@ Pick a season in the menu, or let the real calendar decide:
   walls, grandstands, the start gantry and twenty-two cars under the lights.
 - **New Year's Eve**: the Strip closed to cars, crowds in the boulevard and
   fireworks off eight rooftops.
+
+## Coordinates
+
+World units are metres, x east and z south of a local origin:
+`x = (lon + 115.19) * 89915`, `z = (36.116 - lat) * 111320`.
