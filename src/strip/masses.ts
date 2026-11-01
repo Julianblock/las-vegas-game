@@ -52,6 +52,7 @@ export class Masses {
       this.kept.push(m);
       this.extrude(s, m, cx, cz);
     }
+    this.index();
     const mat = new THREE.ShaderMaterial({
       glslVersion: THREE.GLSL3,
       vertexShader: landmarkVertex,
@@ -72,9 +73,34 @@ export class Masses {
     shadow.addCaster(this.geo, this.shadowMat);
   }
 
+  /** Kept outlines bucketed into 50 m cells. */
+  private grid = new Map<number, OsmMass[]>();
+
+  private index() {
+    for (const m of this.kept) {
+      let x0 = Infinity, x1 = -Infinity, z0 = Infinity, z1 = -Infinity;
+      for (let i = 0; i < m.pts.length; i += 2) {
+        x0 = Math.min(x0, m.pts[i]);
+        x1 = Math.max(x1, m.pts[i]);
+        z0 = Math.min(z0, m.pts[i + 1]);
+        z1 = Math.max(z1, m.pts[i + 1]);
+      }
+      for (let i = Math.floor(x0 / 50); i <= Math.floor(x1 / 50); i++) {
+        for (let j = Math.floor(z0 / 50); j <= Math.floor(z1 / 50); j++) {
+          const k = i * 100003 + j;
+          const l = this.grid.get(k);
+          if (l) l.push(m);
+          else this.grid.set(k, [m]);
+        }
+      }
+    }
+  }
+
   /** True inside any kept outline. */
   covers(x: number, z: number) {
-    for (const m of this.kept) {
+    const cell = this.grid.get(Math.floor(x / 50) * 100003 + Math.floor(z / 50));
+    if (!cell) return false;
+    for (const m of cell) {
       const p = m.pts;
       let inside = false;
       for (let i = 0, j = p.length - 2; i < p.length; j = i, i += 2) {
