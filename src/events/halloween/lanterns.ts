@@ -30,9 +30,9 @@ export class JackOLanterns implements Show {
     let i = 0;
     for (const d of DOORS) {
       const r = rand(Math.round(d.z * 7 + 1000));
-      const x0 = stripX(d.z) + d.side * (STRIP_HALF + 5);
+      const x0 = stripX(d.z) + d.side * (STRIP_HALF - 2.5);
       for (let k = 0; k < d.n; k++) {
-        const x = x0 + (r() - 0.5) * 3, z = d.z + (r() - 0.5) * 6;
+        const x = x0 + (r() - 0.5) * 2, z = d.z + (r() - 0.5) * 6;
         const size = 0.5 + r() * 0.6;
         q.setFromAxisAngle(up, -d.side * Math.PI / 2 + (r() - 0.5) * 0.7);
         this.object.setMatrixAt(i++, m.compose(v.set(x, hf.height(x, z), z), q, sc.setScalar(size)));
