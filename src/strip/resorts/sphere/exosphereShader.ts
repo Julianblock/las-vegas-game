@@ -227,7 +227,12 @@ vec3 program(vec3 n) {
   if (m == 5) return helmet(n);
   if (m == 6) return mirrorball(n);
   if (m == 7) return flag(n);
-  return bursts(n);
+  if (m == 8) return bursts(n);
+  if (m == 9) return ornament(n);
+  if (m == 10) return heart(n);
+  if (m == 11) return clover(n);
+  if (m == 12) return snowglobe(n);
+  return smiley(n);
 }
 
 void main() {
