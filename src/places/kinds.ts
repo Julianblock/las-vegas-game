@@ -1,0 +1,21 @@
+/** What the HUD says about a business under the bird, by its mapped kind. */
+export const POI_KIND: Record<string, string> = {
+  casino: 'Casino',
+  restaurant: 'Restaurant',
+  fast_food: 'Fast food',
+  cafe: 'Caf\u00e9',
+  bar: 'Bar',
+  fuel: 'Gas station',
+  shop: 'Shop',
+  hotel: 'Hotel',
+  motel: 'Motel',
+  attraction: 'Attraction',
+  theatre: 'Showroom',
+  nightclub: 'Nightclub',
+  place_of_worship: 'Shrine',
+  post_office: 'Post office',
+  fire_station: 'Fire station',
+  school: 'School',
+  park: 'Park',
+  viewpoint: 'Viewpoint',
+};
