@@ -20,7 +20,7 @@ export interface Thermal {
 
 /**
  * Rising air: drifting thermal columns over sun-heated ground and ridge lift
- * where the wind meets the Highland Range and the Newberry Mountains.
+ * where the wind meets the Spring Mountains and Frenchman Mountain.
  */
 export class AirField {
   sun = 1; // 0..1 thermal-generating insolation
