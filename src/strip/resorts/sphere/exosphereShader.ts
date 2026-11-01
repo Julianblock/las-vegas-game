@@ -133,7 +133,7 @@ vec3 flag(vec3 n) {
   vec3 c = mix(vec3(0.78, 0.06, 0.12), vec3(0.96), stripe);
   float canton = step(p.x, -0.08) * step(0.0, y);
   vec2 sp = vec2(p.x * 9.0, y * 9.0);
-  float star = smoothstep(0.22, 0.12, length(fract(sp + vec2(0.5 * mod(floor(sp.y), 2.0), 0.0)) - 0.5));
+  float star = smoothstep(0.17, 0.09, length(fract(sp + vec2(0.5 * mod(floor(sp.y), 2.0), 0.0)) - 0.5));
   c = mix(c, mix(vec3(0.05, 0.12, 0.42), vec3(1.0), star), canton);
   return c * (0.82 + 0.18 * cos(p.x * 5.0 - uTime * 2.2));
 }
