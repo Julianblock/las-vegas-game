@@ -51,6 +51,7 @@ import { jerseyMikes } from './jerseyMikes';
 import { jimmyJohns } from './jimmyJohns';
 import { kfc } from './kfc';
 import { kingSolomon } from './kingSolomon';
+import { krispyKreme } from './krispyKreme';
 import { llHawaiian } from './llHawaiian';
 import { marieCallenders } from './marieCallenders';
 import { marigold } from './marigold';
@@ -159,6 +160,7 @@ export const BRANDS: Brand[] = [
   jimmyJohns,
   kfc,
   kingSolomon,
+  krispyKreme,
   llHawaiian,
   marieCallenders,
   marigold,
