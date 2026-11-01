@@ -101,6 +101,7 @@ import { pepesTacos } from './pepesTacos';
 import { peppermill } from './peppermill';
 import { pfChangs } from './pfChangs';
 import { phoDaLat } from './phoDaLat';
+import { pieros } from './pieros';
 import { pizzaHut } from './pizzaHut';
 import { popeyes } from './popeyes';
 import { portOfSubs } from './portOfSubs';
@@ -247,6 +248,7 @@ export const BRANDS: Brand[] = [
   peppermill,
   pfChangs,
   phoDaLat,
+  pieros,
   pizzaHut,
   popeyes,
   portOfSubs,
