@@ -207,8 +207,8 @@ export class Props {
     const addHome = (x: number, z: number, w: number, d: number, ang: number, s: number, i: number, town: boolean) => {
       const lit = s < (town ? 0.7 : 0.45) ? 1 : 0;
       const long = Math.max(w, d) / Math.max(1, Math.min(w, d));
-      if (long > 2.2 && Math.min(w, d) < 7.5) {
-        // Single-wide: always ~4.3 m wide, the long axis along x.
+      if (long > 2.8 && Math.min(w, d) < 5.6) {
+        // Single-wide: always ~4.3 m wide, the long axis along x. Vegas townhouse rows are wider.
         const a = w >= d ? ang : ang + Math.PI / 2;
         push(KIND.TRAILER, GEO.TRAILER, x, z, Math.max(w, d), 4.3 + s * 0.4, Math.min(Math.max(Math.min(w, d), 4.2), 4.9), a, TRAILER[i % TRAILER.length], METAL[(i * 3) % METAL.length], lit, s);
       } else if (s < 0.45) {
