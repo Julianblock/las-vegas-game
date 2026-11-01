@@ -24,4 +24,5 @@ export const COSTUMES: Costume[] = [
   { name: 'Devil', shirt: '#b8101a', pants: '#b8101a', hair: '#600408', face: '#d84030' },
   { name: 'Pirate', shirt: '#f0e8d8', pants: '#2a1a12', hair: '#1a0e08', face: null },
   { name: 'Mummy', shirt: '#e0d6bc', pants: '#e0d6bc', hair: '#e0d6bc', face: '#e0d6bc' },
+  { name: 'Black cat', shirt: '#0e0e10', pants: '#0e0e10', hair: '#0e0e10', face: null },
 ];
