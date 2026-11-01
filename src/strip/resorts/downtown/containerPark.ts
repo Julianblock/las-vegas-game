@@ -21,8 +21,12 @@ export function buildContainerPark(k: Kit) {
     else k.box(fr, x, y, z, WIDE, HIGH - 0.05, LONG, c, { rough: 0.6 });
   };
   const hw = PARK.w / 2, hd = PARK.d / 2;
-  for (let x = -hw + LONG / 2; x <= hw - LONG / 2 + 0.01; x += LONG + 0.6) {
-    for (let l = 0; l < 2; l++) box(x, hd - 2, l, true);
+  const step = LONG + 0.6;
+  const across = Math.floor((PARK.w + 0.6) / step);
+  for (let i = 0; i < across; i++) {
+    const x = (i - (across - 1) / 2) * step;
+    const gate = i === (across - 1) / 2;
+    for (let l = gate ? 1 : 0; l < 2; l++) box(x, hd - 2, l, true);
     for (let l = 0; l < 3; l++) box(x, -hd + 2, l, true);
     k.storefront(fr, x, hd - 3.3, LONG - 2, 2.2);
     k.storefront(fr, x, -hd + 3.3, LONG - 2, 2.2);
