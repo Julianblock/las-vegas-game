@@ -56,6 +56,7 @@ import { greensAndProteins } from './greensAndProteins';
 import { greenValley } from './greenValley';
 import { halalGuys } from './halalGuys';
 import { happyLemon } from './happyLemon';
+import { hofbrauhaus } from './hofbrauhaus';
 import { hooters } from './hooters';
 import { hyattPlace } from './hyattPlace';
 import { ihop } from './ihop';
@@ -198,6 +199,7 @@ export const BRANDS: Brand[] = [
   greenValley,
   halalGuys,
   happyLemon,
+  hofbrauhaus,
   hooters,
   hyattPlace,
   ihop,
