@@ -1,4 +1,5 @@
 import type { Resort } from '../resort';
+import { linq } from './linq';
 import { paris } from './paris';
 import { vanderpump } from './vanderpump';
 import { horseshoe } from './horseshoe';
@@ -14,4 +15,5 @@ export const RESORTS: Resort[] = [
   horseshoe,
   vanderpump,
   paris,
+  linq,
 ];
