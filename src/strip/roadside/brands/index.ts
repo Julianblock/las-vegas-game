@@ -22,6 +22,7 @@ import { cricket } from './cricket';
 import { cvs } from './cvs';
 import { dairyQueen } from './dairyQueen';
 import { daves } from './daves';
+import { dds } from './dds';
 import { delTaco } from './delTaco';
 import { dennys } from './dennys';
 import { dollarTree } from './dollarTree';
@@ -112,6 +113,7 @@ export const BRANDS: Brand[] = [
   cvs,
   dairyQueen,
   daves,
+  dds,
   delTaco,
   dennys,
   dollarTree,
