@@ -1,4 +1,5 @@
 import type { Resort } from '../resort';
+import { binions } from './downtown/binions';
 import { goldenNugget } from './downtown/goldenNugget';
 import { circa } from './downtown/circa';
 import { plaza } from './downtown/plaza';
@@ -105,6 +106,7 @@ export const RESORTS: Resort[] = [
   plaza,
   circa,
   goldenNugget,
+  binions,
   // Last: chain signs skip ground the landmarks above have reserved.
   roadside,
 ];
