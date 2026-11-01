@@ -228,7 +228,7 @@ export class Water {
   readonly detail = new THREE.Vector3(DETAIL.cx, DETAIL.cz, DETAIL.size);
   /** Atlas layout: main grid's share of the height, detail grid's share of width and height, detail res. */
   readonly atlas: THREE.Vector4;
-  /** Lake Mohave's pool elevation (m). */
+  /** Lake Mead's pool elevation (m). */
   readonly lakeLevel: number;
   private main: WaterGrid;
   private det: WaterGrid;
@@ -310,9 +310,9 @@ export class Water {
   }
 
   /**
-   * The lake fills the Colorado's canyon east of the Eldorado and Newberry
-   * Mountains. Its surface sits a little above the elevation model's flat
-   * reservoir; the bed drops away from shore toward the old river channel.
+   * Lake Mead's Las Vegas Bay reaches into the valley's east edge past Frenchman
+   * and Sunrise Mountains. Its surface sits a little above the elevation
+   * model's flat reservoir; the bed drops away toward the drowned wash.
    */
   private planLake(world: WorldData): number {
     const lc = world.landcover;
@@ -323,7 +323,7 @@ export class Water {
       for (let i = 0; i < r; i++) {
         if (lc.data[(j * r + i) * 4] !== LC.WATER) continue;
         const x = ((i + 0.5) / r - 0.5) * this.size;
-        // Lake Mohave lies 18-25 km east of town; other water pixels are stock tanks.
+        // Lake Mead lies 20+ km east of the Strip; other water pixels are park and golf ponds.
         if (x < 15000) continue;
         water[j * r + i] = 1;
         if (hs.length < 20000) hs.push(this.hf.height(x, ((j + 0.5) / r - 0.5) * this.size));
@@ -335,7 +335,7 @@ export class Water {
     const dist = shoreDistance(water, r);
 
     const g = this.main;
-    const id = this.nameId('Lake Mohave', 'lake');
+    const id = this.nameId('Lake Mead', 'lake');
     const scale = RES / r;
     for (let j = 0; j < r; j++) {
       for (let i = 0; i < r; i++) {
