@@ -13,5 +13,7 @@ export const grandPrix: Resort = {
   id: 'grand-prix',
   name: 'Las Vegas Grand Prix',
   style: plazaStyle,
+  signs: [gpWord, gpLED],
+  build: buildPlaza,
   shows: (hf) => [new TrackSurface(hf), new CircuitWalls(hf), new StartGantry(hf), new Grandstands(hf), new Race(hf)],
 };
