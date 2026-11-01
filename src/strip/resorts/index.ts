@@ -17,6 +17,7 @@ import { vdara } from './vdara';
 import { virgin } from './virgin';
 import { lvcc } from './lvcc';
 import { allegiant } from './allegiant';
+import { airport } from '../../air';
 import { grandPrix } from '../../events/grandprix';
 import { halloween } from '../../events/halloween';
 import { newYear } from '../../events/newyear';
