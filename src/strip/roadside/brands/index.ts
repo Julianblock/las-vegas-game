@@ -13,6 +13,7 @@ import { chickFilA } from './chickFilA';
 import { chilis } from './chilis';
 import { chipotle } from './chipotle';
 import { circleK } from './circleK';
+import { coffeeBean } from './coffeeBean';
 import { cricket } from './cricket';
 import { dairyQueen } from './dairyQueen';
 import { delTaco } from './delTaco';
@@ -73,6 +74,7 @@ export const BRANDS: Brand[] = [
   chilis,
   chipotle,
   circleK,
+  coffeeBean,
   cricket,
   dairyQueen,
   delTaco,
