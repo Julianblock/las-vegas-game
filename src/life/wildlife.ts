@@ -209,7 +209,7 @@ const natural = (lc: number) =>
 const SPECIES: SpeciesDef[] = [
   {
     id: 'bighorn',
-    // Desert bighorn of the Eldorado and Newberry ranges: ewes, lambs and the odd heavy-horned ram.
+    // Desert bighorn of Frenchman Mountain and the Spring Mountains: ewes, lambs and the odd heavy-horned ram.
     geo: () =>
       quadruped({ len: 1.25, hipY: 0.66, bodyR: [0.19, 0.25], legR: 0.035, neckLen: 0.2, neckUp: 0.3, headLen: 0.28, headR: 0.09, tailLen: 0.1, tailR: 0.035, tailDown: 0.06, coat: '#ffffff', belly: '#efe6d8', legs: '#e8e0d2', face: '#ffffff', tail: '#5a4a3a', ears: 0.07, rump: '#f2ece2', horns: 0.055, hornColor: '#a8987a' }),
     cap: 40,
