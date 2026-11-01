@@ -23,17 +23,17 @@ export const REGIONS = {
   inner: { size: 22000, heightRes: 2048, heightZoom: 14, imageRes: 4096, imageZoom: 15 },
   mid: { size: 92000, heightRes: 2048, heightZoom: 12, imageRes: 4096, imageZoom: 13 },
   far: { size: 400000, heightRes: 1024, heightZoom: 9, imageRes: 2048, imageZoom: 10 },
-  // The Laughlin casino strip and Bullhead City, down on the Colorado below Davis Dam.
-  laughlin: { size: 13000, cx: 30000, cz: 34700, heightRes: 2048, heightZoom: 14, imageRes: 4096, imageZoom: 16 },
+  // The resort corridor: Decatur to Paradise, the Strat down to the Welcome sign.
+  strip: { size: 9000, cx: 700, cz: -300, heightRes: 2048, heightZoom: 15, imageRes: 4096, imageZoom: 17 },
 };
 
 // Heights are packed into 16 bits across the R and G channels of an 8-bit PNG.
-// Searchlight sits at ~1,080 m; Lake Mohave is ~195 m and Death Valley dips to -86 m.
+// The Strip sits at ~620 m; Mount Charleston tops 3,600 m and Death Valley dips to -86 m.
 export const HEIGHT_ENCODING = {
   inner: { offset: 0, scale: 24 },
-  mid: { offset: 0, scale: 24 },
+  mid: { offset: 100, scale: 16 },
   far: { offset: 100, scale: 16 },
-  laughlin: { offset: 0, scale: 24 },
+  strip: { offset: 0, scale: 24 },
 };
 
 function forEachPixel(res, size, fn, cx = 0, cz = 0) {
