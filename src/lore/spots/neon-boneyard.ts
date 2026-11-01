@@ -11,5 +11,5 @@ export const neonBoneyardSpot: Spot = {
   hint: 'Keep north up Las Vegas Boulevard past downtown.',
   r: 160,
   h: 60,
-  test: near({ x: 4927, z: -6802 }, 100, 60),
+  test: near({ x: 4925, z: -6758 }, 100, 60),
 };
