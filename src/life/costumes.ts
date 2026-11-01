@@ -13,4 +13,5 @@ export interface Costume {
 
 export const COSTUMES: Costume[] = [
   { name: 'Elvis', shirt: '#f4f0e6', pants: '#f4f0e6', hair: '#0a0a0c', face: null },
+  { name: 'Showgirl', shirt: '#e8508a', pants: '#f2c8d8', hair: '#f0d070', face: null },
 ];
