@@ -16,4 +16,5 @@ export const DOORS: Door[] = [
   { name: 'Horseshoe', z: 240, side: 1, n: 6 },
   { name: 'Paris', z: 450, side: 1, n: 7 },
   { name: 'Flamingo', z: -90, side: 1, n: 7 },
+  { name: 'The LINQ', z: -400, side: 1, n: 8 },
 ];
