@@ -24,7 +24,7 @@ export interface GameSettings {
 const KEY = 'las-vegas-settings-v1';
 
 export const DEFAULT_SETTINGS: GameSettings = {
-  bird: 'redtail',
+  bird: 'pigeon',
   palette: 0,
   custom: {},
   season: 'spring',
