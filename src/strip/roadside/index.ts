@@ -38,9 +38,9 @@ export const roadside: Resort = {
     const taken: [number, number][] = [];
     for (const p of k.osm.pois) {
       if (p.x < BOUNDS.x0 || p.x > BOUNDS.x1 || p.z < BOUNDS.z0 || p.z > BOUNDS.z1) continue;
-      if (!p.fp && p.kind !== 'fuel') continue;
       const b = brandOf(p.brand, p.name);
       if (!b || k.occupies(p.x, p.z)) continue;
+      if (!p.fp && p.kind !== 'fuel' && !b.free) continue;
       const hit = roads.nearest(p.x, p.z, 90);
       if (!hit || hit.d < hit.half + 3) continue;
       const ox = (p.x - hit.x) / hit.d;
