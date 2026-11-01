@@ -1,4 +1,5 @@
 import type { Resort } from '../../strip/resort';
+import { Floodlights } from './floodlights';
 import { StartGantry } from './gantry';
 import { buildPlaza } from './plaza';
 import { gpLED, gpWord } from './signs';
