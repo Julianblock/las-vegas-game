@@ -796,6 +796,7 @@ async function boot() {
     traffic.lights.resize(cam, window.innerHeight * engine.pixelRatio);
     power.resize(cam, window.innerHeight * engine.pixelRatio);
     fences.update(cam, heightfield.height(cam.position.x, cam.position.z), window.innerHeight * engine.pixelRatio);
+    traffic.closed = onTrack(env.month, env.day, env.hours) ? onCircuit : null;
     traffic.update(dt, cam.position, G.uNight.value, Math.max(G.uNight.value, murky() ? 0.35 : 0), 1 - 0.2 * G.uWet.value - 0.35 * G.uSnowCover.value);
     const sw = G.uSeason.value;
     dust.update(dt, car.physics, driving && mode === 'fly', Math.min(1, sw.z + sw.w * 0.8 + sw.y * 0.2), cam, window.innerHeight * engine.pixelRatio);
