@@ -11,5 +11,5 @@ export const doubleDownSpot: Spot = {
   hint: 'Drop down on Paradise Road near Harmon.',
   r: 120,
   h: 50,
-  test: near({ x: 3330, z: 720 }, 70, 50),
+  test: near({ x: 3572, z: 1161 }, 70, 50),
 };
