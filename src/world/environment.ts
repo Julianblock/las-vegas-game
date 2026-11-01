@@ -33,10 +33,10 @@ export const MOONS: Record<MoonPref, { label: string }> = {
 };
 
 export const SEASONS: Record<Season, { label: string; month: number; day: number; blurb: string }> = {
-  winter: { label: 'Winter', month: 1, day: 14, blurb: 'Frosty mornings, snow on Charleston Peak, bald eagles over Lake Mohave' },
+  winter: { label: 'Winter', month: 1, day: 14, blurb: 'Frosty mornings, snow on Charleston Peak, the Strip lit up for the holidays' },
   bloom: { label: 'Joshua Bloom', month: 3, day: 18, blurb: 'Joshua trees crowned in cream, marigolds and globemallow on the bajadas' },
   spring: { label: 'Late Spring', month: 4, day: 28, blurb: 'Creosote in yellow flower, cactus blooms, migrants moving through' },
-  summer: { label: 'Monsoon Summer', month: 8, day: 4, blurb: '110°F, heat shimmer on US-95, thunderheads over the Newberrys' },
+  summer: { label: 'Monsoon Summer', month: 8, day: 4, blurb: '110°F, heat shimmer on the Strip, thunderheads over the Spring Mountains' },
   fall: { label: 'Fall', month: 10, day: 18, blurb: 'Long golden light, tarantulas on the road, vultures kettling south' },
 };
 
@@ -90,7 +90,7 @@ export interface Strike {
   dist: number;
 }
 
-// Month keyframes (Jan..Dec) for the desert around Searchlight.
+// Month keyframes (Jan..Dec) for the Las Vegas Valley.
 const K = {
   green: [0.25, 0.4, 0.6, 0.5, 0.25, 0.08, 0, 0.05, 0.1, 0.05, 0.08, 0.15],
   joshuaBloom: [0, 0.3, 0.95, 0.7, 0.1, 0, 0, 0, 0, 0, 0, 0],
@@ -101,10 +101,10 @@ const K = {
   creosoteBloom: [0, 0, 0.4, 0.9, 0.3, 0, 0, 0.2, 0.3, 0, 0, 0],
   dust: [0.2, 0.3, 0.5, 0.6, 0.5, 0.4, 0.5, 0.4, 0.3, 0.2, 0.2, 0.2],
   snowLine: [1700, 1700, 2000, 2500, 3200, 4000, 4400, 4400, 4200, 3200, 2400, 1900],
-  // Wintering bald eagles, ravens and waterfowl on the lake.
+  // Wintering ravens and waterfowl on the resort lakes and golf ponds.
   geese: [1, 0.9, 0.5, 0.1, 0, 0, 0, 0, 0, 0.3, 0.8, 1],
-  // Mean afternoon air temperature (°C) in Searchlight at 1,080 m.
-  tempC: [13, 15, 19, 23, 29, 35, 38, 37, 33, 26, 18, 13],
+  // Mean afternoon air temperature (°C) on the Strip at 620 m.
+  tempC: [14, 17, 21, 26, 32, 38, 41, 40, 35, 27, 19, 14],
 };
 
 function monthly(keys: number[], monthF: number): number {
