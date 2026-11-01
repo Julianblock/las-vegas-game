@@ -25,6 +25,7 @@ import { marigold } from './marigold';
 import { mcdonalds } from './mcdonalds';
 import { metroPizza } from './metroPizza';
 import { oodleNoodle } from './oodleNoodle';
+import { outback } from './outback';
 import { pandaExpress } from './pandaExpress';
 import { parkwayTavern } from './parkwayTavern';
 import { phoDaLat } from './phoDaLat';
@@ -76,6 +77,7 @@ export const BRANDS: Brand[] = [
   mcdonalds,
   metroPizza,
   oodleNoodle,
+  outback,
   pandaExpress,
   parkwayTavern,
   phoDaLat,
