@@ -1,5 +1,5 @@
-// Birds that really work the skies over Searchlight, the Joshua tree flats of
-// Avi Kwa Ame and the shores of Lake Mohave. Dimensions from Cornell / Sibley.
+// Birds that really work the skies over the Las Vegas Strip, the desert lots
+// between the resorts and the ponds of the valley. Dimensions from Cornell / Sibley.
 
 export type TailShape = 'fan' | 'square' | 'wedge' | 'notched' | 'short';
 export type BeakType = 'hook' | 'falcon' | 'goose' | 'spear' | 'pelican' | 'owl' | 'vulture' | 'corvid' | 'seed' | 'needle' | 'gape';
