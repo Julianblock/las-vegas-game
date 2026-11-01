@@ -1,6 +1,7 @@
 import type { Resort } from '../../resort';
 import { FremontCanopy } from './canopy';
 import { canopyColumns } from './columns';
+import { buildContainerPark } from './containerPark';
 import { buildMantis } from './mantis';
 import { MantisFire } from './mantisFire';
 import { buildPioneer } from './pioneer';
