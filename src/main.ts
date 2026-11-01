@@ -51,7 +51,8 @@ import { Water } from './world/water';
 import { WaterSurface } from './render/waterSurface';
 import { Fish } from './life/fish';
 import { FISH } from './life/fishSpecies';
-import { Ghosts } from './life/ghosts';
+import { HAUNTS } from './haunts';
+import { Hauntings } from './life/hauntings';
 import { People } from './life/people';
 import { Discoveries } from './ui/discoveries';
 import { Lore, type Egg } from './world/lore';
@@ -183,9 +184,8 @@ async function boot() {
   const fish = new Fish(water, heightfield);
   fish.setMonth(env.month);
   engine.scene.add(fish.mesh);
-  const graveyard = cemeteryPlans.find((p) => p.name === 'Searchlight Cemetery');
-  const ghosts = graveyard ? new Ghosts(graveyard, heightfield) : null;
-  if (ghosts) engine.scene.add(ghosts.group);
+  const ghosts = new Hauntings(HAUNTS, heightfield);
+  engine.scene.add(ghosts.group);
   // The Highland Range summit, standing in for the Miocene vent.
   const vent = new THREE.Vector3(-12760, heightfield.height(-12760, -15040) - 15, -15040);
   const volcano = new VolcanoVision(vent, { x: -11500, z: -15500, r: 4600 });
@@ -229,30 +229,22 @@ async function boot() {
   hud.units = settings.units;
   const menu = new Menu(settings);
   const journal = new Discoveries();
-  const lore = new Lore(heightfield, journal, volcano, graveyard);
-  journal.total = lore.ids.length + FISH.length + (ghosts ? 1 : 0);
+  const lore = new Lore(heightfield, journal);
+  journal.total = lore.ids.length + FISH.length + HAUNTS.length;
   fish.onSpot = (s) => journal.discover({ id: 'fish-' + s.id, kind: 'fish', kicker: 'Fish spotted', title: s.name, text: s.note });
-  const ghostEgg = {
-    id: 'ghosts',
-    kind: 'secret' as const,
-    kicker: 'Searchlight Cemetery · after dark',
-    title: 'The night shift',
-    text: 'Pale miners drift between the rock-ringed graves, carbide lamps swinging, and fade the moment you come close. Some say they are still looking for the Quartette vein.',
-  };
-  if (ghosts) ghosts.onSight = () => journal.discover(ghostEgg);
+  ghosts.onSight = ({ ground: _g, count: _c, hint: _h, r: _r, h: _hh, ...d }) => journal.discover(d);
   const atlas = lore.atlas();
-  const lakeEgg = atlas.find((e) => e.id === 'lake-mohave')!;
   const eggs: Egg[] = [
     ...atlas,
-    ...(graveyard ? [{ ...ghostEgg, x: graveyard.cx, z: graveyard.cz, hint: 'Come back to the cemetery after dark and fly low among the graves.', r: 70, h: 18, night: true }] : []),
+    ...HAUNTS.map(({ ground, count: _c, ...h }) => ({ ...h, x: ground.cx, z: ground.cz, night: true })),
     {
       id: 'fish',
       kind: 'fish',
-      kicker: 'Lake Mohave · fish',
+      kicker: 'Lakes and lagoons · fish',
       title: `${FISH.length} species to spot`,
-      text: 'Striped bass, rainbow trout, bluegill, carp and the rare native razorback sucker and bonytail all live in the lake. Each one you see goes in your journal.',
-      x: lakeEgg.x - 250,
-      z: lakeEgg.z - 2900,
+      text: 'Koi, carp and bass cruise the resort lakes and lagoons, from Bellagio to the Flamingo ponds. Each one you see goes in your journal.',
+      x: 1430,
+      z: 360,
       hint: 'Glide a few metres above the water, or dive right in, and the fish come into view.',
       r: 80,
       h: 14,
@@ -516,7 +508,6 @@ async function boot() {
     }
     // Park the bird under the camera so shadows and detail follow the tour.
     player.flight.spawn(e.x, heightfield.height(e.x, e.z) + e.h * 0.5, e.z, 0);
-    if (e.id === 'highland-summit' && !volcano.active) volcano.start();
   };
   tour.onExit = () => {
     if (tourNight) env.setPreset(settings.time);
@@ -820,7 +811,7 @@ async function boot() {
     flocks.setMonth(env.month);
     fish.setMonth(env.month);
     fish.update(dt, cam, camWater.mask > 0.3 && cam.position.y < camWater.level + 6, actor);
-    ghosts?.update(dt, cam, G.uNight.value);
+    ghosts.update(dt, cam, G.uNight.value);
     people.update(dt, cam.position, G.uNight.value);
     volcano.update(dt, cam, window.innerHeight * engine.pixelRatio);
     if (mode === 'fly' && !free && !tour.active) {
@@ -836,7 +827,7 @@ async function boot() {
         snowCover: G.uSnowCover.value,
       });
     }
-    sound.setFx(underwater ? 1 : 0, ghosts?.presence ?? 0, volcano.level);
+    sound.setFx(underwater ? 1 : 0, ghosts.presence, volcano.level);
     flocks.update(dt, cam.position, { x: air.windX, z: air.windZ });
     syncCarCasters();
     G.uHeadOn.value = car.object.visible ? car.headOn : 0;
