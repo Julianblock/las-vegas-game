@@ -186,6 +186,7 @@ export class Flocks {
       if (m >= 3 && m <= 10) out.push({ kind: 'swirl', species: SP.SWIFT, count: summer ? 2 : 1 });
       out.push({ kind: 'vee', species: SP.DOVE, count: 2 });
       if (winter || m === 3 || m === 10) out.push({ kind: 'swirl', species: SP.BLACKBIRD, count: 1 });
+      out.push({ kind: 'swirl', species: SP.PIGEON, count: 4 });
     }
     return out;
   }
