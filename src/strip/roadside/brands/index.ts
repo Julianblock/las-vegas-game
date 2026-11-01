@@ -68,6 +68,7 @@ import { upsStore } from './upsStore';
 import { villagePub } from './villagePub';
 import { wahoos } from './wahoos';
 import { walgreens } from './walgreens';
+import { walmart } from './walmart';
 import { wendys } from './wendys';
 
 /** Every chain with a roadside identity, alphabetical. */
@@ -141,5 +142,6 @@ export const BRANDS: Brand[] = [
   villagePub,
   wahoos,
   walgreens,
+  walmart,
   wendys,
 ];
