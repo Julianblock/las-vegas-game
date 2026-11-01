@@ -26,7 +26,7 @@ export function circuitBuilt(month: number, day: number) {
   return (month === 10 && day >= 20) || (month === 11 && day <= 26);
 }
 
-/** Cars on track: practice and qualifying Thursday and Friday nights, the race on Saturday. */
+/** Cars on track from 6 pm: practice and qualifying Thursday and Friday, the race on Saturday. */
 export function onTrack(month: number, day: number, hours: number) {
   if (month !== RACE.month) return false;
   const night = day - RACE.day;
