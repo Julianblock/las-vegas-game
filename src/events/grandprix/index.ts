@@ -1,5 +1,7 @@
 import type { Resort } from '../../strip/resort';
 import { StartGantry } from './gantry';
+import { buildPlaza } from './plaza';
+import { gpLED, gpWord } from './signs';
 import { Grandstands } from './grandstands';
 import { Race } from './race';
 import { plazaStyle } from './style';
