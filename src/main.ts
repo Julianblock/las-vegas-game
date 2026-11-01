@@ -139,7 +139,7 @@ async function boot() {
     G.uStripA.value[i].set(g[0], g[1], g[2], g[3]);
     G.uStripB.value[i].set(g[4], g[5], g[6], g[7]);
   }
-  const props = new Props(world.osm, heightfield, power.pylons, (x, z) => strip.occupies(x, z), roadIndex, strip.lots);
+  const props = new Props(world.osm, heightfield, power.pylons, (x, z) => strip.occupies(x, z) || onCircuit(x, z), roadIndex, strip.lots);
   const lights = new LightPoints([...props.lights, ...strip.lights]);
   engine.scene.add(props.group, strip.group, lights.points, power.mesh);
   const cemeteries = new Cemeteries(cemeteryPlans, heightfield);
