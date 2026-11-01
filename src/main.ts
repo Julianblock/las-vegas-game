@@ -20,7 +20,6 @@ import { SPECIES, speciesById, type Palette } from './birds/species';
 import { Trees } from './veg/trees';
 import { ShadowMap } from './render/shadows';
 import { Props } from './world/props';
-import { Landmarks } from './world/landmarks';
 import { Strip } from './strip/strip';
 import { PowerLines } from './world/powerLines';
 import { Grass } from './veg/grass';
@@ -131,16 +130,15 @@ async function boot() {
 
   loading.progress('Lighting up Terrible\'s and the McDonald\'s sign', 0.97);
   const power = new PowerLines(world.osm, heightfield);
-  const landmarks = new Landmarks(world.osm, heightfield);
   const strip = new Strip(world.osm, heightfield, (x, z) => water.sample(x, z).level);
   for (let i = 0; i * 8 < Math.min(strip.glows.length, 128); i++) {
     const g = strip.glows.slice(i * 8, i * 8 + 8);
     G.uStripA.value[i].set(g[0], g[1], g[2], g[3]);
     G.uStripB.value[i].set(g[4], g[5], g[6], g[7]);
   }
-  const props = new Props(world.osm, heightfield, power.pylons, (x, z) => landmarks.occupies(x, z) || strip.occupies(x, z), roadIndex, [...strip.lots, ...landmarks.lots]);
-  const lights = new LightPoints([...props.lights, ...landmarks.lights, ...strip.lights]);
-  engine.scene.add(props.group, landmarks.group, strip.group, lights.points, power.mesh);
+  const props = new Props(world.osm, heightfield, power.pylons, (x, z) => strip.occupies(x, z), roadIndex, strip.lots);
+  const lights = new LightPoints([...props.lights, ...strip.lights]);
+  engine.scene.add(props.group, strip.group, lights.points, power.mesh);
   const cemeteries = new Cemeteries(cemeteryPlans, heightfield);
   engine.scene.add(cemeteries.group);
   const roads = new Roads(world.osm, heightfield);
@@ -172,7 +170,6 @@ async function boot() {
   const people = new People(
     [
       { ...strip.crowd, walks: [...strip.crowd.walks, ...sidewalks] },
-      { walks: [], spots: landmarks.spots, day: 0.7, night: 0.5, cx: 40, cz: 200, radius: 700 },
     ],
     heightfield,
   );
@@ -211,7 +208,6 @@ async function boot() {
   const shadow = new ShadowMap();
   trees.addShadowCasters(shadow);
   props.addShadowCasters(shadow);
-  landmarks.addShadowCasters(shadow);
   strip.addShadowCasters(shadow);
   cemeteries.addShadowCasters(shadow);
   wildlife.addShadowCasters(shadow);
@@ -850,7 +846,7 @@ async function boot() {
   frame();
   loading.done();
   Object.assign(window, {
-    touch, engine, env, terrain, water, waterSurface, fish, ghosts, people, volcano, journal, tour, showMap, eggs, lore, heightfield, G, player, chase, air, car, driveCam, roadIndex, fences, dust, drive, shadow, precip, cemeteries, cemeteryPlans, controls, menu, hud, places, trees, props, landmarks, strip, lights, traffic, wildlife, flocks, sound, power, grass, roads, motes,
+    touch, engine, env, terrain, water, waterSurface, fish, ghosts, people, volcano, journal, tour, showMap, eggs, lore, heightfield, G, player, chase, air, car, driveCam, roadIndex, fences, dust, drive, shadow, precip, cemeteries, cemeteryPlans, controls, menu, hud, places, trees, props, strip, lights, traffic, wildlife, flocks, sound, power, grass, roads, motes,
     inspectView: (a: number, h: number) => ((inspectAngle = a), (inspectHeight = h)),
     /** Renders a frame and returns it as a JPEG data URL (debug capture). */
     snap: (w = 1100, x0 = 0, y0 = 0, cw = 1, ch = 1) => {
