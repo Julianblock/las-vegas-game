@@ -193,6 +193,14 @@ vec3 clover(vec3 n) {
   return mix(c, vec3(0.3, 0.95, 0.35), max(leaf, stem) * step(0.0, p.z));
 }
 
+vec3 snowglobe(vec3 n) {
+  vec3 c = mix(vec3(0.05, 0.12, 0.35), vec3(0.4, 0.6, 0.9), 0.5 + 0.5 * n.y);
+  c = mix(c, vec3(0.95), step(n.y, -0.45));
+  vec2 g = vec2(atan(n.z, n.x) * 40.0, n.y * 40.0 + uTime * 1.5);
+  float flake = step(0.93, hash3(vec3(floor(g), 3.0))) * smoothstep(0.35, 0.1, length(fract(g) - 0.5));
+  return c + vec3(flake);
+}
+
 vec3 moon(vec3 n) {
   float m = vnoise(n * 4.0) * 0.6 + vnoise(n * 13.0) * 0.4;
   return vec3(0.82, 0.82, 0.78) * (0.65 + 0.35 * smoothstep(0.35, 0.7, m));
