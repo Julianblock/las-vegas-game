@@ -1,5 +1,6 @@
 import type { Resort } from '../../../resort';
 import { casinoBlock } from '../../../parts/casinoBlock';
+import { clearOfMall } from '../fremont';
 import { fremontHotelName } from './signs';
 
 /** The Fremont (1956), downtown’s first high-rise, its neon wall a Fremont Street landmark. */
