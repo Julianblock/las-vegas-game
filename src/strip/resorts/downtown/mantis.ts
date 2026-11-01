@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import type { Kit } from '../../kit';
 
 /** Where the mantis stands, outside Container Park on Fremont East, facing the street. */
-export const MANTIS = { x: 4652, z: -5780, deg: 28 };
+export const MANTIS = { x: 4671, z: -5771, deg: 28 };
 
 /** Antenna tips in the mantis's local frame, where the flames come out. */
 export const ANTENNAE: [number, number, number][] = [
