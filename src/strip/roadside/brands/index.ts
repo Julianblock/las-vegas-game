@@ -23,6 +23,7 @@ import { kingSolomon } from './kingSolomon';
 import { marieCallenders } from './marieCallenders';
 import { marigold } from './marigold';
 import { mcdonalds } from './mcdonalds';
+import { metroPizza } from './metroPizza';
 import { oodleNoodle } from './oodleNoodle';
 import { pandaExpress } from './pandaExpress';
 import { parkwayTavern } from './parkwayTavern';
@@ -73,6 +74,7 @@ export const BRANDS: Brand[] = [
   marieCallenders,
   marigold,
   mcdonalds,
+  metroPizza,
   oodleNoodle,
   pandaExpress,
   parkwayTavern,
