@@ -11,7 +11,7 @@ import {
   sunRaDec,
 } from '../sky/astro';
 
-export type Season = 'winter' | 'bloom' | 'spring' | 'summer' | 'fall' | 'halloween' | 'grandprix' | 'newyear' | 'july4';
+export type Season = 'winter' | 'bloom' | 'spring' | 'summer' | 'july4' | 'fall' | 'halloween' | 'grandprix' | 'newyear';
 export type TimePreset =
   | 'night'
   | 'predawn'
@@ -37,10 +37,10 @@ export const SEASONS: Record<Season, { label: string; month: number; day: number
   bloom: { label: 'Joshua Bloom', month: 3, day: 18, blurb: 'Joshua trees crowned in cream, marigolds and globemallow on the bajadas' },
   spring: { label: 'Late Spring', month: 4, day: 28, blurb: 'Creosote in yellow flower, cactus blooms, migrants moving through' },
   summer: { label: 'Monsoon Summer', month: 8, day: 4, blurb: '110°F, heat shimmer on the Strip, thunderheads over the Spring Mountains' },
+  july4: { label: 'Fourth of July', month: 7, day: 4, blurb: 'Fireworks over Caesars, the Strat, the Rio and downtown on a 105\u00b0F night' },
   fall: { label: 'Fall', month: 10, day: 18, blurb: 'Long golden light, tarantulas on the road, vultures kettling south' },
   halloween: { label: 'Halloween', month: 10, day: 31, blurb: 'Costumes on the Strip, jack-o\u2019-lanterns at every door, the Sphere grinning orange' },
   grandprix: { label: 'Grand Prix', month: 11, day: 21, blurb: 'Formula 1 under the lights: walls down the Strip, cars past the Bellagio at 340 km/h' },
-  july4: { label: 'Fourth of July', month: 7, day: 4, blurb: 'Fireworks over Caesars, the Strat, the Rio and downtown on a 105\u00b0F night' },
   newyear: { label: "New Year's Eve", month: 12, day: 31, blurb: 'The Strip shut to cars, crowds in the boulevard, fireworks off eight rooftops' },
 };
 
