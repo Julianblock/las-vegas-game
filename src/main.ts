@@ -195,8 +195,8 @@ async function boot() {
   const species = speciesById(settings.bird) ?? SPECIES[0];
   const player = new Player(species, paletteFor(settings), heightfield, air);
   player.flight.water = (x, z) => water.sample(x, z);
-  // Default spawn: north of town over US-95, heading south toward Terrible's.
-  const sp = (params.get('spawn') || '-150,1150,-1600,0').split(',').map(Number);
+  // Default spawn: over Flamingo Road west of I-15, heading east toward Caesars and the Bellagio.
+  const sp = (params.get('spawn') || '-300,790,60,1.5708').split(',').map(Number);
   player.flight.spawn(sp[0], sp[1], sp[2], sp[3]);
   engine.scene.add(player.object);
   const car = new Vehicle(heightfield, roadIndex, heightfield.mid.size);
