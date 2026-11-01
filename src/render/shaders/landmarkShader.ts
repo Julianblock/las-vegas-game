@@ -31,9 +31,19 @@ out vec3 vColor;
 flat out vec4 vMat;
 
 void main() {
+#if defined(USE_INSTANCING)
+  // Animated rides (wheel cabins, coaster trains) move as instances.
+  mat4 place = modelMatrix * instanceMatrix;
+  vec3 world = (place * vec4(position, 1.0)).xyz;
+  vNormal = normalize(mat3(place) * normal);
+#elif defined(MOVING)
+  vec3 world = (modelMatrix * vec4(position, 1.0)).xyz;
+  vNormal = normalize(mat3(modelMatrix) * normal);
+#else
   vec3 world = position;
-  vWorld = world;
   vNormal = normal;
+#endif
+  vWorld = world;
   vColor = color;
   vMat = aMat;
 #ifdef USE_MAP
