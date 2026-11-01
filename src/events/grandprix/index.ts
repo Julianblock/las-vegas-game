@@ -1,4 +1,5 @@
 import type { Resort } from '../../strip/resort';
+import { StartGantry } from './gantry';
 import { Race } from './race';
 import { plazaStyle } from './style';
 import { TrackSurface } from './surface';
