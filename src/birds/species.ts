@@ -298,7 +298,7 @@ export const SPECIES: Species[] = [
     id: 'hornedowl',
     name: 'Great Horned Owl',
     latin: 'Bubo virginianus',
-    blurb: 'Hoots from the old headframes of the Searchlight mines at dusk and hunts the washes under the stars and the glow of Vegas.',
+    blurb: 'Hoots from the palm crowns along the Strip at dusk and hunts the golf courses under the glow of the casinos.',
     facts: [
       'The "horns" are just feather tufts; its hearing comes from offset ears hidden under the disk.',
       'Strong enough to take skunks, rabbits and even other owls.',
