@@ -1,6 +1,5 @@
 import { FX } from '../../../world/builders';
 import type { Kit } from '../../kit';
-import { elvis } from '../../parts/elvis';
 import { faceFrame } from '../../parts/face';
 import { palmRow } from '../../parts/palm';
 import { pylon } from '../../parts/pylon';
