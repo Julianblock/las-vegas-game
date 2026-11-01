@@ -19,6 +19,7 @@ import { delTaco } from './delTaco';
 import { dennys } from './dennys';
 import { dominos } from './dominos';
 import { dunkin } from './dunkin';
+import { einstein } from './einstein';
 import { greenValley } from './greenValley';
 import { inNOut } from './inNOut';
 import { jackInTheBox } from './jackInTheBox';
@@ -78,6 +79,7 @@ export const BRANDS: Brand[] = [
   dennys,
   dominos,
   dunkin,
+  einstein,
   greenValley,
   inNOut,
   jackInTheBox,
