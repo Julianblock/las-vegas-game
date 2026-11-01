@@ -17,6 +17,7 @@ export const fremontStreet: Resort = {
     canopyColumns(k);
     buildPioneer(k);
     buildSlotzilla(k);
+    buildContainerPark(k);
     buildMantis(k);
   },
   shows: (hf) => [new FremontCanopy(hf), new MantisFire(hf)],
