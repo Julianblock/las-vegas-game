@@ -24,6 +24,7 @@ import { allegiant } from './allegiant';
 import { airport } from '../../air';
 import { grandPrix } from '../../events/grandprix';
 import { halloween } from '../../events/halloween';
+import { fourthOfJuly } from '../../events/july4';
 import { newYear } from '../../events/newyear';
 import { westgate } from './westgate';
 import { planetHollywood } from './planetHollywood';
@@ -108,6 +109,7 @@ export const RESORTS: Resort[] = [
   halloween,
   grandPrix,
   newYear,
+  fourthOfJuly,
   airport,
   allegiant,
   lvcc,
