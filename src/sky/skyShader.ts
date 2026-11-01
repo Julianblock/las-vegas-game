@@ -169,7 +169,8 @@ void main() {
   }
 
   vec3 eq = transpose(uCelestial) * dir;
-  vec3 night = (starField(eq) + milkyWay(eq)) * uStarBrightness;
+  // The Strip's light pollution leaves only the brightest stars and no Milky Way.
+  vec3 night = (starField(eq) * 0.3 + milkyWay(eq) * 0.03) * uStarBrightness;
   float twinkle = 0.75 + 0.5 * vnoise(eq.xy * 800.0 + uTime * 3.0);
   col += night * Tview * mix(1.0, twinkle, 1.0 - dir.y) * clearSky;
   col += moonDisk(dir) * Tview * max(uMoonScale, 2e-6) * 1200.0 * clearSky;
