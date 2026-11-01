@@ -155,6 +155,10 @@ void main() {
   vMat = aMat;
   vC0 = aC0;
   vC1 = aC1;
+  vK0 = aK0;
+  vK1 = aK1;
+  vK2 = aK2;
+  vK3 = aK3;
   vec2 dc = world.xz - uCamPos.xz;
   world.y -= dot(dc, dc) / (2.0 * 7310000.0);
   gl_Position = projectionMatrix * viewMatrix * vec4(world, 1.0);
