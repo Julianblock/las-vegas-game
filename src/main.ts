@@ -21,7 +21,7 @@ import { Trees } from './veg/trees';
 import { ShadowMap } from './render/shadows';
 import { Props } from './world/props';
 import { Landmarks } from './world/landmarks';
-import { Laughlin } from './world/laughlin';
+import { Strip } from './strip/strip';
 import { PowerLines } from './world/powerLines';
 import { Grass } from './veg/grass';
 import { WindParticles } from './life/windParticles';
@@ -131,15 +131,15 @@ async function boot() {
   loading.progress('Lighting up Terrible\'s and the McDonald\'s sign', 0.97);
   const power = new PowerLines(world.osm, heightfield);
   const landmarks = new Landmarks(world.osm, heightfield);
-  const laughlin = new Laughlin(heightfield);
-  for (let i = 0; i * 8 < Math.min(laughlin.glows.length, 128); i++) {
-    const g = laughlin.glows.slice(i * 8, i * 8 + 8);
+  const strip = new Strip(world.osm, heightfield);
+  for (let i = 0; i * 8 < Math.min(strip.glows.length, 128); i++) {
+    const g = strip.glows.slice(i * 8, i * 8 + 8);
     G.uStripA.value[i].set(g[0], g[1], g[2], g[3]);
     G.uStripB.value[i].set(g[4], g[5], g[6], g[7]);
   }
-  const props = new Props(world.osm, heightfield, power.pylons, (x, z) => landmarks.occupies(x, z) || laughlin.occupies(x, z), roadIndex, [...laughlin.lots, ...landmarks.lots]);
-  const lights = new LightPoints([...props.lights, ...landmarks.lights, ...laughlin.lights]);
-  engine.scene.add(props.group, landmarks.group, laughlin.group, lights.points, power.mesh);
+  const props = new Props(world.osm, heightfield, power.pylons, (x, z) => landmarks.occupies(x, z) || strip.occupies(x, z), roadIndex, [...strip.lots, ...landmarks.lots]);
+  const lights = new LightPoints([...props.lights, ...landmarks.lights, ...strip.lights]);
+  engine.scene.add(props.group, landmarks.group, strip.group, lights.points, power.mesh);
   const cemeteries = new Cemeteries(cemeteryPlans, heightfield);
   engine.scene.add(cemeteries.group);
   const roads = new Roads(world.osm, heightfield);
@@ -150,25 +150,27 @@ async function boot() {
   engine.scene.add(traffic.group);
   const wildlife = new Wildlife(heightfield);
   engine.scene.add(wildlife.group);
-  // Casino Drive's sidewalks, a few metres either side of the centreline.
+  // Sidewalks along the Boulevard and Flamingo Road, out past the travel lanes.
   const sidewalks: number[][] = [];
   for (const r of world.osm.roads) {
-    if (r.name !== 'North Casino Drive' && r.name !== 'South Casino Drive') continue;
-    if (Math.hypot(r.pts[0] - laughlin.crowd.cx, r.pts[1] - laughlin.crowd.cz) > 2500) continue;
-    for (const side of [-1, 1]) {
+    if (!/^(South Las Vegas Boulevard|West Flamingo Road|East Flamingo Road)$/.test(r.name)) continue;
+    if (Math.hypot(r.pts[0] - strip.crowd.cx, r.pts[1] - strip.crowd.cz) > strip.crowd.radius) continue;
+    // Divided carriageways only have a kerb on their right; two-way roads on both sides.
+    for (const side of r.oneway ? [r.oneway] : [-1, 1]) {
       const w: number[] = [];
       for (let i = 0; i < r.pts.length; i += 2) {
         const j = Math.min(i + 2, r.pts.length - 2), k = Math.max(0, i - 2);
         const dx = r.pts[j] - r.pts[k], dz = r.pts[j + 1] - r.pts[k + 1];
         const l = Math.hypot(dx, dz) || 1;
-        w.push(r.pts[i] - (dz / l) * 11 * side, r.pts[i + 1] + (dx / l) * 11 * side);
+        const off = r.oneway ? (r.lanes || 4) * 1.8 + 6 : r.name.startsWith('South') ? 22 : 18;
+        w.push(r.pts[i] - (dz / l) * off * side, r.pts[i + 1] + (dx / l) * off * side);
       }
       sidewalks.push(w);
     }
   }
   const people = new People(
     [
-      { ...laughlin.crowd, walks: [...laughlin.crowd.walks, ...sidewalks] },
+      { ...strip.crowd, walks: [...strip.crowd.walks, ...sidewalks] },
       { walks: [], spots: landmarks.spots, day: 0.7, night: 0.5, cx: 40, cz: 200, radius: 700 },
     ],
     heightfield,
@@ -210,7 +212,7 @@ async function boot() {
   trees.addShadowCasters(shadow);
   props.addShadowCasters(shadow);
   landmarks.addShadowCasters(shadow);
-  laughlin.addShadowCasters(shadow);
+  strip.addShadowCasters(shadow);
   cemeteries.addShadowCasters(shadow);
   wildlife.addShadowCasters(shadow);
   player.shadowCaster = shadow.addCaster(player.model.geometry, createBirdShadowMaterial(), player.object);
@@ -856,7 +858,7 @@ async function boot() {
   frame();
   loading.done();
   Object.assign(window, {
-    touch, engine, env, terrain, water, waterSurface, fish, ghosts, people, volcano, journal, tour, showMap, eggs, lore, heightfield, G, player, chase, air, car, driveCam, roadIndex, fences, dust, drive, shadow, precip, cemeteries, cemeteryPlans, controls, menu, hud, places, trees, props, landmarks, laughlin, lights, traffic, wildlife, flocks, sound, power, grass, roads, motes,
+    touch, engine, env, terrain, water, waterSurface, fish, ghosts, people, volcano, journal, tour, showMap, eggs, lore, heightfield, G, player, chase, air, car, driveCam, roadIndex, fences, dust, drive, shadow, precip, cemeteries, cemeteryPlans, controls, menu, hud, places, trees, props, landmarks, strip, lights, traffic, wildlife, flocks, sound, power, grass, roads, motes,
     inspectView: (a: number, h: number) => ((inspectAngle = a), (inspectHeight = h)),
     /** Renders a frame and returns it as a JPEG data URL (debug capture). */
     snap: (w = 1100, x0 = 0, y0 = 0, cw = 1, ch = 1) => {
