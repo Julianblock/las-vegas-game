@@ -279,7 +279,7 @@ const SPECIES: SpeciesDef[] = [
   },
   {
     id: 'tortoise',
-    // Mojave desert tortoise, Piute-Eldorado Valley critical habitat: never in a hurry.
+    // Mojave desert tortoise in the last open lots of the valley: never in a hurry.
     geo: tortoiseGeometry,
     cap: 10,
     radius: 260,
