@@ -1,0 +1,19 @@
+import type { Resort } from '../../resort';
+import { FremontCanopy } from './canopy';
+import { canopyColumns } from './columns';
+import { buildPioneer } from './pioneer';
+import { buildSlotzilla, slotzillaSign } from './slotzilla';
+import { vegasVic } from './vic';
+
+/** Fremont Street, downtown's five-block casino mall under the canopy. */
+export const fremontStreet: Resort = {
+  id: 'fremontStreet',
+  name: 'Fremont Street Experience',
+  signs: [vegasVic, slotzillaSign],
+  build: (k) => {
+    canopyColumns(k);
+    buildPioneer(k);
+    buildSlotzilla(k);
+  },
+  shows: (hf) => [new FremontCanopy(hf)],
+};
