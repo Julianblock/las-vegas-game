@@ -1,4 +1,5 @@
 import type { Resort } from '../resort';
+import { neonMuseum } from './neonMuseum';
 import { arizonaCharlies } from './arizonaCharlies';
 import { goldSpike } from './downtown/goldSpike';
 import { goldenGate } from './downtown/goldenGate';
@@ -129,6 +130,7 @@ export const RESORTS: Resort[] = [
   goldenGate,
   goldSpike,
   arizonaCharlies,
+  neonMuseum,
   // Last: chain signs skip ground the landmarks above have reserved.
   roadside,
 ];
