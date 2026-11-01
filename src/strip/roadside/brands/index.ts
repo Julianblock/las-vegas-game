@@ -15,6 +15,7 @@ import { dairyQueen } from './dairyQueen';
 import { delTaco } from './delTaco';
 import { dennys } from './dennys';
 import { dunkin } from './dunkin';
+import { greenValley } from './greenValley';
 import { inNOut } from './inNOut';
 import { jackInTheBox } from './jackInTheBox';
 import { javaTree } from './javaTree';
@@ -64,6 +65,7 @@ export const BRANDS: Brand[] = [
   delTaco,
   dennys,
   dunkin,
+  greenValley,
   inNOut,
   jackInTheBox,
   javaTree,
