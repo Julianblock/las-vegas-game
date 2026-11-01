@@ -62,6 +62,7 @@ import { tacoBell } from './tacoBell';
 import { terribles } from './terribles';
 import { tmobile } from './tmobile';
 import { umiya } from './umiya';
+import { upsStore } from './upsStore';
 import { villagePub } from './villagePub';
 import { wahoos } from './wahoos';
 import { walgreens } from './walgreens';
@@ -132,6 +133,7 @@ export const BRANDS: Brand[] = [
   terribles,
   tmobile,
   umiya,
+  upsStore,
   villagePub,
   wahoos,
   walgreens,
