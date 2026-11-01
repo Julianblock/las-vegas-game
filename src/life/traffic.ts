@@ -4,7 +4,8 @@ import { LightPoints } from '../render/lightPoints';
 import { propFragment, propVertex } from '../render/shaders/propShader';
 import type { Heightfield } from '../world/heightfield';
 import type { OsmData } from '../world/meta';
-import { merge, withPart } from '../world/geom';
+import { CAP, DENSITY, pick, zoneOf, type Zone } from './vehicles/mix';
+import { V, VEHICLES } from './vehicles/types';
 
 /** Free-flow speeds (m/s) and traffic density (vehicles per km) by road class. */
 const ROAD: Record<string, { speed: number; density: number; rank: number }> = {
@@ -17,15 +18,6 @@ const ROAD: Record<string, { speed: number; density: number; rank: number }> = {
   residential: { speed: 10, density: 0.06, rank: 0 },
 };
 
-/** Searchlight's 35 mph zone on US-95. */
-const TOWN = { x: 20, z: 200, r: 1100, speed: 15.6 };
-
-/** Paint colours weighted toward what actually drives US-95: white, silver, black, desert tan. */
-export const PAINT = ['#f2f2f0', '#f2f2f0', '#e9e9e6', '#1a1b1d', '#1a1b1d', '#8d9196', '#8d9196', '#b5b8bb', '#5c1a17', '#1f2d4a', '#3b4a3a', '#a89878', '#a8281f', '#c9c2b0', '#6a6e72'];
-const TRAILER = ['#f4f4f2', '#e8e6e0', '#c8ccd0', '#7d2a20', '#2c4a7a', '#f2f2f0', '#1e5a3a'];
-const RV = ['#f0ece2', '#e8e2d2', '#f4f2ec'];
-const BOAT = ['#f4f4f4', '#d22a2a', '#1a4a9a', '#f4f4f4', '#2a2a2a'];
-
 interface Edge {
   pts: Float32Array;
   cum: Float32Array;
@@ -37,6 +29,7 @@ interface Edge {
   speed: number;
   oneway: number;
   lanes: number;
+  zone: Zone;
 }
 
 interface Car {
@@ -56,122 +49,12 @@ interface Car {
   headlight: number;
 }
 
-const TYPES = [
-  { len: 4.7, lightY: 0.72, lightZ: 0.66 }, // car / SUV
-  { len: 5.8, lightY: 0.95, lightZ: 0.74 }, // pickup
-  { len: 21.5, lightY: 1.1, lightZ: 1.0 }, // tractor-trailer
-  { len: 10.5, lightY: 0.9, lightZ: 1.0 }, // motorhome
-  { len: 12.6, lightY: 0.95, lightZ: 0.74 }, // pickup towing a boat to the lake
-];
-
-function box(w: number, h: number, d: number, x: number, y: number, z: number) {
-  return new THREE.BoxGeometry(w, h, d).translate(x, y + h / 2, z);
-}
-
-function wheels(xs: number[], r: number, track: number, width = 0.24) {
-  const out: THREE.BufferGeometry[] = [];
-  for (const x of xs)
-    for (const s of [-1, 1])
-      out.push(withPart(new THREE.CylinderGeometry(r, r, width, 12).rotateX(Math.PI / 2).translate(x, r, s * track), 2));
-  return out;
-}
-
-function taper(g: THREE.BufferGeometry, yAbove: number, fx: number, fz: number, shiftX = 0) {
-  const p = g.attributes.position;
-  for (let i = 0; i < p.count; i++) {
-    if (p.getY(i) > yAbove) {
-      p.setX(i, p.getX(i) * fx + shiftX);
-      p.setZ(i, p.getZ(i) * fz);
-    }
-  }
-  g.computeVertexNormals();
-  return g;
-}
-
-export function carGeometry() {
-  const cabin = taper(box(2.5, 0.52, 1.62, -0.2, 1.02, 0), 1.3, 0.72, 0.9, -0.15);
-  return merge([
-    withPart(box(4.7, 0.42, 1.82, 0, 0.32, 0), 0),
-    withPart(taper(box(4.6, 0.3, 1.8, 0, 0.72, 0), 0.9, 0.97, 0.98), 0),
-    withPart(cabin, 1),
-    withPart(box(1.6, 0.05, 1.42, -0.35, 1.53, 0), 0),
-    ...wheels([1.45, -1.4], 0.34, 0.8),
-  ]);
-}
-
-export function pickupGeometry() {
-  return merge([
-    withPart(box(5.8, 0.55, 1.98, 0, 0.45, 0), 0),
-    withPart(box(2.1, 0.32, 1.96, 1.75, 1.0, 0), 0),
-    withPart(taper(box(1.9, 0.6, 1.8, 0.35, 1.0, 0), 1.3, 0.85, 0.94, -0.05), 1),
-    withPart(box(1.5, 0.06, 1.66, 0.3, 1.6, 0), 0),
-    // Bed walls.
-    withPart(box(2.2, 0.42, 0.08, -1.75, 1.0, 0.95), 0),
-    withPart(box(2.2, 0.42, 0.08, -1.75, 1.0, -0.95), 0),
-    withPart(box(0.08, 0.42, 1.98, -2.86, 1.0, 0), 0),
-    ...wheels([1.85, -1.75], 0.4, 0.86, 0.28),
-  ]);
-}
-
-function semiGeometry() {
-  return merge([
-    // Tractor.
-    withPart(box(2.4, 1.3, 2.45, 9.4, 0.85, 0), 0),
-    withPart(box(2.6, 1.7, 2.45, 7.6, 1.2, 0), 0),
-    withPart(box(0.12, 0.9, 2.2, 8.95, 2.0, 0), 1),
-    withPart(box(1.8, 0.6, 2.4, 7.4, 2.9, 0), 0),
-    // Trailer.
-    withPart(box(15.6, 2.75, 2.58, -1.6, 1.25, 0), 0),
-    withPart(box(3.6, 0.35, 1.2, 6.2, 0.75, 0), 2),
-    ...wheels([9.6, 6.9, 5.6], 0.52, 1.0, 0.32),
-    ...wheels([-7.0, -8.3], 0.52, 1.0, 0.5),
-  ]);
-}
-
-/** Class A motorhome: a tall slab-sided box with a sloped nose. */
-function rvGeometry() {
-  return merge([
-    withPart(taper(box(10.4, 3.0, 2.5, 0, 0.45, 0), 2.6, 1, 1), 0),
-    withPart(box(0.1, 1.1, 2.3, 5.2, 1.6, 0), 1),
-    withPart(box(3.4, 0.5, 1.6, -1.4, 3.45, 0), 0),
-    withPart(box(9.6, 0.18, 2.52, 0, 1.2, 0), 2),
-    ...wheels([3.8, -2.6, -3.6], 0.5, 1.0, 0.3),
-  ]);
-}
-
-/** Pickup hauling a bass boat on a trailer. */
-function boatTowGeometry() {
-  const hull = new THREE.BoxGeometry(6.0, 0.75, 2.2, 4, 2, 1).translate(-5.4, 0.92, 0);
-  // Pointed bow and a V-shaped bottom.
-  const p = hull.attributes.position;
-  for (let i = 0; i < p.count; i++) {
-    const t = Math.max(0, (p.getX(i) + 4.4) / 2.0);
-    let zz = p.getZ(i) * (1 - 0.85 * t * t);
-    if (p.getY(i) < 0.7) zz *= 0.35;
-    p.setZ(i, zz);
-    if (p.getY(i) > 1.2 && t > 0) p.setY(i, p.getY(i) + 0.15 * t);
-  }
-  hull.computeVertexNormals();
-  return merge([
-    withPart(box(5.8, 0.55, 1.98, 2.0, 0.45, 0), 0),
-    withPart(box(2.1, 0.32, 1.96, 3.75, 1.0, 0), 0),
-    withPart(taper(box(1.9, 0.6, 1.8, 2.35, 1.0, 0), 1.3, 0.85, 0.94, -0.05), 1),
-    withPart(box(2.2, 0.42, 0.08, 0.25, 1.0, 0.95), 0),
-    withPart(box(2.2, 0.42, 0.08, 0.25, 1.0, -0.95), 0),
-    ...wheels([3.85, 0.25], 0.4, 0.86, 0.28),
-    withPart(box(6.2, 0.14, 1.6, -5.2, 0.42, 0), 2),
-    withPart(hull, 3),
-    withPart(taper(box(0.5, 0.35, 1.6, -4.4, 1.3, 0), 1.5, 0.5, 1, -0.1), 1),
-    ...wheels([-5.6], 0.3, 0.9, 0.2),
-  ]);
-}
-
 function hash(n: number) {
   const s = Math.sin(n * 127.1 + 311.7) * 43758.5453;
   return s - Math.floor(s);
 }
 
-/** Vehicles driving the real road graph: big rigs and RVs on US-95, boats bound for Cottonwood Cove. */
+/** Vehicles driving the real road graph: cabs, limos and the Deuce crawling the Strip, rigs on I-15. */
 export class Traffic {
   readonly group = new THREE.Group();
   readonly lights: LightPoints;
@@ -193,8 +76,8 @@ export class Traffic {
     this.buildGraph(osm, radius);
     this.spawn();
 
-    const bases = [carGeometry(), pickupGeometry(), semiGeometry(), rvGeometry(), boatTowGeometry()];
-    const counts = [0, 0, 0, 0, 0];
+    const bases = VEHICLES.map((v) => v.geo());
+    const counts = VEHICLES.map(() => 0);
     for (const c of this.cars) c.slot = counts[c.type]++;
     bases.forEach((base, k) => {
       const n = Math.max(1, counts[k]);
@@ -210,14 +93,14 @@ export class Traffic {
         const i = c.slot;
         const h = hash(i * 7.3 + k);
         // SUVs and minivans are just taller, boxier cars.
-        const suv = k === 0 && h < 0.45;
+        const suv = k === V.CAR && h < 0.45;
         t1.set([suv ? 1.04 : 0.95 + h * 0.1, suv ? 1.22 : 1, suv ? 1.06 : 1, 5], i * 4);
-        const paint = k === 2 ? TRAILER : k === 3 ? RV : PAINT;
-        col.set(paint[Math.floor((k === 2 || k === 3 ? h : hash(i * 3.1 + k)) * paint.length)]);
+        const type = VEHICLES[k];
+        col.set(type.paint[Math.floor((type.slow ? h : hash(i * 3.1 + k)) * type.paint.length)]);
         wall.set([col.r, col.g, col.b, 0], i * 4);
-        // The boat hull (part 3) takes its colour from the roof slot.
-        if (k === 4) col.set(BOAT[Math.floor(hash(i * 5.7) * BOAT.length)]);
-        roof.set(k === 4 ? [col.r, col.g, col.b, h] : [0, 0, 0, h], i * 4);
+        // The accent part (toppers, trim, roofs) takes its colour from the roof slot.
+        if (type.accent) col.set(type.accent[Math.floor(hash(i * 5.7) * type.accent.length)]);
+        roof.set(type.accent ? [col.r, col.g, col.b, h] : [0, 0, 0, h], i * 4);
       }
       const a0 = new THREE.InstancedBufferAttribute(t0, 4).setUsage(THREE.DynamicDrawUsage);
       g.setAttribute('aT0', a0);
@@ -277,7 +160,8 @@ export class Traffic {
       for (let i = 1; i < n; i++) cum[i] = cum[i - 1] + Math.hypot(p[i * 2] - p[i * 2 - 2], p[i * 2 + 1] - p[i * 2 - 1]);
       const len = cum[n - 1];
       if (len < 2) continue;
-      let speed = cls.speed;
+      const zone = zoneOf(r.name, r.kind, p[n & ~1], p[(n & ~1) + 1]);
+      const speed = Math.min(cls.speed, CAP[zone]);
       const e: Edge = {
         pts: Float32Array.from(p),
         cum,
@@ -289,6 +173,7 @@ export class Traffic {
         speed,
         oneway: r.oneway ?? 0,
         lanes: r.lanes || (r.kind === 'motorway' ? 2 : 1),
+        zone,
       };
       const id = this.edges.length;
       this.edges.push(e);
@@ -303,18 +188,13 @@ export class Traffic {
   private spawn() {
     let seed = 1;
     this.edges.forEach((e, id) => {
-      // Casino Drive crawls with cruisers, shuttles and valet traffic day and night.
-      const want = (e.len / 1000) * ROAD[e.kind].density * (e.name === 'South Casino Drive' ? 14 : 1);
+      const want = (e.len / 1000) * ROAD[e.kind].density * DENSITY[e.zone];
       let n = Math.floor(want) + (hash(id) < want % 1 ? 1 : 0);
       while (n-- > 0) {
         const h = hash(seed++);
         const dir = e.oneway ? e.oneway : h < 0.5 ? 1 : -1;
-        // US-95 is the Las Vegas - Laughlin - I-40 truck route; Cottonwood Cove Road carries boats.
-        const truckShare = e.kind === 'motorway' || e.kind === 'trunk' ? 0.3 : e.kind === 'residential' ? 0 : 0.04;
-        const lake = e.name === 'Cottonwood Cove Road';
-        const r = hash(seed++);
-        const type = r < truckShare ? 2 : r < truckShare + (lake ? 0.3 : 0.07) ? 4 : r < truckShare + (lake ? 0.4 : 0.14) ? 3 : r < truckShare + 0.5 ? 1 : 0;
-        const vt = e.speed * (0.88 + hash(seed++) * 0.22) * (type === 2 ? 0.9 : 1);
+        const type = pick(e.zone, hash(seed++));
+        const vt = e.speed * (0.88 + hash(seed++) * 0.22) * (type === V.SEMI ? 0.9 : 1);
         this.cars.push({ e: id, dir, s: hash(seed++) * e.len, seg: 0, v: vt, vt, type, slot: 0, x: 0, y: 0, z: 0, hx: 1, hz: 0, headlight: hash(seed++) });
       }
     });
@@ -364,7 +244,7 @@ export class Traffic {
     car.dir = e.a === nodeAt ? 1 : -1;
     car.s = car.dir > 0 ? 0 : e.len;
     car.seg = car.dir > 0 ? 0 : e.pts.length / 2 - 2;
-    car.vt = e.speed * (0.88 + Math.random() * 0.22) * (car.type === 2 ? 0.9 : 1);
+    car.vt = e.speed * (0.88 + Math.random() * 0.22) * (car.type === V.SEMI ? 0.9 : 1);
   }
 
   /**
@@ -388,7 +268,7 @@ export class Traffic {
       for (let i = 0; i < list.length - 1; i++) {
         const me = list[i];
         const lead = list[i + 1];
-        const gap = Math.abs(lead.s - me.s) - TYPES[lead.type].len;
+        const gap = Math.abs(lead.s - me.s) - VEHICLES[lead.type].len;
         const safe = 6 + me.v * 1.6;
         if (gap < safe) me.v = Math.max(0, Math.min(me.v, lead.v * (gap / safe)));
       }
@@ -397,8 +277,7 @@ export class Traffic {
     let li = 0;
     const lp = this.lights;
     for (const c of this.cars) {
-      const inTown = (c.x - TOWN.x) ** 2 + (c.z - TOWN.z) ** 2 < TOWN.r * TOWN.r;
-      c.v += (Math.min(c.vt, inTown ? TOWN.speed : Infinity) * pace - c.v) * Math.min(1, dt * 0.5);
+      c.v += (c.vt * pace - c.v) * Math.min(1, dt * 0.5);
       let e = this.edges[c.e];
       c.s += c.v * dt * c.dir;
       if (c.s > e.len || c.s < 0) {
@@ -425,9 +304,9 @@ export class Traffic {
       const hl = Math.hypot(c.hx, c.hz) || 1;
       const ux = c.hx / hl;
       const uz = c.hz / hl;
-      // Keep right: divided highways drive on their own carriageway; on four-lane
-      // undivided US-95 trucks and RVs hold the outside lane and cars pass inside.
-      const slow = c.type >= 2 || c.headlight > 0.5;
+      // Keep right: divided roads drive on their own carriageway; on undivided
+      // four-lane roads buses, limos and trucks hold the outside lane.
+      const slow = !!VEHICLES[c.type].slow || c.headlight > 0.5;
       const lane = e.oneway ? (e.lanes > 1 ? (slow ? 1.8 : -1.8) : 0) : e.lanes >= 4 ? (slow ? 5.5 : 1.9) : 1.9;
       c.x = x0 + (x1 - x0) * f - uz * lane;
       c.z = z0 + (z1 - z0) * f + ux * lane;
@@ -439,13 +318,13 @@ export class Traffic {
       this.t0[c.type].set([c.x, c.y, c.z, ang], c.slot * 4);
 
       if (lamps > 0.02 && d2 < 15000 * 15000) {
-        const t = TYPES[c.type];
+        const t = VEHICLES[c.type];
         const half = t.len / 2;
         // Headlights are directional: bright toward the viewer, faint from behind.
         const tcx = -dx / Math.sqrt(d2 + 1);
         const tcz = -dz / Math.sqrt(d2 + 1);
         const facing = ux * tcx + uz * tcz;
-        // Desert nights are black: lamps carry for miles down the straight highway.
+        // Lamps carry a long way down the straight valley boulevards.
         const front = 1.0 + 8.0 * Math.pow(Math.max(0, facing), 6);
         const rear = 0.6 + 1.2 * Math.max(0, -facing);
         const led = c.headlight < 0.45;
