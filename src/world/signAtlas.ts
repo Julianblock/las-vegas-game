@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { LAUGHLIN_SIGNS } from './laughlinSigns';
+import { RESORTS } from '../strip/resorts';
 import { BLACK, dotMatrix, fitText, neon, rounded, SANS, SCRIPT, SERIF, type SignSpec } from './signKit';
 
 /** Atlas rectangle in UV space plus the number of stacked animation frames. */
@@ -13,7 +14,7 @@ export interface SignRect {
   aspect: number;
 }
 
-const SIZE = 2048;
+const SIZE = 4096;
 
 /** Terrible's script wordmark, red on the chain's sunny yellow. */
 function terriblesMark(g: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
@@ -548,7 +549,7 @@ export function buildSignAtlas(): { texture: THREE.Texture; rects: Record<string
   let x = pad;
   let y = pad;
   let shelf = 0;
-  const sorted = [...SIGNS, ...LAUGHLIN_SIGNS].sort((a, b) => b.h * (b.frames ?? 1) - a.h * (a.frames ?? 1));
+  const sorted = [...SIGNS, ...LAUGHLIN_SIGNS, ...RESORTS.flatMap((r) => r.signs ?? [])].sort((a, b) => b.h * (b.frames ?? 1) - a.h * (a.frames ?? 1));
   const placed: { s: SignSpec; x: number; y: number }[] = [];
   for (const s of sorted) {
     const th = s.h * (s.frames ?? 1);
