@@ -78,7 +78,7 @@ function edgeDist(poly: number[], x: number, z: number) {
 }
 
 /**
- * Finds a gate for every cemetery near Searchlight and lays a dirt lane from the
+ * Finds a gate for every cemetery in the valley and lays a lane from the
  * nearest public road to it. Lanes go into `osm.roads` so they are drawn,
  * indexed and drivable like any other track; call before building roads.
  */
