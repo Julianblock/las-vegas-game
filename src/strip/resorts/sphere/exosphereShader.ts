@@ -170,6 +170,17 @@ vec3 ornament(vec3 n) {
   return c;
 }
 
+vec3 heart(vec3 n) {
+  vec3 p = front(n);
+  vec2 q = p.xy * 1.6 - vec2(0.0, 0.1);
+  float h = pow(q.x * q.x + q.y * q.y - 0.3, 3.0) - q.x * q.x * q.y * q.y * q.y;
+  float beat = 1.0 + 0.06 * pow(abs(sin(uTime * 2.6)), 8.0);
+  q /= beat;
+  h = pow(q.x * q.x + q.y * q.y - 0.3, 3.0) - q.x * q.x * q.y * q.y * q.y;
+  float inside = step(h, 0.0) * step(0.0, p.z);
+  return mix(vec3(1.0, 0.55, 0.7), vec3(0.85, 0.02, 0.12), inside);
+}
+
 vec3 moon(vec3 n) {
   float m = vnoise(n * 4.0) * 0.6 + vnoise(n * 13.0) * 0.4;
   return vec3(0.82, 0.82, 0.78) * (0.65 + 0.35 * smoothstep(0.35, 0.7, m));
