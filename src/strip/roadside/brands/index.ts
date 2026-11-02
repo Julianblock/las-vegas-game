@@ -96,6 +96,7 @@ import { fogoDeChao } from './fogoDeChao';
 import { fortuneHotel } from './fortuneHotel';
 import { funHogRanch } from './funHogRanch';
 import { gaiaFlowers } from './gaiaFlowers';
+import { gamestop } from './gamestop';
 import { gatewayMotel } from './gatewayMotel';
 import { giordanos } from './giordanos';
 import { greensAndProteins } from './greensAndProteins';
@@ -355,6 +356,7 @@ export const BRANDS: Brand[] = [
   fortuneHotel,
   funHogRanch,
   gaiaFlowers,
+  gamestop,
   gatewayMotel,
   giordanos,
   greensAndProteins,
