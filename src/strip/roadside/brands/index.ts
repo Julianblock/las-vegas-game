@@ -244,6 +244,7 @@ import { wendys } from './wendys';
 import { whiteCastle } from './whiteCastle';
 import { wineRoom } from './wineRoom';
 import { wingstop } from './wingstop';
+import { writersBlock } from './writersBlock';
 import { yardHouse } from './yardHouse';
 import { yuOrMi } from './yuOrMi';
 import { zia } from './zia';
@@ -495,6 +496,7 @@ export const BRANDS: Brand[] = [
   whiteCastle,
   wineRoom,
   wingstop,
+  writersBlock,
   yardHouse,
   yuOrMi,
   zia,
