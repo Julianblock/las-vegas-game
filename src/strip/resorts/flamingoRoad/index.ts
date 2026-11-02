@@ -18,6 +18,7 @@ export const flamingoRoad: Resort = {
     buildMedian(k);
     buildLights(k);
     buildSignals(k, (x) => (x < 1000 ? 15 : 22));
+    buildBillboards(k, (x) => (x < 1000 ? 15 : 22));
     for (const s of STOPS) {
       const fr = k.frame(s.x, flamingoZ(s.x) + s.side * s.off, s.side > 0 ? 0 : 180);
       if (!k.occupies(s.x, flamingoZ(s.x) + s.side * s.off)) shelter(k, fr);
