@@ -62,7 +62,8 @@ export class Grass {
   private rings: Ring[] = [];
   private hf: Heightfield;
   private car = { value: new THREE.Vector4() };
-  maxAgl = 160;
+  /** Above this height (m) a 15 cm blade is under a pixel, so the rings switch off. */
+  maxAgl = 80;
 
   constructor(terrainUniforms: Record<string, THREE.IUniform>, hf: Heightfield) {
     this.hf = hf;
