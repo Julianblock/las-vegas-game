@@ -11,5 +11,5 @@ export const commercialCenterSpot: Spot = {
   hint: 'Find the old shopping plaza on East Sahara near Maryland Parkway.',
   r: 160,
   h: 50,
-  test: near({ x: 4730, z: -3184 }, 120, 50),
+  test: near({ x: 4520, z: -2930 }, 120, 50),
 };
