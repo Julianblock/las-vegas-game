@@ -34,6 +34,7 @@ export const MOONS: Record<MoonPref, { label: string }> = {
 
 export const SEASONS: Record<Season, { label: string; month: number; day: number; blurb: string }> = {
   winter: { label: 'Winter', month: 1, day: 14, blurb: 'Frosty mornings, snow on Charleston Peak, the Strip lit up for the holidays' },
+  lunar: { label: 'Lunar New Year', month: 2, day: 6, blurb: 'Year of the Goat: red lanterns down Spring Mountain, lion dancers in Chinatown' },
   bloom: { label: 'Joshua Bloom', month: 3, day: 18, blurb: 'Joshua trees crowned in cream, marigolds and globemallow on the bajadas' },
   spring: { label: 'Late Spring', month: 4, day: 28, blurb: 'Creosote in yellow flower, cactus blooms, migrants moving through' },
   summer: { label: 'Monsoon Summer', month: 8, day: 4, blurb: '110°F, heat shimmer on the Strip, thunderheads over the Spring Mountains' },
