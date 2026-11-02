@@ -114,6 +114,7 @@ import { highHat } from './highHat';
 import { hofbrauhaus } from './hofbrauhaus';
 import { holidayInn } from './holidayInn';
 import { hooters } from './hooters';
+import { hudsonCleaners } from './hudsonCleaners';
 import { hyattPlace } from './hyattPlace';
 import { ihop } from './ihop';
 import { indiaPalace } from './indiaPalace';
@@ -387,6 +388,7 @@ export const BRANDS: Brand[] = [
   hofbrauhaus,
   holidayInn,
   hooters,
+  hudsonCleaners,
   hyattPlace,
   ihop,
   indiaPalace,
