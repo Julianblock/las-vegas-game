@@ -10,6 +10,9 @@ import { buildSignals } from './signals';
 import { STOPS } from './stops';
 import { CROSS_BLADES, FLAMINGO_BLADES } from './streetNames';
 
+/** Kerb half-width: narrower west of the freeway. */
+const kerb = (x: number) => (x < 1000 ? 15 : 22);
+
 /** Flamingo Road’s streetscape: median palms west of the freeway and the 202’s bus shelters. */
 export const flamingoRoad: Resort = {
   id: 'flamingoRoad',
@@ -18,9 +21,9 @@ export const flamingoRoad: Resort = {
   build: (k) => {
     buildMedian(k);
     buildLights(k);
-    buildHydrants(k, (x) => (x < 1000 ? 15 : 22));
-    buildSignals(k, (x) => (x < 1000 ? 15 : 22));
-    buildBillboards(k, (x) => (x < 1000 ? 15 : 22));
+    buildHydrants(k, kerb);
+    buildSignals(k, kerb);
+    buildBillboards(k, kerb);
     for (const s of STOPS) {
       const fr = k.frame(s.x, flamingoZ(s.x) + s.side * s.off, s.side > 0 ? 0 : 180);
       if (!k.occupies(s.x, flamingoZ(s.x) + s.side * s.off)) shelter(k, fr);
