@@ -62,4 +62,4 @@ export const haciendaSign: SignSpec = {
   },
 };
 
-export const HACIENDA: Mount = { name: 'galleryHacienda', x: 4466, z: -5922, deg: 208, h: 7, lift: 9 };
+export const HACIENDA: Mount = { name: 'galleryHacienda', x: 4466, z: -5922, deg: 208, h: 7, lift: 9, fx: FX.NONE };
