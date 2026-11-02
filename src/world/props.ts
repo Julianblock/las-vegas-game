@@ -379,6 +379,7 @@ export class Props {
     }
 
     // Split each kind into spatial tiles so the GPU only draws what's in view.
+    const lodBase = lodGeometry();
     geos.forEach((base, k) => {
       const byTile = new Map<number, number[][]>();
       for (const r of data[k]) {
