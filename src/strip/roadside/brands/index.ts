@@ -145,6 +145,7 @@ import { officeDepot } from './officeDepot';
 import { oldHavana } from './oldHavana';
 import { oleRed } from './oleRed';
 import { oliveGarden } from './oliveGarden';
+import { oneMansTrash } from './oneMansTrash';
 import { oodleNoodle } from './oodleNoodle';
 import { oreilly } from './oreilly';
 import { outback } from './outback';
@@ -377,6 +378,7 @@ export const BRANDS: Brand[] = [
   oldHavana,
   oleRed,
   oliveGarden,
+  oneMansTrash,
   oodleNoodle,
   oreilly,
   outback,
