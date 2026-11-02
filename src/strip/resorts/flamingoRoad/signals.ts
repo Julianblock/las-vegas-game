@@ -23,5 +23,8 @@ export function buildSignals(k: Kit, half: (x: number) => number) {
     const z = flamingoZ(x), off = half(x);
     mast(k, k.frame(x + BACK, z + off, 270), off - 3, `street_${id}`, -1);
     mast(k, k.frame(x - BACK, z - off, 90), off - 3, `street_${id}`, -1);
+    const fl = flamingoBlade(x, z);
+    mast(k, k.frame(x + CROSS_HALF, z - off - 4, 180), CROSS_HALF - 3, fl, -1);
+    mast(k, k.frame(x - CROSS_HALF, z + off + 4, 0), CROSS_HALF - 3, fl, -1);
   }
 }
