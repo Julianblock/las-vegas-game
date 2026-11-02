@@ -153,6 +153,7 @@ import { terribles } from './terribles';
 import { texaco } from './texaco';
 import { tireXpress } from './tireXpress';
 import { titleMax } from './titleMax';
+import { tix4tonight } from './tix4tonight';
 import { tmobile } from './tmobile';
 import { tommyRockers } from './tommyRockers';
 import { travelodge } from './travelodge';
@@ -326,6 +327,7 @@ export const BRANDS: Brand[] = [
   texaco,
   tireXpress,
   titleMax,
+  tix4tonight,
   tmobile,
   tommyRockers,
   travelodge,
