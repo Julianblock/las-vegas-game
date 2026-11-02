@@ -55,3 +55,16 @@ export function lunarDecorated(month: number, day: number) {
 export function lionDancing(month: number, day: number, hours: number) {
   return month === LUNAR.month && day >= LUNAR.day && day <= LUNAR.day + 2 && hours >= 10 && hours < 22;
 }
+
+/** The National Finals Rodeo: ten nights at the Thomas & Mack, December 3–12, 2026. */
+export const NFR = { month: 12, first: 3, last: 12 };
+
+export function isRodeoWeek(month: number, day: number) {
+  return month === NFR.month && day >= NFR.first - 1 && day <= NFR.last + 1;
+}
+
+/** Share of the crowd in hats and boots: more after dark, when the go-rounds let out. */
+export function cowboyShare(month: number, day: number, hours: number) {
+  if (!isRodeoWeek(month, day)) return 0;
+  return hours >= 18 || hours < 3 ? 0.3 : 0.14;
+}
