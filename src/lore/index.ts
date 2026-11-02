@@ -1,4 +1,5 @@
 import type { Spot } from './spot';
+import { ronaldsDonutsSpot } from './spots/ronalds-donuts';
 import { arizonaCharliesSpot } from './spots/arizona-charlies';
 import { artsDistrictSpot } from './spots/arts-district';
 import { bellagioGallerySpot } from './spots/bellagio-gallery';
@@ -232,4 +233,5 @@ export const SPOTS: Spot[] = [
   bellagioGallerySpot,
   artsDistrictSpot,
   arizonaCharliesSpot,
+  ronaldsDonutsSpot,
 ];
