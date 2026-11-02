@@ -153,6 +153,7 @@ import { mintTavern } from './mintTavern';
 import { monBelAmi } from './monBelAmi';
 import { mortons } from './mortons';
 import { motel8 } from './motel8';
+import { mrFriesMan } from './mrFriesMan';
 import { nachoDaddy } from './nachoDaddy';
 import { nativeJewelry } from './nativeJewelry';
 import { nirvanaHotel } from './nirvanaHotel';
@@ -409,6 +410,7 @@ export const BRANDS: Brand[] = [
   monBelAmi,
   mortons,
   motel8,
+  mrFriesMan,
   nachoDaddy,
   nativeJewelry,
   nirvanaHotel,
