@@ -228,6 +228,18 @@ vec3 coin(vec3 n) {
   return mix(c, mix(gold, vec3(0.75, 0.45, 0.08), min(rim, 1.0)), ring * step(0.0, p.z));
 }
 
+// Sky lanterns drifting up through a deep blue night.
+vec3 skyLanterns(vec3 n) {
+  vec3 c = mix(vec3(0.01, 0.02, 0.08), vec3(0.05, 0.08, 0.25), 0.5 + 0.5 * n.y);
+  vec2 g = vec2(atan(n.z, n.x) * 12.0, n.y * 14.0 - uTime * 0.35);
+  vec2 cell = floor(g);
+  vec2 f = fract(g) - 0.5 - (vec2(hash3(vec3(cell, 1.0)), hash3(vec3(cell, 2.0))) - 0.5) * 0.4;
+  float lit = step(0.55, hash3(vec3(cell, 5.0)));
+  float body = smoothstep(0.2, 0.12, length(f * vec2(1.3, 1.0))) * lit;
+  float flick = 0.85 + 0.15 * sin(uTime * 7.0 + cell.x * 3.1);
+  return c + vec3(1.0, 0.5, 0.12) * body * flick + vec3(0.3, 0.12, 0.02) * smoothstep(0.45, 0.0, length(f)) * lit;
+}
+
 vec3 moon(vec3 n) {
   float m = vnoise(n * 4.0) * 0.6 + vnoise(n * 13.0) * 0.4;
   return vec3(0.82, 0.82, 0.78) * (0.65 + 0.35 * smoothstep(0.35, 0.7, m));
