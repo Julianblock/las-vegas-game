@@ -84,6 +84,7 @@ import { elMirador } from './elMirador';
 import { elPolloLoco } from './elPolloLoco';
 import { eroticMuseum } from './eroticMuseum';
 import { expressBail } from './expressBail';
+import { fallas } from './fallas';
 import { farmerBoys } from './farmerBoys';
 import { fatburger } from './fatburger';
 import { fedexOffice } from './fedexOffice';
@@ -352,6 +353,7 @@ export const BRANDS: Brand[] = [
   elPolloLoco,
   eroticMuseum,
   expressBail,
+  fallas,
   farmerBoys,
   fatburger,
   fedexOffice,
