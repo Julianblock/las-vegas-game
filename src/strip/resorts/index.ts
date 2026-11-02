@@ -29,6 +29,7 @@ import { grandPrix } from '../../events/grandprix';
 import { halloween } from '../../events/halloween';
 import { fourthOfJuly } from '../../events/july4';
 import { lunarNewYear } from '../../events/lunar';
+import { ces } from '../../events/ces';
 import { newYear } from '../../events/newyear';
 import { westgate } from './westgate';
 import { planetHollywood } from './planetHollywood';
