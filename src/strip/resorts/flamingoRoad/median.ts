@@ -3,7 +3,7 @@ import { palm } from '../../parts/palm';
 import { flamingoZ, nearCross } from '../../streets';
 
 /** Stretches of raised, planted median: Decatur to Wynn, and Wynn to the Rio's kink. */
-const RUNS: [number, number][] = [
+export const RUNS: [number, number][] = [
   [-1600, -450],
   [-405, 180],
 ];
