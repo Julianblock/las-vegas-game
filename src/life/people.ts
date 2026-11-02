@@ -15,6 +15,8 @@ export interface Crowd {
   cx: number;
   cz: number;
   radius: number;
+  /** Event crowds turn out only while this holds. */
+  when?: () => boolean;
 }
 
 const BONE = { BODY: 0, L_THIGH: 1, L_SHIN: 2, R_THIGH: 3, R_SHIN: 4, L_ARM: 5, L_FORE: 6, R_ARM: 7, R_FORE: 8, HEAD: 9 } as const;
