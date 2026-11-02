@@ -3,7 +3,9 @@ import { flamingoZ } from '../../streets';
 import { buildMedian } from './median';
 import { shelter } from './shelter';
 import { rtc202, shelterAd } from './signs';
+import { buildSignals } from './signals';
 import { STOPS } from './stops';
+import { CROSS_BLADES, FLAMINGO_BLADES } from './streetNames';
 
 /** Flamingo Road’s streetscape: median palms west of the freeway and the 202’s bus shelters. */
 export const flamingoRoad: Resort = {
