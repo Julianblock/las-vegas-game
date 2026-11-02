@@ -2,7 +2,7 @@ import { SCRIPT } from '../../../world/signKit';
 import type { Brand } from '../brand';
 import { panel } from '../panel';
 
-/** Mexican food on Main since 1993. */
+/** Mexican food on Main Street. */
 export const casaDonJuan: Brand = {
   id: 'casaDonJuan',
   match: /^Casa Don Juan$/,
