@@ -1,3 +1,4 @@
+import { FX } from '../../../../world/builders';
 import type { SignSpec } from '../../../../world/signKit';
 import type { Mount } from '../pole';
 import { tube } from '../tube';
