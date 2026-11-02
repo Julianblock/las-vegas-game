@@ -1,4 +1,5 @@
 import type { Spot } from './spot';
+import { fremontHotelSpot } from './spots/fremont-hotel';
 import { ninthIslandSpot } from './spots/ninth-island';
 import { handOfFaithSpot } from './spots/hand-of-faith';
 import { townsiteAuctionSpot } from './spots/townsite-auction';
@@ -218,4 +219,5 @@ export const SPOTS: Spot[] = [
   townsiteAuctionSpot,
   handOfFaithSpot,
   ninthIslandSpot,
+  fremontHotelSpot,
 ];
