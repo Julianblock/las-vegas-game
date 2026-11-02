@@ -157,6 +157,7 @@ import { titleMax } from './titleMax';
 import { tix4tonight } from './tix4tonight';
 import { tmobile } from './tmobile';
 import { tommyRockers } from './tommyRockers';
+import { tortasAhogadas } from './tortasAhogadas';
 import { travelodge } from './travelodge';
 import { umiya } from './umiya';
 import { upsStore } from './upsStore';
@@ -333,6 +334,7 @@ export const BRANDS: Brand[] = [
   tix4tonight,
   tmobile,
   tommyRockers,
+  tortasAhogadas,
   travelodge,
   umiya,
   upsStore,
