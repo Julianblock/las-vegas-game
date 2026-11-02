@@ -3,8 +3,8 @@ import type { Kit } from '../../kit';
 /** Fremont Street East from the Las Vegas Boulevard corner, heading east-southeast. */
 export const FREMONT_EAST = { x: 4446, z: -5905, bearing: 118 };
 
-/** Facades stand this far either side of the centre line (m). */
-export const FACADE = 13;
+/** Facades stand this far from the centre line (m): the south side builds right up to the kerb. */
+export const FACADE = { south: 8.5, north: 13 };
 
 /**
  * A frame on the facade `s` metres down the street, on the south side when
