@@ -178,6 +178,7 @@ async function boot() {
     [
       { ...strip.crowd, walks: [...strip.crowd.walks, ...sidewalks] },
       cesCrowd(),
+      commercialCenterCrowd(),
     ],
     heightfield,
   );
