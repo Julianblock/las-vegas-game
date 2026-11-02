@@ -161,6 +161,7 @@ import { phoDaLat } from './phoDaLat';
 import { pieros } from './pieros';
 import { pizzaHut } from './pizzaHut';
 import { popeyes } from './popeyes';
+import { popsAuto } from './popsAuto';
 import { portOfSubs } from './portOfSubs';
 import { ptsPlace } from './ptsPlace';
 import { rachelsKitchen } from './rachelsKitchen';
@@ -390,6 +391,7 @@ export const BRANDS: Brand[] = [
   pieros,
   pizzaHut,
   popeyes,
+  popsAuto,
   portOfSubs,
   ptsPlace,
   rachelsKitchen,
