@@ -19,6 +19,7 @@ import { pinchesTacos } from './pinchesTacos';
 import { turmeric } from './turmeric';
 import { uncleJoes } from './uncleJoes';
 import { vanguard } from './vanguard';
+import { vintageBarbershop } from './vintageBarbershop';
 
 /** Every storefront sign on Fremont East, west to east. */
-export const BARS: Bar[] = [, uncleJoes, kabobKorner, parkOnFremont, evelPie, griffin, coterie, beautyBar, vanguard, dontTellMama, leThai, eureka, commonwealth, backstageBilliards, turmeric, pinchesTacos, cityCenterMotel, chow, familyFoods, cheapThrillz, downtownTattoo];
+export const BARS: Bar[] = [, uncleJoes, kabobKorner, parkOnFremont, evelPie, griffin, coterie, beautyBar, vanguard, dontTellMama, leThai, eureka, commonwealth, backstageBilliards, turmeric, pinchesTacos, cityCenterMotel, chow, familyFoods, cheapThrillz, downtownTattoo, vintageBarbershop];
