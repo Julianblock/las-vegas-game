@@ -174,7 +174,7 @@ void main() {
   }
 
   // Snow on the Spring Mountains, Charleston Peak and, some winters, the Highland Range.
-  float snowN = fbm(xz / 3000.0, 4);
+  float snowN = vWorld.y > uSnowLine - 300.0 ? fbm(xz / 3000.0, 4) : 0.0;
   float snow = smoothstep(uSnowLine - 250.0 + snowN * 500.0, uSnowLine + 250.0 + snowN * 500.0, vWorld.y);
   snow *= 1.0 - smoothstep(0.45, 0.75, slope) * 0.7;
   alb = mix(alb, vec3(0.82, 0.85, 0.9), snow);
