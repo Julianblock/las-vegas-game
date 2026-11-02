@@ -122,6 +122,7 @@ import { littleCaesars } from './littleCaesars';
 import { littleWhiteChapelSign } from './littleWhiteChapelSign';
 import { llHawaiian } from './llHawaiian';
 import { lotusOfSiam } from './lotusOfSiam';
+import { lvBrewing } from './lvBrewing';
 import { lvTactical } from './lvTactical';
 import { mainStay } from './mainStay';
 import { marieCallenders } from './marieCallenders';
@@ -350,6 +351,7 @@ export const BRANDS: Brand[] = [
   littleWhiteChapelSign,
   llHawaiian,
   lotusOfSiam,
+  lvBrewing,
   lvTactical,
   mainStay,
   marieCallenders,
