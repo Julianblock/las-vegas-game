@@ -125,6 +125,7 @@ import { metroPcs } from './metroPcs';
 import { metroPizza } from './metroPizza';
 import { mintIndian } from './mintIndian';
 import { mintTavern } from './mintTavern';
+import { monBelAmi } from './monBelAmi';
 import { mortons } from './mortons';
 import { motel8 } from './motel8';
 import { nachoDaddy } from './nachoDaddy';
@@ -334,6 +335,7 @@ export const BRANDS: Brand[] = [
   metroPizza,
   mintIndian,
   mintTavern,
+  monBelAmi,
   mortons,
   motel8,
   nachoDaddy,
