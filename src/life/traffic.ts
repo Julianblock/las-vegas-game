@@ -321,8 +321,8 @@ export class Traffic {
       const dz = c.z - camPos.z;
       const d2 = dx * dx + dz * dz;
       if (d2 < 8000 * 8000 || c.y === 0) c.y = this.hf.surface(c.x, c.z) + 0.2;
-      const ang = Math.atan2(uz, ux);
-      this.t0[c.type].set([c.x, c.y, c.z, ang], c.slot * 4);
+      const o = c.slot * 4, t0 = this.t0[c.type];
+      t0[o] = c.x; t0[o + 1] = c.y; t0[o + 2] = c.z; t0[o + 3] = Math.atan2(uz, ux);
 
       if (lamps > 0.02 && d2 < 15000 * 15000) {
         const t = VEHICLES[c.type];
