@@ -212,6 +212,7 @@ import { starMotel } from './starMotel';
 import { steakNShake } from './steakNShake';
 import { subway } from './subway';
 import { super8 } from './super8';
+import { superPawn } from './superPawn';
 import { sweethearts } from './sweethearts';
 import { tacoBell } from './tacoBell';
 import { tacosElGordo } from './tacosElGordo';
@@ -467,6 +468,7 @@ export const BRANDS: Brand[] = [
   steakNShake,
   subway,
   super8,
+  superPawn,
   sweethearts,
   tacoBell,
   tacosElGordo,
