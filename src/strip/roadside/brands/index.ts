@@ -63,6 +63,7 @@ import { firefly } from './firefly';
 import { firestone } from './firestone';
 import { fiveGuys } from './fiveGuys';
 import { flamingoDecaturPlaza } from './flamingoDecaturPlaza';
+import { flexLounge } from './flexLounge';
 import { fogoDeChao } from './fogoDeChao';
 import { funHogRanch } from './funHogRanch';
 import { giordanos } from './giordanos';
@@ -243,6 +244,7 @@ export const BRANDS: Brand[] = [
   firestone,
   fiveGuys,
   flamingoDecaturPlaza,
+  flexLounge,
   fogoDeChao,
   funHogRanch,
   giordanos,
