@@ -21,11 +21,11 @@ function paint() {
   g.fillStyle = '#ffffff';
   g.textAlign = 'center';
   g.textBaseline = 'middle';
-  g.font = `900 150px ${SANS}`;
-  g.fillText('CES 2027', c.width * 0.36, c.height * 0.52);
-  g.font = `700 40px ${SANS}`;
-  g.fillText('THE MOST POWERFUL', c.width * 0.8, c.height * 0.38);
-  g.fillText('TECH EVENT', c.width * 0.8, c.height * 0.62);
+  g.font = `900 140px ${SANS}`;
+  g.fillText('CES 2027', c.width * 0.31, c.height * 0.52, c.width * 0.56);
+  g.font = `700 34px ${SANS}`;
+  g.fillText('THE MOST POWERFUL', c.width * 0.8, c.height * 0.38, c.width * 0.34);
+  g.fillText('TECH EVENT', c.width * 0.8, c.height * 0.62, c.width * 0.34);
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
   return t;
