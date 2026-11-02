@@ -143,7 +143,8 @@ void main() {
 
   // Desert pavement: old fan surfaces armoured with dark, varnished pebbles.
   float flat0 = 1.0 - smoothstep(0.03, 0.12, slope);
-  float pave = smoothstep(0.52, 0.72, fbm(xz / 340.0 + 11.0, 4)) * flat0 * scrub * (1.0 - mB.r);
+  float paveW = flat0 * scrub * (1.0 - mB.r);
+  float pave = paveW > 0.0 ? smoothstep(0.52, 0.72, fbm(xz / 340.0 + 11.0, 4)) * paveW : 0.0;
   alb = mix(alb, alb * vec3(0.72, 0.66, 0.6), pave * 0.55);
 
   // --- Sandy washes ----------------------------------------------------------------
