@@ -59,6 +59,7 @@ import { diamondInn } from './diamondInn';
 import { dollarGeneral } from './dollarGeneral';
 import { dollarTree } from './dollarTree';
 import { dominos } from './dominos';
+import { donaMaria } from './donaMaria';
 import { dottys } from './dottys';
 import { doubleDown } from './doubleDown';
 import { doubleTree } from './doubleTree';
@@ -277,6 +278,7 @@ export const BRANDS: Brand[] = [
   dollarGeneral,
   dollarTree,
   dominos,
+  donaMaria,
   dottys,
   doubleDown,
   doubleTree,
