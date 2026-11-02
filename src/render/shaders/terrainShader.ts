@@ -181,8 +181,10 @@ void main() {
 
   // --- Lake shore: tamarisk, arrowweed and cattail; lawns and alfalfa ---------------
   float shore = mB.a;
-  vec3 tam = mix(vec3(0.13, 0.13, 0.07), vec3(0.20, 0.16, 0.10), (1.0 - uVeg.x) * 0.6 + 0.3 * nB) * (0.75 + 0.5 * vnoise(xz / 4.0));
-  alb = mix(alb, tam, shore * 0.7);
+  if (shore > 0.0) {
+    vec3 tam = mix(vec3(0.13, 0.13, 0.07), vec3(0.20, 0.16, 0.10), (1.0 - uVeg.x) * 0.6 + 0.3 * nB) * (0.75 + 0.5 * vnoise(xz / 4.0));
+    alb = mix(alb, tam, shore * 0.7);
+  }
 
   // --- Water ------------------------------------------------------------------------
   float waterFrac = mA.a * smoothstep(0.12, 0.05, l + 0.02);
