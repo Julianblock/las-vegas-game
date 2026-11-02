@@ -338,6 +338,41 @@ export class People {
     this.group.add(mesh);
   }
 
+  /** Keeps `attr` as slot data and draws `name` from a packed copy of it. */
+  private stage(name: string, attr: THREE.InstancedBufferAttribute) {
+    this.src[name] = attr;
+    let d = this.drawn[name];
+    if (!d || d.array.length !== attr.array.length) {
+      d = new THREE.InstancedBufferAttribute(new Float32Array(attr.array.length), attr.itemSize);
+      d.setUsage(THREE.DynamicDrawUsage);
+      this.drawn[name] = d;
+      this.geo.setAttribute(name, d);
+    }
+  }
+
+  /** Copies the visible people to the front of the draw buffers and draws only them. */
+  private pack() {
+    const y = this.t0.array as Float32Array;
+    const names = Object.keys(this.src);
+    let j = 0;
+    for (let i = 0; i < this.t0.count; i++) {
+      if (y[i * 4 + 1] < -5000) continue;
+      for (const name of names) {
+        const s = this.src[name].array as Float32Array, d = this.drawn[name].array as Float32Array;
+        const n = this.src[name].itemSize;
+        for (let c = 0; c < n; c++) d[j * n + c] = s[i * n + c];
+      }
+      j++;
+    }
+    for (const name of names) {
+      const d = this.drawn[name];
+      d.clearUpdateRanges();
+      d.addUpdateRange(0, Math.max(1, j) * d.itemSize);
+      d.needsUpdate = true;
+    }
+    this.geo.instanceCount = j;
+  }
+
   /** Dress the crowd from `set`: each person draws the same slot in whichever set is worn. */
   wear(set: Costume[]) {
     if (set === this.worn) return;
