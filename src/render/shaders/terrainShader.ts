@@ -248,7 +248,7 @@ void main() {
 
   // Snow lies thin on the desert: shrubs and rocks poke through the blanket.
   float snowed = snowAmount(n, xz, vWorld.y) * (1.0 - rocky * 0.6) * (1.0 - canopy * 0.7) * (1.0 - under);
-  float driftS = 0.88 + 0.12 * fbm(xz / 45.0 + 7.0, 3);
+  float driftS = snowed > 0.0 ? 0.88 + 0.12 * fbm(xz / 45.0 + 7.0, 3) : 1.0;
   alb = mix(alb, SNOW_ALB * driftS * (0.94 + 0.06 * fine), snowed * (1.0 - waterFrac * 0.7));
   waterFrac *= 1.0 - snowed * 0.85;
 
