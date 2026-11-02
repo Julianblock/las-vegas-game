@@ -167,6 +167,7 @@ import { seafoodCity } from './seafoodCity';
 import { sevenEleven } from './sevenEleven';
 import { seventySix } from './seventySix';
 import { shakeShack } from './shakeShack';
+import { shalimar } from './shalimar';
 import { shell } from './shell';
 import { siegelSuites } from './siegelSuites';
 import { sinclair } from './sinclair';
@@ -380,6 +381,7 @@ export const BRANDS: Brand[] = [
   sevenEleven,
   seventySix,
   shakeShack,
+  shalimar,
   shell,
   siegelSuites,
   sinclair,
