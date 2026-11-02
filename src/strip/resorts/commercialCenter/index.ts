@@ -11,5 +11,6 @@ export const commercialCenter: Resort = {
   signs: [commercialCenterName, commercialCenterBoard],
   build: (k) => {
     pylon(k, 4497, -3084);
+    for (const r of ROWS) arcade(k, r);
   },
 };
