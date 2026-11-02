@@ -31,6 +31,8 @@ function button(k: Kit, fr: Frame) {
  */
 export function mast(k: Kit, fr: Frame, reach: number, name: string, dir = 1) {
   k.cyl(fr, 0, 0, 0, 0.22, 0.16, 7.5, STEEL, { rough: 0.5 });
+  walkHead(k, fr, 2.7);
+  button(k, fr);
   k.box(fr, (dir * reach) / 2, 6.9, 0, reach, 0.18, 0.18, STEEL, { rough: 0.5 });
   head(k, fr, dir * reach * 0.55, 6.8, 0);
   head(k, fr, dir * reach * 0.85, 6.8, 0);
