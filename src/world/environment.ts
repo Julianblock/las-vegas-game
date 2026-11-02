@@ -11,7 +11,7 @@ import {
   sunRaDec,
 } from '../sky/astro';
 
-export type Season = 'winter' | 'lunar' | 'bloom' | 'spring' | 'summer' | 'july4' | 'fall' | 'halloween' | 'grandprix' | 'rodeo' | 'newyear';
+export type Season = 'winter' | 'ces' | 'lunar' | 'bloom' | 'spring' | 'summer' | 'july4' | 'fall' | 'halloween' | 'grandprix' | 'rodeo' | 'newyear';
 export type TimePreset =
   | 'night'
   | 'predawn'
