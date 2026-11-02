@@ -13,7 +13,7 @@ import { CROSS_BLADES, FLAMINGO_BLADES } from './streetNames';
 export const flamingoRoad: Resort = {
   id: 'flamingoRoad',
   name: 'Flamingo Road streetscape',
-  signs: [rtc202, shelterAd, ...FLAMINGO_BLADES, ...CROSS_BLADES],
+  signs: [rtc202, shelterAd, ...FLAMINGO_BLADES, ...CROSS_BLADES, billboardFace],
   build: (k) => {
     buildMedian(k);
     buildLights(k);
