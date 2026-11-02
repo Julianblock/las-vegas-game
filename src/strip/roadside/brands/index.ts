@@ -8,6 +8,7 @@ import { att } from './att';
 import { autozone } from './autozone';
 import { bagelmania } from './bagelmania';
 import { bahamaBreeze } from './bahamaBreeze';
+import { bajamar } from './bajamar';
 import { battistas } from './battistas';
 import { bbqChicken } from './bbqChicken';
 import { benihana } from './benihana';
@@ -183,6 +184,7 @@ export const BRANDS: Brand[] = [
   autozone,
   bagelmania,
   bahamaBreeze,
+  bajamar,
   battistas,
   bbqChicken,
   benihana,
