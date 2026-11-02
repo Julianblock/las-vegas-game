@@ -189,6 +189,7 @@ import { tacosMexico } from './tacosMexico';
 import { terribles } from './terribles';
 import { texaco } from './texaco';
 import { tireXpress } from './tireXpress';
+import { titleLoans } from './titleLoans';
 import { titleMax } from './titleMax';
 import { tix4tonight } from './tix4tonight';
 import { tmobile } from './tmobile';
@@ -405,6 +406,7 @@ export const BRANDS: Brand[] = [
   terribles,
   texaco,
   tireXpress,
+  titleLoans,
   titleMax,
   tix4tonight,
   tmobile,
