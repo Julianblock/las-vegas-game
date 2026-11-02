@@ -442,7 +442,9 @@ export class Props {
   update(cam: THREE.Vector3, focus: THREE.Vector3) {
     for (const b of this.batches) {
       const d = Math.hypot(b.center.x - cam.x, b.center.z - cam.z) - b.radius;
-      b.mesh.visible = b.tower || d < 14000;
+      const shown = b.tower || d < (b.small ? SMALL_FAR : 14000);
+      b.mesh.visible = shown && (!b.lod || d < LOD_NEAR);
+      if (b.lod) b.lod.visible = shown && d >= LOD_NEAR;
       if (b.caster) b.caster.visible = Math.hypot(b.center.x - focus.x, b.center.z - focus.z) - b.radius < 700;
     }
   }
