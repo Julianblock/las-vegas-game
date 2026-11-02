@@ -321,10 +321,10 @@ export class People {
         this.t1.setXYZW(i, hash(i) * 6.28, 0, height, hash(i * 3.3));
       }
     });
-    this.geo.setAttribute('aT0', this.t0);
-    this.geo.setAttribute('aT1', this.t1);
-    this.geo.setAttribute('aC0', new THREE.InstancedBufferAttribute(c0, 4));
-    this.geo.setAttribute('aC1', new THREE.InstancedBufferAttribute(c1, 4));
+    this.stage('aT0', this.t0);
+    this.stage('aT1', this.t1);
+    this.stage('aC0', new THREE.InstancedBufferAttribute(c0, 4));
+    this.stage('aC1', new THREE.InstancedBufferAttribute(c1, 4));
     this.wear(COSTUMES);
     this.geo.instanceCount = total;
     this.material = new THREE.ShaderMaterial({
