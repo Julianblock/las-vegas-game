@@ -140,6 +140,7 @@ export const RESORTS: Resort[] = [
   neonMuseum,
   gateway,
   urbanGallery,
+  fremontEast,
   // Last: chain signs skip ground the landmarks above have reserved.
   roadside,
 ];
