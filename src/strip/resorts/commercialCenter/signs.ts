@@ -17,9 +17,7 @@ export const commercialCenterName: SignSpec = {
       g.lineTo(w * 0.86 + Math.cos(a) * h * 0.16, h * 0.22 + Math.sin(a) * h * 0.16);
       g.stroke();
     }
-    g.fillStyle = '#ffffff';
     neon(g, 'Commercial', w * 0.46, h * 0.38, w * 0.8, (p) => `${p}px ${SCRIPT}`, h * 0.4, '#ffffff');
-    g.fillStyle = '#ffd400';
     neon(g, 'CENTER', w / 2, h * 0.78, w * 0.7, (p) => `900 ${p}px ${SANS}`, h * 0.28, '#ffd400');
   },
 };
