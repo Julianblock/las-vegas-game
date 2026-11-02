@@ -8,6 +8,7 @@ import { ampm } from './ampm';
 import { applebees } from './applebees';
 import { arco } from './arco';
 import { artifice } from './artifice';
+import { arubaHotel } from './arubaHotel';
 import { att } from './att';
 import { autozone } from './autozone';
 import { bagelmania } from './bagelmania';
@@ -229,6 +230,7 @@ export const BRANDS: Brand[] = [
   applebees,
   arco,
   artifice,
+  arubaHotel,
   att,
   autozone,
   bagelmania,
