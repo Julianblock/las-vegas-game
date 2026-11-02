@@ -11,8 +11,8 @@ export const fremontEast: Resort = {
   build: (k) => {
     for (const b of BARS) {
       const fr = facadeFrame(k, b.s, b.side);
-      k.box(fr, 0, 4.2, -0.6, 0.15, 0.15, 1.4, '#2a2a2e', { rough: 0.5 });
-      k.sign(fr, b.sign.name, 0, 4.2 - 0.9, 0.1, 1.6, 1.5, FX.NEON, Math.PI / 2, true);
+      k.box(fr, 0, 4.2, 1.7, 0.15, 0.15, 3.4, '#2a2a2e', { rough: 0.5 });
+      k.sign(fr, b.sign.name, 0, 4.2 - 0.6, 1.8, 1.1, 1.5, FX.NEON, Math.PI / 2, true);
     }
   },
 };
