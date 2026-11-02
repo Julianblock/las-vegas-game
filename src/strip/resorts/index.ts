@@ -3,6 +3,7 @@ import { gateway } from './gateway';
 import { neonMuseum } from './neonMuseum';
 import { urbanGallery } from './urbanGallery';
 import { fremontEast } from './fremontEast';
+import { flamingoRoad } from './flamingoRoad';
 import { arizonaCharlies } from './arizonaCharlies';
 import { goldSpike } from './downtown/goldSpike';
 import { goldenGate } from './downtown/goldenGate';
