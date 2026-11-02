@@ -13,7 +13,10 @@ import { CROSS_BLADES, FLAMINGO_BLADES } from './streetNames';
 /** Kerb half-width: narrower west of the freeway. */
 const kerb = (x: number) => (x < 1000 ? 15 : 22);
 
-/** Flamingo Road’s streetscape: median palms west of the freeway and the 202’s bus shelters. */
+/**
+ * Flamingo Road’s streetscape: median palms and lamps west of the freeway,
+ * signal masts at the cross streets, hydrants, billboards and the 202’s bus shelters.
+ */
 export const flamingoRoad: Resort = {
   id: 'flamingoRoad',
   name: 'Flamingo Road streetscape',
