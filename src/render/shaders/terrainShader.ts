@@ -190,7 +190,7 @@ void main() {
   float waterFrac = mA.a * smoothstep(0.12, 0.05, l + 0.02);
   // Rain pools in clay hollows, ruts and wash bottoms, and dries within hours.
   float canopy = shrub;
-  float hollow = vnoise(ROT_P * xz / 7.0) * 0.6 + vnoise(xz / 1.9) * 0.4;
+  float hollow = uWet > 0.45 ? vnoise(ROT_P * xz / 7.0) * 0.6 + vnoise(xz / 1.9) * 0.4 : 0.0;
   float puddle = smoothstep(0.8, 0.92, hollow + uWet * 0.22) * smoothstep(0.45, 0.85, uWet) * (1.0 - canopy) * (1.0 - rocky);
   waterFrac = max(waterFrac, puddle * (0.5 + 0.5 * wash));
   waterFrac *= smoothstep(0.30, 0.12, slope);
