@@ -213,6 +213,7 @@ import { umiya } from './umiya';
 import { upsStore } from './upsStore';
 import { usps } from './usps';
 import { vegasMarket } from './vegasMarket';
+import { vegasVegan } from './vegasVegan';
 import { verizon } from './verizon';
 import { vesta } from './vesta';
 import { villagePub } from './villagePub';
@@ -443,6 +444,7 @@ export const BRANDS: Brand[] = [
   upsStore,
   usps,
   vegasMarket,
+  vegasVegan,
   verizon,
   vesta,
   villagePub,
