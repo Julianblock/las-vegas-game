@@ -50,6 +50,7 @@ import { Water } from './world/water';
 import { WaterSurface } from './render/waterSurface';
 import { Fish } from './life/fish';
 import { cesCrowd } from './events/ces/crowd';
+import { commercialCenterCrowd } from './strip/resorts/commercialCenter/crowd';
 import { costumeShare, cowboyShare, isNewYearsEve, isRodeoWeek, onTrack } from './events/calendar';
 import { onStrip } from './events/newyear/closure';
 import { setToday } from './events/today';
