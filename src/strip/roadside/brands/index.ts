@@ -114,6 +114,7 @@ import { metroPizza } from './metroPizza';
 import { mintIndian } from './mintIndian';
 import { mintTavern } from './mintTavern';
 import { mortons } from './mortons';
+import { motel8 } from './motel8';
 import { nachoDaddy } from './nachoDaddy';
 import { nirvanaHotel } from './nirvanaHotel';
 import { officeDepot } from './officeDepot';
@@ -306,6 +307,7 @@ export const BRANDS: Brand[] = [
   mintIndian,
   mintTavern,
   mortons,
+  motel8,
   nachoDaddy,
   nirvanaHotel,
   officeDepot,
