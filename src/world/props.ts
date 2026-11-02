@@ -415,7 +415,20 @@ export class Props {
         g.boundingBox = box;
         const mesh = new THREE.Mesh(g, this.material);
         this.group.add(mesh);
-        this.batches.push({ geo: g, mesh, center: g.boundingSphere.center, radius: g.boundingSphere.radius, tower: k === GEO.TOWER });
+        let lod: THREE.Mesh | undefined;
+        if (BUILDINGS.has(k)) {
+          const lg = new THREE.InstancedBufferGeometry();
+          for (const name of Object.keys(lodBase.attributes)) lg.setAttribute(name, lodBase.attributes[name]);
+          lg.setIndex(lodBase.index);
+          for (const name of ['aT0', 'aT1', 'aWall', 'aRoof']) lg.setAttribute(name, g.attributes[name]);
+          lg.instanceCount = n;
+          lg.boundingSphere = g.boundingSphere;
+          lg.boundingBox = box;
+          lod = new THREE.Mesh(lg, this.material);
+          lod.visible = false;
+          this.group.add(lod);
+        }
+        this.batches.push({ geo: g, mesh, center: g.boundingSphere.center, radius: g.boundingSphere.radius, tower: k === GEO.TOWER, lod, small: SMALL.has(k) });
       }
     });
   }
