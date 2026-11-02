@@ -29,3 +29,18 @@ export const COSTUMES: Costume[] = [
   { name: 'Wizard', shirt: '#2a1a6a', pants: '#2a1a6a', hair: '#c8c8d0', face: null },
   { name: 'Astronaut', shirt: '#eaeae6', pants: '#eaeae6', hair: '#eaeae6', face: null },
 ];
+
+/**
+ * Rodeo week: what the National Finals crowd wears into town. Hair stands in
+ * for the hat — straw, black felt, silver belly — and pearl-snap shirts over denim.
+ */
+export const WESTERN: Costume[] = [
+  { name: 'Straw hat', shirt: '#e8e0d0', pants: '#2a3a5a', hair: '#d8c08a', face: null },
+  { name: 'Black hat', shirt: '#1a1a1e', pants: '#26324e', hair: '#141416', face: null },
+  { name: 'Silver belly', shirt: '#6a8ab8', pants: '#2a3a5a', hair: '#cfc8b8', face: null },
+  { name: 'Plaid', shirt: '#a8302a', pants: '#2e3c5c', hair: '#5a3a22', face: null },
+  { name: 'Turquoise snap', shirt: '#3aa8a8', pants: '#24304a', hair: '#e0d8c8', face: null },
+  { name: 'Buckle bunny', shirt: '#e8508a', pants: '#2a3a5a', hair: '#f4f0e8', face: null },
+  { name: 'Duster', shirt: '#8a6a4a', pants: '#3a2a1e', hair: '#3a2a1a', face: null },
+  { name: 'Denim on denim', shirt: '#4a6a9a', pants: '#2a3a5a', hair: '#141416', face: null },
+];
