@@ -1,5 +1,5 @@
 import type { Kit } from '../../kit';
-import { CROSS, flamingoZ } from '../../streets';
+import { CROSS, flamingoZ, stripX } from '../../streets';
 import { mast } from './mast';
 import { NAMES } from './streetNames';
 
