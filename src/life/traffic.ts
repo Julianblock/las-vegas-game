@@ -49,6 +49,10 @@ interface Car {
   headlight: number;
 }
 
+/** Cars farther than this (m) only move every STRIDE frames, in bigger steps. */
+const FAR = 2500;
+const STRIDE = 4;
+
 function hash(n: number) {
   const s = Math.sin(n * 127.1 + 311.7) * 43758.5453;
   return s - Math.floor(s);
@@ -65,6 +69,7 @@ export class Traffic {
   private geos: THREE.InstancedBufferGeometry[] = [];
   private t0: Float32Array[] = [];
   private buckets = new Map<number, Car[]>();
+  private tick = 0;
   /** Streets shut to traffic, such as the Grand Prix circuit on race nights: cars there are hidden. */
   closed: ((x: number, z: number) => boolean) | null = null;
 
@@ -249,6 +254,52 @@ export class Traffic {
     car.vt = e.speed * (0.88 + Math.random() * 0.22) * (car.type === V.SEMI ? 0.9 : 1);
   }
 
+  /** Moves one car `dt` seconds along the graph and writes its instance transform; `ground` re-reads the terrain under it. */
+  private drive(c: Car, dt: number, pace: number, ground: boolean) {
+    c.v += (c.vt * pace - c.v) * Math.min(1, dt * 0.5);
+    let e = this.edges[c.e];
+    c.s += c.v * dt * c.dir;
+    if (c.s > e.len || c.s < 0) {
+      this.next(c, c.s > e.len ? e.b : e.a);
+      e = this.edges[c.e];
+    }
+    // Advance the cached segment index to bracket s.
+    const n = e.pts.length / 2;
+    let i = Math.min(Math.max(c.seg, 0), n - 2);
+    while (i < n - 2 && e.cum[i + 1] < c.s) i++;
+    while (i > 0 && e.cum[i] > c.s) i--;
+    c.seg = i;
+    const x0 = e.pts[i * 2];
+    const z0 = e.pts[i * 2 + 1];
+    const x1 = e.pts[i * 2 + 2];
+    const z1 = e.pts[i * 2 + 3];
+    const sl = e.cum[i + 1] - e.cum[i] || 1;
+    const f = (c.s - e.cum[i]) / sl;
+    const hx = ((x1 - x0) / sl) * c.dir;
+    const hz = ((z1 - z0) / sl) * c.dir;
+    // Smooth the heading so cars don't snap at polyline vertices.
+    c.hx += (hx - c.hx) * Math.min(1, dt * 4);
+    c.hz += (hz - c.hz) * Math.min(1, dt * 4);
+    const hl = Math.hypot(c.hx, c.hz) || 1;
+    const ux = c.hx / hl;
+    const uz = c.hz / hl;
+    // Keep right: divided roads drive on their own carriageway; on undivided
+    // four-lane roads buses, limos and trucks hold the outside lane.
+    const slow = !!VEHICLES[c.type].slow || c.headlight > 0.5;
+    const lane = e.oneway ? (e.lanes > 1 ? (slow ? 1.8 : -1.8) : 0) : e.lanes >= 4 ? (slow ? 5.5 : 1.9) : 1.9;
+    c.x = x0 + (x1 - x0) * f - uz * lane;
+    c.z = z0 + (z1 - z0) * f + ux * lane;
+    if (this.closed?.(c.x, c.z)) {
+      const o = c.slot * 4, t0 = this.t0[c.type];
+      t0[o] = c.x; t0[o + 1] = -1e4; t0[o + 2] = c.z; t0[o + 3] = 0;
+      c.y = -1e4;
+      return;
+    }
+    if (ground || c.y <= 0) c.y = this.hf.surface(c.x, c.z) + 0.2;
+    const o = c.slot * 4, t0 = this.t0[c.type];
+    t0[o] = c.x; t0[o + 1] = c.y; t0[o + 2] = c.z; t0[o + 3] = Math.atan2(uz, ux);
+  }
+
   /**
    * @param lamps how brightly lamps burn (night, or murky weather by day)
    * @param pace  fraction of free-flow speed drivers keep (slower in rain and snow)
@@ -278,52 +329,20 @@ export class Traffic {
 
     let li = 0;
     const lp = this.lights;
-    for (const c of this.cars) {
-      c.v += (c.vt * pace - c.v) * Math.min(1, dt * 0.5);
-      let e = this.edges[c.e];
-      c.s += c.v * dt * c.dir;
-      if (c.s > e.len || c.s < 0) {
-        this.next(c, c.s > e.len ? e.b : e.a);
-        e = this.edges[c.e];
-      }
-      // Advance the cached segment index to bracket s.
-      const n = e.pts.length / 2;
-      let i = Math.min(Math.max(c.seg, 0), n - 2);
-      while (i < n - 2 && e.cum[i + 1] < c.s) i++;
-      while (i > 0 && e.cum[i] > c.s) i--;
-      c.seg = i;
-      const x0 = e.pts[i * 2];
-      const z0 = e.pts[i * 2 + 1];
-      const x1 = e.pts[i * 2 + 2];
-      const z1 = e.pts[i * 2 + 3];
-      const sl = e.cum[i + 1] - e.cum[i] || 1;
-      const f = (c.s - e.cum[i]) / sl;
-      const hx = ((x1 - x0) / sl) * c.dir;
-      const hz = ((z1 - z0) / sl) * c.dir;
-      // Smooth the heading so cars don't snap at polyline vertices.
-      c.hx += (hx - c.hx) * Math.min(1, dt * 4);
-      c.hz += (hz - c.hz) * Math.min(1, dt * 4);
+    this.tick++;
+    for (let ci = 0; ci < this.cars.length; ci++) {
+      const c = this.cars[ci];
+      const fx = c.x - camPos.x, fz = c.z - camPos.z;
+      const f2 = fx * fx + fz * fz;
+      const far = c.y !== 0 && f2 > FAR * FAR;
+      if (!far || (ci + this.tick) % STRIDE === 0) this.drive(c, far ? Math.min(dt * STRIDE, 0.25) : dt, pace, f2 < 8000 * 8000);
+      if (c.y < -1000) continue;
       const hl = Math.hypot(c.hx, c.hz) || 1;
       const ux = c.hx / hl;
       const uz = c.hz / hl;
-      // Keep right: divided roads drive on their own carriageway; on undivided
-      // four-lane roads buses, limos and trucks hold the outside lane.
-      const slow = !!VEHICLES[c.type].slow || c.headlight > 0.5;
-      const lane = e.oneway ? (e.lanes > 1 ? (slow ? 1.8 : -1.8) : 0) : e.lanes >= 4 ? (slow ? 5.5 : 1.9) : 1.9;
-      c.x = x0 + (x1 - x0) * f - uz * lane;
-      c.z = z0 + (z1 - z0) * f + ux * lane;
-      if (this.closed?.(c.x, c.z)) {
-        const o = c.slot * 4, t0 = this.t0[c.type];
-        t0[o] = c.x; t0[o + 1] = -1e4; t0[o + 2] = c.z; t0[o + 3] = 0;
-        continue;
-      }
       const dx = c.x - camPos.x;
       const dz = c.z - camPos.z;
       const d2 = dx * dx + dz * dz;
-      if (d2 < 8000 * 8000 || c.y === 0) c.y = this.hf.surface(c.x, c.z) + 0.2;
-      const o = c.slot * 4, t0 = this.t0[c.type];
-      t0[o] = c.x; t0[o + 1] = c.y; t0[o + 2] = c.z; t0[o + 3] = Math.atan2(uz, ux);
-
       if (lamps > 0.02 && d2 < 15000 * 15000) {
         const t = VEHICLES[c.type];
         const half = t.len / 2;
