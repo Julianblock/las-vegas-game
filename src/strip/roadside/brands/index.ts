@@ -28,6 +28,7 @@ import { bourbonStreet } from './bourbonStreet';
 import { brewTea } from './brewTea';
 import { brokenYolk } from './brokenYolk';
 import { bucaDiBeppo } from './bucaDiBeppo';
+import { buffaloExchange } from './buffaloExchange';
 import { buffaloWildWings } from './buffaloWildWings';
 import { burgerKing } from './burgerKing';
 import { cafeRio } from './cafeRio';
@@ -264,6 +265,7 @@ export const BRANDS: Brand[] = [
   brewTea,
   brokenYolk,
   bucaDiBeppo,
+  buffaloExchange,
   buffaloWildWings,
   burgerKing,
   cafeRio,
