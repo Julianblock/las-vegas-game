@@ -17,6 +17,7 @@ import { bestWestern } from './bestWestern';
 import { bigO } from './bigO';
 import { blueberryHill } from './blueberryHill';
 import { bonfire } from './bonfire';
+import { bourbonStreet } from './bourbonStreet';
 import { brewTea } from './brewTea';
 import { brokenYolk } from './brokenYolk';
 import { bucaDiBeppo } from './bucaDiBeppo';
@@ -216,6 +217,7 @@ export const BRANDS: Brand[] = [
   bigO,
   blueberryHill,
   bonfire,
+  bourbonStreet,
   brewTea,
   brokenYolk,
   bucaDiBeppo,
