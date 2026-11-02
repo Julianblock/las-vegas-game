@@ -157,6 +157,10 @@ interface Batch {
   radius: number;
   tower: boolean;
   caster?: THREE.Mesh;
+  /** Box stand-in drawn instead of `mesh` once the tile is far away. */
+  lod?: THREE.Mesh;
+  /** Cars, lamps and poles: hidden outright at a distance. */
+  small: boolean;
 }
 
 /**
