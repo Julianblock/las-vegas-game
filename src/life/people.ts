@@ -391,10 +391,10 @@ export class People {
       col.set(cos.face ?? '#000000');
       k3.set([col.r, col.g, col.b], i * 3);
     }
-    this.geo.setAttribute('aK0', new THREE.InstancedBufferAttribute(k0, 4));
-    this.geo.setAttribute('aK1', new THREE.InstancedBufferAttribute(k1, 4));
-    this.geo.setAttribute('aK2', new THREE.InstancedBufferAttribute(k2, 4));
-    this.geo.setAttribute('aK3', new THREE.InstancedBufferAttribute(k3, 3));
+    this.stage('aK0', new THREE.InstancedBufferAttribute(k0, 4));
+    this.stage('aK1', new THREE.InstancedBufferAttribute(k1, 4));
+    this.stage('aK2', new THREE.InstancedBufferAttribute(k2, 4));
+    this.stage('aK3', new THREE.InstancedBufferAttribute(k3, 3));
   }
 
   /** Fraction of people in costume (0 most of the year, about a third on Halloween night). */
