@@ -1,6 +1,7 @@
 import type { Bar } from '../bar';
 import { kabobKorner } from './kabobKorner';
+import { parkOnFremont } from './parkOnFremont';
 import { uncleJoes } from './uncleJoes';
 
 /** Every storefront sign on Fremont East, west to east. */
-export const BARS: Bar[] = [, uncleJoes, kabobKorner];
+export const BARS: Bar[] = [, uncleJoes, kabobKorner, parkOnFremont];
