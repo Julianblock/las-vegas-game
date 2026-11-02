@@ -143,6 +143,10 @@ function lampGeometry(): THREE.BufferGeometry {
 }
 
 const PROP_TILE = 2000;
+/** Tiles farther than this (m) draw buildings as plain boxes. */
+const LOD_NEAR = 1500;
+/** Parked cars, lamps and poles vanish past this (m); they're specks by then. */
+const SMALL_FAR = 2500;
 /** Las Vegas is fully mapped: no filler lots along its streets. */
 const FILL_LOTS = false;
 
