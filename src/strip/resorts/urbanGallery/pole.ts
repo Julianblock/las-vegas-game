@@ -10,6 +10,8 @@ export interface Mount {
   /** Height of the sign face (m) and of its bottom edge above the ground. */
   h: number;
   lift: number;
+  /** Neon buzzes between frames; anything else steps through them. */
+  fx?: number;
 }
 
 /** A restored sign on a single steel mast, readable from both ways down the street. */
