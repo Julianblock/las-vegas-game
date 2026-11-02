@@ -130,6 +130,7 @@ import { lotusOfSiam } from './lotusOfSiam';
 import { lvBrewing } from './lvBrewing';
 import { lvTactical } from './lvTactical';
 import { mainStay } from './mainStay';
+import { makersFinders } from './makersFinders';
 import { marieCallenders } from './marieCallenders';
 import { marigold } from './marigold';
 import { marriott } from './marriott';
@@ -374,6 +375,7 @@ export const BRANDS: Brand[] = [
   lvBrewing,
   lvTactical,
   mainStay,
+  makersFinders,
   marieCallenders,
   marigold,
   marriott,
