@@ -203,6 +203,7 @@ import { sweethearts } from './sweethearts';
 import { tacoBell } from './tacoBell';
 import { tacosElGordo } from './tacosElGordo';
 import { tacosMexico } from './tacosMexico';
+import { tacotarian } from './tacotarian';
 import { terribles } from './terribles';
 import { texaco } from './texaco';
 import { threeSheets } from './threeSheets';
@@ -443,6 +444,7 @@ export const BRANDS: Brand[] = [
   tacoBell,
   tacosElGordo,
   tacosMexico,
+  tacotarian,
   terribles,
   texaco,
   threeSheets,
