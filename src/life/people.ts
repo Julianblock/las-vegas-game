@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { COSTUMES } from './costumes';
+import { COSTUMES, type Costume } from './costumes';
 import { G } from '../render/globals';
 import { lightingCommon } from '../render/shaders/lighting';
 import type { Heightfield } from '../world/heightfield';
@@ -253,6 +253,7 @@ export class People {
   /** Standing people: fixed instance slots, revealed by time of day. */
   private standers: { slot: number; crowd: number; rank: number }[] = [];
   private material: THREE.ShaderMaterial;
+  private worn: Costume[] | null = null;
 
   constructor(private crowds: Crowd[], private hf: Heightfield) {
     const base = bodyGeometry();
@@ -289,10 +290,6 @@ export class People {
     this.t1.setUsage(THREE.DynamicDrawUsage);
     const c0 = new Float32Array(total * 4);
     const c1 = new Float32Array(total * 4);
-    const k0 = new Float32Array(total * 4);
-    const k1 = new Float32Array(total * 4);
-    const k2 = new Float32Array(total * 4);
-    const k3 = new Float32Array(total * 3);
     const col = new THREE.Color();
     plan.forEach((p, i) => {
       const h = hash(i * 3.7 + 1.3);
@@ -300,15 +297,6 @@ export class People {
       c0.set([col.r, col.g, col.b, Math.floor(hash(i * 5.3) * 5)], i * 4);
       col.set(PANTS[Math.floor(hash(i * 2.3) * PANTS.length)]);
       c1.set([col.r, col.g, col.b, hash(i * 8.1) < 0.12 ? 3 : Math.floor(hash(i * 6.7) * 5)], i * 4);
-      const cos = COSTUMES[Math.floor(hash(i * 13.1) * COSTUMES.length)];
-      col.set(cos.shirt);
-      k0.set([col.r, col.g, col.b, hash(i * 17.3)], i * 4);
-      col.set(cos.pants);
-      k1.set([col.r, col.g, col.b, cos.hair ? 1 : 0], i * 4);
-      col.set(cos.hair ?? '#000000');
-      k2.set([col.r, col.g, col.b, cos.face ? 1 : 0], i * 4);
-      col.set(cos.face ?? '#000000');
-      k3.set([col.r, col.g, col.b], i * 3);
       const height = 0.9 + h * 0.17;
       if (p.kind === 'walk') {
         const path = this.paths[p.path!];
@@ -324,10 +312,7 @@ export class People {
     this.geo.setAttribute('aT1', this.t1);
     this.geo.setAttribute('aC0', new THREE.InstancedBufferAttribute(c0, 4));
     this.geo.setAttribute('aC1', new THREE.InstancedBufferAttribute(c1, 4));
-    this.geo.setAttribute('aK0', new THREE.InstancedBufferAttribute(k0, 4));
-    this.geo.setAttribute('aK1', new THREE.InstancedBufferAttribute(k1, 4));
-    this.geo.setAttribute('aK2', new THREE.InstancedBufferAttribute(k2, 4));
-    this.geo.setAttribute('aK3', new THREE.InstancedBufferAttribute(k3, 3));
+    this.wear(COSTUMES);
     this.geo.instanceCount = total;
     this.material = new THREE.ShaderMaterial({
       glslVersion: THREE.GLSL3,
@@ -338,6 +323,30 @@ export class People {
     const mesh = new THREE.Mesh(this.geo, this.material);
     mesh.frustumCulled = false;
     this.group.add(mesh);
+  }
+
+  /** Dress the crowd from `set`: each person draws the same slot in whichever set is worn. */
+  wear(set: Costume[]) {
+    if (set === this.worn) return;
+    this.worn = set;
+    const n = this.t0.count;
+    const k0 = new Float32Array(n * 4), k1 = new Float32Array(n * 4), k2 = new Float32Array(n * 4), k3 = new Float32Array(n * 3);
+    const col = new THREE.Color();
+    for (let i = 0; i < n; i++) {
+      const cos = set[Math.floor(hash(i * 13.1) * set.length)];
+      col.set(cos.shirt);
+      k0.set([col.r, col.g, col.b, hash(i * 17.3)], i * 4);
+      col.set(cos.pants);
+      k1.set([col.r, col.g, col.b, cos.hair ? 1 : 0], i * 4);
+      col.set(cos.hair ?? '#000000');
+      k2.set([col.r, col.g, col.b, cos.face ? 1 : 0], i * 4);
+      col.set(cos.face ?? '#000000');
+      k3.set([col.r, col.g, col.b], i * 3);
+    }
+    this.geo.setAttribute('aK0', new THREE.InstancedBufferAttribute(k0, 4));
+    this.geo.setAttribute('aK1', new THREE.InstancedBufferAttribute(k1, 4));
+    this.geo.setAttribute('aK2', new THREE.InstancedBufferAttribute(k2, 4));
+    this.geo.setAttribute('aK3', new THREE.InstancedBufferAttribute(k3, 3));
   }
 
   /** Fraction of people in costume (0 most of the year, about a third on Halloween night). */
