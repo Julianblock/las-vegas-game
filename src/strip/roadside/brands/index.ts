@@ -119,6 +119,7 @@ import { laQuinta } from './laQuinta';
 import { lawrys } from './lawrys';
 import { liquorWorld } from './liquorWorld';
 import { littleCaesars } from './littleCaesars';
+import { littleWhiteChapelSign } from './littleWhiteChapelSign';
 import { llHawaiian } from './llHawaiian';
 import { lotusOfSiam } from './lotusOfSiam';
 import { lvTactical } from './lvTactical';
@@ -346,6 +347,7 @@ export const BRANDS: Brand[] = [
   lawrys,
   liquorWorld,
   littleCaesars,
+  littleWhiteChapelSign,
   llHawaiian,
   lotusOfSiam,
   lvTactical,
