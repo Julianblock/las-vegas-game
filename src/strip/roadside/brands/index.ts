@@ -58,6 +58,7 @@ import { delTaco } from './delTaco';
 import { dennys } from './dennys';
 import { desertOasis } from './desertOasis';
 import { desertStar } from './desertStar';
+import { deThai } from './deThai';
 import { diamondInn } from './diamondInn';
 import { dollarGeneral } from './dollarGeneral';
 import { dollarTree } from './dollarTree';
@@ -297,6 +298,7 @@ export const BRANDS: Brand[] = [
   dennys,
   desertOasis,
   desertStar,
+  deThai,
   diamondInn,
   dollarGeneral,
   dollarTree,
