@@ -14,6 +14,9 @@ const BACK = 16;
  * corner over the eastbound lanes (lenses west), one on the north-west corner
  * over the westbound lanes (lenses east).
  */
+/** West or East Flamingo, split at the Strip. */
+const flamingoBlade = (x: number, z: number) => (x < stripX(z) ? 'street_flamingoW' : 'street_flamingoE');
+
 export function buildSignals(k: Kit, half: (x: number) => number) {
   for (const id of Object.keys(NAMES)) {
     const x = CROSS[id as keyof typeof CROSS];
