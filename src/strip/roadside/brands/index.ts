@@ -186,6 +186,7 @@ import { soyo } from './soyo';
 import { speedeeMart } from './speedeeMart';
 import { stageDoor } from './stageDoor';
 import { starbucks } from './starbucks';
+import { starMotel } from './starMotel';
 import { steakNShake } from './steakNShake';
 import { subway } from './subway';
 import { super8 } from './super8';
@@ -412,6 +413,7 @@ export const BRANDS: Brand[] = [
   speedeeMart,
   stageDoor,
   starbucks,
+  starMotel,
   steakNShake,
   subway,
   super8,
