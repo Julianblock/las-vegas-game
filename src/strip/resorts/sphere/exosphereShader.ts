@@ -260,6 +260,8 @@ vec3 program(vec3 n) {
   if (m == 10) return heart(n);
   if (m == 11) return clover(n);
   if (m == 12) return snowglobe(n);
+  if (m == 14) return coin(n);
+  if (m == 15) return skyLanterns(n);
   return smiley(n);
 }
 
