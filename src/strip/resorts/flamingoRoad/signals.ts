@@ -12,7 +12,8 @@ const BACK = 16;
 /**
  * Far-side signal masts at each named cross street: one on the south-east
  * corner over the eastbound lanes (lenses west), one on the north-west corner
- * over the westbound lanes (lenses east).
+ * over the westbound lanes (lenses east). The cross street gets a pair too,
+ * named for West or East Flamingo.
  */
 /** West or East Flamingo, split at the Strip. */
 const flamingoBlade = (x: number, z: number) => (x < stripX(z) ? 'street_flamingoW' : 'street_flamingoE');
