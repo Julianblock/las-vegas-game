@@ -13,6 +13,10 @@ import type { RoadIndex } from './roadIndex';
 
 export const KIND = { HOUSE: 0, SHED: 1, TANK: 2, TOWER: 3, HUT: 4, VEHICLE: 5, TRAILER: 6, STUCCO: 7, PAD: 8 } as const;
 const GEO = { HOUSE: 0, SHED: 1, TANK: 2, TOWER: 3, LATTICE: 4, POLE: 5, TRAILER: 6, FLAT: 7, LAMP: 8, CAR: 9, PICKUP: 10, PAD: 11 } as const;
+/** Kinds that swap to the box stand-in at a distance. */
+const BUILDINGS = new Set<number>([GEO.HOUSE, GEO.SHED, GEO.TRAILER, GEO.FLAT]);
+/** Kinds too small to see past SMALL_FAR. */
+const SMALL = new Set<number>([GEO.CAR, GEO.PICKUP, GEO.LAMP, GEO.POLE]);
 
 /** Parking lot: centre, heading of its stall rows (radians), width along the rows, depth across them. */
 export interface Lot {
