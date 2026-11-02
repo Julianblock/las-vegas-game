@@ -184,6 +184,7 @@ import { sinclair } from './sinclair';
 import { sistaKims } from './sistaKims';
 import { smiths } from './smiths';
 import { sonic } from './sonic';
+import { soulbelly } from './soulbelly';
 import { souvenirs } from './souvenirs';
 import { soyo } from './soyo';
 import { speedeeMart } from './speedeeMart';
@@ -415,6 +416,7 @@ export const BRANDS: Brand[] = [
   sistaKims,
   smiths,
   sonic,
+  soulbelly,
   souvenirs,
   soyo,
   speedeeMart,
