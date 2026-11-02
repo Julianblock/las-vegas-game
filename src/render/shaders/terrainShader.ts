@@ -239,10 +239,12 @@ void main() {
     stoneCol *= 0.8 + 0.35 * (1.0 - pb.x);
     alb = mix(alb, stoneCol, stone * pebbleFade * 0.5);
   }
-  float h0 = vnoise(q1 / 3.7) + 0.5 * vnoise(q2 / 1.4);
-  float hx = vnoise((q1 + vec2(0.5, 0.0)) / 3.7) + 0.5 * vnoise((q2 + vec2(0.5, 0.0)) / 1.4);
-  float hz = vnoise((q1 + vec2(0.0, 0.5)) / 3.7) + 0.5 * vnoise((q2 + vec2(0.0, 0.5)) / 1.4);
-  n = normalize(n + vec3(h0 - hx, 0.0, h0 - hz) * (0.12 + rocky * 0.5) * nearFade);
+  if (nearFade > 0.0) {
+    float h0 = vnoise(q1 / 3.7) + 0.5 * vnoise(q2 / 1.4);
+    float hx = vnoise((q1 + vec2(0.5, 0.0)) / 3.7) + 0.5 * vnoise((q2 + vec2(0.5, 0.0)) / 1.4);
+    float hz = vnoise((q1 + vec2(0.0, 0.5)) / 3.7) + 0.5 * vnoise((q2 + vec2(0.0, 0.5)) / 1.4);
+    n = normalize(n + vec3(h0 - hx, 0.0, h0 - hz) * (0.12 + rocky * 0.5) * nearFade);
+  }
 
   // Snow lies thin on the desert: shrubs and rocks poke through the blanket.
   float snowed = snowAmount(n, xz, vWorld.y) * (1.0 - rocky * 0.6) * (1.0 - canopy * 0.7) * (1.0 - under);
