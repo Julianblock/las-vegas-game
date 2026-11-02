@@ -15,6 +15,7 @@ const raceWeek = () => today.month === 11 && today.day >= 14 && today.day <= 23;
 const independence = () => today.month === 7 && today.day >= 2 && today.day <= 5;
 const christmas = () => today.month === 12 && today.day <= 25;
 const valentine = () => today.month === 2 && today.day >= 12 && today.day <= 14;
+const lunar = () => lunarDecorated(today.month, today.day) && today.month === 2;
 const paddy = () => today.month === 3 && today.day >= 15 && today.day <= 17;
 const holidays = () => (today.month === 12 && today.day >= 26) || (today.month === 1 && today.day === 1);
 const SPOOKY = [1, 0, 1, 2, 1, 3, 1, 4];
