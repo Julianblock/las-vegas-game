@@ -147,6 +147,7 @@ import { sevenEleven } from './sevenEleven';
 import { seventySix } from './seventySix';
 import { shakeShack } from './shakeShack';
 import { shell } from './shell';
+import { siegelSuites } from './siegelSuites';
 import { sinclair } from './sinclair';
 import { smiths } from './smiths';
 import { sonic } from './sonic';
@@ -335,6 +336,7 @@ export const BRANDS: Brand[] = [
   seventySix,
   shakeShack,
   shell,
+  siegelSuites,
   sinclair,
   smiths,
   sonic,
