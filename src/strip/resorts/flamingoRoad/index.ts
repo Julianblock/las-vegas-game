@@ -9,7 +9,7 @@ import { STOPS } from './stops';
 export const flamingoRoad: Resort = {
   id: 'flamingoRoad',
   name: 'Flamingo Road streetscape',
-  signs: [rtc202],
+  signs: [rtc202, shelterAd],
   build: (k) => {
     buildMedian(k);
     for (const s of STOPS) {
