@@ -8,6 +8,6 @@ export const commercialCenter: Resort = {
   name: 'Commercial Center',
   signs: [commercialCenterName, commercialCenterBoard],
   build: (k) => {
-    pylon(k, 4430, -3078);
+    pylon(k, 4497, -3084);
   },
 };
