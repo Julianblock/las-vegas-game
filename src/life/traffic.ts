@@ -313,7 +313,8 @@ export class Traffic {
       c.x = x0 + (x1 - x0) * f - uz * lane;
       c.z = z0 + (z1 - z0) * f + ux * lane;
       if (this.closed?.(c.x, c.z)) {
-        this.t0[c.type].set([c.x, -1e4, c.z, 0], c.slot * 4);
+        const o = c.slot * 4, t0 = this.t0[c.type];
+        t0[o] = c.x; t0[o + 1] = -1e4; t0[o + 2] = c.z; t0[o + 3] = 0;
         continue;
       }
       const dx = c.x - camPos.x;
