@@ -16,8 +16,8 @@ const POLES: Record<PoleKind, (k: Kit, fr: ReturnType<Kit['frame']>, b: Brand) =
   arches,
 };
 
-/** The stretch of valley the roadside signs cover: the Strip, Flamingo to Decatur, Paradise and beyond. */
-const BOUNDS = { x0: -2600, x1: 5000, z0: -4000, z1: 4200 };
+/** The stretch of valley the roadside signs cover: the Strip, Flamingo to Decatur, Paradise, the Gateway and the Arts District. */
+const BOUNDS = { x0: -2600, x1: 5000, z0: -5300, z1: 4200 };
 
 function brandOf(brand: string, name: string) {
   return BRANDS.find((b) => b.match.test(brand)) ?? BRANDS.find((b) => b.match.test(name));
