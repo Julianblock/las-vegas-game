@@ -44,6 +44,7 @@ import { dds } from './dds';
 import { deeFriscos } from './deeFriscos';
 import { delTaco } from './delTaco';
 import { dennys } from './dennys';
+import { dollarGeneral } from './dollarGeneral';
 import { dollarTree } from './dollarTree';
 import { dominos } from './dominos';
 import { dottys } from './dottys';
@@ -228,6 +229,7 @@ export const BRANDS: Brand[] = [
   deeFriscos,
   delTaco,
   dennys,
+  dollarGeneral,
   dollarTree,
   dominos,
   dottys,
