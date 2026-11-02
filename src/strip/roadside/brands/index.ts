@@ -68,6 +68,7 @@ import { fiveGuys } from './fiveGuys';
 import { flamingoDecaturPlaza } from './flamingoDecaturPlaza';
 import { flexLounge } from './flexLounge';
 import { fogoDeChao } from './fogoDeChao';
+import { fortuneHotel } from './fortuneHotel';
 import { funHogRanch } from './funHogRanch';
 import { giordanos } from './giordanos';
 import { greensAndProteins } from './greensAndProteins';
@@ -257,6 +258,7 @@ export const BRANDS: Brand[] = [
   flamingoDecaturPlaza,
   flexLounge,
   fogoDeChao,
+  fortuneHotel,
   funHogRanch,
   giordanos,
   greensAndProteins,
