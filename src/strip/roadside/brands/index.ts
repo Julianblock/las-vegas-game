@@ -38,6 +38,7 @@ import { cleanEnergy } from './cleanEnergy';
 import { coffeeBean } from './coffeeBean';
 import { costco } from './costco';
 import { cricket } from './cricket';
+import { culichiTown } from './culichiTown';
 import { cvs } from './cvs';
 import { dairyQueen } from './dairyQueen';
 import { daves } from './daves';
@@ -236,6 +237,7 @@ export const BRANDS: Brand[] = [
   coffeeBean,
   costco,
   cricket,
+  culichiTown,
   cvs,
   dairyQueen,
   daves,
