@@ -6,6 +6,7 @@ import { amigoTires } from './amigoTires';
 import { ampm } from './ampm';
 import { applebees } from './applebees';
 import { arco } from './arco';
+import { artifice } from './artifice';
 import { att } from './att';
 import { autozone } from './autozone';
 import { bagelmania } from './bagelmania';
@@ -216,6 +217,7 @@ export const BRANDS: Brand[] = [
   ampm,
   applebees,
   arco,
+  artifice,
   att,
   autozone,
   bagelmania,
