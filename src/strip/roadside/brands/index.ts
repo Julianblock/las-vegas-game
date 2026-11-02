@@ -125,6 +125,7 @@ import { laFavorita } from './laFavorita';
 import { laMojarraLoca } from './laMojarraLoca';
 import { laQuinta } from './laQuinta';
 import { lawrys } from './lawrys';
+import { lettys } from './lettys';
 import { liquorWorld } from './liquorWorld';
 import { littleCaesars } from './littleCaesars';
 import { littleWhiteChapelSign } from './littleWhiteChapelSign';
@@ -373,6 +374,7 @@ export const BRANDS: Brand[] = [
   laMojarraLoca,
   laQuinta,
   lawrys,
+  lettys,
   liquorWorld,
   littleCaesars,
   littleWhiteChapelSign,
