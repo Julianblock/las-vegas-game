@@ -161,6 +161,7 @@ import { umiya } from './umiya';
 import { upsStore } from './upsStore';
 import { verizon } from './verizon';
 import { villagePub } from './villagePub';
+import { vivaLasArepas } from './vivaLasArepas';
 import { vonsFuel } from './vonsFuel';
 import { wahoos } from './wahoos';
 import { walgreens } from './walgreens';
@@ -335,6 +336,7 @@ export const BRANDS: Brand[] = [
   upsStore,
   verizon,
   villagePub,
+  vivaLasArepas,
   vonsFuel,
   wahoos,
   walgreens,
