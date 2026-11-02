@@ -2,7 +2,7 @@ import { SCRIPT } from '../../../world/signKit';
 import type { Brand } from '../brand';
 import { panel } from '../panel';
 
-/** Tamales since 1980. */
+/** Tamales by the dozen, a downtown institution. */
 export const donaMaria: Brand = {
   id: 'donaMaria',
   match: /^Dona Maria/,
