@@ -814,7 +814,9 @@ async function boot() {
     fish.update(dt, cam, camWater.mask > 0.3 && cam.position.y < camWater.level + 6, actor);
     ghosts.update(dt, cam, G.uNight.value);
     setToday(env.month, env.day, env.hours);
-    people.costume = costumeShare(env.month, env.day, env.hours);
+    const rodeo = isRodeoWeek(env.month, env.day);
+    people.wear(rodeo ? WESTERN : COSTUMES);
+    people.costume = rodeo ? cowboyShare(env.month, env.day, env.hours) : costumeShare(env.month, env.day, env.hours);
     people.update(dt, cam.position, G.uNight.value);
     volcano.update(dt, cam, window.innerHeight * engine.pixelRatio);
     if (mode === 'fly' && !free && !tour.active) {
