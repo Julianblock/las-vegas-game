@@ -133,6 +133,7 @@ import { nachoDaddy } from './nachoDaddy';
 import { nativeJewelry } from './nativeJewelry';
 import { nirvanaHotel } from './nirvanaHotel';
 import { officeDepot } from './officeDepot';
+import { oldHavana } from './oldHavana';
 import { oleRed } from './oleRed';
 import { oliveGarden } from './oliveGarden';
 import { oodleNoodle } from './oodleNoodle';
@@ -344,6 +345,7 @@ export const BRANDS: Brand[] = [
   nativeJewelry,
   nirvanaHotel,
   officeDepot,
+  oldHavana,
   oleRed,
   oliveGarden,
   oodleNoodle,
