@@ -326,7 +326,7 @@ export class People {
     this.stage('aC0', new THREE.InstancedBufferAttribute(c0, 4));
     this.stage('aC1', new THREE.InstancedBufferAttribute(c1, 4));
     this.wear(COSTUMES);
-    this.geo.instanceCount = total;
+    this.geo.instanceCount = 0;
     this.material = new THREE.ShaderMaterial({
       glslVersion: THREE.GLSL3,
       vertexShader,
