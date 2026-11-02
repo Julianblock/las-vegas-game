@@ -50,7 +50,7 @@ export class Engine {
     this.scene.add(this.camera);
 
     const size = new THREE.Vector2(window.innerWidth, window.innerHeight).multiplyScalar(this.pixelRatio);
-    const rt = new THREE.WebGLRenderTarget(size.x, size.y, { type: THREE.HalfFloatType, samples: lowPower ? 2 : 4 });
+    const rt = new THREE.WebGLRenderTarget(size.x, size.y, { type: THREE.HalfFloatType, samples: 2 });
     this.composer = new EffectComposer(this.renderer, rt);
     this.composer.addPass(new RenderPass(this.scene, this.camera));
     // Exposure is applied before bloom so the bloom threshold is in display units.
