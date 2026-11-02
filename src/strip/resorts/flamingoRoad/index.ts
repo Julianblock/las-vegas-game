@@ -15,6 +15,7 @@ export const flamingoRoad: Resort = {
   signs: [rtc202, shelterAd, ...FLAMINGO_BLADES, ...CROSS_BLADES],
   build: (k) => {
     buildMedian(k);
+    buildLights(k);
     buildSignals(k, (x) => (x < 1000 ? 15 : 22));
     for (const s of STOPS) {
       const fr = k.frame(s.x, flamingoZ(s.x) + s.side * s.off, s.side > 0 ? 0 : 180);
