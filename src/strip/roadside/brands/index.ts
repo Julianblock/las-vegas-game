@@ -93,6 +93,7 @@ import { kostersCash } from './kostersCash';
 import { krispyKreme } from './krispyKreme';
 import { kungFuTea } from './kungFuTea';
 import { laFavorita } from './laFavorita';
+import { laMojarraLoca } from './laMojarraLoca';
 import { laQuinta } from './laQuinta';
 import { lawrys } from './lawrys';
 import { littleCaesars } from './littleCaesars';
@@ -278,6 +279,7 @@ export const BRANDS: Brand[] = [
   krispyKreme,
   kungFuTea,
   laFavorita,
+  laMojarraLoca,
   laQuinta,
   lawrys,
   littleCaesars,
