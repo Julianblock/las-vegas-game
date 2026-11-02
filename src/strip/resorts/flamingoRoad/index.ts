@@ -2,7 +2,7 @@ import type { Resort } from '../../resort';
 import { flamingoZ } from '../../streets';
 import { buildMedian } from './median';
 import { shelter } from './shelter';
-import { rtc202 } from './signs';
+import { rtc202, shelterAd } from './signs';
 import { STOPS } from './stops';
 
 /** Flamingo Road’s streetscape: median palms west of the freeway and the 202’s bus shelters. */
