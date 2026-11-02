@@ -75,6 +75,7 @@ import { holidayInn } from './holidayInn';
 import { hooters } from './hooters';
 import { hyattPlace } from './hyattPlace';
 import { ihop } from './ihop';
+import { indiaPalace } from './indiaPalace';
 import { inNOut } from './inNOut';
 import { jackInTheBox } from './jackInTheBox';
 import { jackpotBar } from './jackpotBar';
@@ -253,6 +254,7 @@ export const BRANDS: Brand[] = [
   hooters,
   hyattPlace,
   ihop,
+  indiaPalace,
   inNOut,
   jackInTheBox,
   jackpotBar,
