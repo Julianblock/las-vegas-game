@@ -131,6 +131,7 @@ import { marriott } from './marriott';
 import { maverik } from './maverik';
 import { maxs } from './maxs';
 import { mcdonalds } from './mcdonalds';
+import { medussas } from './medussas';
 import { metroPcs } from './metroPcs';
 import { metroPizza } from './metroPizza';
 import { mintIndian } from './mintIndian';
@@ -364,6 +365,7 @@ export const BRANDS: Brand[] = [
   maverik,
   maxs,
   mcdonalds,
+  medussas,
   metroPcs,
   metroPizza,
   mintIndian,
