@@ -100,6 +100,7 @@ import { lawrys } from './lawrys';
 import { littleCaesars } from './littleCaesars';
 import { llHawaiian } from './llHawaiian';
 import { lotusOfSiam } from './lotusOfSiam';
+import { mainStay } from './mainStay';
 import { marieCallenders } from './marieCallenders';
 import { marigold } from './marigold';
 import { marriott } from './marriott';
@@ -287,6 +288,7 @@ export const BRANDS: Brand[] = [
   littleCaesars,
   llHawaiian,
   lotusOfSiam,
+  mainStay,
   marieCallenders,
   marigold,
   marriott,
