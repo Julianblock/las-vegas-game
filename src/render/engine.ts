@@ -81,7 +81,7 @@ export class Engine {
     this.composer.setSize(w, h);
   }
 
-  /** Dynamic resolution: trade pixels for frame rate, aiming for ~40-60 fps. */
+  /** Dynamic resolution: trade pixels for frame rate, aiming for ~45-60 fps. */
   adapt(dt: number) {
     if (dt <= 0 || dt >= 0.25) return;
     this.frameMs += (dt * 1000 - this.frameMs) * 0.08;
