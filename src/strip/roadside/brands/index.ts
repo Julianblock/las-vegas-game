@@ -109,6 +109,7 @@ import { liquorWorld } from './liquorWorld';
 import { littleCaesars } from './littleCaesars';
 import { llHawaiian } from './llHawaiian';
 import { lotusOfSiam } from './lotusOfSiam';
+import { lvTactical } from './lvTactical';
 import { mainStay } from './mainStay';
 import { marieCallenders } from './marieCallenders';
 import { marigold } from './marigold';
@@ -312,6 +313,7 @@ export const BRANDS: Brand[] = [
   littleCaesars,
   llHawaiian,
   lotusOfSiam,
+  lvTactical,
   mainStay,
   marieCallenders,
   marigold,
