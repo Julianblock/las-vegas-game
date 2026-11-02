@@ -91,7 +91,7 @@ export class Grass {
             { spacing: 1.6, n: 110, fadeIn: [26, 36], fadeOut: [64, 86] },
           ]
         : [
-            { spacing: 0.38, n: 250, fadeIn: [-1, 0], fadeOut: [35, 47] },
+            { spacing: 0.45, n: 210, fadeIn: [-1, 0], fadeOut: [35, 47] },
             { spacing: 1.25, n: 190, fadeIn: [35, 47], fadeOut: [88, 118] },
           ]),
     ];
