@@ -255,6 +255,7 @@ import { vegasVegan } from './vegasVegan';
 import { verizon } from './verizon';
 import { vesta } from './vesta';
 import { villagePub } from './villagePub';
+import { violinOutlet } from './violinOutlet';
 import { vivaLasArepas } from './vivaLasArepas';
 import { vonsFuel } from './vonsFuel';
 import { wahoos } from './wahoos';
@@ -527,6 +528,7 @@ export const BRANDS: Brand[] = [
   verizon,
   vesta,
   villagePub,
+  violinOutlet,
   vivaLasArepas,
   vonsFuel,
   wahoos,
