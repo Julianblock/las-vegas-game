@@ -32,6 +32,7 @@ import { bucaDiBeppo } from './bucaDiBeppo';
 import { buffaloExchange } from './buffaloExchange';
 import { buffaloWildWings } from './buffaloWildWings';
 import { burgerKing } from './burgerKing';
+import { burlesqueHall } from './burlesqueHall';
 import { cafeRio } from './cafeRio';
 import { candlewood } from './candlewood';
 import { capriottis } from './capriottis';
@@ -279,6 +280,7 @@ export const BRANDS: Brand[] = [
   buffaloExchange,
   buffaloWildWings,
   burgerKing,
+  burlesqueHall,
   cafeRio,
   candlewood,
   capriottis,
