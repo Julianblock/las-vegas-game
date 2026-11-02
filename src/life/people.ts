@@ -241,8 +241,8 @@ interface Path {
   len: number;
 }
 
-/** Beyond this (m) a person is under a pixel tall, so they're parked instead of drawn. */
-const DRAW_R = 900;
+/** Beyond this (m) a person is a few pixels tall, so they're parked instead of drawn. */
+const DRAW_R = 600;
 
 function hash(n: number) {
   const s = Math.sin(n * 127.1 + 311.7) * 43758.5453;
