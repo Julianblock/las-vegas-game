@@ -131,6 +131,7 @@ import { liquorWorld } from './liquorWorld';
 import { littleCaesars } from './littleCaesars';
 import { littleWhiteChapelSign } from './littleWhiteChapelSign';
 import { llHawaiian } from './llHawaiian';
+import { loLos } from './loLos';
 import { lotusOfSiam } from './lotusOfSiam';
 import { lvBrewing } from './lvBrewing';
 import { lvTactical } from './lvTactical';
@@ -384,6 +385,7 @@ export const BRANDS: Brand[] = [
   littleCaesars,
   littleWhiteChapelSign,
   llHawaiian,
+  loLos,
   lotusOfSiam,
   lvBrewing,
   lvTactical,
