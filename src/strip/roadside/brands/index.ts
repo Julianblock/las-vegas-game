@@ -76,6 +76,7 @@ import { doubleDown } from './doubleDown';
 import { doubleTree } from './doubleTree';
 import { dunkin } from './dunkin';
 import { dutchBros } from './dutchBros';
+import { dxl } from './dxl';
 import { eggWorks } from './eggWorks';
 import { einstein } from './einstein';
 import { ellisIsland } from './ellisIsland';
@@ -337,6 +338,7 @@ export const BRANDS: Brand[] = [
   doubleTree,
   dunkin,
   dutchBros,
+  dxl,
   eggWorks,
   einstein,
   ellisIsland,
