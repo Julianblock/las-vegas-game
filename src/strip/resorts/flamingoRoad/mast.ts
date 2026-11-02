@@ -14,13 +14,14 @@ function head(k: Kit, fr: Frame, x: number, y: number, z: number) {
 
 /**
  * A signal mast on the corner: the pole at the origin, the arm reaching
- * `reach` metres out over the road along local +x, two signal heads facing
- * oncoming traffic (+z), and the cross street's name blade on the arm.
+ * `reach` metres out over the road along local +x (or -x when `dir` is -1),
+ * two signal heads facing oncoming traffic (+z), and the cross street's name
+ * blade on the arm.
  */
-export function mast(k: Kit, fr: Frame, reach: number, name: string) {
+export function mast(k: Kit, fr: Frame, reach: number, name: string, dir = 1) {
   k.cyl(fr, 0, 0, 0, 0.22, 0.16, 7.5, STEEL, { rough: 0.5 });
-  k.box(fr, reach / 2, 6.9, 0, reach, 0.18, 0.18, STEEL, { rough: 0.5 });
-  head(k, fr, reach * 0.55, 6.8, 0);
-  head(k, fr, reach * 0.85, 6.8, 0);
-  k.sign(fr, name, reach * 0.28, 7.35, 0.12, 0.55, 0.5, 0, 0, true);
+  k.box(fr, (dir * reach) / 2, 6.9, 0, reach, 0.18, 0.18, STEEL, { rough: 0.5 });
+  head(k, fr, dir * reach * 0.55, 6.8, 0);
+  head(k, fr, dir * reach * 0.85, 6.8, 0);
+  k.sign(fr, name, dir * reach * 0.28, 7.35, 0.12, 0.55, 0.5, 0, 0, true);
 }
