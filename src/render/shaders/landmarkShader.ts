@@ -102,7 +102,8 @@ void main() {
       // Neon tube buzzing on and off at random.
       : step(0.93, hash12(vec2(floor(uTime * 6.0), vMat.w)));
   }
-  vec2 fuv = vec2(vUv.x, (vUv.y + frame) / vFrames);
+  // Seen from behind, a sign still reads left to right.
+  vec2 fuv = vec2(gl_FrontFacing ? vUv.x : 1.0 - vUv.x, (vUv.y + frame) / vFrames);
   vec4 tex = texture(uMap, mix(vRect.xy, vRect.zw, fuv));
   if (tex.a < 0.5) discard;
   albedo = tex.rgb;
