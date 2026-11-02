@@ -93,6 +93,7 @@ import { ihop } from './ihop';
 import { indiaPalace } from './indiaPalace';
 import { infiniti } from './infiniti';
 import { inNOut } from './inNOut';
+import { inNOutStore } from './inNOutStore';
 import { jackInTheBox } from './jackInTheBox';
 import { jackpotBar } from './jackpotBar';
 import { jamba } from './jamba';
@@ -301,6 +302,7 @@ export const BRANDS: Brand[] = [
   indiaPalace,
   infiniti,
   inNOut,
+  inNOutStore,
   jackInTheBox,
   jackpotBar,
   jamba,
