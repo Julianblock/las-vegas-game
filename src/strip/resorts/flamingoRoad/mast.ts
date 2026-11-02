@@ -12,6 +12,17 @@ function head(k: Kit, fr: Frame, x: number, y: number, z: number) {
   }
 }
 
+/** A pedestrian head on the pole at height y, its orange hand lit toward −z. */
+function walkHead(k: Kit, fr: Frame, y: number) {
+  k.box(fr, 0, y, -0.32, 0.4, 0.4, 0.3, '#1a1a14', { rough: 0.6 });
+  k.box(fr, 0, y + 0.08, -0.48, 0.22, 0.22, 0.02, '#ff7a1a', { glow: 1.1, rough: 0.3 });
+}
+
+/** The push-button box for the crosswalk, at hand height. */
+function button(k: Kit, fr: Frame) {
+  k.box(fr, 0, 1.0, -0.24, 0.12, 0.2, 0.08, '#c8a020', { rough: 0.5 });
+}
+
 /**
  * A signal mast on the corner: the pole at the origin, the arm reaching
  * `reach` metres out over the road along local +x (or -x when `dir` is -1),
