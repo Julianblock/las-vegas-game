@@ -99,6 +99,7 @@ import { gaiaFlowers } from './gaiaFlowers';
 import { gamestop } from './gamestop';
 import { gatewayMotel } from './gatewayMotel';
 import { giordanos } from './giordanos';
+import { gnc } from './gnc';
 import { greensAndProteins } from './greensAndProteins';
 import { greenValley } from './greenValley';
 import { halalGuys } from './halalGuys';
@@ -359,6 +360,7 @@ export const BRANDS: Brand[] = [
   gamestop,
   gatewayMotel,
   giordanos,
+  gnc,
   greensAndProteins,
   greenValley,
   halalGuys,
