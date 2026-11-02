@@ -1,6 +1,7 @@
 import type { Resort } from '../../resort';
 import { flamingoZ } from '../../streets';
 import { billboardFace, buildBillboards } from './billboard';
+import { buildHydrants } from './hydrants';
 import { buildLights } from './lights';
 import { buildMedian } from './median';
 import { shelter } from './shelter';
