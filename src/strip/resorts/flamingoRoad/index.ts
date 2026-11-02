@@ -18,6 +18,7 @@ export const flamingoRoad: Resort = {
   build: (k) => {
     buildMedian(k);
     buildLights(k);
+    buildHydrants(k, (x) => (x < 1000 ? 15 : 22));
     buildSignals(k, (x) => (x < 1000 ? 15 : 22));
     buildBillboards(k, (x) => (x < 1000 ? 15 : 22));
     for (const s of STOPS) {
