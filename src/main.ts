@@ -175,6 +175,7 @@ async function boot() {
   const people = new People(
     [
       { ...strip.crowd, walks: [...strip.crowd.walks, ...sidewalks] },
+      cesCrowd(),
     ],
     heightfield,
   );
