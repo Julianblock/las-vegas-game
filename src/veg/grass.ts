@@ -92,7 +92,7 @@ export class Grass {
           ]
         : [
             { spacing: 0.45, n: 210, fadeIn: [-1, 0], fadeOut: [35, 47] },
-            { spacing: 1.25, n: 190, fadeIn: [35, 47], fadeOut: [88, 118] },
+            { spacing: 1.5, n: 160, fadeIn: [35, 47], fadeOut: [88, 118] },
           ]),
     ];
     for (const s of specs) {
