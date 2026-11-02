@@ -390,6 +390,10 @@ export class People {
       // Keep to the right of the path, like people do.
       const x = ax + (bx - ax) * t + (dz / l) * -(w.off * 0.5 + 0.9);
       const z = az + (bz - az) * t - (dx / l) * -(w.off * 0.5 + 0.9);
+      if ((x - cam.x) ** 2 + (z - cam.z) ** 2 > DRAW_R * DRAW_R) {
+        this.t0.setY(w.slot, -1e4);
+        continue;
+      }
       this.t0.setXYZW(w.slot, x, this.hf.height(x, z), z, Math.atan2(dx, dz));
       this.t1.setX(w.slot, w.ph);
     }
