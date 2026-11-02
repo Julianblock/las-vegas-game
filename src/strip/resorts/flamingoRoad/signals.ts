@@ -3,6 +3,9 @@ import { CROSS, flamingoZ, stripX } from '../../streets';
 import { mast } from './mast';
 import { NAMES } from './streetNames';
 
+/** Half-width of a cross street to its kerb (m). */
+const CROSS_HALF = 12;
+
 /** Corner poles stand this far from the cross street and from Flamingo's centre line. */
 const BACK = 16;
 
