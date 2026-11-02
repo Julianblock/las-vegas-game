@@ -116,6 +116,7 @@ export const RESORTS: Resort[] = [
   newYear,
   fourthOfJuly,
   lunarNewYear,
+  ces,
   airport,
   allegiant,
   lvcc,
