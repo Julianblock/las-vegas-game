@@ -13,6 +13,8 @@ export interface Row {
   depth: number;
   /** Shopfronts on the back too, with a walkway each side. */
   both?: boolean;
+  /** Only the canopies, for a block the map already raises. */
+  canopyOnly?: boolean;
 }
 
 /**
