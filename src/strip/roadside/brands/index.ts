@@ -203,6 +203,7 @@ import { tmobile } from './tmobile';
 import { todMotel } from './todMotel';
 import { tommyRockers } from './tommyRockers';
 import { tortasAhogadas } from './tortasAhogadas';
+import { travelersHostel } from './travelersHostel';
 import { travelodge } from './travelodge';
 import { umiya } from './umiya';
 import { upsStore } from './upsStore';
@@ -428,6 +429,7 @@ export const BRANDS: Brand[] = [
   todMotel,
   tommyRockers,
   tortasAhogadas,
+  travelersHostel,
   travelodge,
   umiya,
   upsStore,
