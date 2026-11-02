@@ -438,7 +438,7 @@ export class Props {
     });
   }
 
-  /** Distance-culls far tiles and limits shadow casting to tiles near the focus. */
+  /** Distance-culls far tiles, swaps far buildings to boxes, and limits shadow casting to tiles near the focus. */
   update(cam: THREE.Vector3, focus: THREE.Vector3) {
     for (const b of this.batches) {
       const d = Math.hypot(b.center.x - cam.x, b.center.z - cam.z) - b.radius;
