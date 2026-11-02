@@ -11,5 +11,5 @@ export const moulinRougeSpot: Spot = {
   hint: 'Find the empty lot on Bonanza Road in the Historic Westside.',
   r: 160,
   h: 50,
-  test: near({ x: 2832, z: -6846 }, 120, 50),
+  test: near({ x: 2960, z: -6950 }, 120, 50),
 };
