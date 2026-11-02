@@ -103,6 +103,11 @@ mat3 rotX(float a) {
 }
 
 void main() {
+  // Parked off-stage: skip the skinning and drop the figure outside the clip volume.
+  if (aT0.y < -5000.0) {
+    gl_Position = vec4(2.0, 2.0, 2.0, 1.0);
+    return;
+  }
   int b = int(aBone + 0.5);
   float ph = aT1.x;
   float amp = aT1.y;
