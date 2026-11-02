@@ -25,6 +25,7 @@ const JULY4 = [7, 8, 7, 2, 8, 0];
 const CHRISTMAS = [9, 12, 9, 0, 12, 2];
 const VALENTINE = [10, 0, 10, 2];
 const PADDY = [11, 0, 11, 2];
+const LUNAR = [14, 15, 14, 0, 15, 2];
 const USUAL_PLUS = [0, 2, 0, 3, 13, 4, 1];
 
 /** The lit skin: cycles programs, faces the Strip, and fades between them. */
