@@ -130,8 +130,8 @@ void main() {
   // Summer bleaches the soil toward pale caliche and the shrubs toward olive-grey.
   desert = mix(desert, mix(desert * vec3(1.06, 1.02, 0.96), vec3(dot(desert, vec3(0.33))) * vec3(1.05, 0.98, 0.9), 0.3), uDesert.x * (1.0 - green));
   // Spring bloom: drifts of desert marigold, globemallow, lupine and desert dandelion.
-  float drift = smoothstep(0.55, 0.78, fbm(xz / 55.0 + 3.1, 3)) * (1.0 - shrub) * (1.0 - smoothstep(0.3, 0.5, slope));
-  float pick = vnoise(xz / 21.0);
+  float drift = uVeg.z > 0.0 ? smoothstep(0.55, 0.78, fbm(xz / 55.0 + 3.1, 3)) * (1.0 - shrub) * (1.0 - smoothstep(0.3, 0.5, slope)) : 0.0;
+  float pick = drift > 0.0 ? vnoise(xz / 21.0) : 0.0;
   vec3 flowerCol = pick < 0.45 ? vec3(0.62, 0.50, 0.06)       // desert marigold, dandelion
                  : pick < 0.62 ? vec3(0.66, 0.28, 0.07)       // apricot globemallow
                  : pick < 0.8 ? vec3(0.30, 0.20, 0.46)        // lupine, phacelia
