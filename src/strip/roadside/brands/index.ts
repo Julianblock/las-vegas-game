@@ -5,6 +5,7 @@ import { alohaKitchen } from './alohaKitchen';
 import { americanCostumes } from './americanCostumes';
 import { amigoTires } from './amigoTires';
 import { ampm } from './ampm';
+import { antiqueAlley } from './antiqueAlley';
 import { applebees } from './applebees';
 import { arco } from './arco';
 import { artifice } from './artifice';
@@ -250,6 +251,7 @@ export const BRANDS: Brand[] = [
   americanCostumes,
   amigoTires,
   ampm,
+  antiqueAlley,
   applebees,
   arco,
   artifice,
