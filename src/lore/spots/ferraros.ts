@@ -6,7 +6,7 @@ export const ferrarosSpot: Spot = {
   kind: 'lore',
   kicker: 'Ferraro’s · Paradise Road',
   title: 'Forty years of osso buco',
-  text: 'Gino Ferraro opened his restaurant in 1985. Four decades on the family still runs it, cooking the dishes Gino brought from Bologna.',
+  text: 'Gino Ferraro opened his restaurant in 1985. Four decades on the family still runs it, with Gino’s son Mimmo running the kitchen.',
   at: { x: 3424, z: 754 },
   hint: 'Look along Paradise Road south of Flamingo.',
   r: 150,
