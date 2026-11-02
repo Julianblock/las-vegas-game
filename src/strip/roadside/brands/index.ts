@@ -199,6 +199,7 @@ import { upsStore } from './upsStore';
 import { usps } from './usps';
 import { vegasMarket } from './vegasMarket';
 import { verizon } from './verizon';
+import { vesta } from './vesta';
 import { villagePub } from './villagePub';
 import { vivaLasArepas } from './vivaLasArepas';
 import { vonsFuel } from './vonsFuel';
@@ -413,6 +414,7 @@ export const BRANDS: Brand[] = [
   usps,
   vegasMarket,
   verizon,
+  vesta,
   villagePub,
   vivaLasArepas,
   vonsFuel,
