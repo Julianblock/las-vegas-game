@@ -51,6 +51,7 @@ import { cleanEnergy } from './cleanEnergy';
 import { coffeeBean } from './coffeeBean';
 import { cornishPastry } from './cornishPastry';
 import { costco } from './costco';
+import { cowtownBoots } from './cowtownBoots';
 import { cricket } from './cricket';
 import { culichiTown } from './culichiTown';
 import { cvs } from './cvs';
@@ -305,6 +306,7 @@ export const BRANDS: Brand[] = [
   coffeeBean,
   cornishPastry,
   costco,
+  cowtownBoots,
   cricket,
   culichiTown,
   cvs,
