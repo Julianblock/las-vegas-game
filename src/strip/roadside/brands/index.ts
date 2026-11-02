@@ -185,6 +185,7 @@ import { stageDoor } from './stageDoor';
 import { starbucks } from './starbucks';
 import { steakNShake } from './steakNShake';
 import { subway } from './subway';
+import { super8 } from './super8';
 import { sweethearts } from './sweethearts';
 import { tacoBell } from './tacoBell';
 import { tacosElGordo } from './tacosElGordo';
@@ -405,6 +406,7 @@ export const BRANDS: Brand[] = [
   starbucks,
   steakNShake,
   subway,
+  super8,
   sweethearts,
   tacoBell,
   tacosElGordo,
