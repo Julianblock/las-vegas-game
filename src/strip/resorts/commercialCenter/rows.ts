@@ -1,6 +1,6 @@
 import type { Row } from './arcade';
 
-/** The plaza's shop rows missing from the map: the central arcade, the Sahara corner row, the market and a chapel row. */
+/** The plaza's shop rows missing from the map: canopies on the central arcade, the Sahara corner row and a chapel row. */
 export const ROWS: Row[] = [
   { x: 4289, z: -2917, deg: 92, len: 127, depth: 43, both: true, canopyOnly: true },
   { x: 4218, z: -3046, deg: 180, len: 50, depth: 18 },
