@@ -165,6 +165,7 @@ import { outback } from './outback';
 import { pandaExpress } from './pandaExpress';
 import { panera } from './panera';
 import { papaJohns } from './papaJohns';
+import { paragonMotorcars } from './paragonMotorcars';
 import { parkwayTavern } from './parkwayTavern';
 import { peiWei } from './peiWei';
 import { pepBoys } from './pepBoys';
@@ -417,6 +418,7 @@ export const BRANDS: Brand[] = [
   pandaExpress,
   panera,
   papaJohns,
+  paragonMotorcars,
   parkwayTavern,
   peiWei,
   pepBoys,
