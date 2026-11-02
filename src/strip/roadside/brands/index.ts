@@ -232,6 +232,7 @@ import { whiteCastle } from './whiteCastle';
 import { wineRoom } from './wineRoom';
 import { wingstop } from './wingstop';
 import { yardHouse } from './yardHouse';
+import { yuOrMi } from './yuOrMi';
 import { zia } from './zia';
 
 /** Every chain with a roadside identity, alphabetical. */
@@ -469,5 +470,6 @@ export const BRANDS: Brand[] = [
   wineRoom,
   wingstop,
   yardHouse,
+  yuOrMi,
   zia,
 ];
