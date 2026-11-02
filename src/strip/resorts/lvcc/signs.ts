@@ -24,6 +24,7 @@ export const lvccScreen: SignSpec = {
       { bg: ['#06202a', '#1a6a9a'], head: 'LVCC', sub: 'LAS VEGAS CONVENTION CENTER', font: (p) => `900 ${p}px ${GROTESK}` },
       { bg: ['#0a0a12', '#3a3aaa'], head: 'CES', sub: 'JANUARY · ALL HALLS', font: (p) => `900 ${p}px ${GROTESK}` },
       { bg: ['#1a0a06', '#c84a1a'], head: 'SEMA', sub: 'THE CAR SHOW · NOVEMBER', font: (p) => `900 ${p}px ${CONDENSED}` },
+      { bg: ['#120a1a', '#6a2aa8'], head: 'NAB SHOW', sub: 'BROADCAST · APRIL · CENTRAL & NORTH', font: (p) => `900 ${p}px ${CONDENSED}` },
       { bg: ['#06180a', '#2a8a4a'], head: 'VEGAS LOOP', sub: 'RIDE THE TUNNELS · WEST STATION', font: (p) => `900 ${p}px ${CONDENSED}` },
       { bg: ['#1a1206', '#9a7a1a'], head: 'WELCOME', sub: 'EXHIBITORS · REGISTRATION OPEN', font: (p) => `900 ${p}px ${GROTESK}` },
     ]);
