@@ -12,6 +12,7 @@ import { artifice } from './artifice';
 import { arubaHotel } from './arubaHotel';
 import { att } from './att';
 import { autozone } from './autozone';
+import { avantpop } from './avantpop';
 import { bagelmania } from './bagelmania';
 import { bahamaBreeze } from './bahamaBreeze';
 import { bajamar } from './bajamar';
@@ -281,6 +282,7 @@ export const BRANDS: Brand[] = [
   arubaHotel,
   att,
   autozone,
+  avantpop,
   bagelmania,
   bahamaBreeze,
   bajamar,
