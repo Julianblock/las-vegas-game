@@ -227,6 +227,7 @@ import { walgreens } from './walgreens';
 import { walmart } from './walmart';
 import { wendys } from './wendys';
 import { whiteCastle } from './whiteCastle';
+import { wineRoom } from './wineRoom';
 import { wingstop } from './wingstop';
 import { yardHouse } from './yardHouse';
 import { zia } from './zia';
@@ -461,6 +462,7 @@ export const BRANDS: Brand[] = [
   walmart,
   wendys,
   whiteCastle,
+  wineRoom,
   wingstop,
   yardHouse,
   zia,
