@@ -245,6 +245,7 @@ import { travelodge } from './travelodge';
 import { umiya } from './umiya';
 import { upsStore } from './upsStore';
 import { usps } from './usps';
+import { vecindadChavo } from './vecindadChavo';
 import { vegasMarket } from './vegasMarket';
 import { vegasVegan } from './vegasVegan';
 import { verizon } from './verizon';
@@ -512,6 +513,7 @@ export const BRANDS: Brand[] = [
   umiya,
   upsStore,
   usps,
+  vecindadChavo,
   vegasMarket,
   vegasVegan,
   verizon,
