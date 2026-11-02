@@ -166,10 +166,12 @@ void main() {
   // --- Rock: andesite, granite and rust-red volcanic cliffs with desert varnish ----
   float rockMask = max(mB.g, smoothstep(0.45, 0.7, slope + (nB - 0.5) * 0.18));
   float rocky = rockMask * (1.0 - wash);
-  vec3 rock = mix(vec3(0.27, 0.22, 0.17), vec3(0.34, 0.19, 0.11), smoothstep(0.5, 0.8, nA));
-  rock = mix(rock, vec3(0.10, 0.08, 0.07), smoothstep(0.55, 0.85, fbm(xz / 9.0 + 5.0, 3)) * 0.7); // varnish streaks
-  rock *= 0.8 + 0.4 * vnoise(xz / 1.7);
-  alb = mix(alb, mix(alb, rock, 0.6), rocky * 0.7);
+  if (rocky > 0.0) {
+    vec3 rock = mix(vec3(0.27, 0.22, 0.17), vec3(0.34, 0.19, 0.11), smoothstep(0.5, 0.8, nA));
+    rock = mix(rock, vec3(0.10, 0.08, 0.07), smoothstep(0.55, 0.85, fbm(xz / 9.0 + 5.0, 3)) * 0.7); // varnish streaks
+    rock *= 0.8 + 0.4 * vnoise(xz / 1.7);
+    alb = mix(alb, mix(alb, rock, 0.6), rocky * 0.7);
+  }
 
   // Snow on the Spring Mountains, Charleston Peak and, some winters, the Highland Range.
   float snowN = fbm(xz / 3000.0, 4);
