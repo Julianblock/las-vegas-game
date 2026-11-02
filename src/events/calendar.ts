@@ -68,3 +68,10 @@ export function cowboyShare(month: number, day: number, hours: number) {
   if (!isRodeoWeek(month, day)) return 0;
   return hours >= 18 || hours < 3 ? 0.3 : 0.14;
 }
+
+/** CES 2027 fills the convention centre January 6–9, show floors open 9 to 6. */
+export const CES = { month: 1, first: 6, last: 9 };
+
+export function isCES(month: number, day: number, hours: number) {
+  return month === CES.month && day >= CES.first && day <= CES.last && hours >= 8.5 && hours < 18.5;
+}
