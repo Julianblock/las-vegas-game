@@ -18,7 +18,8 @@ import { ratPack } from './ratPack';
 import { reddFoxx } from './reddFoxx';
 import { spilotro } from './spilotro';
 import { tupac } from './tupac';
+import { vegasVic } from './vegasVic';
 import { woodlawn } from './woodlawn';
 import type { Haunt } from './haunt';
 
-export const HAUNTS: Haunt[] = [bugsy, elvis, tupac, mgmFire, ratPack, luxor, liberace, reddFoxx, mormonFort, moulinRouge, apache, hauntedMuseum, woodlawn, jackieGaughan, elRanchoFire, kefauver, spilotro, huntridgeUsher, hiltonFire, hughesPenthouse, depotConductor];
+export const HAUNTS: Haunt[] = [bugsy, elvis, tupac, mgmFire, ratPack, luxor, liberace, reddFoxx, mormonFort, moulinRouge, apache, hauntedMuseum, woodlawn, jackieGaughan, elRanchoFire, kefauver, spilotro, huntridgeUsher, hiltonFire, hughesPenthouse, depotConductor, vegasVic];
