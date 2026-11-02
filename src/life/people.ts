@@ -444,7 +444,6 @@ export class People {
         this.t1.setX(s.slot, this.t1.getX(s.slot) + dt);
       }
     }
-    this.t0.needsUpdate = true;
-    this.t1.needsUpdate = true;
+    this.pack();
   }
 }
