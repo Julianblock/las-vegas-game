@@ -215,6 +215,19 @@ vec3 smiley(vec3 n) {
   return mix(c, vec3(0.08), max(eyes, mouth) * step(0.0, p.z));
 }
 
+// Lunar New Year: a gold cash coin, round with a square hole, on lucky red with cloud bands.
+vec3 coin(vec3 n) {
+  vec3 p = front(n);
+  vec3 c = vec3(0.78, 0.03, 0.05);
+  float cloud = step(abs(n.y - 0.55 - 0.04 * sin(atan(n.z, n.x) * 18.0)), 0.025) + step(abs(n.y + 0.55 + 0.04 * sin(atan(n.z, n.x) * 18.0)), 0.025);
+  c = mix(c, vec3(1.0, 0.75, 0.2), min(cloud, 1.0));
+  float r = length(p.xy);
+  float ring = step(r, 0.42) * (1.0 - step(max(abs(p.x), abs(p.y)), 0.12));
+  float rim = step(abs(r - 0.38), 0.015) + step(abs(max(abs(p.x), abs(p.y)) - 0.16), 0.012);
+  vec3 gold = vec3(1.0, 0.78, 0.25) * (0.8 + 0.2 * sin(p.x * 9.0 + uTime));
+  return mix(c, mix(gold, vec3(0.75, 0.45, 0.08), min(rim, 1.0)), ring * step(0.0, p.z));
+}
+
 vec3 moon(vec3 n) {
   float m = vnoise(n * 4.0) * 0.6 + vnoise(n * 13.0) * 0.4;
   return vec3(0.82, 0.82, 0.78) * (0.65 + 0.35 * smoothstep(0.35, 0.7, m));
