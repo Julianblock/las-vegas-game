@@ -23,7 +23,7 @@ export class Engine {
   readonly exposurePass: ShaderPass;
   readonly grade: ShaderPass;
   /** Upper bound for adaptive resolution; the live ratio floats below it. */
-  maxPixelRatio = Math.min(window.devicePixelRatio, lowPower ? 1.1 : 1.5);
+  maxPixelRatio = Math.min(window.devicePixelRatio, lowPower ? 1.1 : 1.25);
   minPixelRatio = lowPower ? 0.5 : 0.75;
   pixelRatio = this.maxPixelRatio;
   private frameMs = 16;
