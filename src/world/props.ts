@@ -450,6 +450,6 @@ export class Props {
   }
 
   addShadowCasters(shadow: ShadowMap) {
-    for (const b of this.batches) b.caster = shadow.addCaster(b.geo, this.shadowMaterial);
+    for (const b of this.batches) b.caster = shadow.addCaster((b.lod?.geometry as THREE.InstancedBufferGeometry) ?? b.geo, this.shadowMaterial);
   }
 }
