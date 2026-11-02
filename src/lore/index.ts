@@ -1,4 +1,5 @@
 import type { Spot } from './spot';
+import { jubileeSpot } from './spots/jubilee';
 import { pennTellerSpot } from './spots/penn-teller';
 import { wetNWildSpot } from './spots/wet-n-wild';
 import { starTrekExperienceSpot } from './spots/star-trek-experience';
@@ -270,4 +271,5 @@ export const SPOTS: Spot[] = [
   starTrekExperienceSpot,
   wetNWildSpot,
   pennTellerSpot,
+  jubileeSpot,
 ];
