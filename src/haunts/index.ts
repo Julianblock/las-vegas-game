@@ -3,6 +3,7 @@ import { bugsy } from './bugsy';
 import { elRanchoFire } from './elRanchoFire';
 import { elvis } from './elvis';
 import { hauntedMuseum } from './hauntedMuseum';
+import { huntridgeUsher } from './huntridgeUsher';
 import { jackieGaughan } from './jackieGaughan';
 import { kefauver } from './kefauver';
 import { liberace } from './liberace';
@@ -17,4 +18,4 @@ import { tupac } from './tupac';
 import { woodlawn } from './woodlawn';
 import type { Haunt } from './haunt';
 
-export const HAUNTS: Haunt[] = [bugsy, elvis, tupac, mgmFire, ratPack, luxor, liberace, reddFoxx, mormonFort, moulinRouge, apache, hauntedMuseum, woodlawn, jackieGaughan, elRanchoFire, kefauver, spilotro];
+export const HAUNTS: Haunt[] = [bugsy, elvis, tupac, mgmFire, ratPack, luxor, liberace, reddFoxx, mormonFort, moulinRouge, apache, hauntedMuseum, woodlawn, jackieGaughan, elRanchoFire, kefauver, spilotro, huntridgeUsher];
