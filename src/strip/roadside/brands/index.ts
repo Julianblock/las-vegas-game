@@ -60,6 +60,7 @@ import { einstein } from './einstein';
 import { ellisIsland } from './ellisIsland';
 import { elMirador } from './elMirador';
 import { elPolloLoco } from './elPolloLoco';
+import { eroticMuseum } from './eroticMuseum';
 import { farmerBoys } from './farmerBoys';
 import { fatburger } from './fatburger';
 import { fedexOffice } from './fedexOffice';
@@ -256,6 +257,7 @@ export const BRANDS: Brand[] = [
   ellisIsland,
   elMirador,
   elPolloLoco,
+  eroticMuseum,
   farmerBoys,
   fatburger,
   fedexOffice,
