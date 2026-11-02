@@ -42,3 +42,16 @@ export function isFourthOfJuly(month: number, day: number, hours: number) {
 export function isNewYearsEve(month: number, day: number, hours: number) {
   return (month === 12 && day === 31 && hours >= 17) || (month === 1 && day === 1 && hours < 1);
 }
+
+/** Lunar New Year 2027, the Year of the Goat, falls on Saturday, February 6. */
+export const LUNAR = { month: 2, day: 6 };
+
+/** Chinatown's lanterns go up three weeks ahead and stay through the Lantern Festival. */
+export function lunarDecorated(month: number, day: number) {
+  return (month === 1 && day >= 16) || (month === 2 && day <= 20);
+}
+
+/** Lion dancers work the plazas the weekend of the new year, from late morning into the night. */
+export function lionDancing(month: number, day: number, hours: number) {
+  return month === LUNAR.month && day >= LUNAR.day && day <= LUNAR.day + 2 && hours >= 10 && hours < 22;
+}
