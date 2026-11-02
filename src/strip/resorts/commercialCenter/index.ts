@@ -4,7 +4,7 @@ import { pylon } from './pylon';
 import { ROWS } from './rows';
 import { commercialCenterBoard, commercialCenterName } from './signs';
 
-/** Commercial Center (1963), the open-air plaza on East Sahara, marked by its pylon. */
+/** Commercial Center (1963), the open-air plaza on East Sahara, its pylon on Sahara and its shop rows round the parking. */
 export const commercialCenter: Resort = {
   id: 'commercialCenter',
   name: 'Commercial Center',
