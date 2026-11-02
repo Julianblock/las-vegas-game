@@ -1,5 +1,6 @@
 import type { Resort } from '../../resort';
 import { flamingoZ } from '../../streets';
+import { buildLights } from './lights';
 import { buildMedian } from './median';
 import { shelter } from './shelter';
 import { rtc202, shelterAd } from './signs';
