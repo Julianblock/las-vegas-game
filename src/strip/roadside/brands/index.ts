@@ -50,6 +50,7 @@ import { circleK } from './circleK';
 import { cleanEnergy } from './cleanEnergy';
 import { coffeeBean } from './coffeeBean';
 import { cornishPastry } from './cornishPastry';
+import { costaVida } from './costaVida';
 import { costco } from './costco';
 import { cowtownBoots } from './cowtownBoots';
 import { cricket } from './cricket';
@@ -307,6 +308,7 @@ export const BRANDS: Brand[] = [
   cleanEnergy,
   coffeeBean,
   cornishPastry,
+  costaVida,
   costco,
   cowtownBoots,
   cricket,
