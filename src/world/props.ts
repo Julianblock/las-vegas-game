@@ -57,9 +57,9 @@ function houseGeometry(): THREE.BufferGeometry {
 /** Unit metal shop building: tall walls, shallow ridged roof. */
 function shedGeometry(): THREE.BufferGeometry {
   const walls = new THREE.BoxGeometry(1, 0.85, 1).translate(0, 0.425, 0);
-  const roof = new THREE.CylinderGeometry(0.72, 0.72, 1.02, 12, 1, false, -0.78, 1.56)
+  const roof = new THREE.CylinderGeometry(0.72, 0.72, 1.02, 12, 1, false, Math.PI / 2 - 0.78, 1.56)
     .rotateZ(Math.PI / 2)
-    .scale(1, 0.22, 1.4)
+    .scale(1, 0.22, 1.04)
     .translate(0, 0.7, 0);
   return merge([withPart(walls, 0), withPart(roof, 1)]);
 }
