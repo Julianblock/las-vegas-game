@@ -9,6 +9,7 @@ import { autozone } from './autozone';
 import { bagelmania } from './bagelmania';
 import { bahamaBreeze } from './bahamaBreeze';
 import { bajamar } from './bajamar';
+import { balkanGrill } from './balkanGrill';
 import { battistas } from './battistas';
 import { bbqChicken } from './bbqChicken';
 import { beautySupply } from './beautySupply';
@@ -209,6 +210,7 @@ export const BRANDS: Brand[] = [
   bagelmania,
   bahamaBreeze,
   bajamar,
+  balkanGrill,
   battistas,
   bbqChicken,
   beautySupply,
