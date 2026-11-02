@@ -64,6 +64,13 @@ function shedGeometry(): THREE.BufferGeometry {
   return merge([withPart(walls, 0), withPart(roof, 1)]);
 }
 
+/** Distant stand-in for any building: a wall box and a roof slab, 24 triangles. */
+function lodGeometry(): THREE.BufferGeometry {
+  const walls = new THREE.BoxGeometry(1, 0.8, 1).translate(0, 0.4, 0);
+  const roof = new THREE.BoxGeometry(1.02, 0.12, 1.02).translate(0, 0.86, 0);
+  return merge([withPart(walls, 0), withPart(roof, 1)]);
+}
+
 /** Welded steel water tank with a shallow cone lid. */
 function tankGeometry(): THREE.BufferGeometry {
   const body = new THREE.CylinderGeometry(0.5, 0.5, 0.9, 20, 1, true).translate(0, 0.45, 0);
