@@ -49,7 +49,7 @@ import { Precipitation } from './weather/precip';
 import { Water } from './world/water';
 import { WaterSurface } from './render/waterSurface';
 import { Fish } from './life/fish';
-import { costumeShare, isNewYearsEve, onTrack } from './events/calendar';
+import { costumeShare, cowboyShare, isNewYearsEve, isRodeoWeek, onTrack } from './events/calendar';
 import { onStrip } from './events/newyear/closure';
 import { setToday } from './events/today';
 import { FISH } from './life/fishSpecies';
