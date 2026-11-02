@@ -88,6 +88,7 @@ import { jerseyMikes } from './jerseyMikes';
 import { jimmyJohns } from './jimmyJohns';
 import { kfc } from './kfc';
 import { kingSolomon } from './kingSolomon';
+import { kostersCash } from './kostersCash';
 import { krispyKreme } from './krispyKreme';
 import { kungFuTea } from './kungFuTea';
 import { laFavorita } from './laFavorita';
@@ -271,6 +272,7 @@ export const BRANDS: Brand[] = [
   jimmyJohns,
   kfc,
   kingSolomon,
+  kostersCash,
   krispyKreme,
   kungFuTea,
   laFavorita,
