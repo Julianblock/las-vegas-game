@@ -136,6 +136,7 @@ export const RESORTS: Resort[] = [
   arizonaCharlies,
   neonMuseum,
   gateway,
+  urbanGallery,
   // Last: chain signs skip ground the landmarks above have reserved.
   roadside,
 ];
