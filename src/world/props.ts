@@ -146,7 +146,7 @@ function lampGeometry(): THREE.BufferGeometry {
   return merge([withPart(pole, 2), withPart(arm, 2), withPart(base, 1), withPart(head, 1)]);
 }
 
-const PROP_TILE = 2000;
+const PROP_TILE = 1000;
 /** Tiles farther than this (m) draw buildings as plain boxes. */
 const LOD_NEAR = 700;
 /** Parked cars, lamps and poles vanish past this (m); they're specks by then. */
