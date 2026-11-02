@@ -128,6 +128,7 @@ import { mainStay } from './mainStay';
 import { marieCallenders } from './marieCallenders';
 import { marigold } from './marigold';
 import { marriott } from './marriott';
+import { martinsMart } from './martinsMart';
 import { maverik } from './maverik';
 import { maxs } from './maxs';
 import { mcdonalds } from './mcdonalds';
@@ -363,6 +364,7 @@ export const BRANDS: Brand[] = [
   marieCallenders,
   marigold,
   marriott,
+  martinsMart,
   maverik,
   maxs,
   mcdonalds,
