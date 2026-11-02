@@ -18,7 +18,7 @@ export const lvccScreen: SignSpec = {
   name: 'lvccScreen',
   w: 640,
   h: 352,
-  frames: 5,
+  frames: 6,
   draw(g, w, h, frame) {
     slides(g, w, h, frame, [
       { bg: ['#06202a', '#1a6a9a'], head: 'LVCC', sub: 'LAS VEGAS CONVENTION CENTER', font: (p) => `900 ${p}px ${GROTESK}` },
