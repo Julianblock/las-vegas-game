@@ -360,7 +360,7 @@ export class People {
     const near = this.crowds.map((c) => Math.hypot(cam.x - c.cx, cam.z - c.cz) < c.radius + 1500);
     this.group.visible = near.some(Boolean);
     if (!this.group.visible) return;
-    const share = this.crowds.map((c) => c.day + (c.night - c.day) * night);
+    const share = this.crowds.map((c) => (c.when && !c.when() ? 0 : c.day + (c.night - c.day) * night));
     for (const w of this.walkers) {
       const out = !near[w.crowd] || hash(w.slot * 1.37) > share[w.crowd];
       if (out) {
