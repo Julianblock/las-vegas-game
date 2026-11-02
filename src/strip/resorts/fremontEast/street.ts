@@ -13,7 +13,8 @@ export const FACADE = { south: 8.5, north: 13 };
 export function facadeFrame(k: Kit, s: number, side: number) {
   const a = (FREMONT_EAST.bearing * Math.PI) / 180;
   const ux = Math.sin(a), uz = -Math.cos(a);
-  const x = FREMONT_EAST.x + ux * s - uz * FACADE * side;
-  const z = FREMONT_EAST.z + uz * s + ux * FACADE * side;
+  const d = side > 0 ? FACADE.south : FACADE.north;
+  const x = FREMONT_EAST.x + ux * s - uz * d * side;
+  const z = FREMONT_EAST.z + uz * s + ux * d * side;
   return k.frame(x, z, FREMONT_EAST.bearing + (side > 0 ? -90 : 90));
 }
