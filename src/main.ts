@@ -55,6 +55,7 @@ import { setToday } from './events/today';
 import { FISH } from './life/fishSpecies';
 import { HAUNTS } from './haunts';
 import { Hauntings } from './life/hauntings';
+import { COSTUMES, WESTERN } from './life/costumes';
 import { People } from './life/people';
 import { Discoveries } from './ui/discoveries';
 import { Lore, type Egg } from './world/lore';
