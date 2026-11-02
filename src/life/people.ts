@@ -401,7 +401,8 @@ export class People {
       if (!near[s.crowd] || s.rank > share[s.crowd]) this.t0.setY(s.slot, -1e4);
       else {
         const x = this.t0.getX(s.slot), z = this.t0.getZ(s.slot);
-        this.t0.setY(s.slot, this.hf.height(x, z));
+        const far = (x - cam.x) ** 2 + (z - cam.z) ** 2 > DRAW_R * DRAW_R;
+        this.t0.setY(s.slot, far ? -1e4 : this.hf.height(x, z));
         this.t1.setX(s.slot, this.t1.getX(s.slot) + dt);
       }
     }
