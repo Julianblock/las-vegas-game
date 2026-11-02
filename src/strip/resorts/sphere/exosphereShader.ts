@@ -165,7 +165,8 @@ vec3 ornament(vec3 n) {
   vec3 p = front(n);
   vec3 c = vec3(0.75, 0.04, 0.08) * (0.55 + 0.45 * smoothstep(-0.2, 1.0, p.z));
   float band = step(abs(abs(n.y) - 0.35), 0.05);
-  float dots = step(0.82, hash3(floor(vec3(atan(n.z, n.x) * 14.0, n.y * 20.0, 0.0)))) * step(abs(n.y), 0.25);
+  vec2 g = vec2(atan(n.z, n.x) * 14.0, n.y * 20.0);
+  float dots = step(0.5, hash3(vec3(floor(g), 0.0))) * smoothstep(0.3, 0.15, length(fract(g) - 0.5)) * step(abs(n.y), 0.25);
   c = mix(c, vec3(1.0, 0.8, 0.3), max(band, dots));
   c += vec3(1.0) * smoothstep(0.12, 0.0, length(p.xy - vec2(-0.3, 0.35))) * step(0.0, p.z);
   return c;
