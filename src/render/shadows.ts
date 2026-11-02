@@ -22,7 +22,7 @@ export class ShadowMap {
   constructor() {
     this.target = new THREE.WebGLRenderTarget(SIZE, SIZE, {
       type: THREE.FloatType,
-      format: THREE.RGBAFormat,
+      format: THREE.RedFormat,
       minFilter: THREE.NearestFilter,
       magFilter: THREE.NearestFilter,
       depthBuffer: true,
