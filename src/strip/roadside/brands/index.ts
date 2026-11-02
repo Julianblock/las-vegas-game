@@ -124,6 +124,7 @@ import { jammyland } from './jammyland';
 import { javaTree } from './javaTree';
 import { jerseyMikes } from './jerseyMikes';
 import { jimmyJohns } from './jimmyJohns';
+import { johnFish } from './johnFish';
 import { kfc } from './kfc';
 import { kingSolomon } from './kingSolomon';
 import { kostersCash } from './kostersCash';
@@ -387,6 +388,7 @@ export const BRANDS: Brand[] = [
   javaTree,
   jerseyMikes,
   jimmyJohns,
+  johnFish,
   kfc,
   kingSolomon,
   kostersCash,
