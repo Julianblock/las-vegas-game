@@ -4,7 +4,7 @@ import type { Kit } from '../../kit';
 export const FREMONT_EAST = { x: 4446, z: -5905, bearing: 118 };
 
 /** Facades stand this far from the centre line (m): the south side builds right up to the kerb. */
-export const FACADE = { south: 8.5, north: 13 };
+export const FACADE = { south: 6.5, north: 13 };
 
 /**
  * A frame on the facade `s` metres down the street, on the south side when
