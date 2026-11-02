@@ -83,6 +83,7 @@ import { flexLounge } from './flexLounge';
 import { fogoDeChao } from './fogoDeChao';
 import { fortuneHotel } from './fortuneHotel';
 import { funHogRanch } from './funHogRanch';
+import { gatewayMotel } from './gatewayMotel';
 import { giordanos } from './giordanos';
 import { greensAndProteins } from './greensAndProteins';
 import { greenValley } from './greenValley';
@@ -302,6 +303,7 @@ export const BRANDS: Brand[] = [
   fogoDeChao,
   fortuneHotel,
   funHogRanch,
+  gatewayMotel,
   giordanos,
   greensAndProteins,
   greenValley,
