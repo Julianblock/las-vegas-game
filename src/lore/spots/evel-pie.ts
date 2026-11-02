@@ -6,7 +6,7 @@ export const evelPieSpot: Spot = {
   kind: 'lore',
   kicker: 'Evel Pie · Fremont East',
   title: 'The daredevil’s pizza parlour',
-  text: 'Evel Pie is decked out in Evel Knievel memorabilia: jumpsuits, posters and a replica of his rocket-powered Skycycle. Knievel jumped the Caesars Palace fountains on New Year’s Eve 1967, crashed on landing, and woke up from a coma a month later.',
+  text: 'Evel Pie is decked out in Evel Knievel memorabilia: jumpsuits, helmets and posters. Knievel jumped the Caesars Palace fountains on New Year’s Eve 1967, crashed on landing, and woke up from a coma a month later.',
   at: { x: 4496, z: -5912 },
   hint: 'Find the pizza place on Fremont East.',
   r: 150,
