@@ -101,6 +101,7 @@ import { laFavorita } from './laFavorita';
 import { laMojarraLoca } from './laMojarraLoca';
 import { laQuinta } from './laQuinta';
 import { lawrys } from './lawrys';
+import { liquorWorld } from './liquorWorld';
 import { littleCaesars } from './littleCaesars';
 import { llHawaiian } from './llHawaiian';
 import { lotusOfSiam } from './lotusOfSiam';
@@ -298,6 +299,7 @@ export const BRANDS: Brand[] = [
   laMojarraLoca,
   laQuinta,
   lawrys,
+  liquorWorld,
   littleCaesars,
   llHawaiian,
   lotusOfSiam,
