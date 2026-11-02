@@ -27,6 +27,5 @@ export function buildArches(k: Kit) {
     }
     for (const s of [-1, 1]) k.box(fr, s * half, -0.5, lean * 4, 3, 1.2, 3, '#d8d4cc', { rough: 0.7 });
   }
-  k.sign(fr, 'gatewaySign', 0, GATEWAY.h - 4, 0.4, 4, 1.6, FX.NEON);
-  k.sign(fr, 'gatewaySign', 0, GATEWAY.h - 4, -0.4, 4, 1.6, FX.NEON, Math.PI);
+  k.sign(fr, 'gatewaySign', 0, GATEWAY.h - 4, 0, 4, 1.6, FX.NEON);
 }
