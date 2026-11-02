@@ -264,6 +264,9 @@ export class People {
   private standers: { slot: number; crowd: number; rank: number }[] = [];
   private material: THREE.ShaderMaterial;
   private worn: Costume[] | null = null;
+  /** Per-slot instance data; each frame the visible slots are packed into `drawn` and only those are drawn. */
+  private src: Record<string, THREE.InstancedBufferAttribute> = {};
+  private drawn: Record<string, THREE.InstancedBufferAttribute> = {};
 
   constructor(private crowds: Crowd[], private hf: Heightfield) {
     const base = bodyGeometry();
