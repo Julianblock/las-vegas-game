@@ -23,7 +23,7 @@ export interface Row {
  */
 export function arcade(k: Kit, r: Row) {
   const fr = k.frame(r.x, r.z, r.deg);
-  k.reserve(fr, 0, 0, r.len / 2, r.depth / 2 + 3.5);
+  if (!r.canopyOnly) k.reserve(fr, 0, 0, r.len / 2, r.depth / 2 + 3.5);
   if (!r.canopyOnly) k.box(fr, 0, -0.5, 0, r.len, 5.3, r.depth, STUCCO, { rough: 0.9 });
   for (const s of r.both ? [-1, 1] : [1]) {
     const z = s * (r.depth / 2 + 1.6);
